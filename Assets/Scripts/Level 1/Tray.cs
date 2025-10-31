@@ -77,7 +77,7 @@ public class Tray : MonoBehaviour
             Vector3 mid = (leftPos + rightPos) / 2f;
 
             // Slight offset so tray not in chest
-            float forwardOffset = 0.10f;
+            float forwardOffset = -5f;
             Vector3 offset = forwardDir * forwardOffset;
             Vector3 targetPos = mid + offset;
 
