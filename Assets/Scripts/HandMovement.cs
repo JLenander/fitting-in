@@ -397,6 +397,8 @@ public class HandMovement : MonoBehaviour
         _freeze = freeze;
     }
 
+    // Make sure both hands not launched when both holding object
+    // Also restrict xymovement
     public void attachedCheckGrapple()
     {
         if (grappleShot)

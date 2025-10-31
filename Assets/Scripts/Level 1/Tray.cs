@@ -17,11 +17,12 @@ public class Tray : MonoBehaviour
         // trayActive = false;
     }
     
-    public void OnAttachPointGrabbed(HandMovement hand)
+    public void OnAttachPointGrabbed()
     {
         if (leftAttach.isHeld && rightAttach.isHeld)
         {
-            hand.attachedCheckGrapple();
+            leftAttach.currentHand.attachedCheckGrapple();
+            rightAttach.currentHand.attachedCheckGrapple();
             StartTwoHandControl();
         }
     }
@@ -66,12 +67,31 @@ public class Tray : MonoBehaviour
             Vector3 leftPos = leftAttach.currentHand.transform.position;
             Vector3 rightPos = rightAttach.currentHand.transform.position;
 
-            Vector3 mid = (leftPos + rightPos) / 2f;
-            transform.position = Vector3.Lerp(transform.position, mid, Time.deltaTime * 10f);
+            Vector3 rightDir = (rightPos - leftPos).normalized;
+            Vector3 forwardDir = Vector3.Cross(Vector3.up, rightDir).normalized; // forward along tray's depth
+            Vector3 upDir = Vector3.Cross(rightDir, forwardDir).normalized;      // recompute up based on both hands
 
-            Vector3 dir = rightPos - leftPos;
-            Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 10f);
+            Quaternion targetRot = Quaternion.LookRotation(forwardDir, upDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+
+            Vector3 mid = (leftPos + rightPos) / 2f;
+
+            // Slight offset so tray not in chest
+            float forwardOffset = 0.10f;
+            Vector3 offset = forwardDir * forwardOffset;
+            Vector3 targetPos = mid + offset;
+
+            // Make side movement heavier
+            float horizontalResponsiveness = 2f;
+            // Lerp less  on X/Z, normal on Y
+            Vector3 newPos = transform.position;
+            newPos.x = Mathf.Lerp(newPos.x, targetPos.x, Time.deltaTime * horizontalResponsiveness);
+            newPos.z = Mathf.Lerp(newPos.z, targetPos.z, Time.deltaTime * horizontalResponsiveness);
+            newPos.y = Mathf.Lerp(newPos.y, targetPos.y, Time.deltaTime * 10f);
+
+            transform.position = newPos;
+            
+            // Note: can't freeze xy because then moving body doesnt move tray
 
             yield return null;
         }

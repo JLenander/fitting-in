@@ -22,7 +22,7 @@ public class AttachPoint : InteractableObject
         target.SetTargetCurrentObject(this);
         target.handAnimator.SetTrigger("Pot");
         target.FreezeWristPosition(true);
-        tray.OnAttachPointGrabbed(target);
+        tray.OnAttachPointGrabbed();
     }
 
     public override void StopInteractWithHand(HandMovement target)
