@@ -41,4 +41,7 @@ public class Level1TaskManager : TaskManager
     // Leave the cafe
     public static void StartTaskLeaveCafe() { Instance.StartTask("Leave"); }
     public static void CompleteTaskLeaveCafe() { Instance.CompleteTask("Leave"); }
+    
+    public static void StartTaskTray() { Instance.StartTask("Tray"); }
+    public static void CompleteTaskTray() { Instance.CompleteTask("Tray"); }
 }
