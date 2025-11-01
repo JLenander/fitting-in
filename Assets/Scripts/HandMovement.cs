@@ -75,224 +75,224 @@ public class HandMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!_freeze)
+        if (_freeze)
         {
-            if (!_disable)
+            return;
+        }
+        
+        if (_disable)
+        {
+            grappleArmSpline.GetComponent<SplineController>().SetRetracting();
+            // keep arm retracting without player input
+            return;
+        }
+
+        // hand rigid body movement
+        Vector2 stickMove = _moveAction.ReadValue<Vector2>();
+        Vector3 stickMovement;
+        if (!grappleShot)
+        {
+            stickMovement = new Vector3(stickMove.x, stickMove.y, 0);
+            // wrist rotation
+            Vector2 lookMove = _lookAction.ReadValue<Vector2>() * Time.deltaTime;
+            // // yaw
+            // _wristRotation.x += lookMove.x * handPitchYawSensitivity;
+            // pitch
+            _wristRotation.y += lookMove.y * handPitchYawSensitivity;
+            // roll
+            ClampWristRotate();
+        }
+        else
+        {
+            stickMovement = new Vector3(stickMove.x, 0, stickMove.y);
+        }
+
+        _wristRotation.z +=
+            (_leftBumperAction.ReadValue<float>() * -1 + _rightBumperAction.ReadValue<float>()) *
+            wristRotationSpeed * Time.deltaTime;
+
+
+        float leftTrigger = _leftTriggerAction.ReadValue<float>();
+        float rightTrigger = _rightTriggerAction.ReadValue<float>();
+        // Vector3 triggerMovement = new Vector3(0, 0, leftTrigger - rightTrigger);
+
+        movement += stickMovement * Time.deltaTime;
+
+        // changed from movement.magnitude to this addition because movement is now += instead of =
+        bool movingNow = stickMovement.magnitude > 0.5f;
+
+        // Movement started
+        if (movingNow && !_isMoving)
+        {
+            _isMoving = true;
+
+            // != expensive but confirmed the right approach
+            if (moveSource != null && !moveSource.isPlaying && !grappleShot)
+                moveSource.Play();
+        }
+
+        // Movement stopped
+        if (!movingNow && _isMoving)
+        {
+            _isMoving = false;
+
+            if (moveSource != null && moveSource.isPlaying)
+                moveSource.Stop();
+
+            if (stopSource != null && !grappleShot)
+                stopSource.Play();
+        }
+
+        // check if hand is empty and is there an object to interact with
+        if (_interactAction.WasPressedThisFrame() && _toInteractObj != null && _canInteract && currObj == null)
+        {
+            if (_toInteractObj.TryGetComponent(out InteractableObject interactable))
             {
-                // hand rigid body movement
-                Vector2 stickMove = _moveAction.ReadValue<Vector2>();
-                Vector3 stickMovement;
-                if (!grappleShot)
+                if (interactable.canPickup)
                 {
-                    stickMovement = new Vector3(stickMove.x, stickMove.y, 0);
-                    // wrist rotation
-                    Vector2 lookMove = _lookAction.ReadValue<Vector2>() * Time.deltaTime;
-                    // // yaw
-                    // _wristRotation.x += lookMove.x * handPitchYawSensitivity;
-                    // pitch
-                    _wristRotation.y += lookMove.y * handPitchYawSensitivity;
-                    // roll
-                    ClampWristRotate();
-                }
-                else
-                {
-                    stickMovement = new Vector3(stickMove.x, 0, stickMove.y);
-                }
-
-                _wristRotation.z +=
-                    (_leftBumperAction.ReadValue<float>() * -1 + _rightBumperAction.ReadValue<float>()) *
-                    wristRotationSpeed * Time.deltaTime;
-
-
-                float leftTrigger = _leftTriggerAction.ReadValue<float>();
-                float rightTrigger = _rightTriggerAction.ReadValue<float>();
-                // Vector3 triggerMovement = new Vector3(0, 0, leftTrigger - rightTrigger);
-
-                movement += stickMovement * Time.deltaTime;
-
-                // changed from movement.magnitude to this addition because movement is now += instead of =
-                bool movingNow = stickMovement.magnitude > 0.5f;
-
-                // Movement started
-                if (movingNow && !_isMoving)
-                {
-                    _isMoving = true;
-
-                    // != expensive but confirmed the right approach
-                    if (moveSource != null && !moveSource.isPlaying && !grappleShot)
-                        moveSource.Play();
-                }
-
-                // Movement stopped
-                if (!movingNow && _isMoving)
-                {
-                    _isMoving = false;
-
-                    if (moveSource != null && moveSource.isPlaying)
-                        moveSource.Stop();
-
-                    if (stopSource != null && !grappleShot)
-                        stopSource.Play();
-                }
-
-                // check if hand is empty and is there an object to interact with
-                if (_interactAction.WasPressedThisFrame() && _toInteractObj != null && _canInteract && currObj == null)
-                {
-                    if (_toInteractObj.TryGetComponent(out InteractableObject interactable))
-                    {
-                        if (interactable.canPickup)
-                        {
-                            InteractWithObject(interactable);
-                            _canInteract = false;
-                        }
-                    }
-                }
-
-                // check if hand is not empty
-                else if (_interactAction.WasPressedThisFrame() && currObj != null)
-                {
-                    Debug.Log("interaction " + _toInteractObj + _canInteract);
-                    StopInteractingWithObject(currObj);
-                }
-
-                bool triggerPressed = leftTrigger > 0.1f || rightTrigger > 0.1f;
-
-                if (triggerPressed && !triggerWasPressed)
-                {
-                    if (!grappleShot)
-                    {
-                        // EmergencyEvent.Instance.IncrementCount(true); // or pass correct value
-
-                        if (hookSource != null)
-                            hookSource.Play();
-
-                        // get distance from head
-                        Vector3 dir;
-                        float dist;
-                        bool hit = headConsole.GrappleDistance(out dist, out dir);
-
-                        if (hit)
-                        {
-                            grappleArmSpline.GetComponent<SplineController>().SetExtending(dist);
-                            grappleTarget.position = dir;
-                            targetObjRest = grappleTarget.localPosition;
-                        }
-                        else
-                        {
-                            // no target, straight forward then
-                            grappleArmSpline.GetComponent<SplineController>().SetExtending(5);
-                            targetObjRest = grappleTarget.localPosition;
-                        }
-
-
-                        // save shoot pos
-                        shootPos = movement;
-
-                        movement = new Vector3(0, 0, 0); // change when we get direction from head
-                    }
-                    else
-                    {
-                        movement = shootPos;
-                        grappleArmSpline.GetComponent<SplineController>().SetRetracting();
-                    }
-
-                    grappleShot = !grappleShot;
-                }
-
-                triggerWasPressed = triggerPressed;
-            }
-            else if (_disable)
-            {
-                grappleArmSpline.GetComponent<SplineController>().SetRetracting();
-                // keep arm retracting without player input
-            }
-
-            // Movement
-            Vector3 totalMvt;
-
-            if (grappleShot)
-            {
-                // control grapple target
-                if (!left)
-                {
-                    totalMvt = movement * speed + targetObjRest;
-                }
-                else
-                {
-                    Vector3 tmpMvt = movement;
-                    tmpMvt.x *= -1.0f;
-                    totalMvt = tmpMvt * speed + targetObjRest;
-                }
-
-                // totalMvt.x = Mathf.Clamp(totalMvt.x, -20f, 28f);
-                // totalMvt.z = Mathf.Clamp(totalMvt.z, -21.8f, 23.5f);
-                float currentY = grappleTarget.localPosition.y;
-
-                grappleTarget.localPosition = new Vector3(totalMvt.x, currentY, totalMvt.z);
-
-                Vector3 clampedMovement = (grappleTarget.localPosition - targetObjRest) / speed;
-                if (left)
-                    clampedMovement.x *= -1.0f;
-
-                movement = clampedMovement;
-
-                if (left)
-                {
-                    // left hand roll
-                    wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
-                }
-                else
-                {
-                    // right hand roll
-                    wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
-                }
-            }
-            else
-            {
-                if (left)
-                {
-                    totalMvt = movement * speed + _ogPosition;
-                }
-                else
-                {
-                    Vector3 tmpMvt = movement;
-                    tmpMvt.x *= -1.0f;
-                    totalMvt = tmpMvt * speed + _ogPosition;
-                }
-
-                totalMvt.x = Mathf.Clamp(totalMvt.x, 97f, 117f);
-                totalMvt.y = Mathf.Clamp(totalMvt.y, -21.8f, -4.5f);
-                float currentZ = transform.localPosition.z;
-
-                transform.localPosition = new Vector3(totalMvt.x, totalMvt.y, currentZ);
-
-                Vector3 clampedMovement = (transform.localPosition - _ogPosition) / speed;
-                if (!left)
-                    clampedMovement.x *= -1.0f;
-
-                movement = clampedMovement;
-
-                // Rotation
-                // pitch and yaw on parent object so the direction is independent of the wrist roll orientation.
-                if (left)
-                {
-                    // left hand pitch and yaw
-                    wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
-                    wristAim.localRotation = Quaternion.Euler(_wristRotation.y, 0, _wristRotation.x * -1.0f);
-                    // left hand roll
-                    wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
-                }
-                else
-                {
-                    // right hand pitch and yaw
-                    wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
-                    wristAim.localRotation = Quaternion.Euler(_wristRotation.y, 0, _wristRotation.x);
-                    // right hand roll
-                    wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
+                    InteractWithObject(interactable);
+                    _canInteract = false;
                 }
             }
         }
 
+        // check if hand is not empty
+        else if (_interactAction.WasPressedThisFrame() && currObj != null)
+        {
+            Debug.Log("interaction " + _toInteractObj + _canInteract);
+            StopInteractingWithObject(currObj);
+        }
+
+        bool triggerPressed = leftTrigger > 0.1f || rightTrigger > 0.1f;
+
+        if (triggerPressed && !triggerWasPressed)
+        {
+            if (!grappleShot)
+            {
+                // EmergencyEvent.Instance.IncrementCount(true); // or pass correct value
+
+                if (hookSource != null)
+                    hookSource.Play();
+
+                // get distance from head
+                Vector3 dir;
+                float dist;
+                bool hit = headConsole.GrappleDistance(out dist, out dir);
+
+                if (hit)
+                {
+                    grappleArmSpline.GetComponent<SplineController>().SetExtending(dist);
+                    grappleTarget.position = dir;
+                    targetObjRest = grappleTarget.localPosition;
+                }
+                else
+                {
+                    // no target, straight forward then
+                    grappleArmSpline.GetComponent<SplineController>().SetExtending(5);
+                    targetObjRest = grappleTarget.localPosition;
+                }
+
+
+                // save shoot pos
+                shootPos = movement;
+
+                movement = new Vector3(0, 0, 0); // change when we get direction from head
+            }
+            else
+            {
+                movement = shootPos;
+                grappleArmSpline.GetComponent<SplineController>().SetRetracting();
+            }
+
+            grappleShot = !grappleShot;
+        }
+
+        triggerWasPressed = triggerPressed;
+    
+        // Movement
+        Vector3 totalMvt;
+
+        if (grappleShot)
+        {
+            // control grapple target
+            if (!left)
+            {
+                totalMvt = movement * speed + targetObjRest;
+            }
+            else
+            {
+                Vector3 tmpMvt = movement;
+                tmpMvt.x *= -1.0f;
+                totalMvt = tmpMvt * speed + targetObjRest;
+            }
+
+            // totalMvt.x = Mathf.Clamp(totalMvt.x, -20f, 28f);
+            // totalMvt.z = Mathf.Clamp(totalMvt.z, -21.8f, 23.5f);
+            float currentY = grappleTarget.localPosition.y;
+
+            grappleTarget.localPosition = new Vector3(totalMvt.x, currentY, totalMvt.z);
+
+            Vector3 clampedMovement = (grappleTarget.localPosition - targetObjRest) / speed;
+            if (left)
+                clampedMovement.x *= -1.0f;
+
+            movement = clampedMovement;
+
+            if (left)
+            {
+                // left hand roll
+                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
+            }
+            else
+            {
+                // right hand roll
+                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
+            }
+        }
+        else
+        {
+            if (left)
+            {
+                totalMvt = movement * speed + _ogPosition;
+            }
+            else
+            {
+                Vector3 tmpMvt = movement;
+                tmpMvt.x *= -1.0f;
+                totalMvt = tmpMvt * speed + _ogPosition;
+            }
+
+            totalMvt.x = Mathf.Clamp(totalMvt.x, 97f, 117f);
+            totalMvt.y = Mathf.Clamp(totalMvt.y, -21.8f, -4.5f);
+            float currentZ = transform.localPosition.z;
+
+            transform.localPosition = new Vector3(totalMvt.x, totalMvt.y, currentZ);
+
+            Vector3 clampedMovement = (transform.localPosition - _ogPosition) / speed;
+            if (!left)
+                clampedMovement.x *= -1.0f;
+
+            movement = clampedMovement;
+
+            // Rotation
+            // pitch and yaw on parent object so the direction is independent of the wrist roll orientation.
+            if (left)
+            {
+                // left hand pitch and yaw
+                wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
+                wristAim.localRotation = Quaternion.Euler(_wristRotation.y, 0, _wristRotation.x * -1.0f);
+                // left hand roll
+                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
+            }
+            else
+            {
+                // right hand pitch and yaw
+                wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
+                wristAim.localRotation = Quaternion.Euler(_wristRotation.y, 0, _wristRotation.x);
+                // right hand roll
+                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
+            }
+        }
     }
 
     /// <summary>

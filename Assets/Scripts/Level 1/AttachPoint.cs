@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttachPoint : InteractableObject
 {
     [SerializeField] private Tray tray;
-    public bool isHeld = false;
+    public bool isHeld;
     public HandMovement currentHand;
 
     public override void InteractWithHand(Transform wrist, HandMovement target)

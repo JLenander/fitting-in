@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3583682898385849077}
   - component: {fileID: 6667753207842392620}
   - component: {fileID: 7894995059491074171}
-  - component: {fileID: 4025427490711760149}
   - component: {fileID: 5498446986582931388}
   m_Layer: 0
   m_Name: Tray
@@ -69,15 +68,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3559e64fb5b74b15bac58acae708408a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tray
-  outline: {fileID: 0}
-  canInteract: 1
-  canPickup: 1
-  interactPopUp: {fileID: 0}
-  _robotHead: {fileID: 0}
-  grappleCollider: {fileID: 0}
-  popUp: {fileID: 0}
-  graphic: {fileID: 0}
-  floatSpeed: 1
+  leftAttach: {fileID: 0}
+  rightAttach: {fileID: 0}
+  cupPrefab: {fileID: 0}
+  leftDrinkSpawn: {fileID: 0}
+  rightDrinkSpawn: {fileID: 0}
+  traySpawnPoint: {fileID: 0}
 --- !u!114 &7894995059491074171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,27 +92,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!65 &4025427490711760149
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456169990086194636}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20, y: 2, z: 15}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5498446986582931388
 Rigidbody:
   m_ObjectHideFlags: 0
