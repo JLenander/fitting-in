@@ -72,7 +72,7 @@ public class BrainConsole : Interactable
             interactSound.Play();
 
         // hide popup
-        PopUpUIHandler.Instance.HidePopUp();
+        PopUpUIHandler.Instance.HideNewTaskPopUp();
 
         //playerTaskPanel.SetActive(true);
         //UpdateTaskList();
