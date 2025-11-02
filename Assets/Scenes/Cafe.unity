@@ -10946,6 +10946,10 @@ PrefabInstance:
       propertyPath: robotBody
       value: 
       objectReference: {fileID: 76562116}
+    - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: playerChair
+      value: 
+      objectReference: {fileID: 1609978945}
     - target: {fileID: 2941727664699777610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: forearmBone
       value: 
@@ -11793,6 +11797,11 @@ MonoBehaviour:
   robotMovement: {fileID: 796993902}
   robot: {fileID: 76562116}
   sceneExitDoor: {fileID: 8689347719959514125}
+--- !u!4 &1609978945 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93f496dc3ecaa214aad62629d79da515, type: 3}
+  m_PrefabInstance: {fileID: 1609978941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1610250359 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3989346385401443251, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
