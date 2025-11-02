@@ -81,7 +81,7 @@ MonoBehaviour:
       m_Calls: []
   showOverlay: 0
   totalTimeBlink: 60
-  totalTimePress: 7
+  totalTimePress: 14
   timeToNextBlink: 0
   pressCountdown: 0
   headConsole: {fileID: 0}

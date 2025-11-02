@@ -1359,6 +1359,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
   m_PrefabInstance: {fileID: 2090245588}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &255473490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7964676728951895415, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &255473491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 851062846598640644, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &255473492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2182534597193460500, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &255473493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6852800716505935969, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &255473494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4205706325098033426, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &255473495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3448584272622448130, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &258429891
 GameObject:
   m_ObjectHideFlags: 0
@@ -15998,7 +16028,7 @@ PrefabInstance:
       objectReference: {fileID: 1440586764219640112}
     - target: {fileID: 675022251718749674, guid: b5f23122e991f994ba41fa9dfa827b7f, type: 3}
       propertyPath: notificationFire.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 675022251718749674, guid: b5f23122e991f994ba41fa9dfa827b7f, type: 3}
       propertyPath: 'notificationFire.Array.data[0]'
@@ -16008,6 +16038,18 @@ PrefabInstance:
       propertyPath: 'notificationFire.Array.data[1]'
       value: 
       objectReference: {fileID: 2536744724625789158}
+    - target: {fileID: 675022251718749674, guid: b5f23122e991f994ba41fa9dfa827b7f, type: 3}
+      propertyPath: 'notificationFire.Array.data[2]'
+      value: 
+      objectReference: {fileID: 255473495}
+    - target: {fileID: 675022251718749674, guid: b5f23122e991f994ba41fa9dfa827b7f, type: 3}
+      propertyPath: 'notificationFire.Array.data[3]'
+      value: 
+      objectReference: {fileID: 255473491}
+    - target: {fileID: 675022251718749674, guid: b5f23122e991f994ba41fa9dfa827b7f, type: 3}
+      propertyPath: 'notificationFire.Array.data[4]'
+      value: 
+      objectReference: {fileID: 255473490}
     - target: {fileID: 738852546620910834, guid: b5f23122e991f994ba41fa9dfa827b7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.74
@@ -16901,7 +16943,7 @@ PrefabInstance:
       objectReference: {fileID: 1440586764219640112}
     - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
       propertyPath: notificationFire.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
       propertyPath: 'notificationFire.Array.data[0]'
@@ -16911,6 +16953,18 @@ PrefabInstance:
       propertyPath: 'notificationFire.Array.data[1]'
       value: 
       objectReference: {fileID: 1568381345}
+    - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
+      propertyPath: 'notificationFire.Array.data[2]'
+      value: 
+      objectReference: {fileID: 255473492}
+    - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
+      propertyPath: 'notificationFire.Array.data[3]'
+      value: 
+      objectReference: {fileID: 255473494}
+    - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
+      propertyPath: 'notificationFire.Array.data[4]'
+      value: 
+      objectReference: {fileID: 255473493}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

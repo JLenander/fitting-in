@@ -16,6 +16,8 @@ public class BlinkConsole : Interactable
     public bool warning = false;
     private bool danger = false;
 
+    private bool fireOver = false;
+
     private void Start()
     {
         DisableOutline();
@@ -71,6 +73,10 @@ public class BlinkConsole : Interactable
 
                     // enable fire
                     FireManager.Instance.StartFireArea("eye");
+
+                    hoverMessage = "[Extinguish fire!]";
+                    msgColour = new Color(1, 0, 0, 1);
+                    outlineColour = new Color(1, 0, 0, 1);
                 }
             }
         }
@@ -82,6 +88,12 @@ public class BlinkConsole : Interactable
         PlayerInteract playerInteract = player.GetComponent<PlayerInteract>();
         if (!danger)
             ResetTimers(); // only allow lever to reset timer if not at critical
+
+        if (fireOver)
+        {
+            ResetTimers(); // if fire is putout 
+        }
+
         playerInteract.LeaveCurrInteractable();
 
         if (audioSource != null)
@@ -106,12 +118,24 @@ public class BlinkConsole : Interactable
         warning = false; // remove flags
         GlobalPlayerUIManager.Instance.DisablePixelate(); // undo pixelate
         PopUpUIHandler.Instance.HideBlinkPopUp();
+
+        hoverMessage = "Blink";
+        msgColour = new Color(1, 1, 1, 1);
+        outlineColour = new Color(1, 1, 1, 1);
+
+        fireOver = false;
     }
+
 
     private IEnumerator BlinkRoutine()
     {
         blinkOverlay.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         blinkOverlay.SetActive(false);
+    }
+
+    public void FirePutOut()
+    {
+        fireOver = true;
     }
 }

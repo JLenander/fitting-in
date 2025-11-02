@@ -54,8 +54,7 @@ public class FireManager : MonoBehaviour
         // based on fire name, fix something
         if (name == "eye")
         {
-            // TODO: reset blinking
-            blinkConsole.ResetTimers();
+            blinkConsole.FirePutOut();
         }
         else if (name == "leftArm")
         {
