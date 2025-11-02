@@ -116,14 +116,6 @@ public class Tray : MonoBehaviour
         if (rightDrinkInstance) Destroy(rightDrinkInstance);
         
         StartCoroutine(SpawnCupsSmooth());
-
-        // // Spawn new cups at tray's spawn points
-        // leftDrinkInstance = Instantiate(drinkPrefab, leftDrinkSpawn.position, Quaternion.identity, transform);
-        // rightDrinkInstance = Instantiate(drinkPrefab, rightDrinkSpawn.position, Quaternion.identity, transform);
-        //
-        // // Assign tray reference for respawn logic
-        // leftDrinkInstance.GetComponent<Drink>().Init(this);
-        // rightDrinkInstance.GetComponent<Drink>().Init(this);
     }
     
     private IEnumerator SpawnCupsSmooth()
@@ -195,13 +187,6 @@ public class Tray : MonoBehaviour
 
     public void TrySnapToTable(Transform snapPoint)
     {
-        // Check if both hands are lowered near table height
-        // float trayHeight = transform.position.y;
-        // float tableHeight = snapPoint.position.y;
-    
-        // // You can tweak this tolerance
-        // if (Mathf.Abs(trayHeight - tableHeight) < 20f)
-        // {
         StopTwoHandControl();
 
         // Snap tray safely
@@ -210,7 +195,6 @@ public class Tray : MonoBehaviour
         transform.rotation = snapPoint.rotation;
 
         Debug.Log("Tray placed on table!");
-        // }
     }
 }
     
