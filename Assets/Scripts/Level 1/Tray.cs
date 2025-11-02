@@ -23,10 +23,6 @@ public class Tray : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ogParent = transform.parent;
         
-        // TODO: implment so that when 
-        var outline = GetComponent<Outline>();
-        if (outline) outline.enabled = false;
-        
         StartCoroutine(SpawnCupsSmooth()); // initial spawn
     }
     
