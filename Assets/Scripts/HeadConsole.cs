@@ -24,9 +24,7 @@ public class HeadConsole : Interactable
 
     private OverlayUIHandler uIHandler;
     private int layerMask;
-
-    private Coroutine exitCoroutine;
-
+    
     void Start()
     {
         DisableOutline();
@@ -132,12 +130,7 @@ public class HeadConsole : Interactable
                 denySource.Play();
             return;
         }
-
-        if (exitCoroutine != null)
-        {
-            StopCoroutine(exitCoroutine);
-        }
-
+        
         _splitscreenUIHandler.ShowOutsideCamera();
 
         player.GetComponent<Player>().TurnOff();
@@ -157,12 +150,7 @@ public class HeadConsole : Interactable
 
     public override void Return(GameObject player)
     {
-        if (exitCoroutine != null)
-        {
-            StopCoroutine(exitCoroutine);
-        }
-
-        exitCoroutine = StartCoroutine(HideOutsideCameraRoutine());
+        HideOutsideCamera();
 
         player.GetComponent<Player>().TurnOn();
         player.GetComponent<Player>().switchOffHead();
@@ -176,12 +164,11 @@ public class HeadConsole : Interactable
         uIHandler.HideContainer(player);
     }
 
-    IEnumerator HideOutsideCameraRoutine()
+    private void HideOutsideCamera()
     {
-        yield return new WaitForSeconds(turnOffAfter);
-
-        _splitscreenUIHandler.HideOutsideCamera();
+        _splitscreenUIHandler.HideOutsideCamera(turnOffAfter);
     }
+    
     public override bool CanInteract()
     {
         return _canInteract;

@@ -7,6 +7,12 @@ using UnityEngine.UIElements;
 public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
 {
     [SerializeField] private UIDocument uiDoc;
+    [SerializeField] private float cameraOverlayTransitionStep = 0.05f;
+    
+    // Outside camera fade animation current timestep
+    private float cameraOverlayTransitionCurrTime;
+    private float cameraOverlayTransitionDuration;
+    private Coroutine cameraOverlayTransitionRoutine;
 
     // Player not joined UI overlays
     // private VisualElement _player1Overlay;
@@ -220,16 +226,36 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         }
     }
 
-    // TODO transition animation
+    // No animation, this is instant
     public void ShowOutsideCamera()
     {
-        _outsideCamOverlay.visible = false;
+        if (cameraOverlayTransitionRoutine != null)
+        {
+            StopCoroutine(cameraOverlayTransitionRoutine);
+        }
+        _outsideCamOverlay.style.opacity = 0.0f;
     }
 
-    // TODO transition animation
-    public void HideOutsideCamera()
+    // fade in animation
+    private IEnumerator HideOutsideCameraAnimation()
     {
-        _outsideCamOverlay.visible = true;
+        while (cameraOverlayTransitionCurrTime > 0)
+        {
+            // Compute new step of opacity
+            float newOpacity = Mathf.InverseLerp(cameraOverlayTransitionDuration, 0.0f, cameraOverlayTransitionCurrTime);
+            _outsideCamOverlay.style.opacity = newOpacity;
+            
+            // timestep
+            cameraOverlayTransitionCurrTime -= cameraOverlayTransitionStep;
+            yield return new WaitForSeconds(cameraOverlayTransitionStep);
+        }
+    }
+    
+    public void HideOutsideCamera(float animationSeconds)
+    {
+        cameraOverlayTransitionCurrTime = animationSeconds;
+        cameraOverlayTransitionDuration = animationSeconds;
+        cameraOverlayTransitionRoutine = StartCoroutine(HideOutsideCameraAnimation());
     }
 
     public void InitializeDialogue()
