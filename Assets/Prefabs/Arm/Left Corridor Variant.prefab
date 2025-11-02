@@ -53,7 +53,12 @@ MonoBehaviour:
   - {fileID: 3477435925537003907}
   - {fileID: 7820728484736451808}
   - {fileID: 24171910145139482}
-  notificationFire: {fileID: 0}
+  notificationFire:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &2629296993033056522
 BoxCollider:
   m_ObjectHideFlags: 0

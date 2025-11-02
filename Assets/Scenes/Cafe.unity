@@ -16942,10 +16942,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1440586764219640112}
     - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
-      propertyPath: notificationFire.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615309229710422460, guid: d37ab846ac72888419f7bf4c8180fd24, type: 3}
       propertyPath: 'notificationFire.Array.data[0]'
       value: 
       objectReference: {fileID: 438740825}
