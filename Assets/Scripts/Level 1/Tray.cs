@@ -23,6 +23,10 @@ public class Tray : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ogParent = transform.parent;
         
+        // TODO: implment so that when 
+        var outline = GetComponent<Outline>();
+        if (outline) outline.enabled = false;
+        
         StartCoroutine(SpawnCupsSmooth()); // initial spawn
     }
     
@@ -152,6 +156,8 @@ public class Tray : MonoBehaviour
     public void OnCupFell()
     {
         Debug.Log("A cup fell! Resetting tray task...");
+        
+        // TODO: enable reset when cup falling not too hard
         // StartCoroutine(ResetRoutine());
     }
 
@@ -195,6 +201,8 @@ public class Tray : MonoBehaviour
         transform.rotation = snapPoint.rotation;
 
         Debug.Log("Tray placed on table!");
+        var outline = GetComponent<Outline>();
+        if (outline) outline.enabled = false;
     }
 }
     

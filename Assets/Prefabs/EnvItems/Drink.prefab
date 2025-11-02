@@ -99,7 +99,6 @@ GameObject:
   m_Component:
   - component: {fileID: 297556164715071921}
   - component: {fileID: 3241655354418924211}
-  - component: {fileID: 2395943414937456655}
   - component: {fileID: 463442399835787767}
   - component: {fileID: 67539424352270168}
   m_Layer: 11
@@ -149,24 +148,6 @@ CapsuleCollider:
   m_Height: 8
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
---- !u!114 &2395943414937456655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6896477537601373647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 1
-  outlineColor: {r: 0.21698111, g: 0.1832276, b: 0.17501779, a: 1}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!54 &463442399835787767
 Rigidbody:
   m_ObjectHideFlags: 0
