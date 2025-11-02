@@ -97,4 +97,10 @@ public class Task
         canStart = false;
         isActive = false;
     }
+
+    public void RestartTask()
+    {
+        Debug.Log($"Task '{id}' restarted!");
+        TaskManager.GenericInstance.AppendActiveTask(this);
+    }
 }

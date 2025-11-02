@@ -126,11 +126,11 @@ public abstract class TaskManager : MonoBehaviour
         }
     }
 
-    public void ResetTask(string id)
+    public void RestartTask(string id)
     {
         if (_tasks.TryGetValue(id, out var task))
         {
-            task.ResetTask();
+            task.RestartTask();
         }
     }
 
@@ -182,13 +182,4 @@ public abstract class TaskManager : MonoBehaviour
         return activeTasks;
     }
 
-    // public List<Task> GetAllTasks()
-    // {
-    //     return new List<Task>(_tasks.Values);
-    // }
-
-    // public List<Task> GetAllActiveTasks()
-    // {
-    //     return _tasks.Values.Where(t => t.isActive).ToList();
-    // }
 }
