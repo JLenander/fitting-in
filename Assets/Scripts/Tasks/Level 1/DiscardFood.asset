@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TaskInfoSO
   id: DiscardFood
   title: Discard Food
-  description: 'Discard the bag of food '
+  description: Discard the bag of food in the garbage can
   location: Legs
   urgency: Normal
   targetProgress: 1

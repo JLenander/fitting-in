@@ -20,6 +20,7 @@ public class NovaLevel1Manager : MonoBehaviour
     public bool bagDiscarded = false;
 
     public Transform bag;
+    public GameObject garbageCan;
     public GameObject tableCup;
     public GameObject handCup;
     public bool talking = false;
@@ -89,6 +90,7 @@ public class NovaLevel1Manager : MonoBehaviour
     {
         bag.GetComponent<InteractableObject>().canPickup = true;
         bag.GetComponent<InteractableObject>().EnableOutline();
+        garbageCan.GetComponent<GarbageCan>().EnableOutline();
         Level1TaskManager.StartTaskDiscardFood();
         yield return null;
     }
@@ -176,7 +178,7 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
 
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(10f);
 
         // discard food task
         // TODO: dialogue prompts 
