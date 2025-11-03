@@ -374,6 +374,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7143286749479749003, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 2856489600915246520}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &715479898 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9182400989961908325, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 3233634353991162672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &742828425 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2182534597193460500, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
@@ -1092,11 +1097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fae98d8f9f96e9942a4cba3fd16bf15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandMovement
---- !u!4 &220409569139395829 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 38266401879832229, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
-  m_PrefabInstance: {fileID: 3233634353991162672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &480808694091588561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1187,6 +1187,10 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1842878193}
+    - target: {fileID: 1117245153883639161, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: robotBody
       value: 
@@ -1498,7 +1502,7 @@ PrefabInstance:
     - target: {fileID: 2050809480309508566, guid: f099881265806844bab8a0fc9e63c918, type: 3}
       propertyPath: playerCamera
       value: 
-      objectReference: {fileID: 220409569139395829}
+      objectReference: {fileID: 715479898}
     - target: {fileID: 2349044254729525231, guid: f099881265806844bab8a0fc9e63c918, type: 3}
       propertyPath: m_Size.x
       value: 0.03442456

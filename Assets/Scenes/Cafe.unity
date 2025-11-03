@@ -10952,6 +10952,10 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
+    - target: {fileID: 1117245153883639161, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: robotBody
       value: 

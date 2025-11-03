@@ -14,7 +14,6 @@ public class BlinkConsole : Interactable
     public float pressAnimationCountdown;
     public float fireBufferCountdown;
     public HeadConsole headConsole;
-    public GameObject blinkOverlay; // a black overlap for camera
     public AudioSource audioSource;
 
     private bool timerIsRunning;
@@ -31,7 +30,6 @@ public class BlinkConsole : Interactable
         fireBufferCountdown = fireBufferTime;
         timerIsRunning = true;
 
-        blinkOverlay.SetActive(false);
         PopUpUIHandler.Instance.HideBlinkPopUp();
     }
 
@@ -117,9 +115,6 @@ public class BlinkConsole : Interactable
 
         if (audioSource != null)
             audioSource.Play();
-
-        if (blinkOverlay != null)
-            StartCoroutine(BlinkRoutine());
     }
 
     public void ResetTimers()
@@ -145,14 +140,6 @@ public class BlinkConsole : Interactable
         outlineColour = new Color(1, 1, 1, 1);
 
         fireOver = false;
-    }
-
-
-    private IEnumerator BlinkRoutine()
-    {
-        blinkOverlay.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        blinkOverlay.SetActive(false);
     }
 
     public void FirePutOut()
