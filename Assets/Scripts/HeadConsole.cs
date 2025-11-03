@@ -240,11 +240,8 @@ public class HeadConsole : Interactable
             if (hit.collider.CompareTag("GrappleStop"))
             {
                 Vector3 targetPos = hit.collider.bounds.center;
-
-                // end up above the centre
-                float yOffset = 10.0f;
-                targetPos.y += yOffset;
-
+                // add some y offset to get to the top of the grapple stop collider above the center
+                targetPos.y += hit.collider.bounds.extents.y;
 
                 direction = targetPos;
                 dist = hit.distance;

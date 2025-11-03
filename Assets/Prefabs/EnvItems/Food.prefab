@@ -195,7 +195,6 @@ MonoBehaviour:
   interactPopUp: {fileID: 8175565122845978006}
   _robotHead: {fileID: 0}
   totalBites: 10
-  robotHead: {fileID: 0}
   particle: {fileID: 0}
   foodStates: []
   foodStateChange: 
@@ -237,7 +236,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 4, z: 8}
+  m_Size: {x: 10.64, y: 4, z: 9.98}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3939688307723832127
 Rigidbody:
