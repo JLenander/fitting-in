@@ -522,6 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5904948759087187704}
   - component: {fileID: 7263848868334851239}
+  - component: {fileID: 7929926126811079903}
   m_Layer: 0
   m_Name: EmerencyEventHandler
   m_TagString: Untagged
@@ -570,6 +571,27 @@ MonoBehaviour:
   leftArmTerminal: {fileID: 0}
   rightArmTerminal: {fileID: 0}
   safeUses: 5
+  brokenDialogue: {fileID: 0}
+--- !u!114 &7929926126811079903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624155605218546144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5543adb67d75a46a95e10470cbb167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  eyeFireArea: {fileID: 0}
+  leftArmFireArea: {fileID: 0}
+  rightArmFireArea: {fileID: 0}
+  legFireArea: {fileID: 0}
+  blinkConsole: {fileID: 0}
+  leftArmConsole: {fileID: 0}
+  rightArmConsole: {fileID: 0}
+  hipConsole: {fileID: 0}
 --- !u!1 &8926503776465663307
 GameObject:
   m_ObjectHideFlags: 0

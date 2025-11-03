@@ -81,10 +81,10 @@ MonoBehaviour:
   onReturn:
     m_PersistentCalls:
       m_Calls: []
+  showOverlay: 0
   exteriorCamera: {fileID: 0}
-  camAngle: {x: 0, y: 0, z: 0, w: 0}
-  leftGrappleArmSpline: {fileID: 0}
-  rightGrappleArmSpline: {fileID: 0}
+  reach: 1000
+  turnOffAfter: 10
   hookSource: {fileID: 707840859072992687}
   interactSource: {fileID: 8238744525230429438}
   denySource: {fileID: 0}

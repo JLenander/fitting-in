@@ -38,12 +38,13 @@ public class GlobalPlayerUIManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this);
-        } else 
+        }
+        else
         {
             Instance = this;
         }
     }
-    
+
     public void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -125,10 +126,14 @@ public class GlobalPlayerUIManager : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / time);
 
+            float perceptualT = Mathf.Pow(t, 0.1f); // because it doesnt look "pixealted" until like 900
+
+            float scale = 1f - perceptualT * (1f - downScaleAmount);
+
             // res = original *  (1 - lerpscale)
             outsideRenderTextureView.Release();
-            outsideRenderTextureView.width = (int)(originalWidth * Mathf.Lerp(1, downScaleAmount, t));
-            outsideRenderTextureView.height = (int)(originalHeight * Mathf.Lerp(1, downScaleAmount, t));
+            outsideRenderTextureView.width = (int)(originalWidth * scale);
+            outsideRenderTextureView.height = (int)(originalHeight * scale);
             outsideRenderTextureView.Create();
 
             yield return null;

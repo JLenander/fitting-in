@@ -80,13 +80,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   showOverlay: 0
-  totalTimeBlink: 60
-  totalTimePress: 10
+  timeBetweenBlinks: 60
+  eyeAnimationTime: 7
+  fireBufferTime: 5
   timeToNextBlink: 0
-  pressCountdown: 0
+  pressAnimationCountdown: 0
+  fireBufferCountdown: 0
   headConsole: {fileID: 0}
   blinkOverlay: {fileID: 0}
   audioSource: {fileID: 7029899614225871069}
+  isPixelatingPhase: 0
 --- !u!114 &921974929911903338
 MonoBehaviour:
   m_ObjectHideFlags: 0

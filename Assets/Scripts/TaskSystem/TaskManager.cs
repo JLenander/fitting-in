@@ -140,7 +140,7 @@ public abstract class TaskManager : MonoBehaviour
         PassDataUI();
         if (task.id != "FixRight" && task.id != "FixLeft")
         {
-            PopUpUIHandler.Instance.ShowPopUp();
+            PopUpUIHandler.Instance.ShowNewTaskPopUp();
         }
     }
 

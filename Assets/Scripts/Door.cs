@@ -5,10 +5,13 @@ public class Door : Interactable
     [SerializeField] private Transform Destination;
     public bool locked;
 
+    public bool upper;
+
     private void Start()
     {
         DisableOutline();
-        LockDoor();
+        if (!upper)
+            LockDoor();
     }
 
     public override void Interact(GameObject player)

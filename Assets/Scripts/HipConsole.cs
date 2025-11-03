@@ -54,4 +54,20 @@ public class HipConsole : Interactable
     {
         return _canInteract;
     }
+
+    public void DisableInteract()
+    {
+        hoverMessage = "[LEGS DISABLED]";
+        msgColour = new Color(1, 0, 0, 1);
+        outlineColour = new Color(1, 0, 0, 1);
+        // _currPlayer = null;
+    }
+
+    public void EnableInteract()
+    {
+        _canInteract = true;
+        hoverMessage = "Control Legs";
+        msgColour = new Color(1, 1, 1, 1);
+        outlineColour = new Color(1, 1, 1, 1);
+    }
 }

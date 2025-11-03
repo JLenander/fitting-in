@@ -50,8 +50,9 @@ public interface ISplitscreenUIHandler
 
     /// <summary>
     /// Hide the outside camera (or eye camera)
+    /// <param name="animationSeconds">The number of seconds for the transition animation</param>
     /// </summary>
-    public void HideOutsideCamera();
+    public void HideOutsideCamera(float animationSeconds);
 
     /// <summary>
     /// Show dialogue box
@@ -85,4 +86,14 @@ public interface ISplitscreenUIHandler
     /// neutralize the reticle when nothing is hit
     /// </summary>
     public void ReticleNeutral();
+
+    /// <summary>
+    /// enable burn overlay
+    /// </summary>
+    public void EnablePlayerBurnOverlay(int playerIndex);
+
+    /// <summary>
+    /// disable burn overlay
+    /// </summary>
+    public void DisablePlayerBurnOverlay(int playerIndex);
 }

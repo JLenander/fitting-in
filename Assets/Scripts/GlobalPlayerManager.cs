@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class GlobalPlayerManager : MonoBehaviour
 {
     public static GlobalPlayerManager Instance;
-    
+
     private int _playerLimit;
     private PlayerData[] _players;
     private GlobalPlayerUIManager uiManager; // use to aggregate player UI
@@ -19,7 +19,7 @@ public class GlobalPlayerManager : MonoBehaviour
     [SerializeField] private GameObject characterSelectScreen;
     private ICharacterSelectScreen _characterSelectScreen;
     private PauseMenuUIHandler _pauseMenuUIHandler;
-    
+
     // To replace by colors player pick - to ference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
     {
@@ -34,14 +34,15 @@ public class GlobalPlayerManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this);
-        } else 
+        }
+        else
         {
             Instance = this;
         }
-        
+
         DontDestroyOnLoad(this);
     }
-    
+
     void Start()
     {
         _characterSelectScreen = characterSelectScreen.GetComponent<ICharacterSelectScreen>();
@@ -75,13 +76,14 @@ public class GlobalPlayerManager : MonoBehaviour
             Debug.Log("Player " + idx + " Joined - Character Select Scene");
             _players[idx].Input = playerInput;
             _players[idx].PlayerObject = playerInput.gameObject; // This might change so it's a separate field.
+            _players[idx].PlayerGraphic = playerInput.gameObject.GetComponent<PlayerSetup>().playerGraphic;
             _players[idx].Player = _players[idx].PlayerObject.GetComponent<Player>();
             _players[idx].Player.SetPlayerID(playerInput.playerIndex);
             _players[idx].Valid = true;
 
             // Add player to the character selection screen so they can start selecting their character.
             _characterSelectScreen.AddPlayer(idx);
-            
+
             // register callbacks for the character select screen color change actions
             _players[idx].LeftActionDelegate = ctx => _characterSelectScreen.ChangeColor(idx, -1);
             _players[idx].RightActionDelegate = ctx => _characterSelectScreen.ChangeColor(idx, +1);
@@ -92,7 +94,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 var playerColor = _players[idx].PlayerColor;
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(playerColor);
             };
-            
+
             // register callback for opening and closing pause menu
             _players[idx].PauseMenuDelegate = ctx =>
             {
@@ -105,7 +107,7 @@ public class GlobalPlayerManager : MonoBehaviour
                         _players[i].Player.SetInPauseMenu();
                     }
                 }
-                
+
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(_players[idx].PlayerColor);
                 // Show and focus the pause menu.
                 _pauseMenuUIHandler.ShowPauseMenu();
@@ -119,7 +121,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 {
                     // All players are ready and someone pressed the submit action so we load level select
                     Debug.Log("All players ready - starting");
-                    
+
                     // Assign player colors from selector to player data
                     for (int i = 0; i < _playerLimit; i++)
                     {
@@ -128,12 +130,12 @@ public class GlobalPlayerManager : MonoBehaviour
                             _players[i].PlayerColor = playerColorSelector[i];
                             // outline here instead of Player.cs Start(),
                             // so that that script no need reference _players
-                            var outline = _players[i].PlayerObject.GetComponent<Outline>();
+                            var outline = _players[i].PlayerGraphic.GetComponent<Outline>();
                             if (outline != null)
                             {
                                 outline.OutlineColor = _players[i].PlayerColor;
                             }
-                            
+
                             // Register settings UI callback and set default UI settings
                             _pauseMenuUIHandler.SetPlayerSettings(i, new PlayerSettingsUI()
                             {
@@ -142,14 +144,14 @@ public class GlobalPlayerManager : MonoBehaviour
                             });
                             _pauseMenuUIHandler.RegisterPlayerSettingsCallback(i, UpdatePlayerSettings);
                             _pauseMenuUIHandler.ShowPlayerSettings(i);
-                            
+
                             // assign pause menu open/close delegates
                             InputActionMapper.GetPlayerOpenPauseMenuAction(_players[i].Input).started += Players[i].PauseMenuDelegate;
                             InputActionMapper.GetUIClosePauseMenuAction(_players[i].Input).started += ctx =>
                             {
                                 _pauseMenuUIHandler.ClosePauseMenu();
                             };
-                            
+
                             // Inform pause menu of player colors
                             _pauseMenuUIHandler.SetPlayerColor(i, _players[i].PlayerColor);
                         }
@@ -162,7 +164,7 @@ public class GlobalPlayerManager : MonoBehaviour
 
                     // pass these players to UI manager
                     GlobalPlayerUIManager.Instance.PassPlayers(_players);
-                    
+
                     // minimap initialize player dots *removed*
 
                     // Load level select screen
@@ -172,7 +174,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 {
                     // If player already ready, ignore
                     if (_players[idx].Ready) return;
-                    
+
                     // If current color taken, do not allow ready
                     // else assign color and ready up
                     var currentColor = playerColorSelector[idx];
@@ -187,7 +189,7 @@ public class GlobalPlayerManager : MonoBehaviour
                     }
                     Debug.Log("Player " + idx + " ready");
                     // hide any previous warning, need do before ReadyPlayer, that uses warning area to show ready text
-                    _characterSelectScreen.HideColorConflictWarning(idx); 
+                    _characterSelectScreen.HideColorConflictWarning(idx);
                     _characterSelectScreen.ReadyPlayer(idx);
                     _players[idx].Ready = true;
                     _players[idx].PlayerColor = currentColor;
@@ -204,7 +206,7 @@ public class GlobalPlayerManager : MonoBehaviour
                     _players[idx].Ready = false;
                     var previousColor = _players[idx].PlayerColor;
                     _players[idx].PlayerColor = Color.clear; // make player color free
-                    
+
                     // Hide any warnings for other players that were blocked by this color
                     for (int i = 0; i < _playerLimit; i++)
                     {
@@ -274,7 +276,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 player.Player.SetNotInPauseMenu();
             }
         }
-        
+
         // Close Pause Menu UI if in it
         _pauseMenuUIHandler.HidePauseMenu();
     }
@@ -368,6 +370,7 @@ public struct PlayerData
     public PlayerInput Input { get; set; }
     public Player Player { get; set; }
     public GameObject PlayerObject { get; set; }
+    public GameObject PlayerGraphic { get; set; }
     public Action<InputAction.CallbackContext> SubmitActionDelegate { get; set; }
     public Action<InputAction.CallbackContext> CancelActionDelegate { get; set; }
     public Action<InputAction.CallbackContext> LeftActionDelegate { get; set; }
@@ -401,13 +404,13 @@ public interface ICharacterSelectScreen
     /// </summary>
     /// <param name="playerIndex"></param>
     public void UnreadyPlayer(int playerIndex);
-    
+
     /// <summary>
     /// Change the color selection for a player.
     /// </summary>
     /// <param name="playerIndex">The index of the player changing their color</param
     public void ChangeColor(int playerIndex, int direction);
-    
+
     public void ShowColorConflictWarning(int playerIndex, int otherIndex);
 
     public void HideColorConflictWarning(int playerIndex);

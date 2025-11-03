@@ -31,7 +31,7 @@ public class HandConsole : Interactable
 
     public override void Interact(GameObject player)
     {
-        if (!_canInteract) return;  // check if there is already a player on the console
+        if (!_canInteract) return;  // if interactable
         player.GetComponent<Player>().TurnOff();
         HandMovement target = handRigTarget.GetComponent<HandMovement>();
         target.TurnOn(player);
@@ -60,12 +60,13 @@ public class HandConsole : Interactable
 
     public void DisableInteract()
     {
-        hoverMessage = "[GRAPPLE DISABLED] Enter Arm to repair";
+        hoverMessage = "[ARM DISABLED]";
         msgColour = new Color(1, 0, 0, 1);
         outlineColour = new Color(1, 0, 0, 1);
+        _currPlayer = null;
+        _canInteract = false;
         // handRigTarget.GetComponent<HandMovement>().JamArm(true);
         // headConsole.JamArm(left, true);
-        _currPlayer = null;
     }
 
     public void EnableInteract()
@@ -74,6 +75,7 @@ public class HandConsole : Interactable
         hoverMessage = "Control Arm";
         msgColour = new Color(1, 1, 1, 1);
         outlineColour = new Color(1, 1, 1, 1);
+        _canInteract = true;
         // handRigTarget.GetComponent<HandMovement>().JamArm(false);
         // headConsole.JamArm(left, false);
     }
