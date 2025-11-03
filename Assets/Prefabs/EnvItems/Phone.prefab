@@ -169,6 +169,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugCollider
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.25}
+--- !u!1 &5629429514713802126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2797776162267875514}
+  - component: {fileID: 1847892579306794989}
+  m_Layer: 10
+  m_Name: GrappleStop
+  m_TagString: GrappleStop
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2797776162267875514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629429514713802126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5870327612358294059}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1847892579306794989
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629429514713802126}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1.27, z: 0.45}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6814120919084499619
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +778,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01b64a996a4f15647a12c2e63c788149, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3005306824933303375}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01b64a996a4f15647a12c2e63c788149, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2797776162267875514}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01b64a996a4f15647a12c2e63c788149, type: 3}
       insertIndex: -1
@@ -815,6 +871,9 @@ MonoBehaviour:
   interactPopUp: {fileID: 4180770147558386532}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 1604658092851338773}
+  leftHandTarget: {fileID: 0}
+  rightHandTarget: {fileID: 0}
+  grappleCollider: {fileID: 0}
 --- !u!114 &7857500324946947932
 MonoBehaviour:
   m_ObjectHideFlags: 0
