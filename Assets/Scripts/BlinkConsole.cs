@@ -32,6 +32,7 @@ public class BlinkConsole : Interactable
         timerIsRunning = true;
 
         blinkOverlay.SetActive(false);
+        PopUpUIHandler.Instance.HideBlinkPopUp();
     }
 
     void Update()
