@@ -22,6 +22,9 @@ public class Tray : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         ogParent = transform.parent;
+        // disabling outline because outline goes through cups and looks kinda weird
+        var outline = GetComponent<Outline>();
+        if (outline) outline.enabled = false;
         
         StartCoroutine(SpawnCupsSmooth()); // initial spawn
     }
@@ -197,8 +200,6 @@ public class Tray : MonoBehaviour
         transform.rotation = snapPoint.rotation;
 
         Debug.Log("Tray placed on table!");
-        var outline = GetComponent<Outline>();
-        if (outline) outline.enabled = false;
     }
 }
     
