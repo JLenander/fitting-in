@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Menu.bank
   Name: Menu
   StudioPath: bank:/Menu
-  lastModified: 638977805659980112
+  lastModified: 638977816482651320
   FileSizes: []
   Exists: 1
 --- !u!114 &-8921776581938000227
@@ -247,7 +247,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Lvl1.bank
   Name: Lvl1
   StudioPath: bank:/Lvl1
-  lastModified: 638977805659353365
+  lastModified: 638977816482565972
   FileSizes: []
   Exists: 1
 --- !u!114 &-5376912908870696740
@@ -265,7 +265,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638977805659412486
+  lastModified: 638977816482581009
   FileSizes: []
   Exists: 1
 --- !u!114 &-4841463637744015177
@@ -446,7 +446,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Tutorial.bank
   Name: Tutorial
   StudioPath: bank:/Tutorial
-  lastModified: 638977805665308660
+  lastModified: 638977816482696459
   FileSizes: []
   Exists: 1
 --- !u!114 &-2003007960854598663
@@ -491,7 +491,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638977805659428424
+  lastModified: 638977816482601101
   FileSizes:
   - Name: 
     Value: 1882
@@ -591,7 +591,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -1945535652046819133}
   cacheVersion: 131849
-  cacheTime: 638977805665308660
+  cacheTime: 638977816482696459
   SerializableEventsDict:
   - key: event:/Ambient/amb_cafe
     index: 0
@@ -671,7 +671,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Playable.bank
   Name: Playable
   StudioPath: bank:/Playable
-  lastModified: 638977805664751958
+  lastModified: 638977816482696459
   FileSizes: []
   Exists: 1
 --- !u!114 &8459852040927780740
