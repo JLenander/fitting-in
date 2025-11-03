@@ -127,6 +127,7 @@ public class BlinkConsole : Interactable
         timerIsRunning = true;
         timeToNextBlink = timeBetweenBlinks;
         pressAnimationCountdown = eyeAnimationTime;
+        fireBufferCountdown = fireBufferTime;
         outlineColour = Color.white;
         //EnableOutline();
         Debug.Log("timers reset");
@@ -134,6 +135,7 @@ public class BlinkConsole : Interactable
         headConsole.EnableInteract(); // reenable head
         isFullyPixelated = false; // remove flags
         isPixelatingPhase = false; // remove flags
+        isInFireBuffer = false; // remove flags
         GlobalPlayerUIManager.Instance.DisablePixelate(); // undo pixelate
         PopUpUIHandler.Instance.HideBlinkPopUp();
 
