@@ -9041,6 +9041,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4585482731703959710, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
   m_PrefabInstance: {fileID: 1286585085}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1286585087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2686172117624947067, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
+  m_PrefabInstance: {fileID: 1286585085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1292706323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11279,8 +11284,8 @@ MonoBehaviour:
   eatSource: {fileID: 1582269022}
   grabbed: 0
   bagDiscarded: 0
-  bag: {fileID: 0}
-  garbageCan: {fileID: 0}
+  bag: {fileID: 1286585087}
+  garbageCan: {fileID: 1900401257}
   tableCup: {fileID: 450646048}
   handCup: {fileID: 2021013548}
   talking: 0
@@ -13709,6 +13714,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
+--- !u!1 &1900401257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4230836909950260945, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
+  m_PrefabInstance: {fileID: 1900401256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1901567147
 MeshCollider:
   m_ObjectHideFlags: 0
