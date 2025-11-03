@@ -151,18 +151,13 @@ public class CoffeePot : InteractableObject
     public override void StopInteractWithHand(HandMovement target)
     {
         // return to original position
-        Quaternion currRotation = transform.rotation;
         transform.parent = ogParent;
-        Vector3 currPos = transform.localPosition;
-        transform.localPosition = new Vector3(currPos.x, 5.14f, currPos.z);
-
-        transform.localRotation = Quaternion.Euler(0f, currRotation.y, 0f);
-
         canPickup = true;
+        rb.isKinematic = false;
         triggerCollider.enabled = true;
         target.handAnimator.SetTrigger("Neutral"); // sets the opposite hand back to neutral
-
         grappleCollider.enabled = true;
+        DisableOutline();
     }
 
     IEnumerator BurnArm(bool left)

@@ -87,4 +87,14 @@ public abstract class InteractableObject : MonoBehaviour
     public virtual void StopInteractWithHand(HandMovement target)
     {
     }
+
+    public void SetCanInteractTrue()
+    {
+        canInteract = true;
+    }
+
+    public void SetCanInteractFalse()
+    {
+        canInteract = false;
+    }
 }

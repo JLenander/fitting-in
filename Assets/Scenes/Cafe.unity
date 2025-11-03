@@ -9163,6 +9163,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2686172117624947067, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
   m_PrefabInstance: {fileID: 1286585085}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1286585088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8262820992941046557, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
+  m_PrefabInstance: {fileID: 1286585085}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286585086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c378bc7eab8c4a41886209261785188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &1292706323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12250,9 +12261,21 @@ MonoBehaviour:
     onStart:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1609978944}
-          m_TargetAssemblyTypeName: TriggerSeat, Assembly-CSharp
-          m_MethodName: 
+        - m_Target: {fileID: 1900401259}
+          m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1900401258}
+          m_TargetAssemblyTypeName: GarbageCan, Assembly-CSharp
+          m_MethodName: EnableOutline
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12260,7 +12283,31 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1286585088}
+          m_TargetAssemblyTypeName: Bag, Assembly-CSharp
+          m_MethodName: EnableOutline
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1286585088}
+          m_TargetAssemblyTypeName: Bag, Assembly-CSharp
+          m_MethodName: SetCanInteractTrue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
     onComplete:
       m_PersistentCalls:
@@ -14346,6 +14393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Garbage Can
       objectReference: {fileID: 0}
+    - target: {fileID: 6602725840403312224, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7137200830225250669, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 204.8
@@ -14394,6 +14445,22 @@ PrefabInstance:
 --- !u!1 &1900401257 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4230836909950260945, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
+  m_PrefabInstance: {fileID: 1900401256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1900401258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1915526275975090059, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
+  m_PrefabInstance: {fileID: 1900401256}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900401257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d286cf95b26887142b319c17a3a7f50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!65 &1900401259 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8400179474284692437, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
   m_PrefabInstance: {fileID: 1900401256}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &1901567147

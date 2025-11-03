@@ -88,15 +88,6 @@ public class NovaLevel1Manager : MonoBehaviour
         Level1TaskManager.StartTaskPourCoffee();
     }
 
-    IEnumerator DiscardFood()
-    {
-        bag.GetComponent<InteractableObject>().canPickup = true;
-        bag.GetComponent<InteractableObject>().EnableOutline();
-        garbageCan.GetComponent<GarbageCan>().EnableOutline();
-        Level1TaskManager.StartTaskDiscardFood();
-        yield return null;
-    }
-
     public void PlayLevelRoutine()
     {
         levelCoroutine = StartCoroutine(LevelStart());
@@ -183,7 +174,7 @@ public class NovaLevel1Manager : MonoBehaviour
         // discard food task
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        StartCoroutine(DiscardFood());
+        Level1TaskManager.StartTaskDiscardFood();
         yield return new WaitUntil(() => bagDiscarded);
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
