@@ -73,6 +73,15 @@ public class FireArea : MonoBehaviour
         }
     }
 
+    public void PlayerTeleportOut(PlayerSetup playerSetup)
+    {
+        if (playerSetup != null && playersInside.Contains(playerSetup))
+        {
+            playersInside.Remove(playerSetup);
+            playerSetup.extinguisher.ActivateExtinguisher(false);
+        }
+    }
+
     public void EnableFires()
     {
         if (active) return;
