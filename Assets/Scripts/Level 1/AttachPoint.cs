@@ -33,6 +33,7 @@ public class AttachPoint : InteractableObject
 
         target.SetTargetCurrentObject(null);
         target.FreezeWristPosition(false);
+        // currentHand.attachedCheckGrapple();
         target.handAnimator.SetTrigger("Neutral");
         
         currentHand.disableGrapple(false);
@@ -57,6 +58,7 @@ public class AttachPoint : InteractableObject
             currentHand.FreezeWristPosition(false);
             currentHand.disableGrapple(false);
             currentHand.handAnimator.SetTrigger("Neutral");
+            
             isHeld = false;
             currentHand = null;
 

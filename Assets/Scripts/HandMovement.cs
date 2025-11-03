@@ -62,6 +62,7 @@ public class HandMovement : MonoBehaviour
     private bool triggerWasPressed = false;
 
     private Vector3 targetObjRest;
+    private Vector3 lastTargetPos;
 
     private Vector3 shootPos;
 
@@ -76,6 +77,13 @@ public class HandMovement : MonoBehaviour
 
     private void Update()
     {
+        if (_disable)
+        {
+            grappleArmSpline.GetComponent<SplineController>().SetRetracting();
+            // keep arm retracting without player input
+            return;
+        }
+        
         if (_freeze)
         {
             if (_interactAction.WasPressedThisFrame() && currObj != null)
@@ -83,13 +91,9 @@ public class HandMovement : MonoBehaviour
                 Debug.Log("interaction " + _toInteractObj + _canInteract);
                 StopInteractingWithObject(currObj);
             }
-            return;
-        }
-        
-        if (_disable)
-        {
-            grappleArmSpline.GetComponent<SplineController>().SetRetracting();
-            // keep arm retracting without player input
+
+            grappleTarget.position = lastTargetPos;
+            targetObjRest = grappleTarget.localPosition;
             return;
         }
 
@@ -400,6 +404,10 @@ public class HandMovement : MonoBehaviour
     
     public void FreezeWristPosition(bool freeze)
     {
+        if (freeze)
+        {
+            lastTargetPos = grappleTarget.position;
+        }
         _freeze = freeze;
     }
 
