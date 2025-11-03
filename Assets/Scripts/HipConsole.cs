@@ -8,10 +8,15 @@ public class HipConsole : Interactable
     public AudioSource audioSource;
 
     private OverlayUIHandler uIHandler;
+
+    [SerializeField] Transform playerChair;
+    private TriggerSeat triggerSeat;
     void Start()
     {
         DisableOutline();
         uIHandler = LegUIHandler.Instance;
+        if (playerChair) triggerSeat = playerChair.GetComponent<TriggerSeat>();
+
     }
     public override void Interact(GameObject player)
     {
@@ -22,6 +27,13 @@ public class HipConsole : Interactable
         if (audioSource != null)
             audioSource.Play();
         uIHandler.ShowContainer(player);
+        triggerSeat.StandRobot();
+        if (Level1TaskManager.Instance.GetTaskData("Leave") == null && playerChair)
+        {
+            triggerSeat.sceneExitDoor.enabled = false;
+            Collider collider = triggerSeat.GetComponent<Collider>();
+            collider.enabled = true;
+        }
     }
 
     public override void Return(GameObject player)
@@ -31,6 +43,10 @@ public class HipConsole : Interactable
 
         _canInteract = true;
         uIHandler.HideContainer(player);
+        if (playerChair && triggerSeat.PlayerInsideSeat())
+        {
+            triggerSeat.SeatRobot();
+        }
     }
 
 

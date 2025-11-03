@@ -28,7 +28,20 @@ public class Level1TaskManager : TaskManager
     // Pickup evidence
     public static void StartTaskPickupEvidence() { Instance.StartTask("Evidence"); }
     public static void CompleteTaskPickupEvidence() { Instance.CompleteTask("Evidence"); }
+
+    // Throw food in garbage can
+    public static void StartTaskDiscardFood() { Instance.StartTask("DiscardFood"); }
+    public static void CompleteTaskDiscardFood() { Instance.CompleteTask("DiscardFood"); }
+
+    // Sit down after walking
+    public static void StartTaskSitBackDown() { Instance.StartTask("SitBackDown"); }
+    public static void ResetTaskSitBackDown() { Instance.RestartTask("SitBackDown"); }
+    public static void CompleteTaskSitBackDown() { Instance.CompleteTask("SitBackDown"); }
+
     // Leave the cafe
     public static void StartTaskLeaveCafe() { Instance.StartTask("Leave"); }
     public static void CompleteTaskLeaveCafe() { Instance.CompleteTask("Leave"); }
+    
+    public static void StartTaskTray() { Instance.StartTask("Tray"); }
+    public static void CompleteTaskTray() { Instance.CompleteTask("Tray"); }
 }

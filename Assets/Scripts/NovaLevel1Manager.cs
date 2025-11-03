@@ -17,7 +17,10 @@ public class NovaLevel1Manager : MonoBehaviour
     public AudioSource eatSource;
 
     public bool grabbed = false;
+    public bool bagDiscarded = false;
 
+    public Transform bag;
+    public GameObject garbageCan;
     public GameObject tableCup;
     public GameObject handCup;
     public bool talking = false;
@@ -25,6 +28,8 @@ public class NovaLevel1Manager : MonoBehaviour
     private float timer = 0f;
     private int cakeIndex = 0;
     public bool ate = false;
+
+    public Coroutine levelCoroutine;
 
     void Start()
     {
@@ -81,9 +86,18 @@ public class NovaLevel1Manager : MonoBehaviour
         Level1TaskManager.StartTaskPourCoffee();
     }
 
+    IEnumerator DiscardFood()
+    {
+        bag.GetComponent<InteractableObject>().canPickup = true;
+        bag.GetComponent<InteractableObject>().EnableOutline();
+        garbageCan.GetComponent<GarbageCan>().EnableOutline();
+        Level1TaskManager.StartTaskDiscardFood();
+        yield return null;
+    }
+
     public void PlayLevelRoutine()
     {
-        StartCoroutine(LevelStart());
+        levelCoroutine = StartCoroutine(LevelStart());
     }
 
     public IEnumerator LevelStart()
@@ -164,7 +178,12 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
 
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(10f);
+
+        // discard food task
+        // TODO: dialogue prompts 
+        StartCoroutine(DiscardFood());
+        yield return new WaitUntil(() => bagDiscarded);
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
