@@ -35,5 +35,4 @@ public class PhoneScreen : MonoBehaviour
             Level0TaskManager.StartTaskSwipe();
         }
     }
-
 }
