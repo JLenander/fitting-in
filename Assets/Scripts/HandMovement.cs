@@ -20,6 +20,7 @@ public class HandMovement : MonoBehaviour
     private Vector3 _ogPosition;
     private bool _disable;
     private bool _freeze;
+    private bool _grappleDisabled;
 
     private bool _isMoving;
     public AudioSource moveSource;
@@ -77,6 +78,11 @@ public class HandMovement : MonoBehaviour
     {
         if (_freeze)
         {
+            if (_interactAction.WasPressedThisFrame() && currObj != null)
+            {
+                Debug.Log("interaction " + _toInteractObj + _canInteract);
+                StopInteractingWithObject(currObj);
+            }
             return;
         }
         
@@ -165,7 +171,7 @@ public class HandMovement : MonoBehaviour
 
         bool triggerPressed = leftTrigger > 0.1f || rightTrigger > 0.1f;
 
-        if (triggerPressed && !triggerWasPressed)
+        if (triggerPressed && !triggerWasPressed && !_grappleDisabled)
         {
             if (!grappleShot)
             {
@@ -407,5 +413,10 @@ public class HandMovement : MonoBehaviour
             grappleArmSpline.GetComponent<SplineController>().SetRetracting();
             grappleShot = false;
         }
+    }
+
+    public void disableGrapple(bool disable)
+    {
+        _grappleDisabled = disable;
     }
 }

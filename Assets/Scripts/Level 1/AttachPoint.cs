@@ -12,8 +12,9 @@ public class AttachPoint : InteractableObject
 
         isHeld = true;
         currentHand = target;
+        currentHand.disableGrapple(true);
         DisableOutline();
-        
+           
         // Disable interactivity while held
         canInteract = false;
         canPickup = false;
@@ -27,11 +28,14 @@ public class AttachPoint : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        Debug.Log("Stop ATTACH and  " + target);
         if (!isHeld || currentHand != target) return;
 
         target.SetTargetCurrentObject(null);
         target.FreezeWristPosition(false);
         target.handAnimator.SetTrigger("Neutral");
+        
+        currentHand.disableGrapple(false);
         isHeld = false;
         currentHand = null;
 
@@ -44,12 +48,14 @@ public class AttachPoint : InteractableObject
         tray.OnAttachPointReleased();
     }
     
+    // need this instead of calling stopinteractwithhand because can call without currenthand reference
     public void LetGoCurrentHand()
     {
         if (currentHand != null)
         {
             currentHand.SetTargetCurrentObject(null);
             currentHand.FreezeWristPosition(false);
+            currentHand.disableGrapple(false);
             currentHand.handAnimator.SetTrigger("Neutral");
             isHeld = false;
             currentHand = null;

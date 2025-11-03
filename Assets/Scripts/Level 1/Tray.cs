@@ -42,10 +42,7 @@ public class Tray : MonoBehaviour
     public void OnAttachPointReleased()
     {
         // If either hand released, stop tray motion
-        if (isTwoHanded)
-        {
-            StopTwoHandControl();
-        }
+        StopTwoHandControl();
     }
 
     private void StartTwoHandControl()
