@@ -29,12 +29,17 @@ public class HipConsole : Interactable
         if (enterSfx != null)
             enterSfx.Play();
         uIHandler.ShowContainer(player);
-        triggerSeat.StandRobot();
-        if (Level1TaskManager.Instance.GetTaskData("Leave") == null && playerChair)
+
+        // this is only for level 1
+        if (triggerSeat != null)
         {
-            triggerSeat.sceneExitDoor.enabled = false;
-            Collider collider = triggerSeat.GetComponent<Collider>();
-            collider.enabled = true;
+            triggerSeat.StandRobot();
+            if (Level1TaskManager.Instance.GetTaskData("Leave") == null && playerChair)
+            {
+                triggerSeat.sceneExitDoor.enabled = false;
+                Collider collider = triggerSeat.GetComponent<Collider>();
+                collider.enabled = true;
+            }
         }
     }
 

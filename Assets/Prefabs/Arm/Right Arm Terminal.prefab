@@ -65,6 +65,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5916554466945693436, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 6229773657863677107}
+    - target: {fileID: 5916554466945693436, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
       propertyPath: hoverMessage
       value: Control Right Arm
       objectReference: {fileID: 0}
@@ -75,5 +79,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6445804123322227572, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6229773657863677107}
   m_SourcePrefab: {fileID: 100100000, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+--- !u!1 &4440243858328911565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6445804123322227572, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+  m_PrefabInstance: {fileID: 7271891666948285881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6229773657863677107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440243858328911565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20

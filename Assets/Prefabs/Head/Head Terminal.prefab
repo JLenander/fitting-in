@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 707840859072992687}
   - component: {fileID: 8238744525230429438}
   - component: {fileID: 3048036568315073815}
+  - component: {fileID: 1215250727413896705}
   m_Layer: 0
   m_Name: Head Terminal
   m_TagString: interactable
@@ -88,6 +89,7 @@ MonoBehaviour:
   hookSource: {fileID: 707840859072992687}
   interactSource: {fileID: 8238744525230429438}
   denySource: {fileID: 0}
+  interactSfx: {fileID: 1215250727413896705}
 --- !u!114 &339064723301493737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,6 +399,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1215250727413896705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5051648518970035384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &7783336739317130597
 PrefabInstance:
   m_ObjectHideFlags: 0

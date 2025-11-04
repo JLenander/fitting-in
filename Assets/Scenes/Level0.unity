@@ -975,6 +975,10 @@ PrefabInstance:
       value: EmerencyEventHandler
       objectReference: {fileID: 0}
     - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: fireSfx
+      value: 
+      objectReference: {fileID: 1917217006}
+    - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: hipConsole
       value: 
       objectReference: {fileID: 2856489600915246521}
@@ -1007,6 +1011,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+--- !u!114 &1917217006 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4709538606492710203, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+  m_PrefabInstance: {fileID: 1917217005}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
 --- !u!1 &1985507128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2394951667841468422, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
