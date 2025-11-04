@@ -88,22 +88,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7258395926828420493, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.81593674
-      objectReference: {fileID: 0}
-    - target: {fileID: 7258395926828420493, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.57132703
-      objectReference: {fileID: 0}
-    - target: {fileID: 7258395926828420493, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.050762866
-      objectReference: {fileID: 0}
-    - target: {fileID: 7258395926828420493, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.072496645
-      objectReference: {fileID: 0}
     - target: {fileID: 7489968646445564626, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
       propertyPath: m_Name
       value: ArmRigTargetL

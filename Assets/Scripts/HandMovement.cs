@@ -126,12 +126,12 @@ public class HandMovement : MonoBehaviour
         Vector3 moveVector;
         if (!grappleShot)
         {
-            // Move vector for hand target
+            // Move vector for arm rig target
             moveVector = new Vector3(leftStickMove.x, leftStickMove.y, 0);
         }
         else
         {
-            // Move vector for target zone
+            // Move vector for hand target (spline target)
             moveVector = new Vector3(leftStickMove.x, 0, leftStickMove.y);
         }
         
