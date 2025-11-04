@@ -86,12 +86,28 @@ public class HandMovement : MonoBehaviour
         
         if (_freeze)
         {
-            if (_interactAction.WasPressedThisFrame() && currObj != null)
+            // code below somehow allows any hand console player's any button press to stop interaction
+            // if (currObj != null && _currPlayer != null)
+            // {
+            //     // Only stop if this hand's player pressed interact
+            //     var playerInput = _currPlayer.GetComponent<PlayerInput>();
+            //     var playerInteract = InputActionMapper.GetPlayerItemInteractAction(playerInput);
+            //
+            //     if (playerInteract.WasPressedThisFrame())
+            //     {
+            //         Debug.Log("interaction " + _toInteractObj + _canInteract);
+            //         StopInteractingWithObject(currObj);
+            //     }
+            // }
+            
+            // still allow stopping interaction with frozen hand
+            if (_interactAction.WasPressedThisFrame() && currObj != null && _currPlayer!= null)
             {
                 Debug.Log("interaction " + _toInteractObj + _canInteract);
                 StopInteractingWithObject(currObj);
             }
 
+            // so hand stays in position when frozen and walking
             grappleTarget.position = lastTargetPos;
             targetObjRest = grappleTarget.localPosition;
             return;
@@ -358,9 +374,13 @@ public class HandMovement : MonoBehaviour
 
     public void TurnOff(GameObject playerUsing)
     {
+        // failed method of making single hand stay on tray even if not at hand console: if (!_freeze)
+        // somehow joins all player's all hand console button presses
+        // so all interaction/move/rotate/launching will mess up 
+
         _disable = true;
         grappleShot = false;
-
+        
         // Stop movement sound and play stop sound if we were moving
         if (moveSource != null && moveSource.isPlaying)
             moveSource.Stop();
