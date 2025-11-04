@@ -13,7 +13,7 @@ public class PopUpUIHandler : MonoBehaviour
     private VisualElement blinkContainer;
     private Coroutine blinkRoutine;
 
-    void Start()
+    private void Awake()
     {
         // Only allow one level manager
         if (Instance != null && Instance != this)
@@ -24,12 +24,15 @@ public class PopUpUIHandler : MonoBehaviour
         {
             Instance = this;
         }
-
+        
         root = uIDocument.rootVisualElement;
 
         newTaskContainer = root.Query<VisualElement>("NewTaskContainer").First();
         blinkContainer = root.Query<VisualElement>("BlinkContainer").First();
-
+    }
+    
+    void Start()
+    {
         HideNewTaskPopUp();
         HideBlinkPopUp();
     }

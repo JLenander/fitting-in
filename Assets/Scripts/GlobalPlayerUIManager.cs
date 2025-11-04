@@ -76,6 +76,8 @@ public class GlobalPlayerUIManager : MonoBehaviour
         DisableDim();
         DisablePixelate();
         dialogueDisplay.gameObject.SetActive(false);
+        PopUpUIHandler.Instance.HideBlinkPopUp();
+        PopUpUIHandler.Instance.HideNewTaskPopUp();
     }
 
     // log players' cameras
