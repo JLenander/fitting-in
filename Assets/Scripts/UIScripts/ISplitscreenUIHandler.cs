@@ -49,7 +49,8 @@ public interface ISplitscreenUIHandler
     public void ShowOutsideCamera();
 
     /// <summary>
-    /// Hide the outside camera (or eye camera)
+    /// Hide the outside camera (or eye camera).
+    /// Pass 0 or negative seconds if hiding should happen instantly.
     /// <param name="animationSeconds">The number of seconds for the transition animation</param>
     /// </summary>
     public void HideOutsideCamera(float animationSeconds);

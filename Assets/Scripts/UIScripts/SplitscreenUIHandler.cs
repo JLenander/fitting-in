@@ -44,7 +44,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     // Cache for art sprites
     private Dictionary<string, Sprite> _spriteCache = new();
 
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this);
         var root = uiDoc.rootVisualElement;
@@ -253,8 +253,23 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     
     public void HideOutsideCamera(float animationSeconds)
     {
+        // Reset the animation if started twice.
+        if (cameraOverlayTransitionRoutine != null)
+        {
+            StopCoroutine(cameraOverlayTransitionRoutine);
+        }
+        
+        // Instantly hide the outside with the overlay
+        if (animationSeconds <= 0)
+        {
+            _outsideCamOverlay.style.opacity = 1.0f;
+            return;
+        }
+        
         cameraOverlayTransitionCurrTime = animationSeconds;
         cameraOverlayTransitionDuration = animationSeconds;
+
+        
         cameraOverlayTransitionRoutine = StartCoroutine(HideOutsideCameraAnimation());
     }
 

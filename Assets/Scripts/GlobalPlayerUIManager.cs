@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // used to control player UI in the splitscreen view, used to shake and dim their cameras
@@ -43,12 +44,34 @@ public class GlobalPlayerUIManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
     {
-        DontDestroyOnLoad(gameObject);
         _splitscreenUIHandler = FindAnyObjectByType<SplitscreenUIHandler>();
+        
+        // Register scene change handler after loading the UI to start with 
+        SceneManager.activeSceneChanged += UpdateUIForSceneChange;
+        InitializeUI();
+    }
+
+    /// <summary>
+    /// As a global player UI manager, update all player UI that needs to update on a scene change.
+    /// For example, reset UI to initial states.
+    /// </summary>
+    private void UpdateUIForSceneChange(Scene oldScene, Scene newScene)
+    {
+        InitializeUI();
+    }
+
+    /// <summary>
+    /// Initialize UI to defaults.
+    /// </summary>
+    private void InitializeUI()
+    {
+        _splitscreenUIHandler.HideOutsideCamera(0f);
         DisableDim();
         DisablePixelate();
         dialogueDisplay.gameObject.SetActive(false);
