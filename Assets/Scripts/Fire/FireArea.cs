@@ -46,28 +46,39 @@ public class FireArea : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (active && other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerSetup playerSetup = other.GetComponent<PlayerSetup>();
 
             if (playerSetup != null && !playersInside.Contains(playerSetup))
             {
                 playersInside.Add(playerSetup);
-                playerSetup.extinguisher.ActivateExtinguisher(true);
+
+                if (active)
+                    playerSetup.extinguisher.ActivateExtinguisher(true);
             }
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (active && other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerSetup playerSetup = other.GetComponent<PlayerSetup>();
-            if (playerSetup != null)
+            if (playerSetup != null && playersInside.Contains(playerSetup))
             {
                 playersInside.Remove(playerSetup);
                 playerSetup.extinguisher.ActivateExtinguisher(false);
             }
+        }
+    }
+
+    public void PlayerTeleportOut(PlayerSetup playerSetup)
+    {
+        if (playerSetup != null && playersInside.Contains(playerSetup))
+        {
+            playersInside.Remove(playerSetup);
+            playerSetup.extinguisher.ActivateExtinguisher(false);
         }
     }
 
@@ -93,6 +104,12 @@ public class FireArea : MonoBehaviour
         }
 
         enableRoutine = StartCoroutine(EnableRoutine());
+
+        foreach (var player in playersInside)
+        {
+            if (player != null)
+                player.extinguisher.ActivateExtinguisher(true);
+        }
     }
 
     // gradually increase fires

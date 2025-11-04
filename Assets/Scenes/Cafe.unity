@@ -2458,7 +2458,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395270529}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!4 &395270531
 Transform:
   m_ObjectHideFlags: 0
@@ -6478,7 +6478,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7839684266347174250, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1590754953}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
 --- !u!1 &1138850547 stripped
@@ -10192,12 +10195,20 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 276867141054492880, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 276867141054492880, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: m_Resource
       value: 
       objectReference: {fileID: 8300000, guid: 784d9d116c369c54f8b53a4d9929bf75, type: 3}
     - target: {fileID: 397365818852289157, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: m_Volume
       value: 0.108
+      objectReference: {fileID: 0}
+    - target: {fileID: 397365818852289157, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 397365818852289157, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: m_Resource
@@ -10951,10 +10962,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 125800236353010361, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: fireArea
+      value: 
+      objectReference: {fileID: 1568381346}
+    - target: {fileID: 125800236353010361, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: Destination
+      value: 
+      objectReference: {fileID: 800615587}
     - target: {fileID: 582336313316107014, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
+    - target: {fileID: 1466687498264982217, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Size.x
+      value: 12.442501
+      objectReference: {fileID: 0}
+    - target: {fileID: 1466687498264982217, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Center.x
+      value: -0.15083337
+      objectReference: {fileID: 0}
     - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: robotBody
       value: 
@@ -11079,6 +11106,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8467054180586661436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: fireArea
+      value: 
+      objectReference: {fileID: 1568381346}
+    - target: {fileID: 8467054180586661436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: Destination
+      value: 
+      objectReference: {fileID: 1239801188}
     - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
@@ -11525,6 +11560,84 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1783796639540315338, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!1 &1590754952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1590754953}
+  - component: {fileID: 1590754955}
+  - component: {fileID: 1590754954}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1590754953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590754952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 524322326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590754954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590754952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1835340458
+      Data2: 1217364803
+      Data3: -87900757
+      Data4: -786578346
+    Path: event:/Music/level_one
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1590754955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590754952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1001 &1594262997
 PrefabInstance:
   m_ObjectHideFlags: 0
