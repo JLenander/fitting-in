@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -52,6 +53,7 @@ public class HandMovement : MonoBehaviour
     [SerializeField] private GameObject grappleArmSpline;
 
     public AudioSource hookSource;
+    public StudioEventEmitter grappleSfx;
 
     public HeadConsole headConsole;
 
@@ -197,8 +199,8 @@ public class HandMovement : MonoBehaviour
             {
                 // EmergencyEvent.Instance.IncrementCount(true); // or pass correct value
 
-                if (hookSource != null)
-                    hookSource.Play();
+                if (grappleSfx != null)
+                    grappleSfx.Play();
 
                 // get distance from head
                 Vector3 dir;

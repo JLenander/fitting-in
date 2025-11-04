@@ -2109,6 +2109,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7005292842867156995, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!114 &330007765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -394028744
+      Data2: 1132443671
+      Data3: -1138375235
+      Data4: -1047548548
+    Path: event:/SFX/Robot/grapple
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!64 &339930053
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2407,6 +2438,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -453414060628706315, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!114 &370547641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -394028744
+      Data2: 1132443671
+      Data3: -1138375235
+      Data4: -1047548548
+    Path: event:/SFX/Robot/grapple
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &394511962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7853607055929859697, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
@@ -6517,13 +6579,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: grappleSfx
+      value: 
+      objectReference: {fileID: 370547641}
+    - target: {fileID: 6563188557207657235, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676138728223071749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163664760754894619, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: grappleSfx
+      value: 
+      objectReference: {fileID: 330007765}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7839684266347174250, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1590754953}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1247843849156549410, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 370547641}
+    - targetCorrespondingSourceObject: {fileID: 2360737117090242100, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 330007765}
   m_SourcePrefab: {fileID: 100100000, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
 --- !u!1 &1138850547 stripped
 GameObject:
@@ -11412,7 +11496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spineTarget: {fileID: 552350949}
-  bendCoolDown: 0.5
   bendDistance: 7
   returnSpeed: 7
   audioSource: {fileID: 1582269021}
@@ -14181,11 +14264,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -713403206
-      Data2: 1330869701
-      Data3: 760117135
-      Data4: -38464930
-    Path: event:/SFX/Interior/terminal_enter
+      Data1: 1371676489
+      Data2: 1161071372
+      Data3: -706900566
+      Data4: -882616684
+    Path: event:/SFX/Interior/treadmill
   Event: 
   EventPlayTrigger: 0
   EventStopTrigger: 0
