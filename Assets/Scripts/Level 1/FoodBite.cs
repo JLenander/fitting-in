@@ -16,6 +16,9 @@ public class FoodBite : InteractableObject, IPooledObject
     public int score = 2;
 
     public AudioSource audioSource;
+    
+    // The offset to place the object in on pickup for the hand
+    public Vector3 handOffset = new Vector3(0f, 3.5f, -1.7f);
 
     public override void Start()
     {
@@ -40,7 +43,7 @@ public class FoodBite : InteractableObject, IPooledObject
         {
             // move to hand
             transform.parent = obj;
-            transform.localPosition = new Vector3(0.0f, 5.2f, -1.0f);
+            transform.localPosition = handOffset;
             transform.localRotation = Quaternion.Euler(-88f, 10f, 0f);
             canPickup = false;
 
