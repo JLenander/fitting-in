@@ -16,6 +16,8 @@ public class CoffeePot : InteractableObject
     [SerializeField] private HandConsole leftConsole;
     [SerializeField] private HandConsole rightConsole;
 
+    [SerializeField] private DialogueScriptableObj burnDialogue;
+
     private bool isPouring = false;
 
     [SerializeField] private Transform spoutTip;          // assign in Inspector
@@ -185,5 +187,6 @@ public class CoffeePot : InteractableObject
         }
 
         // output dialogue
+        GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
   - Y'ouch!
-  - That's hot
-  - Someone needs to put out the fire at the arms
+  - Our limb system is overheating!
+  - Someone needs to put out the fire inside the arm
   spirteA: {fileID: 21300000, guid: 7cf1f3e381de4504d8c4445353b39e1d, type: 3}
   spirteB: {fileID: 21300000, guid: 14195ce6032b9da4ab6a0eba52e7c89b, type: 3}

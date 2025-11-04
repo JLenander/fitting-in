@@ -305,6 +305,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   leftConsole: {fileID: 0}
   rightConsole: {fileID: 0}
+  burnDialogue: {fileID: 11400000, guid: cda96d2ea8768a540bde1a1edb94bd6f, type: 2}
   spoutTip: {fileID: 838067025856432034}
   coffeePour: {fileID: 6910735435490514365}
 --- !u!54 &3763328431830505262
