@@ -238,7 +238,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638978092532468236
+  lastModified: 638978095938273750
   FileSizes: []
   Exists: 1
 --- !u!114 &-4982732039356139642
@@ -464,7 +464,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638978092532496035
+  lastModified: 638978095938288777
   FileSizes:
   - Name: 
     Value: 1980
@@ -566,7 +566,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -1945535652046819133}
   cacheVersion: 131849
-  cacheTime: 638978092537624470
+  cacheTime: 638978095938288777
   SerializableEventsDict:
   - key: event:/Ambient/amb_cafe
     index: 0
@@ -731,7 +731,7 @@ MonoBehaviour:
   Path: Assets/FMOD Banks/Desktop/Playable.bank
   Name: Playable
   StudioPath: bank:/Playable
-  lastModified: 638978092535902228
+  lastModified: 638978095542974175
   FileSizes: []
   Exists: 1
 --- !u!114 &6671995593224931253
