@@ -10969,6 +10969,10 @@ PrefabInstance:
       value: -0.15083337
       objectReference: {fileID: 0}
     - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1904862320}
+    - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: robotBody
       value: 
       objectReference: {fileID: 76562116}
@@ -10976,6 +10980,10 @@ PrefabInstance:
       propertyPath: playerChair
       value: 
       objectReference: {fileID: 1609978945}
+    - target: {fileID: 2180102898528216618, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2941727664699777610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: forearmBone
       value: 
@@ -11134,6 +11142,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8139884504765179461, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1869179585}
+    - targetCorrespondingSourceObject: {fileID: 3677380697053700436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904862320}
     - targetCorrespondingSourceObject: {fileID: 4132870269002581580, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1814432141}
@@ -11175,7 +11186,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 1568381339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1904862319}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcffd2b72b11a694091950ac75331ad9, type: 3}
@@ -14018,6 +14029,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2619086233303812490, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!1 &1904862319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3677380697053700436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1904862320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904862319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1908971980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4186333593806343112, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
