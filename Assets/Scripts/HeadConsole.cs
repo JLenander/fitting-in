@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class HeadConsole : Interactable
     public AudioSource hookSource;
     public AudioSource interactSource;
     public AudioSource denySource;
+
+    public StudioEventEmitter interactSfx;
 
     private OverlayUIHandler uIHandler;
     private int layerMask;
@@ -137,8 +140,8 @@ public class HeadConsole : Interactable
         player.GetComponent<Player>().switchToHead(exteriorCamera);
         _canInteract = false;
 
-        if (interactSource != null)
-            interactSource.Play();
+        if (interactSfx != null)
+            interactSfx.Play();
 
         // for grapple arm
         _currPlayer = player;

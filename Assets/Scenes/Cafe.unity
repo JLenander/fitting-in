@@ -11001,6 +11001,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3058777039347956642, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: interactSfx
+      value: 
+      objectReference: {fileID: 1814432141}
+    - target: {fileID: 3058777039347956642, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: exteriorCamera
       value: 
       objectReference: {fileID: 984563275}
@@ -11107,7 +11111,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4132870269002581580, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1814432141}
   m_SourcePrefab: {fileID: 100100000, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
 --- !u!4 &1568381340 stripped
 Transform:
@@ -13250,6 +13257,42 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802012909}
   m_Mesh: {fileID: 7857590630482128698, guid: 7fd09de4ab3c45f42abc2fecf6b481b8, type: 3}
+--- !u!1 &1814432140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4132870269002581580, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1814432141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814432140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1823916575 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5824461040333631235, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
