@@ -44,6 +44,8 @@ public class HipConsole : Interactable
         player.GetComponent<Player>().switchOffLegs();
 
         _canInteract = true;
+        if (enterSfx != null)
+            enterSfx.Stop();
         uIHandler.HideContainer(player);
         if (playerChair && triggerSeat.PlayerInsideSeat())
         {
