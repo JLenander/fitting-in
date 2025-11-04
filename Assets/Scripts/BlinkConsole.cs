@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
+using FMODUnity;
 
 public class BlinkConsole : Interactable
 {
@@ -16,6 +17,7 @@ public class BlinkConsole : Interactable
     public HeadConsole headConsole;
     public GameObject blinkOverlay; // a black overlap for camera
     public AudioSource audioSource;
+    public StudioEventEmitter enterSfx;
 
     private bool timerIsRunning;
     [FormerlySerializedAs("warning")] public bool isPixelatingPhase = false;
@@ -115,8 +117,8 @@ public class BlinkConsole : Interactable
 
         playerInteract.LeaveCurrInteractable();
 
-        if (audioSource != null)
-            audioSource.Play();
+        if (enterSfx != null)
+            enterSfx.Play();
 
         if (blinkOverlay != null)
             StartCoroutine(BlinkRoutine());

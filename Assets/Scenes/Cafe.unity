@@ -4024,6 +4024,11 @@ Transform:
   - {fileID: 1209078608}
   m_Father: {fileID: 1535737719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &668466420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6199739010608921559, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &673602843
 GameObject:
   m_ObjectHideFlags: 0
@@ -10956,10 +10961,18 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
+    - target: {fileID: 389959047049649812, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1568381347}
     - target: {fileID: 582336313316107014, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
+    - target: {fileID: 942394105965026826, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1466687498264982217, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_Size.x
       value: 12.442501
@@ -11076,6 +11089,10 @@ PrefabInstance:
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 1138850547}
+    - target: {fileID: 7525589340187091645, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8061766155699826322, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.33
@@ -11136,6 +11153,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6199739010608921559, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1568381347}
     - targetCorrespondingSourceObject: {fileID: 7783328170831499938, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1869179586}
@@ -11197,7 +11217,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 389959047049649812, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 1568381339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 668466420}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c20d77c09d47e340a2bb7e22a91b182, type: 3}
@@ -11214,6 +11234,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964320936d968ec49b55a53f1c9ad667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1568381347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668466420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1576845215
 GameObject:
   m_ObjectHideFlags: 0
