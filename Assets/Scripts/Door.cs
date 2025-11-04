@@ -3,6 +3,8 @@ using UnityEngine;
 public class Door : Interactable
 {
     [SerializeField] private Transform Destination;
+
+    [SerializeField] private FireArea fireArea;
     public bool locked;
 
     public bool upper;
@@ -18,6 +20,12 @@ public class Door : Interactable
     {
         if (!locked)
         {
+            // make sure exiting fire area properly
+            if (fireArea != null)
+            {
+                fireArea.PlayerTeleportOut(player.GetComponent<PlayerSetup>());
+            }
+
             CharacterController charControl = player.GetComponent<CharacterController>();
             charControl.enabled = false;
             player.transform.position = Destination.position;

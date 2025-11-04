@@ -14,7 +14,7 @@ public class HeadConsole : Interactable
     private bool _canInteract = true;
 
     private bool _leftJammed, _rightJammed;
-    private bool _leftShot, _rightShot;
+    // private bool _leftShot, _rightShot;
     private InputAction _leftTriggerAction, _rightTriggerAction;
     private GameObject _currPlayer;
 
@@ -31,7 +31,7 @@ public class HeadConsole : Interactable
         _splitscreenUIHandler = FindAnyObjectByType<SplitscreenUIHandler>();
         // for grapple arm
         _leftJammed = _rightJammed = false;
-        _leftShot = _rightShot = false;
+        // _leftShot = _rightShot = false;
         uIHandler = HeadUIHandler.Instance;
 
         layerMask = LayerMask.GetMask("GrappleStop");

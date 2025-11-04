@@ -78,10 +78,6 @@ public class BlinkConsole : Interactable
 
                     // start fire buffer countdown before the fire starts to give players time to blink
                     isInFireBuffer = true;
-
-                    hoverMessage = "[Extinguish fire!]";
-                    msgColour = new Color(1, 0, 0, 1);
-                    outlineColour = new Color(1, 0, 0, 1);
                 }
 
                 if (isInFireBuffer)
@@ -93,6 +89,10 @@ public class BlinkConsole : Interactable
                         // Eye is on fire now.
                         isInFireBuffer = false;
                         FireManager.Instance.StartFireArea("eye");
+
+                        hoverMessage = "[Extinguish fire!]";
+                        msgColour = new Color(1, 0, 0, 1);
+                        outlineColour = new Color(1, 0, 0, 1);
                     }
                 }
             }
@@ -103,7 +103,7 @@ public class BlinkConsole : Interactable
     public override void Interact(GameObject player)
     {
         PlayerInteract playerInteract = player.GetComponent<PlayerInteract>();
-        if (!isFullyPixelated)
+        if (!isFullyPixelated || (isFullyPixelated && isInFireBuffer))
             ResetTimers(); // only allow lever to reset timer if not at critical
 
         if (fireOver)
@@ -135,15 +135,18 @@ public class BlinkConsole : Interactable
         GlobalPlayerUIManager.Instance.DisablePixelate(); // undo pixelate
         PopUpUIHandler.Instance.HideBlinkPopUp();
 
+        fireOver = false;
+
         hoverMessage = "Blink";
         msgColour = new Color(1, 1, 1, 1);
         outlineColour = new Color(1, 1, 1, 1);
-
-        fireOver = false;
     }
 
     public void FirePutOut()
     {
         fireOver = true;
+
+        hoverMessage = "Blink";
+        msgColour = new Color(1, 1, 1, 1);
     }
 }
