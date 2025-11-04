@@ -2061,8 +2061,8 @@ MonoBehaviour:
   baseZ: 4.23
   moveSource: {fileID: 8682444517587383604}
   stopSource: {fileID: 9115779696011899960}
-  handPitchYawSensitivity: 150
-  wristRotationSpeed: 260
+  handPitchYawSensitivity: 180
+  wristRollSpeed: 180
   wristRoll: {fileID: 7203524997457381922}
   wristPitchYaw: {fileID: 2167919564173934219}
   wristAim: {fileID: 7258395926828420493}

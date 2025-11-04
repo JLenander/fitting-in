@@ -38,13 +38,12 @@ public class HandMovement : MonoBehaviour
 
     [FormerlySerializedAs("lookSensitivity")] public float handPitchYawSensitivity = 0.4f;
 
-    [SerializeField] private float wristRotationSpeed = 1.0f;
+    [FormerlySerializedAs("wristRotationSpeed")] [SerializeField] private float wristRollSpeed = 1.0f;
 
     // The transforms to control the hand/wrist roll/pitch/yaw (airplane degrees of freedom system).
     // Pitch and Yaw are separate from Roll as we want them to be independent of the hand/wrist roll orientation.
     [SerializeField] private Transform wristRoll;
     [SerializeField] private Transform wristPitchYaw;
-    [SerializeField] private Transform wristAim;
     [SerializeField] private Transform wristBone;
 
     private bool grappleShot;
@@ -123,38 +122,42 @@ public class HandMovement : MonoBehaviour
         }
 
         // hand rigid body movement
-        Vector2 stickMove = _moveAction.ReadValue<Vector2>();
-        Vector3 stickMovement;
+        Vector2 leftStickMove = _moveAction.ReadValue<Vector2>();
+        Vector3 moveVector;
         if (!grappleShot)
         {
-            stickMovement = new Vector3(stickMove.x, stickMove.y, 0);
-            // wrist rotation
-            Vector2 lookMove = _lookAction.ReadValue<Vector2>() * Time.deltaTime;
-            // // yaw
-            // _wristRotation.x += lookMove.x * handPitchYawSensitivity;
-            // pitch
-            _wristRotation.y += lookMove.y * handPitchYawSensitivity;
-            // roll
-            ClampWristRotate();
+            // Move vector for hand target
+            moveVector = new Vector3(leftStickMove.x, leftStickMove.y, 0);
         }
         else
         {
-            stickMovement = new Vector3(stickMove.x, 0, stickMove.y);
+            // Move vector for target zone
+            moveVector = new Vector3(leftStickMove.x, 0, leftStickMove.y);
         }
-
-        _wristRotation.z +=
-            (_leftBumperAction.ReadValue<float>() * -1 + _rightBumperAction.ReadValue<float>()) *
-            wristRotationSpeed * Time.deltaTime;
-
-
+        
+        // wrist rotation. For less confusing controls, give each axis a 45 degree angle of exclusivity
+        // (only roll or only pitch depending on which direction the stick is most moved in)
+        Vector2 rightStickMove = _lookAction.ReadValue<Vector2>() * Time.deltaTime;
+        if (Mathf.Abs(rightStickMove.x) > Mathf.Abs(rightStickMove.y))
+        {
+            // roll
+            _wristRotation.z += rightStickMove.x * wristRollSpeed;
+        }
+        else
+        {
+            // pitch
+            _wristRotation.y += rightStickMove.y * handPitchYawSensitivity;
+        }
+        ClampWristRotate();
+        
         float leftTrigger = _leftTriggerAction.ReadValue<float>();
         float rightTrigger = _rightTriggerAction.ReadValue<float>();
         // Vector3 triggerMovement = new Vector3(0, 0, leftTrigger - rightTrigger);
 
-        movement += stickMovement * Time.deltaTime;
+        movement += moveVector * Time.deltaTime;
 
         // changed from movement.magnitude to this addition because movement is now += instead of =
-        bool movingNow = stickMovement.magnitude > 0.5f;
+        bool movingNow = moveVector.magnitude > 0.5f;
 
         // Movement started
         if (movingNow && !_isMoving)
@@ -243,90 +246,77 @@ public class HandMovement : MonoBehaviour
         }
 
         triggerWasPressed = triggerPressed;
-    
-        // Movement
-        Vector3 totalMvt;
 
+        // Calculate movement of the grapple target
         if (grappleShot)
         {
-            // control grapple target
+            Vector3 grappleMvt;
+            // control grapple target,
             if (!left)
             {
-                totalMvt = movement * speed + targetObjRest;
+                grappleMvt = movement * speed + targetObjRest;
             }
             else
             {
                 Vector3 tmpMvt = movement;
                 tmpMvt.x *= -1.0f;
-                totalMvt = tmpMvt * speed + targetObjRest;
+                grappleMvt = tmpMvt * speed + targetObjRest;
             }
 
             // totalMvt.x = Mathf.Clamp(totalMvt.x, -20f, 28f);
             // totalMvt.z = Mathf.Clamp(totalMvt.z, -21.8f, 23.5f);
             float currentY = grappleTarget.localPosition.y;
 
-            grappleTarget.localPosition = new Vector3(totalMvt.x, currentY, totalMvt.z);
+            grappleTarget.localPosition = new Vector3(grappleMvt.x, currentY, grappleMvt.z);
 
             Vector3 clampedMovement = (grappleTarget.localPosition - targetObjRest) / speed;
             if (left)
                 clampedMovement.x *= -1.0f;
 
             movement = clampedMovement;
-
-            if (left)
-            {
-                // left hand roll
-                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
-            }
-            else
-            {
-                // right hand roll
-                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
-            }
         }
         else
         {
+            Vector3 handMvt;
             if (left)
             {
-                totalMvt = movement * speed + _ogPosition;
+                handMvt = movement * speed + _ogPosition;
             }
             else
             {
                 Vector3 tmpMvt = movement;
                 tmpMvt.x *= -1.0f;
-                totalMvt = tmpMvt * speed + _ogPosition;
+                handMvt = tmpMvt * speed + _ogPosition;
             }
 
-            totalMvt.x = Mathf.Clamp(totalMvt.x, 97f, 117f);
-            totalMvt.y = Mathf.Clamp(totalMvt.y, -21.8f, -4.5f);
+            handMvt.x = Mathf.Clamp(handMvt.x, 97f, 117f);
+            handMvt.y = Mathf.Clamp(handMvt.y, -21.8f, -4.5f);
             float currentZ = transform.localPosition.z;
 
-            transform.localPosition = new Vector3(totalMvt.x, totalMvt.y, currentZ);
+            transform.localPosition = new Vector3(handMvt.x, handMvt.y, currentZ);
 
             Vector3 clampedMovement = (transform.localPosition - _ogPosition) / speed;
             if (!left)
                 clampedMovement.x *= -1.0f;
 
             movement = clampedMovement;
-
-            // Rotation
-            // pitch and yaw on parent object so the direction is independent of the wrist roll orientation.
-            if (left)
-            {
-                // left hand pitch and yaw
-                wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
-                wristAim.localRotation = Quaternion.Euler(_wristRotation.y, 0, _wristRotation.x * -1.0f);
-                // left hand roll
-                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
-            }
-            else
-            {
-                // right hand pitch and yaw
-                wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
-                wristAim.localRotation = Quaternion.Euler(_wristRotation.y, 0, _wristRotation.x);
-                // right hand roll
-                wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
-            }
+        }
+        
+        // Rotation
+        // pitch on parent object so the direction is independent of the wrist roll orientation.
+        if (left)
+        {
+            // left hand pitch & yaw
+            wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
+            // left hand roll
+            wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z, 0);
+        }
+        else
+        {
+            // right hand pitch & yaw
+            wristPitchYaw.localRotation = Quaternion.Euler(_wristRotation.y, 0, 0);
+            // right hand roll
+            wristRoll.localRotation = Quaternion.Euler(0, _wristRotation.z * -1.0f, 0);
         }
     }
 
