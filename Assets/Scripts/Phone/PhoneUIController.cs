@@ -38,7 +38,7 @@ public class PhoneUIController : MonoBehaviour
     private RectTransform rt;
     private bool swiping = false;
     private bool locked = true;
-    private bool remarked = false;
+    // private bool remarked = false;
     private TaskManager taskManager;
     private bool matchedText = false;
 

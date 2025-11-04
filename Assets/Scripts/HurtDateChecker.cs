@@ -4,7 +4,6 @@ using UnityEngine;
 public class HurtDateChecker : MonoBehaviour
 {
     [SerializeField] private Transform spineTarget;
-    [SerializeField] private float bendCoolDown = 0.5f;
     [SerializeField] private float bendDistance = 0.2f;
     [SerializeField] private float returnSpeed = 0.5f;
 
