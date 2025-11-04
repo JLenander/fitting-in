@@ -31,7 +31,11 @@ public class HandConsole : Interactable
 
     public override void Interact(GameObject player)
     {
-        if (!_canInteract) return;  // if interactable
+        if (!_canInteract)
+        {
+            return;
+        }
+        ;  // if interactable
         player.GetComponent<Player>().TurnOff();
         HandMovement target = handRigTarget.GetComponent<HandMovement>();
         target.TurnOn(player);
@@ -49,6 +53,7 @@ public class HandConsole : Interactable
         player.GetComponent<Player>().TurnOn();
         handRigTarget.GetComponent<HandMovement>().TurnOff(player);
         _canInteract = true; // current player leaves
+
         _currPlayer = null;
         uIHandler.HideContainer(player);
     }
@@ -63,7 +68,11 @@ public class HandConsole : Interactable
         hoverMessage = "[ARM DISABLED]";
         msgColour = new Color(1, 0, 0, 1);
         outlineColour = new Color(1, 0, 0, 1);
-        _currPlayer = null;
+
+        PlayerInteract playerInteract = _currPlayer.GetComponent<PlayerInteract>();
+        if (playerInteract != null)
+            playerInteract.LeaveCurrInteractable();
+
         _canInteract = false;
         // handRigTarget.GetComponent<HandMovement>().JamArm(true);
         // headConsole.JamArm(left, true);
