@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class FireManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class FireManager : MonoBehaviour
     public HandConsole leftArmConsole;
     public HandConsole rightArmConsole;
     public HipConsole hipConsole;
+    public StudioEventEmitter fireSfx;
 
     private Dictionary<string, FireArea> fireAreas;
 
@@ -35,6 +37,8 @@ public class FireManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        fireSfx.EventInstance.setVolume(3f);
     }
 
     public void StartFireArea(string name)
@@ -42,6 +46,11 @@ public class FireManager : MonoBehaviour
         if (fireAreas.TryGetValue(name, out FireArea area))
         {
             area.EnableFires();
+            if (!fireSfx.IsPlaying())
+            {
+                Debug.Log($"Fire sound start");
+                fireSfx.Play();
+            }
         }
         else
         {
@@ -73,5 +82,18 @@ public class FireManager : MonoBehaviour
         {
             Debug.Log($"Can't disable fire area {name} that doesn't exist");
         }
+        
+        // If any fire area still active, don't stop sfx
+        foreach (var fa in fireAreas)
+        {
+            var area = fa.Value;
+            if (area != null && area.IsActive)
+            {
+                return;
+            }
+        }
+
+        Debug.Log($"Fire sound stop");
+        fireSfx.Stop();
     }
 }

@@ -2467,7 +2467,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395270529}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!4 &395270531
 Transform:
   m_ObjectHideFlags: 0
@@ -10455,6 +10455,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1568381342}
     - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: fireSfx
+      value: 
+      objectReference: {fileID: 1450802916}
+    - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: hipConsole
       value: 
       objectReference: {fileID: 1568381344}
@@ -10514,6 +10518,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5904948759087187704, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
   m_PrefabInstance: {fileID: 1450802913}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1450802916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4709538606492710203, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+  m_PrefabInstance: {fileID: 1450802913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
 --- !u!1 &1476768494
 GameObject:
   m_ObjectHideFlags: 0
@@ -11070,12 +11085,12 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
-    - target: {fileID: 1117245153883639161, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 942394105965026826, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117245153883639161, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1466687498264982217, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
