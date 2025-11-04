@@ -19,6 +19,8 @@ public class Evidence : InteractableObject, IPooledObject
         grabbed = false;
         popUp.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        EnableOutline();
+
     }
     public void OnSpawn()
     {

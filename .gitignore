@@ -99,3 +99,6 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 .vsconfig
+
+# FMOD cache file
+Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset

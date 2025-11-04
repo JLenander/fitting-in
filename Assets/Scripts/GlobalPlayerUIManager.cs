@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // used to control player UI in the splitscreen view, used to shake and dim their cameras
@@ -27,7 +28,8 @@ public class GlobalPlayerUIManager : MonoBehaviour
     [SerializeField] private float walkShakeDuration = 0.05f;   // how long each shake lasts
     [SerializeField] private float walkShakeInterval = 0.1f;     // time between shakes
 
-    private List<PlayerData> playerCam = new List<PlayerData>();
+    private List<PlayerData> playerData = new List<PlayerData>();
+    private List<Vector3> playerCameraLocalPos = new List<Vector3>();
 
     private bool start = false;
     private Coroutine pixelateCoroutine;
@@ -43,12 +45,34 @@ public class GlobalPlayerUIManager : MonoBehaviour
         {
             Instance = this;
         }
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
     {
-        DontDestroyOnLoad(gameObject);
         _splitscreenUIHandler = FindAnyObjectByType<SplitscreenUIHandler>();
+        
+        // Register scene change handler after loading the UI to start with 
+        SceneManager.activeSceneChanged += UpdateUIForSceneChange;
+        InitializeUI();
+    }
+
+    /// <summary>
+    /// As a global player UI manager, update all player UI that needs to update on a scene change.
+    /// For example, reset UI to initial states.
+    /// </summary>
+    private void UpdateUIForSceneChange(Scene oldScene, Scene newScene)
+    {
+        InitializeUI();
+    }
+
+    /// <summary>
+    /// Initialize UI to defaults.
+    /// </summary>
+    private void InitializeUI()
+    {
+        _splitscreenUIHandler.HideOutsideCamera(0f);
         DisableDim();
         DisablePixelate();
         dialogueDisplay.gameObject.SetActive(false);
@@ -61,7 +85,8 @@ public class GlobalPlayerUIManager : MonoBehaviour
         {
             if (players[i].Valid)
             {
-                playerCam.Add(players[i]);
+                playerData.Add(players[i]);
+                playerCameraLocalPos.Add(players[i].Input.camera.transform.localPosition);
                 _splitscreenUIHandler.EnablePlayerOverlay(i);
 
                 // assign render texture to camera
@@ -193,6 +218,15 @@ public class GlobalPlayerUIManager : MonoBehaviour
     }
     public void StartWalkingShake()
     {
+        // Store player camera transforms
+        foreach (var player in playerData)
+        {
+            if (player.Valid)
+            {
+                playerCameraLocalPos[player.Index] = player.Input.camera.transform.localPosition;
+            }
+        }
+        
         if (_walkingShakeCoroutine == null)
             _walkingShakeCoroutine = StartCoroutine(WalkingShakeRoutine());
     }
@@ -205,10 +239,10 @@ public class GlobalPlayerUIManager : MonoBehaviour
             _walkingShakeCoroutine = null;
 
             // reset all cameras to original position
-            foreach (var playerData in playerCam)
+            foreach (var player in playerData)
             {
-                if (playerData.Valid && playerData.Input?.camera != null)
-                    playerData.Input.camera.transform.localPosition = Vector3.zero;
+                if (player.Valid && player.Input?.camera != null)
+                    player.Input.camera.transform.localPosition = playerCameraLocalPos[player.Index];
             }
         }
     }
@@ -217,7 +251,7 @@ public class GlobalPlayerUIManager : MonoBehaviour
     {
         while (true)
         {
-            foreach (var playerData in playerCam)
+            foreach (var playerData in playerData)
             {
                 if (playerData.Valid && playerData.Input?.camera != null)
                 {
