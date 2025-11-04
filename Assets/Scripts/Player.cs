@@ -9,8 +9,7 @@ public class Player : MonoBehaviour
     // lookSensitivity controls the camera sensitivity for the player as a plorp only (not in terminal)
     [SerializeField] private float lookSensitivity;
 
-    [SerializeField] private AudioSource footstepSource;
-    [SerializeField] private AudioClip[] footstepClips;
+    
     public StudioEventEmitter stepSfx;
     [SerializeField] private float stepInterval = 0.5f;
     private CharacterController _characterController;
@@ -54,8 +53,6 @@ public class Player : MonoBehaviour
         _characterController.enabled = true;
 
         _controlFunc = ControlPlayer;
-
-        footstepSource.volume = 0.1f;
     }
 
     void FixedUpdate()
