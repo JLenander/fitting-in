@@ -119,12 +119,12 @@ public class CoffeePot : InteractableObject
         if (canInteract && canPickup)
         {
             // first time pickup, start a fire
-            if (first)
-            {
-                first = false;
+            // if (first)
+            // {
+            //     first = false;
 
-                StartCoroutine(BurnArm(target.left));
-            }
+            //     StartCoroutine(BurnArm(target.left));
+            // }
 
             // move to hand
             DisableOutline();
