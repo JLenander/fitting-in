@@ -117,9 +117,6 @@ public class BlinkConsole : Interactable
 
         if (enterSfx != null)
             enterSfx.Play();
-
-        if (blinkOverlay != null)
-            StartCoroutine(BlinkRoutine());
     }
 
     public void ResetTimers()
