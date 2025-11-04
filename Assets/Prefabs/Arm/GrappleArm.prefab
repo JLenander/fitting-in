@@ -1168,7 +1168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4282386708170707015}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17310469, y: 0.01164148, z: -0.104848675, w: 0.9792375}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1.6244556, y: 1.6244556, z: 1.6244557}
   m_ConstrainProportionsScale: 0
@@ -2065,13 +2065,13 @@ MonoBehaviour:
   wristRollSpeed: 180
   wristRoll: {fileID: 7203524997457381922}
   wristPitchYaw: {fileID: 2167919564173934219}
-  wristAim: {fileID: 7258395926828420493}
   wristBone: {fileID: 1695341088322505098}
   oppositeHandAnimator: {fileID: 0}
   handAnimator: {fileID: 5030860086350588141}
   currObj: {fileID: 0}
   grappleArmSpline: {fileID: 1951719360051209165}
   hookSource: {fileID: 3293728549715247843}
+  grappleSfx: {fileID: 0}
   headConsole: {fileID: 0}
   left: 0
   grappleTarget: {fileID: 5644754071235285436}
