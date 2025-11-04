@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 /// <summary>
 /// on active this shoots a ray out to find fires
@@ -12,6 +13,7 @@ public class Extinguisher : MonoBehaviour
     public LayerMask fireLayer;
     private bool active;
     private bool reset;
+    public StudioEventEmitter waterSfx;
 
     void Start()
     {
@@ -76,5 +78,15 @@ public class Extinguisher : MonoBehaviour
     {
         active = state;
         waterStream.SetActive(state);
+        if (state && !waterSfx.IsPlaying()) 
+        {
+            Debug.Log($"Water sound start");
+            waterSfx.Play();
+        }
+        else if (!state && waterSfx.IsPlaying())
+        {
+            Debug.Log($"Water sound stop");
+            waterSfx.Stop();
+        }
     }
 }

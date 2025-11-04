@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 
 public class RobotMovement : MonoBehaviour
@@ -15,8 +16,7 @@ public class RobotMovement : MonoBehaviour
     public float robotLookSensitivity = 50f;
     public bool disable = false;
 
-    [SerializeField] private AudioSource footstepSource;
-    [SerializeField] private AudioClip[] footstepClips;
+    public StudioEventEmitter stepSfx;
     [SerializeField] private float stepInterval = 0.02f;
     private float _stepTimer;
 
@@ -31,8 +31,6 @@ public class RobotMovement : MonoBehaviour
 
         if (_robotCharacterController == null)
             Debug.LogError("No CharacterController found");
-        
-        footstepSource.volume = 0.2f;
     }
 
     public void ControlRobotMovement()
@@ -80,11 +78,7 @@ public class RobotMovement : MonoBehaviour
 
     public void PlayFootstep()
     {
-        if (footstepClips.Length > 0)
-        {
-            int index = UnityEngine.Random.Range(0, footstepClips.Length);
-            footstepSource.PlayOneShot(footstepClips[index]);
-        }
+        stepSfx.Play();
     }
 
     public void SetMoveAction(InputAction moveAction)

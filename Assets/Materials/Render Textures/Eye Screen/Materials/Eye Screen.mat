@@ -10,10 +10,12 @@ Material:
   m_Name: Eye Screen
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: 165994214ccbbec418a3969b3a4001d5, type: 2}
-  m_ModifiedSerializedProperties: 16
-  m_ValidKeywords: []
+  m_ModifiedSerializedProperties: 26
+  m_ValidKeywords:
+  - _EMISSION
+  - _SPECULAR_SETUP
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -26,17 +28,25 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 8400000, guid: 1dba09165fb55324cad7f9b7c17cba45, type: 2}
+        m_Texture: {fileID: 8400000, guid: 193351b6688faea4cbe4929250e27aaa, type: 2}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: -1, y: -1.25}
+    - _EmissionMap:
+        m_Texture: {fileID: 8400000, guid: 193351b6688faea4cbe4929250e27aaa, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 8400000, guid: 1dba09165fb55324cad7f9b7c17cba45, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 8400000, guid: 193351b6688faea4cbe4929250e27aaa, type: 2}
+        m_Scale: {x: 3, y: 3}
+        m_Offset: {x: -1, y: -1.25}
     m_Ints: []
     m_Floats:
+    - _Cull: 2
     - _Cutoff: 0.5
-    m_Colors: []
+    - _WorkflowMode: 0
+    m_Colors:
+    - _EmissionColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _SpecColor: {r: 0.14716971, g: 0.14716971, b: 0.14716971, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &998259975399020648

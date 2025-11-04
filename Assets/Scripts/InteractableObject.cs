@@ -57,13 +57,16 @@ public abstract class InteractableObject : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        DisableOutline();
-        canInteract = false;
-        if (handMovement != null)
-            handMovement.SetCurrentInteractableObject(null, false);
-        if (interactPopUp != null)
+        if (other != null && other.CompareTag("Hand") && canPickup)
         {
-            interactPopUp.gameObject.SetActive(false);
+            DisableOutline();
+            canInteract = false;
+            if (handMovement != null)
+                handMovement.SetCurrentInteractableObject(null, false);
+            if (interactPopUp != null)
+            {
+                interactPopUp.gameObject.SetActive(false);
+            }
         }
     }
 

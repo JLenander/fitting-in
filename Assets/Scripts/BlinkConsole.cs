@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
+using FMODUnity;
 
 public class BlinkConsole : Interactable
 {
@@ -14,8 +15,8 @@ public class BlinkConsole : Interactable
     public float pressAnimationCountdown;
     public float fireBufferCountdown;
     public HeadConsole headConsole;
-    public GameObject blinkOverlay; // a black overlap for camera
     public AudioSource audioSource;
+    public StudioEventEmitter enterSfx;
 
     private bool timerIsRunning;
     [FormerlySerializedAs("warning")] public bool isPixelatingPhase = false;
@@ -31,7 +32,6 @@ public class BlinkConsole : Interactable
         fireBufferCountdown = fireBufferTime;
         timerIsRunning = true;
 
-        blinkOverlay.SetActive(false);
         PopUpUIHandler.Instance.HideBlinkPopUp();
     }
 
@@ -115,11 +115,8 @@ public class BlinkConsole : Interactable
 
         playerInteract.LeaveCurrInteractable();
 
-        if (audioSource != null)
-            audioSource.Play();
-
-        if (blinkOverlay != null)
-            StartCoroutine(BlinkRoutine());
+        if (enterSfx != null)
+            enterSfx.Play();
     }
 
     public void ResetTimers()
@@ -145,14 +142,6 @@ public class BlinkConsole : Interactable
         hoverMessage = "Blink";
         msgColour = new Color(1, 1, 1, 1);
         outlineColour = new Color(1, 1, 1, 1);
-    }
-
-
-    private IEnumerator BlinkRoutine()
-    {
-        blinkOverlay.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
-        blinkOverlay.SetActive(false);
     }
 
     public void FirePutOut()

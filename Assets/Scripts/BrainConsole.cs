@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class BrainConsole : Interactable
 
     public AudioSource interactSound;
     public AudioSource buttonSound;
+    public StudioEventEmitter enterSfx;
 
     private Door leftDoor, rightDoor, leftEscapeDoor, rightEscapeDoor;
     private InputAction _leftTriggerAction, _rightTriggerAction,
@@ -68,8 +70,8 @@ public class BrainConsole : Interactable
 
         _lookAction = input.actions.FindAction("Look");
 
-        if (interactSound != null)
-            interactSound.Play();
+        if (enterSfx != null)
+            enterSfx.Play();
 
         // hide popup
         PopUpUIHandler.Instance.HideNewTaskPopUp();

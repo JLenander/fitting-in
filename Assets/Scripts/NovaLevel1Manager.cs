@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class NovaLevel1Manager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class NovaLevel1Manager : MonoBehaviour
     public GameObject novaRightHandCake;
 
     public AudioSource eatSource;
+    public StudioEventEmitter biteSfx;
 
     public bool grabbed = false;
     public bool bagDiscarded = false;
@@ -46,7 +48,7 @@ public class NovaLevel1Manager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         novaRightHandCake.SetActive(true);
         yield return new WaitForSeconds(1.5f);
-        eatSource.Play();
+        biteSfx.Play();
         novaRightHandCake.SetActive(false);
         yield return new WaitForSeconds(1f);
         talking = true;

@@ -2056,6 +2056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HandMovement
   speed: 20
+  defaultGrappleDistance: 50
   movement: {x: 0, y: 0, z: 0}
   baseZ: 4.23
   moveSource: {fileID: 8682444517587383604}

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,16 +9,20 @@ public class Player : MonoBehaviour
     // lookSensitivity controls the camera sensitivity for the player as a plorp only (not in terminal)
     [SerializeField] private float lookSensitivity;
 
-    [SerializeField] private AudioSource footstepSource;
-    [SerializeField] private AudioClip[] footstepClips;
+    
+    public StudioEventEmitter stepSfx;
     [SerializeField] private float stepInterval = 0.5f;
     private CharacterController _characterController;
     private Camera _playerCamera;
     private Camera _outsideCamera;
     private InputAction _moveAction;
     private InputAction _lookAction;
-    private float xRotation = 0f;
-    private float yRotation = 0f; // left/right (yaw)
+    
+    private float xRotationPlayerCam = 0f;
+    private float yRotationPlayerCam = 0f; // left/right (yaw)
+    private float xRotationExternalCam = 0f;
+    private float yRotationExternalCam = 0f;
+    
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundMask;
@@ -52,8 +57,6 @@ public class Player : MonoBehaviour
         _characterController.enabled = true;
 
         _controlFunc = ControlPlayer;
-
-        footstepSource.volume = 0.1f;
     }
 
     void FixedUpdate()
@@ -101,7 +104,7 @@ public class Player : MonoBehaviour
                 stepTimer -= Time.fixedDeltaTime;
                 if (stepTimer <= 0f)
                 {
-                    PlayFootstep();
+                    stepSfx.Play();
                     stepTimer = stepInterval;
                 }
             }
@@ -111,13 +114,12 @@ public class Player : MonoBehaviour
         {
             // Look
             Vector2 lookValue = _lookAction.ReadValue<Vector2>();
-            Vector3 lookRotate = new Vector3(0, lookValue.x * lookSensitivity * -1, 0);
-            xRotation -= lookValue.y * lookSensitivity;
-            yRotation -= lookValue.x * lookSensitivity * -1;
+            xRotationPlayerCam -= lookValue.y * lookSensitivity;
+            yRotationPlayerCam -= lookValue.x * lookSensitivity * -1;
 
-            transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
-            xRotation = Math.Clamp(xRotation, -90f, 90f);
-            _playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            transform.localRotation = Quaternion.Euler(0f, yRotationPlayerCam, 0f);
+            xRotationPlayerCam = Math.Clamp(xRotationPlayerCam, -90f, 90f);
+            _playerCamera.transform.localRotation = Quaternion.Euler(xRotationPlayerCam, 0f, 0f);
         }
     }
 
@@ -125,13 +127,12 @@ public class Player : MonoBehaviour
     {
         // Look
         Vector2 lookValue = _lookAction.ReadValue<Vector2>();
-        Vector3 lookRotate = new Vector3(0, lookValue.x * lookSensitivity * -1, 0);
-        xRotation -= lookValue.y * lookSensitivity;
-        yRotation -= lookValue.x * lookSensitivity * -1;
+        xRotationExternalCam -= lookValue.y * lookSensitivity;
+        yRotationExternalCam -= lookValue.x * lookSensitivity * -1;
 
-        yRotation = Math.Clamp(yRotation, -70f, 70f);
-        xRotation = Math.Clamp(xRotation, -50f, 70f);
-        _outsideCamera.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        yRotationExternalCam = Math.Clamp(yRotationExternalCam, -70f, 70f);
+        xRotationExternalCam = Math.Clamp(xRotationExternalCam, -50f, 70f);
+        _outsideCamera.transform.localRotation = Quaternion.Euler(xRotationExternalCam, yRotationExternalCam, 0f);
     }
 
     private void SwitchOnConsole()
@@ -147,14 +148,14 @@ public class Player : MonoBehaviour
     }
 
 
-    public void PlayFootstep()
-    {
-        if (footstepClips.Length > 0)
-        {
-            int index = UnityEngine.Random.Range(0, footstepClips.Length);
-            footstepSource.PlayOneShot(footstepClips[index]);
-        }
-    }
+    //public void PlayFootstep()
+    //{
+    //    if (footstepClips.Length > 0)
+    //    {
+    //        int index = UnityEngine.Random.Range(0, footstepClips.Length);
+    //        footstepSource.PlayOneShot(footstepClips[index]);
+    //    }
+    //}
 
     /// <summary>
     /// Disable all player control
@@ -177,6 +178,7 @@ public class Player : MonoBehaviour
     public void switchToHead(Camera outsideCamera)
     {
         SwitchOnConsole();
+        
         _outsideCamera = outsideCamera;
         _controlFunc = ControlEyeCam;
     }
