@@ -112,6 +112,7 @@ MonoBehaviour:
   floatSpeed: 1
   score: 2
   audioSource: {fileID: 9084605516717041414}
+  handOffset: {x: 0, y: 3.5, z: -1.7}
 --- !u!65 &5938523467898302478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15163,13 +15164,37 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3807872653148275282, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -2289850566753715047, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
       propertyPath: m_Name
       value: small_bite_spaguetti_UV
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163315828992663809, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414873204688766143, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779172475547009161, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15196,7 +15221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
-  outlineMode: 0
+  outlineMode: 2
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 10
   precomputeOutline: 0

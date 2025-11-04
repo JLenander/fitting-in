@@ -128,12 +128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 7
   lookSensitivity: 3.5
-  footstepSource: {fileID: 6477602773953544208}
-  footstepClips:
-  - {fileID: 8300000, guid: eb31fc05ea1e75b4c88a213489834bbd, type: 3}
-  - {fileID: 8300000, guid: 3212575511509bd488fa5d1afd229094, type: 3}
-  - {fileID: 8300000, guid: 921314554fba080489342b512e19053f, type: 3}
-  - {fileID: 8300000, guid: 639ccbf82dc7b2f418639d9ef6c5fd57, type: 3}
   stepSfx: {fileID: -2862781930355676998}
   stepInterval: 0.5
   gravity: -0.02
@@ -308,7 +302,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 24575
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

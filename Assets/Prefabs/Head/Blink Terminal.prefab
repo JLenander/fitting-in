@@ -87,8 +87,8 @@ MonoBehaviour:
   pressAnimationCountdown: 0
   fireBufferCountdown: 0
   headConsole: {fileID: 0}
-  blinkOverlay: {fileID: 0}
   audioSource: {fileID: 7029899614225871069}
+  enterSfx: {fileID: 0}
   isPixelatingPhase: 0
 --- !u!114 &921974929911903338
 MonoBehaviour:
@@ -213,6 +213,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 225409838144032217}
     m_Modifications:
+    - target: {fileID: -9188541255742811839, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -253,9 +257,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1718254560232230878, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 47668324213327266, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 688255452808413857, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
       propertyPath: m_Name
       value: blink_terminal
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894615377530851186, guid: b84612bddcd47a344ac62729aef3f521, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

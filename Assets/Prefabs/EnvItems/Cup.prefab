@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2794640641019423805, guid: bc60c691e40aa6341b39229dc5a39d94, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bc60c691e40aa6341b39229dc5a39d94, type: 3}
       propertyPath: m_Name
@@ -316,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 5682213011054637315, guid: bc60c691e40aa6341b39229dc5a39d94, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 165994214ccbbec418a3969b3a4001d5, type: 2}
+      objectReference: {fileID: 2100000, guid: 0b0319350ae20cc408553c647cba6a81, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -1998565600098212563, guid: bc60c691e40aa6341b39229dc5a39d94, type: 3}
