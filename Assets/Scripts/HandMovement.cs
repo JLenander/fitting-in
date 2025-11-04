@@ -6,6 +6,9 @@ public class HandMovement : MonoBehaviour
 {
     public float speed = 5f;
 
+    // Default distance to grapple from the body  if the aiming doesn't target a grapple stop
+    public float defaultGrappleDistance = 50f;
+
     private InputAction _moveAction;
     private InputAction _leftTriggerAction;
     private InputAction _rightTriggerAction;
@@ -18,8 +21,12 @@ public class HandMovement : MonoBehaviour
 
     public float baseZ = 4.23f;
     private Vector3 _ogPosition;
+    
+    // Disable the arm entirely, keeping the arm retracting
     private bool _disable;
+    // Freeze the position of the hand but still allow interacting and stopping interacting
     private bool _freeze;
+    // Disable the grapple shooting out
     private bool _grappleDisabled;
 
     private bool _isMoving;
@@ -201,20 +208,20 @@ public class HandMovement : MonoBehaviour
                     hookSource.Play();
 
                 // get distance from head
-                Vector3 dir;
-                float dist;
-                bool hit = headConsole.GrappleDistance(out dist, out dir);
+                bool hit = headConsole.GrappleDistance(out var grappleTargetDist, out var grappleTargetPos);
 
                 if (hit)
                 {
-                    grappleArmSpline.GetComponent<SplineController>().SetExtending(dist);
-                    grappleTarget.position = dir;
+                    grappleArmSpline.GetComponent<SplineController>().SetExtending(grappleTargetDist);
+                    grappleTarget.position = grappleTargetPos;
                     targetObjRest = grappleTarget.localPosition;
                 }
                 else
                 {
-                    // no target, straight forward then
-                    grappleArmSpline.GetComponent<SplineController>().SetExtending(5);
+                    // no target, aim towards the reticle with a default distance
+                    grappleArmSpline.GetComponent<SplineController>().SetExtending(defaultGrappleDistance);
+                    var defaultGrapplePos = headConsole.GetExternalCameraPosition() + (headConsole.GetExternalCameraDirection() * defaultGrappleDistance);
+                    grappleTarget.position = defaultGrapplePos;
                     targetObjRest = grappleTarget.localPosition;
                 }
 

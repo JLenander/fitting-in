@@ -106,7 +106,13 @@ public class SplineController : MonoBehaviour
         var midpointPos = GetKnotLocalPosition(_midKnot);
         var endpointRelativeMidpointPos = new Vector3(endpointPos.x / 2, endpointPos.y / 2, endpointPos.z / 2);
         var midpointDirectionVector = endpointRelativeMidpointPos - midpointPos;
-        _currMidPointForce = Vector3.LerpUnclamped(_currMidPointForce, midpointDirectionVector, 0.7f) * (extendSpeed * Time.deltaTime);
+        // Lag behind if extending (or extended) for a bendy look
+        float midpointLagBehindFactor = 1.0f;
+        if (!OverrideExtend && !extending)
+        {
+            midpointLagBehindFactor = 0.7f;
+        }
+        _currMidPointForce = Vector3.LerpUnclamped(_currMidPointForce, midpointDirectionVector, midpointLagBehindFactor) * (extendSpeed * Time.deltaTime);
         // If we're extending lag the middle knot for a bendy look
         _midKnot += _currMidPointForce;
         UpdateKnot(KnotIndex.Mid, _midKnot);

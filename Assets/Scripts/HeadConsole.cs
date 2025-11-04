@@ -222,13 +222,15 @@ public class HeadConsole : Interactable
     }
 
     /// <summary>
-    /// calculates the distance based on first POI struck
+    /// Calculates the distance and position of the first grapple POI struck.
     /// </summary>
+    /// <param name="dist">The distance to the first grapple POI struck, 0 if no grapple POI struck.</param>
+    /// <param name="position">The position of the first grapple POI struck, Vector3.zero if no grapple POI struck</param>
     /// <returns></returns>
-    public bool GrappleDistance(out float dist, out Vector3 direction)
+    public bool GrappleDistance(out float dist, out Vector3 position)
     {
         dist = 0;
-        direction = Vector3.zero;
+        position = Vector3.zero;
 
         Ray ray = new Ray(exteriorCamera.transform.position, exteriorCamera.transform.forward);
         RaycastHit hit;
@@ -243,12 +245,30 @@ public class HeadConsole : Interactable
                 // add some y offset to get to the top of the grapple stop collider above the center
                 targetPos.y += hit.collider.bounds.extents.y;
 
-                direction = targetPos;
+                position = targetPos;
                 dist = hit.distance;
                 return true;
             }
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Return the forward direction of the exterior camera
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetExternalCameraDirection()
+    {
+        return exteriorCamera.transform.forward;
+    }
+    
+    /// <summary>
+    /// Return the position of the exterior camera
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetExternalCameraPosition()
+    {
+        return exteriorCamera.transform.position;
     }
 }
