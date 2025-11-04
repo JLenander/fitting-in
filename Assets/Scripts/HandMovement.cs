@@ -20,6 +20,7 @@ public class HandMovement : MonoBehaviour
     private Vector3 _ogPosition;
     private bool _disable;
     private bool _freeze;
+    private bool _grappleDisabled;
 
     private bool _isMoving;
     public AudioSource moveSource;
@@ -61,6 +62,7 @@ public class HandMovement : MonoBehaviour
     private bool triggerWasPressed = false;
 
     private Vector3 targetObjRest;
+    private Vector3 lastTargetPos;
 
     private Vector3 shootPos;
 
@@ -75,15 +77,39 @@ public class HandMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_freeze)
-        {
-            return;
-        }
-        
         if (_disable)
         {
             grappleArmSpline.GetComponent<SplineController>().SetRetracting();
             // keep arm retracting without player input
+            return;
+        }
+        
+        if (_freeze)
+        {
+            // code below somehow allows any hand console player's any button press to stop interaction
+            // if (currObj != null && _currPlayer != null)
+            // {
+            //     // Only stop if this hand's player pressed interact
+            //     var playerInput = _currPlayer.GetComponent<PlayerInput>();
+            //     var playerInteract = InputActionMapper.GetPlayerItemInteractAction(playerInput);
+            //
+            //     if (playerInteract.WasPressedThisFrame())
+            //     {
+            //         Debug.Log("interaction " + _toInteractObj + _canInteract);
+            //         StopInteractingWithObject(currObj);
+            //     }
+            // }
+            
+            // still allow stopping interaction with frozen hand
+            if (_interactAction.WasPressedThisFrame() && currObj != null && _currPlayer!= null)
+            {
+                Debug.Log("interaction " + _toInteractObj + _canInteract);
+                StopInteractingWithObject(currObj);
+            }
+
+            // so hand stays in position when frozen and walking
+            grappleTarget.position = lastTargetPos;
+            targetObjRest = grappleTarget.localPosition;
             return;
         }
 
@@ -165,7 +191,7 @@ public class HandMovement : MonoBehaviour
 
         bool triggerPressed = leftTrigger > 0.1f || rightTrigger > 0.1f;
 
-        if (triggerPressed && !triggerWasPressed)
+        if (triggerPressed && !triggerWasPressed && !_grappleDisabled)
         {
             if (!grappleShot)
             {
@@ -348,9 +374,13 @@ public class HandMovement : MonoBehaviour
 
     public void TurnOff(GameObject playerUsing)
     {
+        // failed method of making single hand stay on tray even if not at hand console: if (!_freeze)
+        // somehow joins all player's all hand console button presses
+        // so all interaction/move/rotate/launching will mess up 
+
         _disable = true;
         grappleShot = false;
-
+        
         // Stop movement sound and play stop sound if we were moving
         if (moveSource != null && moveSource.isPlaying)
             moveSource.Stop();
@@ -394,6 +424,10 @@ public class HandMovement : MonoBehaviour
     
     public void FreezeWristPosition(bool freeze)
     {
+        if (freeze)
+        {
+            lastTargetPos = grappleTarget.position;
+        }
         _freeze = freeze;
     }
 
@@ -407,5 +441,10 @@ public class HandMovement : MonoBehaviour
             grappleArmSpline.GetComponent<SplineController>().SetRetracting();
             grappleShot = false;
         }
+    }
+
+    public void disableGrapple(bool disable)
+    {
+        _grappleDisabled = disable;
     }
 }
