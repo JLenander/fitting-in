@@ -60,6 +60,9 @@ public class Food : InteractableObject
 
             // change animation state based on numbites
             ChangeFoodState(foodBiteCount);
+            
+            // Turn off outline when food bite is picked up (until another hover turns it back on)
+            DisableOutline();
         }
         else
         {

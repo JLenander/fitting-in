@@ -25,6 +25,7 @@ public class FoodBite : InteractableObject, IPooledObject
         base.Start();
         popUp.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        EnableOutline();
     }
 
     public void OnSpawn()

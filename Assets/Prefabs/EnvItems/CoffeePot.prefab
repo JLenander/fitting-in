@@ -522,6 +522,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -636552354510716113, guid: 3f23b280debd0724296654979f51f675, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 447396670202114029, guid: 3f23b280debd0724296654979f51f675, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3f23b280debd0724296654979f51f675, type: 3}
       propertyPath: m_Name
       value: The_coffee_pot_UV

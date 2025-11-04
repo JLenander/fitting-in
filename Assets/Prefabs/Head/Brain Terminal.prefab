@@ -80,6 +80,7 @@ MonoBehaviour:
   onReturn:
     m_PersistentCalls:
       m_Calls: []
+  showOverlay: 0
   unlockDuration: 3
   leftDoorObj: {fileID: 0}
   rightDoorObj: {fileID: 0}
@@ -87,6 +88,7 @@ MonoBehaviour:
   rightEscapeDoorObj: {fileID: 0}
   interactSound: {fileID: 3028844225421024241}
   buttonSound: {fileID: 9175269521045231464}
+  enterSfx: {fileID: 0}
 --- !u!114 &3043226041863993145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,9 +349,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7189312541382518630, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: -5380586722048926542, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
       propertyPath: m_Name
       value: brain_terminal
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1148539174630159290, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302114712107474353, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418097408302940385, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723318972315858231, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6620738388340332227, guid: 0764cb2ed2937f5479c63808efec2dcf, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -143,10 +143,12 @@ MonoBehaviour:
   onReturn:
     m_PersistentCalls:
       m_Calls: []
+  showOverlay: 0
   handRigTarget: {fileID: 0}
   headConsole: {fileID: 0}
   left: 1
   audioSource: {fileID: 8984068795386295593}
+  enterSfx: {fileID: 0}
 --- !u!65 &9200000814670586052
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -436,9 +438,29 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6002700571014856352, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: -4141099442325316252, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
       propertyPath: m_Name
       value: left arm hologram
+      objectReference: {fileID: 0}
+    - target: {fileID: 7258185397571065459, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709818307477045481, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124239229657347704, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -5936208762756603818, guid: 0516ec30d35b7364a994169a0c0d8356, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
