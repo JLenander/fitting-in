@@ -5847,6 +5847,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39bd74f452bd7744ba73b57911b06c9f, type: 3}
+--- !u!1 &1033531347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1853892412158901302, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1033531348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033531347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1033749495 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7811081835868096957, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
@@ -11038,6 +11074,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 984563273}
     - target: {fileID: 3668651548392535814, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1033531348}
+    - target: {fileID: 3668651548392535814, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: leftEscapeDoorObj
       value: 
       objectReference: {fileID: 1558049404031227148}
@@ -11141,6 +11181,10 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1239801188}
+    - target: {fileID: 8902363975393147678, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: enterSfx
       value: 
@@ -11153,6 +11197,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1853892412158901302, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1033531348}
     - targetCorrespondingSourceObject: {fileID: 6199739010608921559, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1568381347}
