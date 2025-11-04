@@ -18,7 +18,7 @@ public class EvidenceSpawner : MonoBehaviour
 
     public float numSeconds = 7;
     public int numTimes = 10;
-    private float spawnTimer;
+    // private float spawnTimer;
     private int evidenceCount; // keep track of num evidences in scene
     private ObjectPooler objectPooler;
     private string[] evidenceTypes = { "Notepad", "Map", "Polaroid" }; // types of evidence
@@ -28,7 +28,7 @@ public class EvidenceSpawner : MonoBehaviour
     {
         objectPooler = ObjectPooler.Instance;
         evidenceCount = 0;
-        spawnTimer = 0; // start the timer
+        // spawnTimer = 0; // start the timer
         uniqueEvidence.SetActive(false);
     }
 
