@@ -199,6 +199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Fix Button
       objectReference: {fileID: 0}
+    - target: {fileID: 2317810426766745109, guid: de2ceee3dd6769a478ce8fa3ddd475d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4941773769403307742, guid: de2ceee3dd6769a478ce8fa3ddd475d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.13
