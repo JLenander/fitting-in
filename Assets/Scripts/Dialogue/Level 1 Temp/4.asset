@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - Hmmmm
-  - I was going to show you this cool photo I took
-  - But I must've left it at home...
-  - Oh well!
+  - Oh!!!
+  - You want to keep it?
+  - Sure!
   - Still got plenty more, but let's eat first
   spirteA: {fileID: 21300000, guid: c879e5dc88cd6b54883e90583eb8da78, type: 3}
   spirteB: {fileID: 21300000, guid: d8665aaa2da204c4090b2027ed9ab093, type: 3}
