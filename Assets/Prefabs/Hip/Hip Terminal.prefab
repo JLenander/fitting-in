@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 312038684308951797}
   - component: {fileID: 6866886201421983075}
   - component: {fileID: 869684908002949981}
+  - component: {fileID: 2593878048604584739}
   m_Layer: 0
   m_Name: Hip Terminal
   m_TagString: interactable
@@ -79,8 +80,11 @@ MonoBehaviour:
   onReturn:
     m_PersistentCalls:
       m_Calls: []
+  showOverlay: 0
   robotBody: {fileID: 0}
   audioSource: {fileID: 869684908002949981}
+  enterSfx: {fileID: 2593878048604584739}
+  playerChair: {fileID: 0}
 --- !u!114 &6866886201421983075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +200,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2593878048604584739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402771123945733155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1371676489
+      Data2: 1161071372
+      Data3: -706900566
+      Data4: -882616684
+    Path: event:/SFX/Interior/treadmill
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &8749597235935816626
 PrefabInstance:
   m_ObjectHideFlags: 0
