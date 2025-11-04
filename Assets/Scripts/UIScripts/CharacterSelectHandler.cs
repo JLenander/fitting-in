@@ -21,16 +21,14 @@ namespace UIScripts
         private int _playerCount = 0;
 
         private readonly Color[] _availableColors = {
-            HexToColor("#af0d0dff"),
-            HexToColor("#2f2fc0ff"),
+            HexToColor("#e74848ff"),
+            HexToColor("#5656f3ff"),
             HexToColor("#e4e40fff"),
             HexToColor("#38d45aff"),
             HexToColor("#ff83f5ff"),
             HexToColor("#2cebf1ff"),
-            HexToColor("#6c079bff"),
+            HexToColor("#c340ffff"),
             HexToColor("#ffb327ff"),
-            HexToColor("#000000ff"),
-            HexToColor("#686868ff"),
         };
 
         private static Color HexToColor(string hex)
