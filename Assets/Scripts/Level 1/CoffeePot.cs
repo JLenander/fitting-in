@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CoffeePot : InteractableObject
@@ -12,6 +13,11 @@ public class CoffeePot : InteractableObject
     public float pourThresholdAngle = 60f; // degrees below horizontal
 
     public AudioSource audioSource;
+    [SerializeField] private HandConsole leftConsole;
+    [SerializeField] private HandConsole rightConsole;
+
+    [SerializeField] private DialogueScriptableObj burnDialogue;
+
     private bool isPouring = false;
 
     [SerializeField] private Transform spoutTip;          // assign in Inspector
@@ -21,6 +27,8 @@ public class CoffeePot : InteractableObject
     //[SerializeField] private float volume; // TODO: limit the pot
     private FillCup cup;
     private LayerMask layerMask;
+
+    private bool first = true;
 
     void Awake()
     {
@@ -110,6 +118,14 @@ public class CoffeePot : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            // first time pickup, start a fire
+            // if (first)
+            // {
+            //     first = false;
+
+            //     StartCoroutine(BurnArm(target.left));
+            // }
+
             // move to hand
             DisableOutline();
             transform.parent = obj;
@@ -147,5 +163,30 @@ public class CoffeePot : InteractableObject
         target.handAnimator.SetTrigger("Neutral"); // sets the opposite hand back to neutral
 
         grappleCollider.enabled = true;
+    }
+
+    IEnumerator BurnArm(bool left)
+    {
+        yield return new WaitForSeconds(5);
+
+        if (left)
+        {
+            // start fire
+            FireManager.Instance.StartFireArea("leftArm");
+
+            // disable the relevant arm
+            leftConsole.DisableInteract();
+        }
+        else
+        {
+            // start fire
+            FireManager.Instance.StartFireArea("rightArm");
+
+            // disable the relevant arm
+            rightConsole.DisableInteract();
+        }
+
+        // output dialogue
+        GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
     }
 }

@@ -180,10 +180,9 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
 
-        yield return new WaitForSeconds(10f);
-
         // discard food task
-        // TODO: dialogue prompts 
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
         StartCoroutine(DiscardFood());
         yield return new WaitUntil(() => bagDiscarded);
 

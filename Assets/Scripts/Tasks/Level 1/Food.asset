@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TaskInfoSO
   id: Food
   title: Spaghetti
-  description: Robots can't eat food, if only there was a bag nearby
+  description: Robots can't eat food, drop the food in the bag nearby
   location: Arms
   urgency: Normal
   targetProgress: 1
