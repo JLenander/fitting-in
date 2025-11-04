@@ -2056,6 +2056,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7005292842867156995, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!114 &330007765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -394028744
+      Data2: 1132443671
+      Data3: -1138375235
+      Data4: -1047548548
+    Path: event:/SFX/Robot/grapple
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!64 &339930053
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2354,6 +2385,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -453414060628706315, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!114 &370547641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -394028744
+      Data2: 1132443671
+      Data3: -1138375235
+      Data4: -1047548548
+    Path: event:/SFX/Robot/grapple
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &394511962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7853607055929859697, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
@@ -2405,7 +2467,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395270529}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!4 &395270531
 Transform:
   m_ObjectHideFlags: 0
@@ -3985,6 +4047,11 @@ Transform:
   - {fileID: 1209078608}
   m_Father: {fileID: 1535737719}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &668466420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6199739010608921559, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &673602843
 GameObject:
   m_ObjectHideFlags: 0
@@ -5803,6 +5870,42 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39bd74f452bd7744ba73b57911b06c9f, type: 3}
+--- !u!1 &1033531347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1853892412158901302, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1033531348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033531347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1033749495 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7811081835868096957, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
@@ -6355,7 +6458,46 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: df27d24d0c87dd8449d7d0ecc7624cd5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 398299460}
+    - targetCorrespondingSourceObject: {fileID: 3675959044779556064, guid: df27d24d0c87dd8449d7d0ecc7624cd5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1129066207}
   m_SourcePrefab: {fileID: 100100000, guid: df27d24d0c87dd8449d7d0ecc7624cd5, type: 3}
+--- !u!1 &1129066206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3675959044779556064, guid: df27d24d0c87dd8449d7d0ecc7624cd5, type: 3}
+  m_PrefabInstance: {fileID: 1129066205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1129066207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129066206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1984243815
+      Data2: 1287077273
+      Data3: -1225226111
+      Data4: 166262520
+    Path: event:/Ambient/fan
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &1138850546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6408,13 +6550,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: grappleSfx
+      value: 
+      objectReference: {fileID: 370547641}
+    - target: {fileID: 6563188557207657235, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676138728223071749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163664760754894619, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: grappleSfx
+      value: 
+      objectReference: {fileID: 330007765}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7839684266347174250, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1590754953}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1247843849156549410, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 370547641}
+    - targetCorrespondingSourceObject: {fileID: 2360737117090242100, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 330007765}
   m_SourcePrefab: {fileID: 100100000, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
 --- !u!1 &1138850547 stripped
 GameObject:
@@ -10291,6 +10455,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1568381342}
     - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: fireSfx
+      value: 
+      objectReference: {fileID: 1450802916}
+    - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: hipConsole
       value: 
       objectReference: {fileID: 1568381344}
@@ -10350,6 +10518,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5904948759087187704, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
   m_PrefabInstance: {fileID: 1450802913}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1450802916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4709538606492710203, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+  m_PrefabInstance: {fileID: 1450802913}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
 --- !u!1 &1476768494
 GameObject:
   m_ObjectHideFlags: 0
@@ -10898,10 +11077,18 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
+    - target: {fileID: 389959047049649812, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1568381347}
     - target: {fileID: 582336313316107014, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: Destination
       value: 
       objectReference: {fileID: 800615587}
+    - target: {fileID: 942394105965026826, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1117245153883639161, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10915,6 +11102,10 @@ PrefabInstance:
       value: -0.15083337
       objectReference: {fileID: 0}
     - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1904862320}
+    - target: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: robotBody
       value: 
       objectReference: {fileID: 76562116}
@@ -10922,6 +11113,10 @@ PrefabInstance:
       propertyPath: playerChair
       value: 
       objectReference: {fileID: 1609978945}
+    - target: {fileID: 2180102898528216618, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2941727664699777610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: forearmBone
       value: 
@@ -10947,6 +11142,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3058777039347956642, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: interactSfx
+      value: 
+      objectReference: {fileID: 1814432141}
+    - target: {fileID: 3058777039347956642, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: exteriorCamera
       value: 
       objectReference: {fileID: 984563275}
@@ -10958,6 +11157,10 @@ PrefabInstance:
       propertyPath: rightGrappleArmSpline
       value: 
       objectReference: {fileID: 984563273}
+    - target: {fileID: 3668651548392535814, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1033531348}
     - target: {fileID: 3668651548392535814, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: leftEscapeDoorObj
       value: 
@@ -10994,10 +11197,26 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1239801188}
+    - target: {fileID: 5321607628525583615, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138238746099271704, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1869179586}
     - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 1138850547}
+    - target: {fileID: 7525589340187091645, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8061766155699826322, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.33
@@ -11046,6 +11265,14 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1239801188}
+    - target: {fileID: 8902363975393147678, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: enterSfx
+      value: 
+      objectReference: {fileID: 1869179585}
     - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
@@ -11053,7 +11280,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1853892412158901302, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1033531348}
+    - targetCorrespondingSourceObject: {fileID: 6199739010608921559, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1568381347}
+    - targetCorrespondingSourceObject: {fileID: 7783328170831499938, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1869179586}
+    - targetCorrespondingSourceObject: {fileID: 8139884504765179461, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1869179585}
+    - targetCorrespondingSourceObject: {fileID: 3677380697053700436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904862320}
+    - targetCorrespondingSourceObject: {fileID: 4132870269002581580, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1814432141}
   m_SourcePrefab: {fileID: 100100000, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
 --- !u!4 &1568381340 stripped
 Transform:
@@ -11070,7 +11315,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 1568381339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1869179583}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3af0c0fdfc57664aa2119b32edc71a1, type: 3}
@@ -11081,7 +11326,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 1568381339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1869179584}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3af0c0fdfc57664aa2119b32edc71a1, type: 3}
@@ -11092,7 +11337,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1586498926774587266, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 1568381339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1904862319}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcffd2b72b11a694091950ac75331ad9, type: 3}
@@ -11103,7 +11348,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 389959047049649812, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
   m_PrefabInstance: {fileID: 1568381339}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 668466420}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c20d77c09d47e340a2bb7e22a91b182, type: 3}
@@ -11120,6 +11365,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964320936d968ec49b55a53f1c9ad667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1568381347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668466420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1576845215
 GameObject:
   m_ObjectHideFlags: 0
@@ -11169,6 +11445,8 @@ GameObject:
   - component: {fileID: 1582269020}
   - component: {fileID: 1582269021}
   - component: {fileID: 1582269022}
+  - component: {fileID: 1582269024}
+  - component: {fileID: 1582269023}
   m_Layer: 0
   m_Name: Nova
   m_TagString: Untagged
@@ -11206,10 +11484,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   spineTarget: {fileID: 552350949}
-  bendCoolDown: 0.5
   bendDistance: 7
   returnSpeed: 7
   audioSource: {fileID: 1582269021}
+  slapSfx: {fileID: 1582269024}
 --- !u!136 &1582269019
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11263,6 +11541,7 @@ MonoBehaviour:
   evidenceSpawner: {fileID: 1210528887}
   novaRightHandCake: {fileID: 8568069718544949073}
   eatSource: {fileID: 1582269022}
+  biteSfx: {fileID: 1582269023}
   grabbed: 0
   bagDiscarded: 0
   bag: {fileID: 1286585087}
@@ -11278,7 +11557,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582269016}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -11375,7 +11654,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582269016}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -11465,6 +11744,68 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1582269023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582269016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1619446305
+      Data2: 1220738291
+      Data3: -553755213
+      Data4: 80778350
+    Path: event:/SFX/Nova/bite
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1582269024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582269016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2087088606
+      Data2: 1117333176
+      Data3: -46045518
+      Data4: 182472114
+    Path: event:/SFX/Nova/slap
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1589930979 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5434494853936552663, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
@@ -13216,6 +13557,42 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1802012909}
   m_Mesh: {fileID: 7857590630482128698, guid: 7fd09de4ab3c45f42abc2fecf6b481b8, type: 3}
+--- !u!1 &1814432140 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4132870269002581580, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1814432141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814432140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1823916575 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5824461040333631235, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
@@ -13485,6 +13862,78 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &1869179583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8139884504765179461, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1869179584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7783328170831499938, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1869179585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869179583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1869179586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869179584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -713403206
+      Data2: 1330869701
+      Data3: 760117135
+      Data4: -38464930
+    Path: event:/SFX/Interior/terminal_enter
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1874416822
 GameObject:
   m_ObjectHideFlags: 0
@@ -13847,6 +14296,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2619086233303812490, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
+--- !u!1 &1904862319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3677380697053700436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+  m_PrefabInstance: {fileID: 1568381339}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1904862320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904862319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1371676489
+      Data2: 1161071372
+      Data3: -706900566
+      Data4: -882616684
+    Path: event:/SFX/Interior/treadmill
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1908971980 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4186333593806343112, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}

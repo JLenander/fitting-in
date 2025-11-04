@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6632339362198454148}
   - component: {fileID: 8168391943883310693}
   - component: {fileID: 7151540355888902700}
+  - component: {fileID: 6264176496961272089}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -52,13 +53,7 @@ MonoBehaviour:
   robotMoveSpeed: 40
   robotLookSensitivity: 40
   disable: 0
-  footstepSource: {fileID: 7151540355888902700}
-  footstepClips:
-  - {fileID: 8300000, guid: 45ee84aec9372244fa600620d2063392, type: 3}
-  - {fileID: 8300000, guid: 634a7521a69ff7e4188659f6b2ca9fb3, type: 3}
-  - {fileID: 8300000, guid: f444c7adb1b624148b7a4821f51afefb, type: 3}
-  - {fileID: 8300000, guid: a557227292187ac468dd81aa5fb2189b, type: 3}
-  - {fileID: 8300000, guid: 2f41b4be010731741b3cf777c255f117, type: 3}
+  stepSfx: {fileID: 6264176496961272089}
   stepInterval: 1
   gravity: -9.81
   groundCheckDistance: 0.2
@@ -127,7 +122,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181067212562394993}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -217,6 +212,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6264176496961272089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181067212562394993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 685740143
+      Data2: 1132671300
+      Data3: -246779003
+      Data4: 649712724
+    Path: event:/SFX/Robot/step_robot
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &287237332282369568
 GameObject:
   m_ObjectHideFlags: 0

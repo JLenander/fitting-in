@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class HandConsole : Interactable
     public bool left;
 
     public AudioSource audioSource;
+    public StudioEventEmitter enterSfx;
 
     private GameObject _currPlayer;
 
@@ -39,8 +41,8 @@ public class HandConsole : Interactable
         _canInteract = false;
         _currPlayer = player;
 
-        if (audioSource != null)
-            audioSource.Play();
+        if (enterSfx != null)
+            enterSfx.Play();
         uIHandler.ShowContainer(player);
     }
 

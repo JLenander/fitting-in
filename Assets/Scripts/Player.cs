@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,8 +9,8 @@ public class Player : MonoBehaviour
     // lookSensitivity controls the camera sensitivity for the player as a plorp only (not in terminal)
     [SerializeField] private float lookSensitivity;
 
-    [SerializeField] private AudioSource footstepSource;
-    [SerializeField] private AudioClip[] footstepClips;
+    
+    public StudioEventEmitter stepSfx;
     [SerializeField] private float stepInterval = 0.5f;
     private CharacterController _characterController;
     private Camera _playerCamera;
@@ -56,8 +57,6 @@ public class Player : MonoBehaviour
         _characterController.enabled = true;
 
         _controlFunc = ControlPlayer;
-
-        footstepSource.volume = 0.1f;
     }
 
     void FixedUpdate()
@@ -105,7 +104,7 @@ public class Player : MonoBehaviour
                 stepTimer -= Time.fixedDeltaTime;
                 if (stepTimer <= 0f)
                 {
-                    PlayFootstep();
+                    stepSfx.Play();
                     stepTimer = stepInterval;
                 }
             }
@@ -149,14 +148,14 @@ public class Player : MonoBehaviour
     }
 
 
-    public void PlayFootstep()
-    {
-        if (footstepClips.Length > 0)
-        {
-            int index = UnityEngine.Random.Range(0, footstepClips.Length);
-            footstepSource.PlayOneShot(footstepClips[index]);
-        }
-    }
+    //public void PlayFootstep()
+    //{
+    //    if (footstepClips.Length > 0)
+    //    {
+    //        int index = UnityEngine.Random.Range(0, footstepClips.Length);
+    //        footstepSource.PlayOneShot(footstepClips[index]);
+    //    }
+    //}
 
     /// <summary>
     /// Disable all player control
