@@ -11,7 +11,10 @@ public class TriggerSeat : MonoBehaviour
     private bool triggered = false;
     private bool playerInside = false;
 
+    // Where the seat is to place the robot in
     private Vector3 seatVector = new Vector3(253.3f, 18.1f, 60.1f);
+    // Where the robot's original position is
+    private Vector3 robotPositionBeforeSit;
 
     // only enable collider if we found two hands
     private int handCount = 0;
@@ -51,6 +54,7 @@ public class TriggerSeat : MonoBehaviour
     public void SeatRobot()
     {
         robotCharController.enabled = false;
+        robotPositionBeforeSit = robot.position;
         robot.position = seatVector;
         robot.rotation = new Quaternion(0, 180, 0, 0);
         GlobalPlayerUIManager.Instance.StopWalkingShake();
@@ -61,8 +65,9 @@ public class TriggerSeat : MonoBehaviour
 
     public void StandRobot()
     {
-        robotCharController.enabled = true;
+        robot.position = robotPositionBeforeSit;
         robotMovement.disable = false;
+        robotCharController.enabled = true;
         // enable the exit door collier
         sceneExitDoor.enabled = true;
         handCount = 0;
