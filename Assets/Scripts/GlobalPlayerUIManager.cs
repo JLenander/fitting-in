@@ -28,7 +28,8 @@ public class GlobalPlayerUIManager : MonoBehaviour
     [SerializeField] private float walkShakeDuration = 0.05f;   // how long each shake lasts
     [SerializeField] private float walkShakeInterval = 0.1f;     // time between shakes
 
-    private List<PlayerData> playerCam = new List<PlayerData>();
+    private List<PlayerData> playerData = new List<PlayerData>();
+    private List<Vector3> playerCameraLocalPos = new List<Vector3>();
 
     private bool start = false;
     private Coroutine pixelateCoroutine;
@@ -84,7 +85,8 @@ public class GlobalPlayerUIManager : MonoBehaviour
         {
             if (players[i].Valid)
             {
-                playerCam.Add(players[i]);
+                playerData.Add(players[i]);
+                playerCameraLocalPos.Add(players[i].Input.camera.transform.localPosition);
                 _splitscreenUIHandler.EnablePlayerOverlay(i);
 
                 // assign render texture to camera
@@ -216,6 +218,15 @@ public class GlobalPlayerUIManager : MonoBehaviour
     }
     public void StartWalkingShake()
     {
+        // Store player camera transforms
+        foreach (var player in playerData)
+        {
+            if (player.Valid)
+            {
+                playerCameraLocalPos[player.Index] = player.Input.camera.transform.localPosition;
+            }
+        }
+        
         if (_walkingShakeCoroutine == null)
             _walkingShakeCoroutine = StartCoroutine(WalkingShakeRoutine());
     }
@@ -228,10 +239,10 @@ public class GlobalPlayerUIManager : MonoBehaviour
             _walkingShakeCoroutine = null;
 
             // reset all cameras to original position
-            foreach (var playerData in playerCam)
+            foreach (var player in playerData)
             {
-                if (playerData.Valid && playerData.Input?.camera != null)
-                    playerData.Input.camera.transform.localPosition = Vector3.zero;
+                if (player.Valid && player.Input?.camera != null)
+                    player.Input.camera.transform.localPosition = playerCameraLocalPos[player.Index];
             }
         }
     }
@@ -240,7 +251,7 @@ public class GlobalPlayerUIManager : MonoBehaviour
     {
         while (true)
         {
-            foreach (var playerData in playerCam)
+            foreach (var playerData in playerData)
             {
                 if (playerData.Valid && playerData.Input?.camera != null)
                 {
