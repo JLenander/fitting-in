@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class HurtDateChecker : MonoBehaviour
     // [SerializeField] private DialogueScriptableObj hurtDialogue;
 
     public AudioSource audioSource;
+    public StudioEventEmitter slapSfx;
     private Vector3 original;
     private Quaternion startRot;
     private Coroutine bendRoutine;
@@ -40,8 +42,8 @@ public class HurtDateChecker : MonoBehaviour
             if (bendRoutine != null) StopCoroutine(bendRoutine);
             bendRoutine = StartCoroutine(BendOpposite(bendOffset));
 
-            if (audioSource != null)
-                audioSource.Play();
+            if (slapSfx != null)
+                slapSfx.Play();
 
             // deduct points from player
             scoreKeeper.IncrementHurtDate();

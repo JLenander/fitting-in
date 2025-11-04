@@ -11498,6 +11498,8 @@ GameObject:
   - component: {fileID: 1582269020}
   - component: {fileID: 1582269021}
   - component: {fileID: 1582269022}
+  - component: {fileID: 1582269024}
+  - component: {fileID: 1582269023}
   m_Layer: 0
   m_Name: Nova
   m_TagString: Untagged
@@ -11538,6 +11540,7 @@ MonoBehaviour:
   bendDistance: 7
   returnSpeed: 7
   audioSource: {fileID: 1582269021}
+  slapSfx: {fileID: 1582269024}
 --- !u!136 &1582269019
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11591,6 +11594,7 @@ MonoBehaviour:
   evidenceSpawner: {fileID: 1210528887}
   novaRightHandCake: {fileID: 8568069718544949073}
   eatSource: {fileID: 1582269022}
+  biteSfx: {fileID: 1582269023}
   grabbed: 0
   bagDiscarded: 0
   bag: {fileID: 1286585087}
@@ -11606,7 +11610,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582269016}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -11703,7 +11707,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582269016}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -11793,6 +11797,68 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1582269023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582269016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1619446305
+      Data2: 1220738291
+      Data3: -553755213
+      Data4: 80778350
+    Path: event:/SFX/Nova/bite
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1582269024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582269016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2087088606
+      Data2: 1117333176
+      Data3: -46045518
+      Data4: 182472114
+    Path: event:/SFX/Nova/slap
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1589930979 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5434494853936552663, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
