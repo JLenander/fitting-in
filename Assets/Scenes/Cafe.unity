@@ -12315,8 +12315,20 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 1286585088}
           m_TargetAssemblyTypeName: Bag, Assembly-CSharp
-          m_MethodName: SetCanInteractTrue
+          m_MethodName: EnableCanPickup
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1900401260}
+          m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14477,6 +14489,11 @@ MonoBehaviour:
 --- !u!65 &1900401259 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 8400179474284692437, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
+  m_PrefabInstance: {fileID: 1900401256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1900401260 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 6602725840403312224, guid: 934466850a167d242a7bf3e3f87a1ef1, type: 3}
   m_PrefabInstance: {fileID: 1900401256}
   m_PrefabAsset: {fileID: 0}
 --- !u!64 &1901567147

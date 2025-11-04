@@ -88,13 +88,23 @@ public abstract class InteractableObject : MonoBehaviour
     {
     }
 
-    public void SetCanInteractTrue()
+    public void EnableCanInteract()
     {
         canInteract = true;
     }
 
-    public void SetCanInteractFalse()
+    public void DisableCanInteract()
     {
         canInteract = false;
+    }
+    
+    public void EnableCanPickup()
+    {
+        canPickup = true;
+    }
+
+    public void DisableCanPickup()
+    {
+        canPickup = false;
     }
 }
