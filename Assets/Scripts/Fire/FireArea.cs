@@ -18,7 +18,7 @@ public class FireArea : MonoBehaviour
 
     private List<PlayerSetup> playersInside = new List<PlayerSetup>();
     // private bool stopIncreasing;
-    
+
     public bool IsActive => active;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -157,8 +157,6 @@ public class FireArea : MonoBehaviour
                 if (playerSetup != null && playerSetup.extinguisher != null)
                     playerSetup.extinguisher.ActivateExtinguisher(false);
             }
-
-            playersInside.Clear();
 
             if (enableRoutine != null)
             {
