@@ -109,15 +109,6 @@ public class Tray : MonoBehaviour
         }
     }
     
-    private void SpawnCups()
-    {
-        // Destroy any old cups
-        if (leftDrinkInstance) Destroy(leftDrinkInstance);
-        if (rightDrinkInstance) Destroy(rightDrinkInstance);
-        
-        StartCoroutine(SpawnCupsSmooth());
-    }
-    
     private IEnumerator SpawnCupsSmooth()
     {
         // Temporarily freeze tray
@@ -153,8 +144,7 @@ public class Tray : MonoBehaviour
     {
         Debug.Log("A cup fell! Resetting tray task...");
         
-        // TODO: enable reset when cup falling not too hard
-        // StartCoroutine(ResetRoutine());
+        StartCoroutine(ResetRoutine());
     }
 
     private IEnumerator ResetRoutine()
@@ -171,7 +161,11 @@ public class Tray : MonoBehaviour
         rb.isKinematic = false;
 
         // Respawn cups
-        SpawnCups();
+        // Destroy any old cups
+        if (leftDrinkInstance) Destroy(leftDrinkInstance);
+        if (rightDrinkInstance) Destroy(rightDrinkInstance);
+        
+        StartCoroutine(SpawnCupsSmooth());
 
         // Detach hands if still attached
         if (isTwoHanded)
