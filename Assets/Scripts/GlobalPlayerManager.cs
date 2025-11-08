@@ -72,6 +72,12 @@ public class GlobalPlayerManager : MonoBehaviour
     {
         if (SceneConstants.IsCharacterSelectScene())
         {
+            // Ignore join from non-Player
+            if (playerInput.gameObject.GetComponent<Player>() == null)
+            {
+                return;
+            }
+            
             var idx = playerInput.playerIndex;
             Debug.Log("Player " + idx + " Joined - Character Select Scene");
             _players[idx].Input = playerInput;
@@ -82,7 +88,7 @@ public class GlobalPlayerManager : MonoBehaviour
             _players[idx].Valid = true;
 
             // Add player to the character selection screen so they can start selecting their character.
-            _characterSelectScreen.AddPlayer(idx);
+            _characterSelectScreen.AddPlayer(idx, playerInput);
 
             // register callbacks for the character select screen color change actions
             _players[idx].LeftActionDelegate = ctx => _characterSelectScreen.ChangeColor(idx, -1);
@@ -121,7 +127,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 {
                     // All players are ready and someone pressed the submit action so we load level select
                     Debug.Log("All players ready - starting");
-
+                    
                     // Assign player colors from selector to player data
                     for (int i = 0; i < _playerLimit; i++)
                     {
@@ -162,6 +168,8 @@ public class GlobalPlayerManager : MonoBehaviour
                         }
                     }
 
+                    _characterSelectScreen.DestroyPlorps();
+                    
                     // pass these players to UI manager
                     GlobalPlayerUIManager.Instance.PassPlayers(_players);
 
@@ -385,7 +393,7 @@ public interface ICharacterSelectScreen
     /// Add a player to the character selection screen to allow them to select their character.
     /// </summary>
     /// <param name="playerIndex"></param>
-    public void AddPlayer(int playerIndex);
+    public void AddPlayer(int playerIndex, PlayerInput playerInput);
 
     /// <summary>
     /// Remove a player by index from the character selection screen.
@@ -414,4 +422,5 @@ public interface ICharacterSelectScreen
     public void ShowColorConflictWarning(int playerIndex, int otherIndex);
 
     public void HideColorConflictWarning(int playerIndex);
+    public void DestroyPlorps();
 }

@@ -1,55 +1,20 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/CharacterSelect/CharacterSelect.uss?fileID=7433441132597879392&amp;guid=dc71b3340487bd840ad68aa282f11ad4&amp;type=3#CharacterSelect" />
-    <ui:VisualElement name="PlainColorBackground" style="flex-grow: 1; background-color: rgb(242, 241, 232); justify-content: space-evenly; align-content: center; align-items: center; flex-direction: column;">
-        <ui:VisualElement name="JoinBoxes" style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: space-evenly; align-self: flex-start; width: 100%; top: auto; margin-top: 70px;">
-            <ui:VisualElement name="Player1Section" style="flex-direction: row; align-items: center;">
-                <ui:VisualElement name="Player1LeftArrow" class="arrow-indicator" style="width: 80px; height: 80px; margin-right: 10px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/L1R1/L1&apos;); visibility: hidden;" />
-                <ui:VisualElement name="Player1SelectorWrapper" style="flex-direction: column; align-items: center; width: 300px; height: 300px; justify-content: flex-start; position: relative;">
-                    <ui:Label text="Player 1" name="Player1Label" style="position: absolute; top: -60px; font-size: 32px; font-weight: 900; margin-bottom: 20px; color: black; text-align: center; -unity-text-outline: true; -unity-text-outline-color: black; -unity-text-outline-width: 1px;" />
-                    <ui:VisualElement name="Player1Selector" class="characterPreview" style="width: 250px; height: 250px;">
-                        <ui:VisualElement name="CharacterPreview" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI/Images/Plorp-2D-Drawn.png?fileID=2800000&amp;guid=a1e3570009a22c14d9f0025596811366&amp;type=3#Plorp-2D-Drawn&quot;); background-color: rgba(0, 0, 0, 0); width: 70%; height: 70%;" />
-                    </ui:VisualElement>
-                    <ui:Label name="Player1ColorWarning" style="color: red; font-size: 28px; unity-text-align: middle; margin-top: 5px; height: 25px; visibility: hidden;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="Player1RightArrow" class="arrow-indicator" style="width: 80px; height: 80px; margin-left: 10px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/L1R1/R1&apos;); visibility: hidden;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Player2Section" style="flex-direction: row; align-items: center;">
-                <ui:VisualElement name="Player2LeftArrow" class="arrow-indicator" style="width: 80px; height: 80px; margin-right: 10px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/L1R1/L1&apos;); visibility: hidden;" />
-                <ui:VisualElement name="Player2SelectorWrapper" style="flex-direction: column; align-items: center; width: 300px; height: 300px; justify-content: flex-start; position: relative;">
-                    <ui:Label text="Player 2" name="Player2Label" style="position: absolute; top: -60px; font-size: 32px; font-weight: 900; margin-bottom: 20px; color: black; text-align: center; -unity-text-outline: true; -unity-text-outline-color: black; -unity-text-outline-width: 1px;" />
-                    <ui:VisualElement name="Player2Selector" class="characterPreview" style="width: 250px; height: 250px;">
-                        <ui:VisualElement name="CharacterPreview" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI/Images/Plorp-2D-Drawn.png?fileID=2800000&amp;guid=a1e3570009a22c14d9f0025596811366&amp;type=3#Plorp-2D-Drawn&quot;); background-color: rgba(0, 0, 0, 0); width: 70%; height: 70%;" />
-                    </ui:VisualElement>
-                    <ui:Label name="Player2ColorWarning" style="color: red; font-size: 28px; unity-text-align: middle; margin-top: 5px; height: 25px; visibility: hidden;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="Player2RightArrow" class="arrow-indicator" style="width: 80px; height: 80px; margin-left: 10px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/L1R1/R1&apos;); visibility: hidden;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Player3Section" style="flex-direction: row; align-items: center;">
-                <ui:VisualElement name="Player3LeftArrow" class="arrow-indicator" style="width: 80px; height: 80px; margin-right: 10px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/L1R1/L1&apos;); visibility: hidden;" />
-                <ui:VisualElement name="Player3SelectorWrapper" style="flex-direction: column; align-items: center; width: 300px; height: 300px; justify-content: flex-start; position: relative;">
-                    <ui:Label text="Player 3" name="Player3Label" style="position: absolute; top: -60px; font-size: 32px; font-weight: 900; margin-bottom: 20px; color: black; text-align: center; -unity-text-outline: true; -unity-text-outline-color: black; -unity-text-outline-width: 1px;" />
-                    <ui:VisualElement name="Player3Selector" class="characterPreview" style="width: 250px; height: 250px; background-color: rgb(203, 203, 203);">
-                        <ui:VisualElement name="CharacterPreview" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI/Images/Plorp-2D-Drawn.png?fileID=2800000&amp;guid=a1e3570009a22c14d9f0025596811366&amp;type=3#Plorp-2D-Drawn&quot;); background-color: rgba(0, 0, 0, 0); width: 70%; height: 70%;" />
-                    </ui:VisualElement>
-                    <ui:Label name="Player3ColorWarning" style="color: red; font-size: 28px; unity-text-align: middle; margin-top: 5px; height: 25px; visibility: hidden;" />
-                </ui:VisualElement>
-                <ui:VisualElement name="Player3RightArrow" class="arrow-indicator" style="width: 80px; height: 80px; margin-left: 10px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/L1R1/R1&apos;); visibility: hidden;" />
-            </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="ButtonInstructions" style="flex-direction: column; align-items: center; gap: 120px;">
-            <ui:VisualElement name="TopInstructions" style="flex-direction: row; justify-content: center; align-items: center; gap: 120px; margin-bottom: 30px;">
-                <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-right: 50px;">
+    <ui:VisualElement name="PlainColorBackground" style="flex-grow: 1; background-color: rgba(242, 241, 232, 0); justify-content: space-evenly; align-content: center; align-items: center; flex-direction: column;">
+        <ui:VisualElement name="ButtonInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; width: 100%; padding-left: 150px;">
+            <ui:VisualElement name="TopInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; margin-bottom: 30px;">
+                <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-bottom: 50px;">
                     <ui:VisualElement name="JoinButtonIcon" class="button-icon" style="width: 80px; height: 80px; background-color: rgba(0, 0, 0, 0); margin-right: 20px; background-image: resource(&apos;UI/KeysPNG/PS4KEYS_BnW/Cross&apos;); -unity-background-image-tint-color: rgb(151, 222, 136);" />
-                    <ui:Label text="Join / Ready" style="font-size: 40px;" />
+                    <ui:Label text="Join / Ready" style="font-size: 40px; color: rgb(255, 255, 255);" />
                 </ui:VisualElement>
-                <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-left: 70px;">
+                <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px;">
                     <ui:VisualElement name="LeaveButtonIcon" class="button-icon" style="width: 80px; height: 80px; background-color: rgba(0, 0, 0, 0); margin-right: 20px; background-image: resource(&apos;UI/KeysPNG/PS4KEYS_BnW/Circle&apos;); -unity-background-image-tint-color: rgb(150, 221, 136);" />
-                    <ui:Label text="Leave / Un-Ready" style="font-size: 40px;" />
+                    <ui:Label text="Leave / Un-Ready" style="font-size: 40px; color: rgb(255, 255, 255);" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="StartInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-top: 30px; visibility: hidden;">
                 <ui:VisualElement name="StartButtonIcon" class="button-icon" style="width: 80px; height: 80px; background-color: rgba(0, 0, 0, 0); margin-right: 20px; background-image: resource(&apos;UI/KeysPNG/PS4KEYS_BnW/Cross&apos;); -unity-background-image-tint-color: rgb(150, 221, 136);" />
-                <ui:Label text="Start!" style="font-size: 40px;" />
+                <ui:Label text="Start!" style="font-size: 40px; background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
