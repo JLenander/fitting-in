@@ -24,7 +24,7 @@ public class PlorpSelect : MonoBehaviour
         yRotation = modelTransform.localEulerAngles.y;
     }
 
-    public void changeColor(Color color)
+    public void ChangeColor(Color color)
     {
         outline.OutlineColor = color;
     }

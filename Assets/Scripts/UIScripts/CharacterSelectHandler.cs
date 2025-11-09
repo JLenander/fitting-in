@@ -82,7 +82,7 @@ namespace UIScripts
             // _playerArrows[playerIndex + 3].visible = true;
             
             // Set player select box background color to player color
-            plorps[playerIndex].changeColor(_availableColors[playerIndex]);
+            plorps[playerIndex].ChangeColor(_availableColors[playerIndex]);
             
             // Player default select default color
             _playerManager.playerColorSelector[playerIndex] = _availableColors[playerIndex];
@@ -163,7 +163,7 @@ namespace UIScripts
             var newColor = _availableColors[_playerColorIndices[playerIndex]];
             
             // Update plorp outline color
-            plorps[playerIndex].changeColor(newColor);
+            plorps[playerIndex].ChangeColor(newColor);
             
             // Update GlobalPlayerManager’s color selector
             _playerManager.playerColorSelector[playerIndex] = newColor;
