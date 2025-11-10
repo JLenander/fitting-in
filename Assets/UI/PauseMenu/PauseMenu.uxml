@@ -23,7 +23,6 @@
                 <ui:Button text="Exit Game" name="QuitGameButton" class="custom-image-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/Button_700px.png?fileID=2800000&amp;guid=d9a96e29670fda648b3b7e776b17b3ca&amp;type=3#Button_700px&quot;); width: 700px; height: 65px;">
                     <ui:VisualElement name="QuitGameButtonBorder" class="custom-image-button-border" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/Button_700px_Border.png?fileID=2800000&amp;guid=ee30615f4fa6e6e4c967476c06239658&amp;type=3#Button_700px_Border&quot;);" />
                 </ui:Button>
-                <ui:Button text="Exit Game" name="QuitGameButtonOld" class="player-color-border" style="display: none;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
