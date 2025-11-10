@@ -21,74 +21,79 @@ public class PauseMenuUIHandler : MonoBehaviour
     // Player Sensitivity Settings
     private Slider[] _playerLookSensitivities = new Slider[NumPlayers];
 
-    private List<VisualElement> borderedElements;
+    // The list of elements that update the current active player (player inputting to UI)
+    private List<VisualElement> borderElements;
+    private VisualElement _playerColorBorderElement;
 
     // The player color of the most recent player who was inputting to the pause menu
     private StyleColor _currentActivePlayerColor;
     
     private void Awake()
     {
-        // DontDestroyOnLoad(this);
-        
         root = uiDoc.rootVisualElement;
         
-        _returnToGameButton = root.Query<Button>("ReturnToGameButton").First();
-        _returnToLevelSelectButton = root.Query<Button>("LevelSelectButton").First();
-        _quitGameButton = root.Query<Button>("QuitGameButton").First();
+        SetupButtonClickables();
         
         _playerLookSensitivities[0] = root.Query<Slider>("Player1InputSensitivity").First();
         _playerLookSensitivities[1] = root.Query<Slider>("Player2InputSensitivity").First();
         _playerLookSensitivities[2] = root.Query<Slider>("Player3InputSensitivity").First();
 
         // Setup player colored border callbacks to update the border color on focus or slider change.
-        borderedElements = root.Query(className: "player-color-border").ToList();
-        foreach (var element in borderedElements)
+        _playerColorBorderElement = root.Query<VisualElement>("PauseMenuPlayerColorOverlay").First();
+        // This happens on every button and slider
+        borderElements = root.Query(className: "custom-image-button").ToList();
+        foreach (var slider in _playerLookSensitivities)
+        {
+            borderElements.Add(slider);
+        }
+        foreach (var element in borderElements)
         {
             var slider = element as Slider;
             slider?.RegisterValueChangedCallback((evt) =>
             {
-                element.style.borderBottomColor = _currentActivePlayerColor;
-                element.style.borderLeftColor = _currentActivePlayerColor;
-                element.style.borderRightColor = _currentActivePlayerColor;
-                element.style.borderTopColor = _currentActivePlayerColor;
+                // Set active player color
+                _playerColorBorderElement.style.unityBackgroundImageTintColor = _currentActivePlayerColor;
             });
-
+        
             element.RegisterCallback<FocusInEvent>(ctx =>
             {
-                element.style.borderBottomColor = _currentActivePlayerColor;
-                element.style.borderLeftColor = _currentActivePlayerColor;
-                element.style.borderRightColor = _currentActivePlayerColor;
-                element.style.borderTopColor = _currentActivePlayerColor;
-            });
-            element.RegisterCallback<FocusOutEvent>(ctx =>
-            {
-                element.style.borderBottomColor = Color.clear;
-                element.style.borderLeftColor = Color.clear;
-                element.style.borderRightColor = Color.clear;
-                element.style.borderTopColor = Color.clear;
+                // Set active player color
+                _playerColorBorderElement.style.unityBackgroundImageTintColor = _currentActivePlayerColor;
             });
         }
         
         HidePauseMenu();
     }
 
-    private void Start()
+    private void ReturnToGameButtonHandler()
     {
-        // Setup return to level select button callback
-        _returnToLevelSelectButton.clicked += () =>
-        {
-            GlobalLevelManager.Instance.LoadLevelSelectScreen();
-        };
+        GlobalLevelManager.Instance.LoadLevelSelectScreen();
+    }
 
-        _quitGameButton.clicked += () =>
-        {
-            Debug.Log("QuitButtonPressed");
+    private void QuitGameButtonHandler()
+    {
+        Debug.Log("QuitButtonPressed");
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
                 Application.Quit(0);
 #endif
-        };
+    }
+    
+    // Setup the clickables for our custom buttons
+    private void SetupButtonClickables()
+    {
+        _returnToGameButton = root.Query<Button>("ReturnToGameButton").First();
+        _returnToLevelSelectButton = root.Query<Button>("LevelSelectButton").First();
+        _quitGameButton = root.Query<Button>("QuitGameButton").First();
+        
+        // Return to game handler is setup by each player later on (RegisterPlayerSettingsCallback) as it needs to pass specific data to each player
+        
+        // Setup return to level select button callback
+        _returnToLevelSelectButton.clicked += ReturnToGameButtonHandler;
+        
+        // Setup quit game button callback
+        _quitGameButton.clicked += QuitGameButtonHandler;
     }
 
     /// <summary>
