@@ -61,4 +61,22 @@ public class Ball : InteractableObject
 
         grappleCollider.enabled = true;
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Hoop")
+        {
+            // hit the hoop
+
+            // TODO: add sound for hoop hit
+
+        }
+        else if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            // Velocity on contact
+            float velocity = rg.linearVelocity.magnitude;
+
+            // TODO: add sound for ground hit
+        }
+    }
 }
