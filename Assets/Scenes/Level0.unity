@@ -4921,10 +4921,6 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1842878193}
-    - target: {fileID: 1047381910200079796, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
-      propertyPath: m_Intensity
-      value: 2.57
-      objectReference: {fileID: 0}
     - target: {fileID: 1117245153883639161, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5013,10 +5009,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7359489073814936489, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
-      propertyPath: m_Intensity
-      value: 1.27
-      objectReference: {fileID: 0}
     - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
@@ -5060,10 +5052,6 @@ PrefabInstance:
     - target: {fileID: 8061766155699826322, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8245330176170873290, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
-      propertyPath: m_Intensity
-      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 8467054180586661436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: fireArea
