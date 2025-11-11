@@ -15,6 +15,7 @@ TagManager:
   - Ignore
   - Tray
   - Basketball
+  - Hoop
   layers:
   - Default
   - TransparentFX
