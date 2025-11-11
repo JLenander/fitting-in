@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4161271343222456841}
   - component: {fileID: 7296307097571121242}
   - component: {fileID: 8590696995257644555}
+  - component: {fileID: 592968372886374776}
+  - component: {fileID: 7461661317795710811}
   m_Layer: 0
   m_Name: Basketball
   m_TagString: Untagged
@@ -58,6 +60,8 @@ MonoBehaviour:
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 8590696995257644555}
   grappleCollider: {fileID: 3516257495333985253}
+  hoopSfx: {fileID: 592968372886374776}
+  groundSfx: {fileID: 7461661317795710811}
 --- !u!135 &4161271343222456841
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -127,6 +131,68 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 16.5
   m_Center: {x: 0, y: 5.02, z: 0}
+--- !u!114 &592968372886374776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401090296469437495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1753733730
+      Data2: 1165433094
+      Data3: -442997599
+      Data4: -1366946856
+    Path: event:/SFX/Exterior/bbal_rim
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &7461661317795710811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401090296469437495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1137222634
+      Data2: 1101501347
+      Data3: -590783309
+      Data4: -863283606
+    Path: event:/SFX/Exterior/bball
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5144300854118535421
 GameObject:
   m_ObjectHideFlags: 0

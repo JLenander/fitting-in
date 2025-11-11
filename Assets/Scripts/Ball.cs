@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Ball : InteractableObject
@@ -6,6 +7,11 @@ public class Ball : InteractableObject
     public Collider grappleCollider;
     private Transform parent;
     private Rigidbody rg;
+    public StudioEventEmitter hoopSfx;
+    public StudioEventEmitter groundSfx;
+    float velocity;
+    float minSpeed = 0f;
+    float maxSpeed = 10f;
 
     public override void Start()
     {
@@ -13,6 +19,8 @@ public class Ball : InteractableObject
         parent = transform.parent;
 
         rg = GetComponent<Rigidbody>();
+
+        hoopSfx.SetParameter("ballspeed", velocity);
     }
 
     public override void InteractWithHand(Transform obj, HandMovement target)
@@ -67,15 +75,20 @@ public class Ball : InteractableObject
         if (collision.collider.tag == "Hoop")
         {
             // hit the hoop
-
+            velocity = rg.linearVelocity.magnitude;
+            velocity = Mathf.InverseLerp(minSpeed, maxSpeed, velocity);
+            Debug.Log(velocity);
+            hoopSfx.Play();
             // TODO: add sound for hoop hit
 
         }
         else if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             // Velocity on contact
-            float velocity = rg.linearVelocity.magnitude;
-
+            velocity = rg.linearVelocity.magnitude;
+            velocity = Mathf.InverseLerp(minSpeed, maxSpeed, velocity);
+            Debug.Log(velocity);
+            groundSfx.Play();
             // TODO: add sound for ground hit
         }
     }
