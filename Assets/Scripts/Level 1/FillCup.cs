@@ -1,22 +1,24 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class FillCup : MonoBehaviour
 {
     [SerializeField] private Transform liquid;
-    [SerializeField] private int fullCounter;
+    [FormerlySerializedAs("fullCounter")] [SerializeField] private float secondsTillFull;
     [SerializeField] private float maxFillHeight = 1f;
     [SerializeField] private float initialHeight = 0.1f;
 
     private bool full = false;
 
-    private int counter;
+    [SerializeField] private float fillCounter;
     private Vector3 baseScale;
 
     public Outline outline;
 
     void Start()
     {
+        fillCounter = 0.0f;
         float newYScale = maxFillHeight;
         float yOffset = (newYScale - initialHeight) / 1.5f;
         baseScale = new Vector3(3.5f, initialHeight, 3.5f);
@@ -41,7 +43,7 @@ public class FillCup : MonoBehaviour
         baseScale = new Vector3(3.5f, initialHeight, 3.5f);
         liquid.localScale = baseScale;
         liquid.localPosition = Vector3.zero;
-        counter = 0;
+        fillCounter = 0;
 
         // allow filling
         full = false;
@@ -53,15 +55,15 @@ public class FillCup : MonoBehaviour
 
         EnableOutline();
 
-        counter++;
-        if (counter > fullCounter)
+        fillCounter += Time.deltaTime;
+        if (fillCounter > secondsTillFull)
         {
             full = true;
             ScoreKeeper.Instance.IncrementScoring("Filled Nova's coffee");
             Level1TaskManager.CompleteTaskPourCoffee();
         }
 
-        float fillProgress = (float)counter / fullCounter;
+        float fillProgress = fillCounter / secondsTillFull;
         float newYScale = Mathf.Lerp(initialHeight, maxFillHeight, fillProgress);
         float yOffset = (newYScale - initialHeight) / 1.5f;
 
