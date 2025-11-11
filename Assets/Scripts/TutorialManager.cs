@@ -152,6 +152,9 @@ public class TutorialManager : MonoBehaviour
 
         // start task chain
         Level0TaskManager.StartTaskGoToPhone();
+
+        // reenable blinking fires 
+        blinkConsole.enabled = true;
     }
 
     IEnumerator RepeatDialogue()
