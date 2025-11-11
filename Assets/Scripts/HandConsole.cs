@@ -37,7 +37,13 @@ public class HandConsole : Interactable
         {
             return;
         }
-        ;  // if interactable
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.interactArmTerminal = true;
+        }
+
+        // if interactable
         player.GetComponent<Player>().TurnOff();
         HandMovement target = handRigTarget.GetComponent<HandMovement>();
         target.TurnOn(player);

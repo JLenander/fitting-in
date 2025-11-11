@@ -47,11 +47,6 @@ public class PhoneUIController : MonoBehaviour
         rt = screenImage.rectTransform;
     }
 
-    private void Start()
-    {
-        Level0TaskManager.StartTaskGoToPhone();
-    }
-
     // Toggle between two swipe screens, for now
     // CHANGE when more profiles added
     public bool ClickApp()
