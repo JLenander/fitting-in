@@ -113,6 +113,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 _pauseMenuUIHandler.ShowPauseMenu();
                 _pauseMenuUIHandler.FocusPanel();
                 
+                // Pause game on pause menu open
                 Time.timeScale = 0;
             };
 
@@ -151,6 +152,7 @@ public class GlobalPlayerManager : MonoBehaviour
                             InputActionMapper.GetPlayerOpenPauseMenuAction(_players[i].Input).started += Players[i].PauseMenuDelegate;
                             InputActionMapper.GetUIClosePauseMenuAction(_players[i].Input).started += ctx =>
                             {
+                                // Resume game on pause menu open
                                 Time.timeScale = 1;
                                 _pauseMenuUIHandler.ClosePauseMenu();
                             };
