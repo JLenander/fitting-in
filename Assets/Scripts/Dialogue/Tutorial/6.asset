@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: 6
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - Good
   - Try grappling to the "Basketball"s on the floor
   - You will need to eye terminal to aim the reticle
   - Whenever it is something we can grab

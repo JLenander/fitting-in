@@ -77,9 +77,12 @@ public class HandConsole : Interactable
         msgColour = new Color(1, 0, 0, 1);
         outlineColour = new Color(1, 0, 0, 1);
 
-        PlayerInteract playerInteract = _currPlayer.GetComponent<PlayerInteract>();
-        if (playerInteract != null)
-            playerInteract.LeaveCurrInteractable();
+        if (_currPlayer != null)
+        {
+            PlayerInteract playerInteract = _currPlayer.GetComponent<PlayerInteract>();
+            if (playerInteract != null)
+                playerInteract.LeaveCurrInteractable();
+        }
 
         _canInteract = false;
         // handRigTarget.GetComponent<HandMovement>().JamArm(true);
