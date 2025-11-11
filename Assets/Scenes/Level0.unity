@@ -824,6 +824,7 @@ GameObject:
   - component: {fileID: 252878168}
   - component: {fileID: 252878167}
   - component: {fileID: 252878166}
+  - component: {fileID: 252878169}
   m_Layer: 13
   m_Name: Hoop
   m_TagString: Untagged
@@ -846,6 +847,7 @@ MonoBehaviour:
   ballTag: Basketball
   scoreText: {fileID: 960832312}
   score: 0
+  scoreSfx: {fileID: 252878169}
 --- !u!65 &252878167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -886,6 +888,37 @@ Transform:
   - {fileID: 463556008}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &252878169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252878165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 141848099
+      Data2: 1302070846
+      Data3: 1293150858
+      Data4: -1562534335
+    Path: event:/SFX/Exterior/bball_score
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &269400077
 GameObject:
   m_ObjectHideFlags: 0
