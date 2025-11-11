@@ -12,6 +12,7 @@ public class PhoneUIController : MonoBehaviour
     // Drag and drop sprites here
     public Sprite faceIDSprite;
     public Sprite homeSprite;
+    public Sprite faceAcceptSprite;
     public List<Sprite> profiles;
     public Sprite match;
 
@@ -19,6 +20,7 @@ public class PhoneUIController : MonoBehaviour
     public float tiltAngle = 30f;   // degrees
 
     public void ShowFaceID() => screenImage.sprite = faceIDSprite;
+    public void ShowFaceAccepted() => screenImage.sprite = faceAcceptSprite;
     public void ShowHome() => screenImage.sprite = homeSprite;
 
     public int countBeforeMatch = 6;
