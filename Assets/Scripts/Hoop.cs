@@ -1,3 +1,4 @@
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Hoop : MonoBehaviour
     [SerializeField] private string ballTag = "Basketball"; // tag of the basketball
     [SerializeField] private TextMeshProUGUI scoreText;
     public int score = 0;
+    public StudioEventEmitter scoreSfx;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +20,7 @@ public class Hoop : MonoBehaviour
             }
 
             score++;
+            scoreSfx.Play();
 
             if (scoreText != null)
             {
