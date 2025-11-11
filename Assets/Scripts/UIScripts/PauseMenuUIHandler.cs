@@ -230,7 +230,11 @@ public class PauseMenuUIHandler : MonoBehaviour
     {
         for (var i = 0; i < NumPlayers; i++)
         {
-            _playerLookSensitivities[i].labelElement.style.color = playerColors[i];
+            var draggerBorder = _playerLookSensitivities[i].Query<VisualElement>("unity-dragger-border").First();
+            if (draggerBorder != null)
+            {
+                draggerBorder.style.unityBackgroundImageTintColor = playerColors[i];
+            }
         }
     }
 
