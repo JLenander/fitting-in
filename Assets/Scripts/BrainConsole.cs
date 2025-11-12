@@ -36,10 +36,12 @@ public class BrainConsole : Interactable
     private void Start()
     {
         DisableOutline();
-        leftDoor = leftDoorObj.GetComponent<Door>();
-        rightDoor = rightDoorObj.GetComponent<Door>();
-        leftEscapeDoor = leftEscapeDoorObj.GetComponent<Door>();
-        rightEscapeDoor = rightEscapeDoorObj.GetComponent<Door>();
+        
+        // Doors disabled currently
+        // leftDoor = leftDoorObj.GetComponent<Door>();
+        // rightDoor = rightDoorObj.GetComponent<Door>();
+        // leftEscapeDoor = leftEscapeDoorObj.GetComponent<Door>();
+        // rightEscapeDoor = rightEscapeDoorObj.GetComponent<Door>();
 
         StartCoroutine(WaitForBrainUIHandler());
 
