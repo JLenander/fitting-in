@@ -1,5 +1,6 @@
 // Start phone with FaceID and success when faces player camera - to home screen
 
+using System.Collections;
 using UnityEngine;
 
 public class PhoneScreen : MonoBehaviour
@@ -29,10 +30,18 @@ public class PhoneScreen : MonoBehaviour
         if (screenAngle < _maxAngle)
         {
             _faceIDDone = true;
-            _phoneUI.ShowHome();
-            Debug.Log("FaceID success! Phone screen facing camera.");
-            Level0TaskManager.CompleteTaskUnlock();
-            Level0TaskManager.StartTaskSwipe();
+            StartCoroutine(FaceAcceptedRoutine());
         }
+    }
+
+    IEnumerator FaceAcceptedRoutine()
+    {
+        _phoneUI.ShowFaceAccepted();
+
+        yield return new WaitForSeconds(4);
+        _phoneUI.ShowHome();
+        Debug.Log("FaceID success! Phone screen facing camera.");
+        Level0TaskManager.CompleteTaskUnlock();
+        Level0TaskManager.StartTaskSwipe();
     }
 }

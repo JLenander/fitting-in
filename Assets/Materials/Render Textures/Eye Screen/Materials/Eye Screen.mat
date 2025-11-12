@@ -45,6 +45,8 @@ Material:
     - _Cutoff: 0.5
     - _WorkflowMode: 0
     m_Colors:
+    - _BaseColor: {r: 0.48235294, g: 0.48235294, b: 0.48235294, a: 1}
+    - _Color: {r: 0.4823529, g: 0.4823529, b: 0.4823529, a: 1}
     - _EmissionColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _SpecColor: {r: 0.14716971, g: 0.14716971, b: 0.14716971, a: 1}
   m_BuildTextureStacks: []

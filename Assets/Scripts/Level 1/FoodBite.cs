@@ -16,7 +16,7 @@ public class FoodBite : InteractableObject, IPooledObject
     public int score = 2;
 
     public AudioSource audioSource;
-    
+
     // The offset to place the object in on pickup for the hand
     public Vector3 handOffset = new Vector3(0f, 3.5f, -1.7f);
 
@@ -51,7 +51,7 @@ public class FoodBite : InteractableObject, IPooledObject
             rb.isKinematic = true;
             Debug.Log("pickup success");
 
-            target.handAnimator.SetTrigger("Hold"); // sets current hand to hold anim
+            target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
             target.SetTargetCurrentObject(this);
 
             if (bag != null) bag.EnableOutline();
@@ -98,7 +98,7 @@ public class FoodBite : InteractableObject, IPooledObject
         }
         else if (collision.gameObject.CompareTag("Bag"))
         {
-            if (NovaLevel1Manager.Instance.ate) 
+            if (NovaLevel1Manager.Instance.ate)
             {
                 ScoreKeeper.Instance.ModifyScore(score);
                 ScoreKeeper.Instance.IncrementScoring("Spaghetti completion");
