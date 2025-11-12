@@ -110,8 +110,12 @@ public class PlayerInteract : MonoBehaviour
 
     void SetReturnText(Interactable currItem)
     {
+        // This interaction prompt may not be necessary and currently blocks the terminal UI. Instead, hide the interaction prompt when interacting
         if (GlobalPlayerUIManager.Instance != null)
-            GlobalPlayerUIManager.Instance.EnableInteractionText(playerId, "To Return", currItem.msgColour, "UI/KeysPNG/PS4KEYS_BnW/Circle");
+        {
+            GlobalPlayerUIManager.Instance.DisableInteractionText(playerId);
+            // GlobalPlayerUIManager.Instance.EnableInteractionText(playerId, "To Return", currItem.msgColour, "UI/KeysPNG/PS4KEYS_BnW/Circle");
+        }
     }
 
     /// <summary>
