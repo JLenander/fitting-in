@@ -56,15 +56,17 @@
 }
 
 .instructions-header {
-    height: 60px;
-    font-size: 40px;
+    height: 20%;
+    font-size: 30px;
     background-color: rgb(255, 255, 255);
     -unity-font-definition: url("project://database/Assets/Fonts/AreaKilometer50-gxmEq.otf?fileID=12800000&guid=ef001ebbe0814b84986d79c8d1de465a&type=3#AreaKilometer50-gxmEq");
     -unity-text-align: middle-center;
     -unity-font-style: bold;
     top: auto;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
 }
 
 .instructions-border {

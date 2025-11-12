@@ -16,7 +16,7 @@ public class HandConsole : Interactable
 
     private GameObject _currPlayer;
 
-    private OverlayUIHandler uIHandler;
+    private TerminalUIHandler uIHandler;
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class HandConsole : Interactable
 
         if (enterSfx != null)
             enterSfx.Play();
-        uIHandler.ShowContainer(player);
+        uIHandler.ShowUI(player);
     }
 
     public override void Return(GameObject player)
@@ -57,7 +57,7 @@ public class HandConsole : Interactable
         _canInteract = true; // current player leaves
 
         _currPlayer = null;
-        uIHandler.HideContainer(player);
+        uIHandler.HideUI(player);
     }
 
     public override bool CanInteract()

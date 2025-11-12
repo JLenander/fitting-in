@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LegUIHandler : OverlayUIHandler
+public class LegUIHandler : TerminalUIHandler
 {
     public static LegUIHandler Instance;
     public void Awake()

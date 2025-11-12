@@ -25,7 +25,7 @@ public class HeadConsole : Interactable
 
     public StudioEventEmitter interactSfx;
 
-    private OverlayUIHandler uIHandler;
+    private TerminalUIHandler uIHandler;
     private int layerMask;
     
     void Start()
@@ -148,7 +148,7 @@ public class HeadConsole : Interactable
         var input = _currPlayer.GetComponent<PlayerInput>();
         _leftTriggerAction = input.actions.FindAction("LeftTrigger");
         _rightTriggerAction = input.actions.FindAction("RightTrigger");
-        uIHandler.ShowContainer(player);
+        uIHandler.ShowUI(player);
     }
 
     public override void Return(GameObject player)
@@ -164,7 +164,7 @@ public class HeadConsole : Interactable
         _currPlayer = null;
         _leftTriggerAction = null;
         _rightTriggerAction = null;
-        uIHandler.HideContainer(player);
+        uIHandler.HideUI(player);
     }
 
     private void HideOutsideCamera()

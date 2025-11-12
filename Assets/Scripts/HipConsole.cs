@@ -9,7 +9,7 @@ public class HipConsole : Interactable
     public AudioSource audioSource;
     public StudioEventEmitter enterSfx;
 
-    private OverlayUIHandler uIHandler;
+    private TerminalUIHandler uIHandler;
 
     [SerializeField] Transform playerChair;
     private TriggerSeat triggerSeat;
@@ -28,7 +28,7 @@ public class HipConsole : Interactable
         _canInteract = false;
         if (enterSfx != null)
             enterSfx.Play();
-        uIHandler.ShowContainer(player);
+        uIHandler.ShowUI(player);
 
         // this is only for level 1
         if (triggerSeat != null)
@@ -51,7 +51,7 @@ public class HipConsole : Interactable
         _canInteract = true;
         if (enterSfx != null)
             enterSfx.Stop();
-        uIHandler.HideContainer(player);
+        uIHandler.HideUI(player);
         if (playerChair && triggerSeat.PlayerInsideSeat())
         {
             triggerSeat.SeatRobot();

@@ -25,8 +25,8 @@ public class BrainConsole : Interactable
                         _leftBumperAction, _rightBumperAction, _lookAction;
 
     private BrainUIHandler uIHandler;
-
-    private bool task;
+    
+    private ConsolePage _currConsolePage;
 
     private bool leftLock, rightLock;
 
@@ -43,7 +43,7 @@ public class BrainConsole : Interactable
 
         StartCoroutine(WaitForBrainUIHandler());
 
-        task = true;
+        _currConsolePage = ConsolePage.Tasks;
         leftLock = true;
         rightLock = true;
     }
@@ -66,7 +66,7 @@ public class BrainConsole : Interactable
         _leftBumperAction = input.actions.FindAction("LeftBumper");
         _rightBumperAction = input.actions.FindAction("RightBumper");
 
-        uIHandler.ShowContainer(player);
+        uIHandler.ShowUI(player);
 
         _lookAction = input.actions.FindAction("Look");
 
@@ -85,7 +85,7 @@ public class BrainConsole : Interactable
         //playerTaskPanel.SetActive(false);
         _canInteract = true;
 
-        uIHandler.HideContainer(player);
+        uIHandler.HideUI(player);
     }
 
     private void Update()
@@ -98,65 +98,72 @@ public class BrainConsole : Interactable
 
         if (bumperPress && !wasBumperPressed)
         {
-            task = !task;
-            uIHandler.SwitchScreen();
+            // Disabled Door page view
+            // consolePage = ConsolePage.DoorControl;
+            // uIHandler.SwitchScreen();
         }
 
         wasBumperPressed = bumperPress;
 
-        if (!task)
+        switch (_currConsolePage)
         {
-            // unlock left door 
-            if (_leftTriggerAction != null && _leftTriggerAction.ReadValue<float>() > 0.1f && leftLock)
-            {
-                if (leftDoor != null && leftEscapeDoor != null)
+            case  ConsolePage.Tasks:
+                // handle task UI switching
+                float rightInput = _lookAction.ReadValue<Vector2>().y;
+
+                int dir = 0;
+                if (rightInput > 0.5)
                 {
-                    leftDoor.UnlockDoor();
-                    leftEscapeDoor.UnlockDoor();
-
-                    leftLock = false;
-
-                    StartCoroutine(LockDoorRoutine(true));
+                    dir = -1;
                 }
-            }
-
-            // unlock right door 
-            if (_rightTriggerAction != null && _rightTriggerAction.ReadValue<float>() > 0.1f && rightLock)
-            {
-                if (rightDoor != null && rightEscapeDoor != null)
+                else if (rightInput < -0.5)
                 {
-                    rightDoor.UnlockDoor();
-                    rightEscapeDoor.UnlockDoor();
-
-                    rightLock = false;
-
-                    StartCoroutine(LockDoorRoutine(false));
+                    dir = 1;
                 }
-            }
-        }
-        else
-        {
-            // handle task UI switching
-            float rightInput = _lookAction.ReadValue<Vector2>().y;
 
-            int dir = 0;
-            if (rightInput > 0.5)
-            {
-                dir = -1;
-            }
-            else if (rightInput < -0.5)
-            {
-                dir = 1;
-            }
+                if (dir != 0 && lastStickDir == 0)
+                {
+                    if (buttonSound != null)
+                        buttonSound.Play();
+                    uIHandler.ChangeActiveTask(dir == -1);
+                }
 
-            if (dir != 0 && lastStickDir == 0)
-            {
-                if (buttonSound != null)
-                    buttonSound.Play();
-                uIHandler.ChangeActiveTask(dir == -1);
-            }
+                lastStickDir = dir;
+                
+                break;
+            case  ConsolePage.DoorControl:
+                // unlock left door 
+                if (_leftTriggerAction != null && _leftTriggerAction.ReadValue<float>() > 0.1f && leftLock)
+                {
+                    if (leftDoor != null && leftEscapeDoor != null)
+                    {
+                        leftDoor.UnlockDoor();
+                        leftEscapeDoor.UnlockDoor();
 
-            lastStickDir = dir;
+                        leftLock = false;
+
+                        StartCoroutine(LockDoorRoutine(true));
+                    }
+                }
+
+                // unlock right door 
+                if (_rightTriggerAction != null && _rightTriggerAction.ReadValue<float>() > 0.1f && rightLock)
+                {
+                    if (rightDoor != null && rightEscapeDoor != null)
+                    {
+                        rightDoor.UnlockDoor();
+                        rightEscapeDoor.UnlockDoor();
+
+                        rightLock = false;
+
+                        StartCoroutine(LockDoorRoutine(false));
+                    }
+                }
+
+                break;
+            default:
+                Debug.LogError("Unhandled Console page");
+                break;
         }
     }
 
@@ -193,24 +200,9 @@ public class BrainConsole : Interactable
     {
         return _canInteract;
     }
-
-    //private void UpdateTaskList()
-    //{
-    //    // Get all active tasks for the player
-    //    var activeTasks = TaskManager.Instance.GetAllActiveTasks();
-
-    //    if (activeTasks.Count == 0)
-    //    {
-    //        tasksList.text = "No active tasks";
-    //        return;
-    //    }
-
-    //    string taskText = "";
-    //    foreach (var task in activeTasks)
-    //    {
-    //        taskText += $"{task.title}: {task.currentProgress}/{task.targetProgress}\n";
-    //    }
-
-    //    tasksList.text = taskText;
-    //}
+    
+    enum ConsolePage {
+        Tasks,
+        DoorControl
+    }
 }

@@ -14,6 +14,12 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     private float cameraOverlayTransitionDuration;
     private Coroutine cameraOverlayTransitionRoutine;
 
+    // Player containing box (area containing the player camera
+    private VisualElement[] _playerBoxes;
+    
+    // Player terminal UI elements
+    private VisualElement[] _playerTerminalUIZones;
+    
     // Player not joined UI overlays
     // private VisualElement _player1Overlay;
     private VisualElement _player2Overlay;
@@ -52,6 +58,8 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         _player2Overlay = root.Query<VisualElement>("Player2NotJoined").First();
         _player3Overlay = root.Query<VisualElement>("Player3NotJoined").First();
 
+        _playerBoxes = new VisualElement[NumPlayers];
+        _playerTerminalUIZones = new VisualElement[NumPlayers];
         _playerLabels = new Label[NumPlayers];
         _playerInteractionGroups = new VisualElement[NumPlayers];
         _playerGreyscaleOverlays = new VisualElement[NumPlayers];
@@ -60,6 +68,10 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
 
         for (int i = 0; i < NumPlayers; i++)
         {
+            _playerBoxes[i] = root.Query<VisualElement>("Player" + (i + 1)).First();
+            
+            _playerTerminalUIZones[i] = _playerBoxes[i].Query<VisualElement>("TerminalUI").First();
+            
             _playerLabels[i] = root.Query<Label>("Player" + (i + 1) + "Label").First();
             _playerInteractionGroups[i] = root.Query<VisualElement>("Player" + (i + 1) + "InteractionGroup").First();
             _playerBoxBorders[i] = root.Query<VisualElement>("Player" + (i + 1));
@@ -395,5 +407,44 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         }
 
         burnOverlay.style.backgroundColor = targetColor; //ensure fully transparent
+    }
+
+    public void SetTerminalUIForPlayer(int playerIndex, VisualElement element)
+    {
+        if (playerIndex < 0 || playerIndex >= NumPlayers)
+        {
+            Debug.LogError("Player index out of range");
+            return;
+        }
+
+        var terminalUI = _playerTerminalUIZones[playerIndex];
+        if (terminalUI == null)
+        {
+            Debug.LogError("No terminal UI found for player " + playerIndex);
+            return;
+        }
+        
+        // Ensure the element is taking up the whole terminal UI space
+        element.style.width = new StyleLength(Length.Percent(100f));
+        element.style.height = new StyleLength(Length.Percent(100f));
+        terminalUI.Add(element);
+    }
+
+    public void ClearTerminalUIForPlayer(int playerIndex)
+    {
+        if (playerIndex < 0 || playerIndex >= NumPlayers)
+        {
+            Debug.LogError("Player index out of range");
+            return;
+        }
+
+        var terminalUI = _playerTerminalUIZones[playerIndex];
+        if (terminalUI == null)
+        {
+            Debug.LogError("No terminal UI found for player " + playerIndex);
+            return;
+        }
+
+        terminalUI.Clear();
     }
 }
