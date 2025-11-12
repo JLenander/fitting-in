@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -10,15 +9,18 @@ namespace UIScripts
     /// </summary>
     public class CharacterSelectHandler : MonoBehaviour, ICharacterSelectScreen
     {
-        private const string PlayerCharacterPreviewName = "CharacterPreview";
-
         private VisualElement[] _playerBoxes;
         private VisualElement _readyText;
         private Label[] _playerColorWarnings;
         private VisualElement[] _playerArrows;
+        private VisualElement[] _playerLabels;
+        
+        public GameObject[] plorpSpawns; // assign in inspector
+        private PlorpSelect[] _plorps = new PlorpSelect[3];
+        public GameObject plorpPrefab;
 
-        private int _readyPlayers = 0;
-        private int _playerCount = 0;
+        private int _readyPlayers;
+        private int _playerCount;
 
         private readonly Color[] _availableColors = {
             HexToColor("#e74848ff"),
@@ -45,9 +47,8 @@ namespace UIScripts
 
         void Start()
         {
-            // TODO: no need after new design, just cue scene + spawn anchors
-            _playerBoxes = new VisualElement[3];
             _playerColorWarnings = new Label[3];
+            _playerLabels = new VisualElement[3];
             _playerArrows = new VisualElement[6];
 
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
@@ -57,98 +58,81 @@ namespace UIScripts
 
             for (int i = 0; i < 3; i++)
             {
-                _playerBoxes[i] = root.Query<VisualElement>("Player" + (i + 1) + "Selector").First();
                 _playerColorWarnings[i] = root.Query<Label>("Player" + (i + 1) + "ColorWarning").First();
-                _playerArrows[i] = root.Query<VisualElement>("Player" + (i + 1) + "LeftArrow").First();
-                _playerArrows[i + 3] = root.Query<VisualElement>("Player" + (i + 1) + "RightArrow").First();
+                _playerLabels[i] = root.Query<VisualElement>("P" + (i + 1) + "Label").First();
+                _playerArrows[i] = root.Query<VisualElement>("P" + (i + 1) + "L1").First();
+                _playerArrows[i + 3] = root.Query<VisualElement>("P" + (i + 1) + "R1").First();
             }
-
-            SetupBoxes();
 
             _playerManager = FindAnyObjectByType<GlobalPlayerManager>();
         }
 
-        // Setup the initial states of the player select boxes
-        // TODO: no need after new design
-        private void SetupBoxes()
+        public void AddPlayer(int playerIndex, PlayerInput playerInput)
         {
-            foreach (var playerBox in _playerBoxes)
-            {
-                var previewImg = playerBox.Query<VisualElement>(name: PlayerCharacterPreviewName).First();
-                previewImg.visible = false;
-            }
-        }
-
-        // TODO: spawn players at anchors instead
-        public void AddPlayer(int playerIndex)
-        {
-            // show the character select preview img
-            var playerBox = _playerBoxes[playerIndex];
-            var previewImg = playerBox.Query<VisualElement>(name: PlayerCharacterPreviewName).First();
-            previewImg.visible = true;
+            // spawn player prefab at anchor instead
+            var plorpGameObj = Instantiate(plorpPrefab, plorpSpawns[playerIndex].transform.position, plorpSpawns[playerIndex].transform.rotation);
+            _plorps[playerIndex] = plorpGameObj.GetComponent<PlorpSelect>();
+            _plorps[playerIndex].Initialize(playerInput);
+            
             _playerArrows[playerIndex].visible = true;
             _playerArrows[playerIndex + 3].visible = true;
-
+            _playerLabels[playerIndex].visible = true;
+            
             // Set player select box background color to player color
-            previewImg.style.backgroundColor = _availableColors[playerIndex];
-
+            _plorps[playerIndex].ChangeColor(_availableColors[playerIndex]);
+            
             // Player default select default color
             _playerManager.playerColorSelector[playerIndex] = _availableColors[playerIndex];
-
+            
             _playerCount++;
+            _readyText.visible = AllPlayersReady();
         }
 
-        // TODO: despawn players instead
         public void RemovePlayer(int playerIndex)
         {
-            // hide character select preview image
-            var playerBox = _playerBoxes[playerIndex];
-            var previewImg = playerBox.Query<VisualElement>(name: PlayerCharacterPreviewName).First();
-            previewImg.visible = false;
+            // destroy player prefab
+            Destroy(_plorps[playerIndex].gameObject);
+            _plorps[playerIndex] = null;
+            
+            _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = false;
             _playerArrows[playerIndex + 3].visible = false;
-
+            _playerLabels[playerIndex].visible = false;
+            
             // Free up color from selector
             _playerManager.playerColorSelector[playerIndex] = Color.clear;
-
+            
             _playerCount--;
-
+            
             // if now rest of players all ready, show "all players ready" text
             _readyText.visible = AllPlayersReady();
         }
 
-        // TODO: play ready animation instead
         public void ReadyPlayer(int playerIndex)
         {
-            // highlight the player box with an outline to indicate they have readied up
-            var playerBox = _playerBoxes[playerIndex];
-            playerBox.AddToClassList("playerConfirmed");
-
+            // Play ready animation
+            _plorps[playerIndex].Ready();
+            
             _readyPlayers++;
             // if that was last player to ready, show "all players ready" text
             _readyText.visible = AllPlayersReady();
-
-            string message = "Ready!";
-            _playerColorWarnings[playerIndex].text = message;
-            _playerColorWarnings[playerIndex].style.color = Color.black; // rgb not showing
-            _playerColorWarnings[playerIndex].visible = true;
+            
+            // _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = false;
             _playerArrows[playerIndex + 3].visible = false;
         }
 
-        // TODO: play unready animation instead
         public void UnreadyPlayer(int playerIndex)
         {
-            // unhighlight the player box
-            var playerBox = _playerBoxes[playerIndex];
-            playerBox.RemoveFromClassList("playerConfirmed");
-
+            // back to idle animation
+            _plorps[playerIndex].Unready();
+            
             _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = true;
             _playerArrows[playerIndex + 3].visible = true;
-
+            
             _readyPlayers--;
-
+            
             // if all players were ready now not, hide "all players ready" text
             _readyText.visible = AllPlayersReady();
         }
@@ -165,17 +149,15 @@ namespace UIScripts
             // Ignore color change if player is ready
             if (_playerManager.Players[playerIndex].Ready)
                 return;
-
+            
             // Cycle index
             var max = _availableColors.Length;
             _playerColorIndices[playerIndex] = (_playerColorIndices[playerIndex] + direction + max) % max;
             var newColor = _availableColors[_playerColorIndices[playerIndex]];
-
-            // Update color boxoh no 
-            var playerBox = _playerBoxes[playerIndex];
-            var previewImg = playerBox.Query<VisualElement>("CharacterPreview").First();
-            previewImg.style.backgroundColor = newColor;
-
+            
+            // Update plorp outline color
+            _plorps[playerIndex].ChangeColor(newColor);
+            
             // Update GlobalPlayerManager’s color selector
             _playerManager.playerColorSelector[playerIndex] = newColor;
             HideColorConflictWarning(playerIndex);
@@ -185,13 +167,24 @@ namespace UIScripts
         {
             string message = "Color taken by Player " + (otherIndex + 1);
             _playerColorWarnings[playerIndex].text = message;
-            _playerColorWarnings[playerIndex].style.color = Color.red;
             _playerColorWarnings[playerIndex].visible = true;
         }
 
         public void HideColorConflictWarning(int playerIndex)
         {
             _playerColorWarnings[playerIndex].visible = false;
+        }
+
+        public void DestroyPlorps()
+        {
+            for (int i = 0; i < _plorps.Length; i++)
+            {
+                if (_plorps[i] != null)
+                {
+                    Destroy(_plorps[i].gameObject);
+                    _plorps[i] = null;
+                }
+            }
         }
     }
 }

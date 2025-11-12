@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HeadUIHandler : OverlayUIHandler
+public class HeadUIHandler : TerminalUIHandler
 {
     public static HeadUIHandler Instance;
     public void Awake()
