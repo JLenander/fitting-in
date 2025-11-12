@@ -9,7 +9,7 @@ public class FireManager : MonoBehaviour
     public FireArea leftArmFireArea;
     public FireArea rightArmFireArea;
     public FireArea beginFireArea;
-    public FireArea legFireArea;
+    public FireArea spawnFireArea;
     public BlinkConsole blinkConsole;
     public HandConsole leftArmConsole;
     public HandConsole rightArmConsole;
@@ -26,7 +26,7 @@ public class FireManager : MonoBehaviour
             { "eye", eyeFireArea },
             { "leftArm", leftArmFireArea },
             { "rightArm", rightArmFireArea },
-            { "leg", legFireArea },
+            { "spawn", spawnFireArea },
             { "begin", beginFireArea }
         };
 
@@ -75,7 +75,7 @@ public class FireManager : MonoBehaviour
         {
             rightArmConsole.EnableInteract();
         }
-        else if (name == "leg")
+        else if (name == "spawn")
         {
             // TODO: reenable legs
 

@@ -16,6 +16,11 @@ public class FillCup : MonoBehaviour
 
     public Outline outline;
 
+    [SerializeField] private HandConsole leftConsole;
+    [SerializeField] private HandConsole rightConsole;
+
+    [SerializeField] private DialogueScriptableObj burnDialogue;
+
     void Start()
     {
         fillCounter = 0.0f;
@@ -51,7 +56,10 @@ public class FillCup : MonoBehaviour
 
     public void AddCoffee()
     {
-        if (full) return;
+        if (full)
+        {
+            return;
+        }
 
         EnableOutline();
 
@@ -79,5 +87,29 @@ public class FillCup : MonoBehaviour
     public void EnableOutline()
     {
         outline.enabled = true;
+    }
+
+    IEnumerator BurnArm()
+    {
+        yield return new WaitForSeconds(5);
+
+        // start fire
+        FireManager.Instance.StartFireArea("leftArm");
+
+        // disable the relevant arm
+        leftConsole.DisableInteract();
+
+        // start fire
+        FireManager.Instance.StartFireArea("rightArm");
+
+        // disable the relevant arm
+        rightConsole.DisableInteract();
+
+        FireManager.Instance.StartFireArea("spawn");
+
+        // output dialogue
+        GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
+
+
     }
 }
