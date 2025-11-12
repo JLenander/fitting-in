@@ -116,6 +116,9 @@ public class GlobalPlayerManager : MonoBehaviour
                 // Show and focus the pause menu.
                 _pauseMenuUIHandler.ShowPauseMenu();
                 _pauseMenuUIHandler.FocusPanel();
+                
+                // Pause game on pause menu open
+                Time.timeScale = 0;
             };
 
             // register callbacks for the character select screen actions.
@@ -153,6 +156,8 @@ public class GlobalPlayerManager : MonoBehaviour
                             InputActionMapper.GetPlayerOpenPauseMenuAction(_players[i].Input).started += Players[i].PauseMenuDelegate;
                             InputActionMapper.GetUIClosePauseMenuAction(_players[i].Input).started += ctx =>
                             {
+                                // Resume game on pause menu open
+                                Time.timeScale = 1;
                                 _pauseMenuUIHandler.ClosePauseMenu();
                                 //stop lowpass audio
                                 pauseSS.Stop();
@@ -285,6 +290,9 @@ public class GlobalPlayerManager : MonoBehaviour
 
         // Close Pause Menu UI if in it
         _pauseMenuUIHandler.HidePauseMenu();
+        
+        // Reset timescale to 1 if we are paused
+        Time.timeScale = 1;
     }
 
     /// <summary>
