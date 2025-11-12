@@ -28,6 +28,16 @@ public static class InputActionMapper
         return playerInput.actions.FindAction("Look", throwIfNotFound: true);
     }
 
+    public static InputAction GetPlayerInteractAction(PlayerInput playerInput)
+    {
+        return playerInput.actions.FindAction("Interact", throwIfNotFound: true);
+    }
+
+    public static InputAction GetPlayerReturnAction(PlayerInput playerInput)
+    {
+        return playerInput.actions.FindAction("Return", throwIfNotFound: true);
+    }
+
     public static InputAction GetPlayerItemInteractAction(PlayerInput playerInput)
     {
         return playerInput.actions.FindAction("ItemInteract", throwIfNotFound: true);
