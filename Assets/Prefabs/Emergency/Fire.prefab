@@ -4884,9 +4884,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5393f090a51c42945a02ac7e25906276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  maxFireCount: 300
+  fireTimeToPutOut: 1.5
   fireArea: {fileID: 0}
   fireParticle: {fileID: 1476207932897601934}
+  remainingFireTime: 0
 --- !u!65 &7467171483587290332
 BoxCollider:
   m_ObjectHideFlags: 0

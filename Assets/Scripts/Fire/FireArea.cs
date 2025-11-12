@@ -160,8 +160,6 @@ public class FireArea : MonoBehaviour
                     playerSetup.extinguisher.ActivateExtinguisher(false);
             }
 
-            playersInside.Clear();
-
             if (enableRoutine != null)
             {
                 StopCoroutine(enableRoutine);
