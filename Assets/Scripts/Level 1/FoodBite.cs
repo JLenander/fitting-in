@@ -18,7 +18,7 @@ public class FoodBite : InteractableObject, IPooledObject
     public AudioSource audioSource;
     
     // The offset to place the object in on pickup for the hand
-    public Vector3 handOffset = new Vector3(0f, 3.5f, -1.7f);
+    public Vector3 handOffset = new Vector3(-0.9f, 3.5f, -0.92f);
 
     public override void Start()
     {
@@ -51,7 +51,7 @@ public class FoodBite : InteractableObject, IPooledObject
             rb.isKinematic = true;
             Debug.Log("pickup success");
 
-            target.handAnimator.SetTrigger("Hold"); // sets current hand to hold anim
+            target.handAnimator.SetTrigger("Pot"); // sets current hand to hold anim
             target.SetTargetCurrentObject(this);
 
             if (bag != null) bag.EnableOutline();
