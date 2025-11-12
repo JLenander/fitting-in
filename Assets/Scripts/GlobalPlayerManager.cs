@@ -14,13 +14,13 @@ public class GlobalPlayerManager : MonoBehaviour
 
     private int _playerLimit;
     private PlayerData[] _players;
-    private GlobalPlayerUIManager uiManager; // use to aggregate player UI
+    private GlobalPlayerUIManager _uiManager; // use to aggregate player UI
     // The UI handler for the character select screen
     [SerializeField] private GameObject characterSelectScreen;
     private ICharacterSelectScreen _characterSelectScreen;
     private PauseMenuUIHandler _pauseMenuUIHandler;
 
-    // To replace by colors player pick - to ference for conflict or pass to PlayerData when all ready
+    // To replace by colors player pick - to reference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
     {
         Color.clear,      // Player 1
@@ -48,7 +48,7 @@ public class GlobalPlayerManager : MonoBehaviour
         _characterSelectScreen = characterSelectScreen.GetComponent<ICharacterSelectScreen>();
         _pauseMenuUIHandler = FindAnyObjectByType<PauseMenuUIHandler>();
 
-        // initalize player data
+        // initialize player data
         _playerLimit = PlayerInputManager.instance.maxPlayerCount;
         _players = new PlayerData[_playerLimit];
         for (int i = 0; i < _playerLimit; i++)
@@ -416,7 +416,7 @@ public interface ICharacterSelectScreen
     /// <summary>
     /// Change the color selection for a player.
     /// </summary>
-    /// <param name="playerIndex">The index of the player changing their color</param
+    /// <param name="playerIndex">The index of the player changing their color</param>
     public void ChangeColor(int playerIndex, int direction);
 
     public void ShowColorConflictWarning(int playerIndex, int otherIndex);
