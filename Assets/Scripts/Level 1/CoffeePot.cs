@@ -82,7 +82,6 @@ public class CoffeePot : InteractableObject
             if (Physics.Raycast(origin, direction, out RaycastHit hit, rayLength, layerMask))
             {
                 Debug.DrawLine(origin, hit.point, Color.cyan);
-                Debug.Log(hit.transform);
                 if (hit.collider.CompareTag("Cup"))
                 {
                     cup = hit.collider.GetComponent<FillCup>();

@@ -3,7 +3,32 @@ guid: 78c5fce5f0b46034790db8313ec22dbb
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_bolts
+    second: {fileID: 2100000, guid: 61d867a0a7217e84da630a3d33bfd62a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_handles
+    second: {fileID: 2100000, guid: fcbd19b8d190dff499b84595678b6692, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_periscope
+    second: {fileID: 2100000, guid: f636a873f486b4543b00ce9b0a386ccc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_tube
+    second: {fileID: 2100000, guid: d601ac80e4bce924db9f91babad4e18a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: T_wire
+    second: {fileID: 2100000, guid: c66c82fb6331320499a8024d829919a7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

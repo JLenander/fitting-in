@@ -22,7 +22,9 @@ public class DialogueSystem : MonoBehaviour
     private Coroutine _dialogueRoutine;
     private bool _isDialogueActive;
     private Queue<DialogueScriptableObj> _dialogueQueue = new();
-    
+
+    private Coroutine dialoguePlayer;
+
     public void StartDialogue(DialogueScriptableObj content)
     {
         if (_isDialogueActive)
@@ -38,7 +40,20 @@ public class DialogueSystem : MonoBehaviour
         _spriteA = content.spirteA;
         _spriteB = content.spirteB;
         _isDialogueActive = true;
-        StartCoroutine(PlayDialogue());
+        dialoguePlayer = StartCoroutine(PlayDialogue());
+    }
+
+    public void ClearDialogue()
+    {
+        _dialogueQueue.Clear();
+        _isDialogueActive = false;
+        StopCoroutine(dialoguePlayer);
+
+        // cleanup
+        _line = "";
+        dialogueUI.WriteDialogueText(_line);
+        dialogueUI.HideDialogue();
+        _isDialogueActive = false;
     }
 
     private IEnumerator PlayDialogue()
@@ -74,7 +89,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueUI.WriteDialogueText(_line);
         dialogueUI.HideDialogue();
         _isDialogueActive = false;
-        
+
         // Check for queued dialogues
         if (_dialogueQueue.Count > 0)
         {

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Linq;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class GlobalPlayerManager : MonoBehaviour
     [SerializeField] private GameObject characterSelectScreen;
     private ICharacterSelectScreen _characterSelectScreen;
     private PauseMenuUIHandler _pauseMenuUIHandler;
+
+    public StudioEventEmitter pauseSS;
 
     // To replace by colors player pick - to reference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
@@ -113,11 +116,15 @@ public class GlobalPlayerManager : MonoBehaviour
                         _players[i].Player.SetInPauseMenu();
                     }
                 }
-
+                //lowpass audio
+                pauseSS.Play();
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(_players[idx].PlayerColor);
                 // Show and focus the pause menu.
                 _pauseMenuUIHandler.ShowPauseMenu();
                 _pauseMenuUIHandler.FocusPanel();
+                
+                // Pause game on pause menu open
+                Time.timeScale = 0;
             };
 
             // register callbacks for the character select screen actions.
@@ -155,7 +162,11 @@ public class GlobalPlayerManager : MonoBehaviour
                             InputActionMapper.GetPlayerOpenPauseMenuAction(_players[i].Input).started += Players[i].PauseMenuDelegate;
                             InputActionMapper.GetUIClosePauseMenuAction(_players[i].Input).started += ctx =>
                             {
+                                // Resume game on pause menu open
+                                Time.timeScale = 1;
                                 _pauseMenuUIHandler.ClosePauseMenu();
+                                //stop lowpass audio
+                                pauseSS.Stop();
                             };
 
                             // Inform pause menu of player colors
@@ -287,6 +298,9 @@ public class GlobalPlayerManager : MonoBehaviour
 
         // Close Pause Menu UI if in it
         _pauseMenuUIHandler.HidePauseMenu();
+        
+        // Reset timescale to 1 if we are paused
+        Time.timeScale = 1;
     }
 
     /// <summary>
@@ -422,5 +436,7 @@ public interface ICharacterSelectScreen
     public void ShowColorConflictWarning(int playerIndex, int otherIndex);
 
     public void HideColorConflictWarning(int playerIndex);
+    
     public void DestroyPlorps();
+}
 }
