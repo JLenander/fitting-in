@@ -8,16 +8,17 @@
 .unity-base-slider__label {
     font-size: 28px;
     color: rgb(0, 0, 0);
-    background-color: rgb(228, 228, 228);
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-bottom-left-radius: 2px;
+    background-color: rgb(153, 219, 135);
     padding-top: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
-    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Examples%20&%20Extras/Fonts/Roboto-Bold.ttf?fileID=12800000&guid=4beb055f07aaff244873dec698d0363e&type=3#Roboto-Bold");
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    width: 265px;
+    -unity-text-align: middle-center;
 }
 
 .unity-text-field__input {
@@ -25,6 +26,17 @@
     padding-right: 2px;
     padding-bottom: 2px;
     padding-left: 2px;
+    -unity-text-align: middle-center;
+    background-color: rgb(153, 219, 135);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-size: 26px;
 }
 
 .unity-base-slider__dragger {
@@ -62,4 +74,44 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.unity-base-slider__dragger {
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url("project://database/Assets/Sprites/UI/SliderPlorp.png?fileID=2800000&guid=1dae4d6067e9a9b469ab136d0eef2bed&type=3#SliderPlorp");
+    width: 64px;
+    height: 64px;
+    -unity-background-scale-mode: scale-and-crop;
+    top: 10px;
+    border-left-color: rgba(90, 179, 82, 0);
+    border-right-color: rgba(90, 179, 82, 0);
+    border-top-color: rgba(90, 179, 82, 0);
+    border-bottom-color: rgba(90, 179, 82, 0);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-size: 95% 95%;
+}
+
+.unity-base-slider:focus .unity-base-slider__dragger {
+    border-left-color: rgb(90, 179, 82);
+    border-right-color: rgb(90, 179, 82);
+    border-top-color: rgb(90, 179, 82);
+    border-bottom-color: rgb(90, 179, 82);
+}
+
+.unity-base-slider__dragger-border {
+    background-image: url("project://database/Assets/Sprites/UI/SliderPlorp_Border.png?fileID=2800000&guid=ad90c995bdb3174489872d779abe1eac&type=3#SliderPlorp_Border");
+    background-color: rgba(0, 0, 0, 0);
+    width: 64px;
+    height: 64px;
+    top: -2px;
+    display: flex;
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+    background-size: 95% 95%;
 }

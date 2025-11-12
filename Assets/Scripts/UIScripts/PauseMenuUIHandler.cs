@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PauseMenuUIHandler : MonoBehaviour
@@ -18,77 +20,197 @@ public class PauseMenuUIHandler : MonoBehaviour
     // Player colors
     private Color[] playerColors = new Color[NumPlayers];
     
-    // Player Sensitivity Settings
+    // Player Sensitivity Settings and related inputs
+    private const float IncreasedStepAmount = 2.0f;
+    private const float StepIntervalIncreaseDelay = 1.0f;
+    // (Inputs are necessary for custom smooth slider logic)
     private Slider[] _playerLookSensitivities = new Slider[NumPlayers];
-
-    private List<VisualElement> borderedElements;
+    private List<InputAction> _playerNavActions;
+    // Whether current focus is on a slider
+    private bool focusOnSlider;
+    private bool isHoldingSlider;
+    // Time since we started holding
+    private double _timeSinceFirstSliderInput;
+    
+    // The list of elements that update the current active player (player inputting to UI)
+    private List<VisualElement> customButtonElements;
+    private VisualElement _playerColorBorderElement;
 
     // The player color of the most recent player who was inputting to the pause menu
     private StyleColor _currentActivePlayerColor;
     
     private void Awake()
     {
-        // DontDestroyOnLoad(this);
-        
         root = uiDoc.rootVisualElement;
         
-        _returnToGameButton = root.Query<Button>("ReturnToGameButton").First();
-        _returnToLevelSelectButton = root.Query<Button>("LevelSelectButton").First();
-        _quitGameButton = root.Query<Button>("QuitGameButton").First();
+        SetupButtonClickables();
         
         _playerLookSensitivities[0] = root.Query<Slider>("Player1InputSensitivity").First();
         _playerLookSensitivities[1] = root.Query<Slider>("Player2InputSensitivity").First();
         _playerLookSensitivities[2] = root.Query<Slider>("Player3InputSensitivity").First();
 
-        // Setup player colored border callbacks to update the border color on focus or slider change.
-        borderedElements = root.Query(className: "player-color-border").ToList();
-        foreach (var element in borderedElements)
-        {
-            var slider = element as Slider;
-            slider?.RegisterValueChangedCallback((evt) =>
-            {
-                element.style.borderBottomColor = _currentActivePlayerColor;
-                element.style.borderLeftColor = _currentActivePlayerColor;
-                element.style.borderRightColor = _currentActivePlayerColor;
-                element.style.borderTopColor = _currentActivePlayerColor;
-            });
+        // Intialize to negative value to prevent false positive on quick startup
+        _timeSinceFirstSliderInput = -10.0f;
 
-            element.RegisterCallback<FocusInEvent>(ctx =>
-            {
-                element.style.borderBottomColor = _currentActivePlayerColor;
-                element.style.borderLeftColor = _currentActivePlayerColor;
-                element.style.borderRightColor = _currentActivePlayerColor;
-                element.style.borderTopColor = _currentActivePlayerColor;
-            });
-            element.RegisterCallback<FocusOutEvent>(ctx =>
-            {
-                element.style.borderBottomColor = Color.clear;
-                element.style.borderLeftColor = Color.clear;
-                element.style.borderRightColor = Color.clear;
-                element.style.borderTopColor = Color.clear;
-            });
-        }
+        // Setup player colored border callbacks to update the border color on focus or slider change.
+        // This happens on every button and slider
+        _playerColorBorderElement = root.Query<VisualElement>("PauseMenuPlayerColorOverlay").First();
+        customButtonElements = root.Query(className: "custom-image-button").ToList();
+        SetupCustomSliders();
+        SetupCustomButtons();
+
+        SceneManager.activeSceneChanged += PauseSceneChangeHandler;
         
         HidePauseMenu();
     }
 
-    private void Start()
+    /// <summary>
+    /// Setup the custom sliders to have smoother movement by increasing the step interval after a few seconds.
+    /// Code in Update() checks for if the slider inputs are neutral which resets the timeSinceSliderLastHeld
+    /// </summary>
+    private void SetupCustomSliders()
     {
-        // Setup return to level select button callback
-        _returnToLevelSelectButton.clicked += () =>
+        for (int i = 0; i < _playerLookSensitivities.Length; i++)
         {
-            GlobalLevelManager.Instance.LoadLevelSelectScreen();
-        };
+            var slider = _playerLookSensitivities[i];
+            // Handler for when the value is changed, increasing the change if input has been held enough.
+            slider.RegisterValueChangedCallback((evt) =>
+            {
+                // Set active player color
+                _playerColorBorderElement.style.unityBackgroundImageTintColor = _currentActivePlayerColor;
+                
+                // Handle custom slider step interval logic
+                var currTime = Time.unscaledTimeAsDouble;
+                if (!isHoldingSlider)
+                {
+                    isHoldingSlider = true;
+                    _timeSinceFirstSliderInput = currTime;
+                }
+                // Take the difference in realtime to see if we've held the button long enough to trigger the increased step
+                if (currTime - _timeSinceFirstSliderInput > StepIntervalIncreaseDelay)
+                {
+                    var direction = (evt.newValue > evt.previousValue) ? 1.0f : -1.0f;
+                    slider.SetValueWithoutNotify(slider.value + (direction * IncreasedStepAmount));
+                }
+                
+            });
+            
+            slider.RegisterCallback<FocusInEvent>(evt =>
+            {
+                // Optimization to prevent some checks on update when not on a slider.
+                focusOnSlider = true; 
+                
+                // Set active player color
+                _playerColorBorderElement.style.unityBackgroundImageTintColor = _currentActivePlayerColor;
+            });
+        }
+    }
+    
+    /// <summary>
+    /// Scene change handler for Pause Menu UI handler.
+    /// Initializes the player navigation actions if not done so after loading a level.
+    /// </summary>
+    private void PauseSceneChangeHandler(Scene oldScene, Scene newScene)
+    {
+        if (!SceneConstants.IsCharacterSelectScene() && !SceneConstants.IsLevelSelectScene())
+        {
+            InitalizePlayerNavActions();
+        }
+    }
+    
+    /// <summary>
+    /// Initialize the player navigation actions if not already done so.
+    /// </summary>
+    private void InitalizePlayerNavActions()
+    {
+        if (_playerNavActions == null)
+        {
+            _playerNavActions = new List<InputAction>();
+            foreach (var playerData in GlobalPlayerManager.Instance.Players)
+            {
+                if (playerData.Valid)
+                {
+                    var playerInput = playerData.Input;
+                    var prevActionMap = playerInput.currentActionMap.name;
+                    playerInput.SwitchCurrentActionMap(InputActionMapper.UIActionMapName);
+                    _playerNavActions.Add(InputActionMapper.GetUINavigateAction(playerInput));
+                    playerInput.SwitchCurrentActionMap(prevActionMap);
+                }
+            }
+        }
+    }
 
-        _quitGameButton.clicked += () =>
+    /// <summary>
+    /// Setup custom image buttons with an image border to color the pause menu border on focus.
+    /// Coloring of the button border to indicate highlight is done in USS.
+    /// </summary>
+    private void SetupCustomButtons()
+    {
+        foreach (var element in customButtonElements)
         {
-            Debug.Log("QuitButtonPressed");
+            element.RegisterCallback<FocusInEvent>(ctx =>
+            {
+                // Optimization to prevent some checks on update when not on a slider.
+                focusOnSlider = false;
+                
+                // Set active player color
+                _playerColorBorderElement.style.unityBackgroundImageTintColor = _currentActivePlayerColor;
+            });
+        }
+    }
+
+    public void Update()
+    {
+        // Perform a check when on a slider for neutral input in order to enable the sliding interval ("Page Size" in settings)
+        // to increase after holding the input for a moment.
+        if (root.style.display == DisplayStyle.Flex && focusOnSlider && _playerNavActions != null)
+        {
+            var allSliderInputsNeutral = true;
+            foreach (var navAction in _playerNavActions)
+            {
+                var navValue = navAction.ReadValue<Vector2>();
+                if (navValue.x != 0.0f)
+                {
+                    allSliderInputsNeutral = false;
+                }
+            }
+
+            if (allSliderInputsNeutral)
+            {
+                isHoldingSlider = false;
+            }
+        }
+    }
+
+    private void ReturnToGameButtonHandler()
+    {
+        GlobalLevelManager.Instance.LoadLevelSelectScreen();
+    }
+
+    private void QuitGameButtonHandler()
+    {
+        Debug.Log("QuitButtonPressed");
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
                 Application.Quit(0);
 #endif
-        };
+    }
+    
+    // Setup the clickables for our custom buttons
+    private void SetupButtonClickables()
+    {
+        _returnToGameButton = root.Query<Button>("ReturnToGameButton").First();
+        _returnToLevelSelectButton = root.Query<Button>("LevelSelectButton").First();
+        _quitGameButton = root.Query<Button>("QuitGameButton").First();
+        
+        // Return to game handler is setup by each player later on (RegisterPlayerSettingsCallback) as it needs to pass specific data to each player
+        
+        // Setup return to level select button callback
+        _returnToLevelSelectButton.clicked += ReturnToGameButtonHandler;
+        
+        // Setup quit game button callback
+        _quitGameButton.clicked += QuitGameButtonHandler;
     }
 
     /// <summary>
@@ -107,7 +229,11 @@ public class PauseMenuUIHandler : MonoBehaviour
     {
         for (var i = 0; i < NumPlayers; i++)
         {
-            _playerLookSensitivities[i].labelElement.style.color = playerColors[i];
+            var draggerBorder = _playerLookSensitivities[i].Query<VisualElement>("unity-dragger-border").First();
+            if (draggerBorder != null)
+            {
+                draggerBorder.style.unityBackgroundImageTintColor = playerColors[i];
+            }
         }
     }
 
@@ -119,7 +245,7 @@ public class PauseMenuUIHandler : MonoBehaviour
             return;
         } 
         
-        _playerLookSensitivities[playerIndex].value = settings.LookSensitivity;
+        _playerLookSensitivities[playerIndex].SetValueWithoutNotify(settings.LookSensitivity);
     }
 
     /// <summary>
