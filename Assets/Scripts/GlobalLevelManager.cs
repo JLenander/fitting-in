@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// The globall level manager is in charge of the playable levels information, such as the name, the status as to whether
@@ -16,6 +18,10 @@ public class GlobalLevelManager : MonoBehaviour
 {
     public static GlobalLevelManager Instance { get; private set; }
 
+    [SerializeField] private UIDocument loadingScreen;
+    private VisualElement _loadingScreenRoot;
+    private AsyncOperation asyncLevelLoad;
+    
     private Dictionary<string, int> _sceneNameToLevelIndexMap;
 
     public void Awake()
@@ -28,6 +34,11 @@ public class GlobalLevelManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        _loadingScreenRoot = loadingScreen.rootVisualElement;
+        HideLoadingScreen();
+
+        SceneManager.sceneLoaded += SceneLoadHandler;
         
         DontDestroyOnLoad(this);
     }
@@ -41,6 +52,11 @@ public class GlobalLevelManager : MonoBehaviour
         }
             
         SanityCheckSceneNames();
+    }
+
+    public void SceneLoadHandler(Scene oldScene, LoadSceneMode mode)
+    {
+        HideLoadingScreen();
     }
 
     public Level[] GetLevels()
@@ -90,8 +106,8 @@ public class GlobalLevelManager : MonoBehaviour
     /// <param name="sceneName">The name of the scene to load. Do not use magic strings, see <see cref="SceneConstants"/></param>
     public void LoadScene(string sceneName)
     {
+        ShowLoadingScreen();
         GlobalPlayerManager.Instance?.PrepareAllPlayersForSceneChange();
-        // TODO: Add a loading screen or loading animation
         SceneManager.LoadScene(sceneName);
     }
     
@@ -118,6 +134,16 @@ public class GlobalLevelManager : MonoBehaviour
         {
             Debug.Log("Level at index " + levelIndex + " is locked");
         }
+    }
+
+    private void ShowLoadingScreen()
+    {
+        _loadingScreenRoot.style.display = DisplayStyle.Flex;
+    }
+
+    private void HideLoadingScreen()
+    {
+        _loadingScreenRoot.style.display = DisplayStyle.None;
     }
 
     private void SanityCheckSceneNames()
