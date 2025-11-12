@@ -11533,6 +11533,7 @@ MonoBehaviour:
   dialogues:
   - {fileID: 11400000, guid: e6e5f2984d544ef40a6866762e3f65bb, type: 2}
   - {fileID: 11400000, guid: 178f51564a424ac4da6dca61a858ef8f, type: 2}
+  - {fileID: 11400000, guid: 3fde3cf596c9e8b47bf76811b3ea7901, type: 2}
   - {fileID: 11400000, guid: 2dd3490947c52a84bab91b11a4b6d1fa, type: 2}
   - {fileID: 11400000, guid: 796f4859a72758c42b2bee69f3c6ed0f, type: 2}
   - {fileID: 11400000, guid: acb0ca1757b245a468de73daa227d09d, type: 2}

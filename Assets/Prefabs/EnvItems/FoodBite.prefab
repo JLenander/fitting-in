@@ -102,7 +102,6 @@ MonoBehaviour:
   outline: {fileID: 6828464677427300517}
   canInteract: 1
   canPickup: 1
-  interactPopUp: {fileID: 0}
   _robotHead: {fileID: 0}
   groundMask:
     serializedVersion: 2
@@ -113,6 +112,7 @@ MonoBehaviour:
   score: 2
   audioSource: {fileID: 9084605516717041414}
   handOffset: {x: 0, y: 3.5, z: -1.7}
+  pastaSauce: {fileID: 5154158129052883714}
 --- !u!65 &5938523467898302478
 BoxCollider:
   m_ObjectHideFlags: 0
