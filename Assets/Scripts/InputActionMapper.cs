@@ -28,6 +28,16 @@ public static class InputActionMapper
         return playerInput.actions.FindAction("Look", throwIfNotFound: true);
     }
 
+    public static InputAction GetPlayerInteractAction(PlayerInput playerInput)
+    {
+        return playerInput.actions.FindAction("Interact", throwIfNotFound: true);
+    }
+
+    public static InputAction GetPlayerReturnAction(PlayerInput playerInput)
+    {
+        return playerInput.actions.FindAction("Return", throwIfNotFound: true);
+    }
+
     public static InputAction GetPlayerItemInteractAction(PlayerInput playerInput)
     {
         return playerInput.actions.FindAction("ItemInteract", throwIfNotFound: true);
@@ -57,6 +67,12 @@ public static class InputActionMapper
     {
         return playerInput.actions.FindAction("OpenPauseMenu", throwIfNotFound: true);
     }
+    
+    public static InputAction GetUINavigateAction(PlayerInput playerInput)
+    {
+        return playerInput.actions.FindAction("Navigate", throwIfNotFound: true);
+    }
+    
     public static InputAction GetUIClosePauseMenuAction(PlayerInput playerInput)
     {
         return playerInput.actions.FindAction("ClosePauseMenu", throwIfNotFound: true);
@@ -75,4 +91,5 @@ public static class InputActionMapper
     public const string CharacterSelectActionMapName = "CharacterSelect";
     public const string LevelSelectActionMapName = "LevelSelect";
     public const string PlayerActionMapName = "Player";
+    public const string UIActionMapName = "UI";
 }

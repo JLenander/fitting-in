@@ -40,3 +40,43 @@
 
 .button {
 }
+
+.custom-image-button-border {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+}
+
+.custom-image-button:focus .custom-image-button-border {
+    -unity-background-image-tint-color: rgb(90, 178, 82);
+}
+
+.custom-image-button {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-left: 6px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.custom-image-button:focus {
+    -unity-background-image-tint-color: rgb(234, 234, 234);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.custom-image-button:hover {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}

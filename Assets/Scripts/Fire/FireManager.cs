@@ -8,6 +8,7 @@ public class FireManager : MonoBehaviour
     public FireArea eyeFireArea;
     public FireArea leftArmFireArea;
     public FireArea rightArmFireArea;
+    public FireArea beginFireArea;
     public FireArea legFireArea;
     public BlinkConsole blinkConsole;
     public HandConsole leftArmConsole;
@@ -25,7 +26,8 @@ public class FireManager : MonoBehaviour
             { "eye", eyeFireArea },
             { "leftArm", leftArmFireArea },
             { "rightArm", rightArmFireArea },
-            { "leg", legFireArea }
+            { "leg", legFireArea },
+            { "begin", beginFireArea }
         };
 
         // init singleton
@@ -37,7 +39,7 @@ public class FireManager : MonoBehaviour
         {
             Instance = this;
         }
-        
+
         fireSfx.EventInstance.setVolume(3f);
     }
 
@@ -78,11 +80,15 @@ public class FireManager : MonoBehaviour
             // TODO: reenable legs
 
         }
+        else if (name == "begin")
+        {
+            TutorialManager.Instance.beginFire = true;
+        }
         else
         {
             Debug.Log($"Can't disable fire area {name} that doesn't exist");
         }
-        
+
         // If any fire area still active, don't stop sfx
         foreach (var fa in fireAreas)
         {

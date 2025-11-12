@@ -22,6 +22,12 @@ public class HipConsole : Interactable
     }
     public override void Interact(GameObject player)
     {
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.interactLegTerminal = true;
+        }
+
         player.GetComponent<Player>().TurnOff();
         player.GetComponent<Player>().switchToLegs(robotBody);
 

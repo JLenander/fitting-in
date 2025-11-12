@@ -100,57 +100,63 @@ public class ScoreboardUIHandler : MonoBehaviour
     IEnumerator AnimateScoreboardRoutine(ScoreboardData data)
     {
         scoreboardContent.visible = true;
-        // print reoccuring data first
-        string content = AddDashes(evidenceCountText);
+        // // print reoccuring data first
+        string content = "";
         scoreboardContent.text = content;
 
-        // pause a bit
-        yield return new WaitForSeconds(pauseAfterTitle);
+        // // pause a bit
+        // yield return new WaitForSeconds(pauseAfterTitle);
 
         // increment number
-        float elapsed = 0f;
+        // float elapsed = 0f;
+        // int startScore = 0;
+        // int targetScore = data.evidenceCount;
+
+        // while (elapsed < scoreCountDuration)
+        // {
+        //     elapsed += Time.deltaTime;
+        //     float t = Mathf.Clamp01(elapsed / scoreCountDuration);
+        //     int current = Mathf.RoundToInt(Mathf.Lerp(startScore, targetScore, t));
+        //     scoreboardContent.text = content + " " + current.ToString() + "x";
+        //     yield return null;
+        // }
+
+        // content = content + " " + targetScore + "x\n";
+        // scoreboardContent.text = content;
+
+        // yield return new WaitForSeconds(betweenTitles); // small pause
+        float elapsed;
         int startScore = 0;
-        int targetScore = data.evidenceCount;
+        int targetScore = 0;
 
-        while (elapsed < scoreCountDuration)
+        if (data.hurtDateCount != 0)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / scoreCountDuration);
-            int current = Mathf.RoundToInt(Mathf.Lerp(startScore, targetScore, t));
-            scoreboardContent.text = content + " " + current.ToString() + "x";
-            yield return null;
+            content = content + AddDashes(hurtDateCountText);
+            scoreboardContent.text = content;
+
+            // pause a bit
+            yield return new WaitForSeconds(pauseAfterTitle);
+
+            // increment number
+            elapsed = 0f;
+            startScore = 0;
+            targetScore = data.hurtDateCount;
+
+            while (elapsed < scoreCountDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / scoreCountDuration);
+                int current = Mathf.RoundToInt(Mathf.Lerp(startScore, targetScore, t));
+                scoreboardContent.text = content + " " + current.ToString() + "x";
+                yield return null;
+            }
+
+            content = content + " " + targetScore + "x\n";
+            scoreboardContent.text = content;
+
+            // pause a bit
+            yield return new WaitForSeconds(pauseAfterTitle);
         }
-
-        content = content + " " + targetScore + "x\n";
-        scoreboardContent.text = content;
-
-        yield return new WaitForSeconds(betweenTitles); // small pause
-
-        content = content + AddDashes(hurtDateCountText);
-        scoreboardContent.text = content;
-
-        // pause a bit
-        yield return new WaitForSeconds(pauseAfterTitle);
-
-        // increment number
-        elapsed = 0f;
-        startScore = 0;
-        targetScore = data.hurtDateCount;
-
-        while (elapsed < scoreCountDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / scoreCountDuration);
-            int current = Mathf.RoundToInt(Mathf.Lerp(startScore, targetScore, t));
-            scoreboardContent.text = content + " " + current.ToString() + "x";
-            yield return null;
-        }
-
-        content = content + " " + targetScore + "x\n";
-        scoreboardContent.text = content;
-
-        // pause a bit
-        yield return new WaitForSeconds(pauseAfterTitle);
 
         // event stuff
         foreach (var e in data.events)

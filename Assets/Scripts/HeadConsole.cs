@@ -27,7 +27,7 @@ public class HeadConsole : Interactable
 
     private TerminalUIHandler uIHandler;
     private int layerMask;
-    
+
     void Start()
     {
         DisableOutline();
@@ -133,7 +133,12 @@ public class HeadConsole : Interactable
                 denySource.Play();
             return;
         }
-        
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.interactEyeTerminal = true;
+        }
+
         _splitscreenUIHandler.ShowOutsideCamera();
 
         player.GetComponent<Player>().TurnOff();
@@ -171,7 +176,7 @@ public class HeadConsole : Interactable
     {
         _splitscreenUIHandler.HideOutsideCamera(turnOffAfter);
     }
-    
+
     public override bool CanInteract()
     {
         return _canInteract;
@@ -265,7 +270,7 @@ public class HeadConsole : Interactable
     {
         return exteriorCamera.transform.forward;
     }
-    
+
     /// <summary>
     /// Return the position of the exterior camera
     /// </summary>
