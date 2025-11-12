@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
-public class LeftArmUIHandler : OverlayUIHandler
+public class LeftArmUIHandler : TerminalUIHandler
 {
     public static LeftArmUIHandler Instance;
     public void Awake()
