@@ -95,6 +95,9 @@ public class BlinkConsole : Interactable
                         hoverMessage = "[Extinguish fire!]";
                         msgColour = new Color(1, 0, 0, 1);
                         outlineColour = new Color(1, 0, 0, 1);
+
+                        // if level 1 play sus animation
+                        // play blink sus dialogue
                     }
                 }
             }
