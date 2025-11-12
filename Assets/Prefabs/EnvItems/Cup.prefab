@@ -215,9 +215,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   liquid: {fileID: 90708576353505251}
-  fullCounter: 500
+  secondsTillFull: 5
   maxFillHeight: 2.2
   initialHeight: 0.1
+  fillCounter: 0
   outline: {fileID: 300403850476083074}
 --- !u!114 &300403850476083074
 MonoBehaviour:

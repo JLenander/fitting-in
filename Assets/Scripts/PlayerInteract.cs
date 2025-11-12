@@ -16,48 +16,70 @@ public class PlayerInteract : MonoBehaviour
 
     private Interactable interacting;
     private int playerId;
+    
+    // Variables to enable interact and return to share an action
+    private bool _actionLock;
 
     void Awake()
     {
         var input = GetComponent<PlayerInput>();
-        _interactAction = input.actions.FindAction("Interact");
-        _returnAction = input.actions.FindAction("Return");
-        fpsCam = GetComponent<PlayerInput>().camera;
+        _interactAction = InputActionMapper.GetPlayerInteractAction(input);
+        _returnAction = InputActionMapper.GetPlayerReturnAction(input);
+        fpsCam = input.camera;
 
         interacting = null;
 
-        PlayerInput playerInput = GetComponent<PlayerInput>();
-        playerId = playerInput.playerIndex;
+        _actionLock = false;
+        
+        playerId = input.playerIndex;
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckInteraction();
-
-        if (_interactAction.WasPressedThisFrame() && currentItem != null && interacting == null)
+        
+        // Disable interaction or return if the interact/return action has not been released yet.
+        // This prevents the shared interact action from immediately leaving the interaction after
+        // starting an interaction with something and vice versa
+        if (_actionLock)
         {
-            if (currentItem.CanInteract())
+            if (!_interactAction.WasPressedThisFrame() && !_returnAction.WasPressedThisFrame())
             {
-                Debug.Log("Interacting with " + currentItem);
-                interacting = currentItem;
-                currentItem.Interact(gameObject);
-                //if (GlobalPlayerUIManager.Instance != null && interacting)
-                //{
-                //    GlobalPlayerUIManager.Instance.EnableScreenGreyscale(playerId);
-                //}
-                DisableCurrInteractable();
+                _actionLock = false;
+            }
+            else
+            {
+                return;
             }
         }
-
-        if (_returnAction.WasPressedThisFrame())
+        
+        if (IsInteracting())
         {
-            interacting?.Return(gameObject);
-            interacting = null;
-            //if (GlobalPlayerUIManager.Instance != null)
-            //    GlobalPlayerUIManager.Instance.DisableScreenGreyscale(playerId);
+            // Check for return or interact action to leave the current interactable
+            if (_returnAction.WasPressedThisFrame() || _interactAction.WasPressedThisFrame())
+            {
+                _actionLock = true;
+                
+                interacting?.Return(gameObject);
+                interacting = null;
+            }
         }
-
+        else
+        {
+            // Check for interact action to interact with the current interactable
+            if (_interactAction.WasPressedThisFrame() && currentItem != null && interacting == null)
+            {
+                if (currentItem.CanInteract())
+                {
+                    _actionLock = true;
+                    
+                    interacting = currentItem;
+                    currentItem.Interact(gameObject);
+                    DisableCurrInteractable();
+                }
+            }
+        }
     }
 
     void CheckInteraction()
@@ -110,8 +132,12 @@ public class PlayerInteract : MonoBehaviour
 
     void SetReturnText(Interactable currItem)
     {
+        // This interaction prompt may not be necessary and currently blocks the terminal UI. Instead, hide the interaction prompt when interacting
         if (GlobalPlayerUIManager.Instance != null)
-            GlobalPlayerUIManager.Instance.EnableInteractionText(playerId, "To Return", currItem.msgColour, "UI/KeysPNG/PS4KEYS_BnW/Circle");
+        {
+            GlobalPlayerUIManager.Instance.DisableInteractionText(playerId);
+            // GlobalPlayerUIManager.Instance.EnableInteractionText(playerId, "To Return", currItem.msgColour, "UI/KeysPNG/PS4KEYS_BnW/Circle");
+        }
     }
 
     /// <summary>
@@ -150,5 +176,13 @@ public class PlayerInteract : MonoBehaviour
     {
         interacting?.Return(gameObject);
         interacting = null;
+    }
+
+    /// <summary>
+    /// Return true iff this player is currently interacting with something
+    /// </summary>
+    public bool IsInteracting()
+    {
+        return interacting != null;
     }
 }

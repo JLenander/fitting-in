@@ -1,19 +1,20 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// controls the fire
 /// </summary>
 public class Fire : MonoBehaviour
 {
-    public int maxFireCount = 500; // fire counter to decrement
+    [FormerlySerializedAs("maxFireCount")] public float fireTimeToPutOut; // fire counter to decrement
     public FireArea fireArea; // the fire area controller
     [SerializeField] private GameObject fireParticle;
-    private int currFireCount; // curr fire counter
+    [SerializeField] private float remainingFireTime; // curr fire counter (how long player needs to spray before this is put out)
     private Collider detectCollider; // used for player to call ReduceFire
 
     void Start()
     {
-        currFireCount = 0;
+        remainingFireTime = 0.0f;
 
         // set up the collider for putting out
         detectCollider = GetComponent<Collider>();
@@ -25,7 +26,7 @@ public class Fire : MonoBehaviour
     public void StartFire()
     {
         // fill up the counter
-        currFireCount = maxFireCount;
+        remainingFireTime = fireTimeToPutOut;
 
         // enable the collider for putting out
         detectCollider.enabled = true;
@@ -41,15 +42,15 @@ public class Fire : MonoBehaviour
     /// </summary>
     public void ReduceFire()
     {
-        currFireCount--;
+        remainingFireTime -= Time.deltaTime;
 
-        currFireCount = Mathf.Max(currFireCount, 0);
+        remainingFireTime = Mathf.Max(remainingFireTime, 0);
 
-        float scale = (float)currFireCount / maxFireCount;
+        float scale = remainingFireTime / fireTimeToPutOut;
         scale = Mathf.Clamp(scale, 0.1f, 1f);
         fireParticle.transform.localScale = Vector3.one * scale;
 
-        if (currFireCount <= 0)
+        if (remainingFireTime <= 0)
         {
             // notify fire area
             if (fireArea != null)
