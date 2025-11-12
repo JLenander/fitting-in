@@ -43,7 +43,13 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     private Label _dialogueText;
     private VisualElement _dialogueIcon;
 
+    // Aiming reticle for eyes
     private VisualElement _reticle;
+    
+    // New Task popup alert
+    private VisualElement _newTaskAlert;
+    // Blink alert
+    private VisualElement _blinkAlert;
 
     private const int NumPlayers = 3;
 
@@ -97,6 +103,10 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
 
         // aim reticle
         _reticle = root.Query<VisualElement>("AimReticle").First();
+        
+        // Popup ui elements
+        _newTaskAlert = root.Query<VisualElement>("NewTaskAlert").First();
+        _blinkAlert = root.Query<VisualElement>("BlinkAlert").First();
 
         // Disable Root to start until scene is switched
         root.style.display = DisplayStyle.None;
@@ -407,6 +417,26 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         }
 
         burnOverlay.style.backgroundColor = targetColor; //ensure fully transparent
+    }
+
+    public void ShowNewTaskPopUp()
+    {
+        _newTaskAlert.visible = true;
+    }
+    
+    public void HideNewTaskPopUp()
+    {
+        _newTaskAlert.visible = false;
+    }
+    
+    public void ShowBlinkPopUp()
+    {
+        _blinkAlert.visible = true;
+    }
+    
+    public void HideBlinkPopUp()
+    {
+        _blinkAlert.visible = false;
     }
 
     public void SetTerminalUIForPlayer(int playerIndex, VisualElement element)

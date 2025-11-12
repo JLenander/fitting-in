@@ -98,6 +98,26 @@ public interface ISplitscreenUIHandler
     /// disable burn overlay
     /// </summary>
     public void DisablePlayerBurnOverlay(int playerIndex);
+    
+    /// <summary>
+    /// Show the new task popup alert
+    /// </summary>
+    public void ShowNewTaskPopUp();
+    
+    /// <summary>
+    /// Hide the new task popup alert
+    /// </summary>
+    public void HideNewTaskPopUp();
+    
+    /// <summary>
+    /// Show the blink popup alert
+    /// </summary>
+    public void ShowBlinkPopUp();
+    
+    /// <summary>
+    /// Hide the blink popup alert
+    /// </summary>
+    public void HideBlinkPopUp();
 
     /// <summary>
     /// Set the terminal UI element for a particular player. This terminal UI will go into the player box for

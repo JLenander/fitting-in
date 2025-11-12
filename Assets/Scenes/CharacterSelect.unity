@@ -377,65 +377,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5569860638936263973, guid: 6c951279af45d354090e2a145ecf5a12, type: 3}
   m_PrefabInstance: {fileID: 1070582681}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &764638470
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 764638471}
-  - component: {fileID: 764638472}
-  m_Layer: 5
-  m_Name: TaskPopup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &764638471
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764638470}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 655477691}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &764638472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764638470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: 9b0dd6976fb162d4ea6505a9d374ec46, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: dbfd7a6bed5d37e4e980fd32c42d8f46, type: 3}
-  m_SortingOrder: 5
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &912823605
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,9 +522,6 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5569860638936263973, guid: 6c951279af45d354090e2a145ecf5a12, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 764638471}
-    - targetCorrespondingSourceObject: {fileID: 5569860638936263973, guid: 6c951279af45d354090e2a145ecf5a12, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2074024826}
     - targetCorrespondingSourceObject: {fileID: 5569860638936263973, guid: 6c951279af45d354090e2a145ecf5a12, type: 3}
       insertIndex: -1
@@ -721,7 +659,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   terminalUIAsset: {fileID: 9197481963319205126, guid: 45c0e9b0faecbe9409b1841c468a20b6, type: 3}
-  uIDocument: {fileID: 0}
   popUpUIHandler: {fileID: 1413962070}
 --- !u!114 &1413962070
 MonoBehaviour:
@@ -735,7 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3d5b194bd8d6d4ab10c36d838cbd0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  uIDocument: {fileID: 764638472}
   blinkInterval: 0.5
 --- !u!114 &1413962072
 MonoBehaviour:
@@ -750,7 +686,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RightArmUIHandler
   terminalUIAsset: {fileID: 9197481963319205126, guid: bf007295bc0837e488464fa947492baa, type: 3}
-  uIDocument: {fileID: 0}
 --- !u!114 &1413962073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +699,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeftArmUIHandler
   terminalUIAsset: {fileID: 9197481963319205126, guid: bf007295bc0837e488464fa947492baa, type: 3}
-  uIDocument: {fileID: 0}
 --- !u!114 &1413962074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,7 +712,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegUIHandler
   terminalUIAsset: {fileID: 9197481963319205126, guid: f5bbb639e8ba43e4b85cf75107ed7f2a, type: 3}
-  uIDocument: {fileID: 0}
 --- !u!114 &1413962076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,7 +725,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeadUIHandler
   terminalUIAsset: {fileID: 9197481963319205126, guid: 47cb8debb345e15439f532dc58c454ab, type: 3}
-  uIDocument: {fileID: 0}
 --- !u!1 &1509070343
 GameObject:
   m_ObjectHideFlags: 0
