@@ -126,9 +126,10 @@ public class Player : MonoBehaviour
     private void ControlEyeCam()
     {
         // Look
+        // Adjust lookSensitivity by 0.5 as the eye camera is twice as large as the player camera.
         Vector2 lookValue = _lookAction.ReadValue<Vector2>();
-        xRotationExternalCam -= lookValue.y * lookSensitivity;
-        yRotationExternalCam -= lookValue.x * lookSensitivity * -1;
+        xRotationExternalCam -= lookValue.y * lookSensitivity * 0.5f;
+        yRotationExternalCam -= lookValue.x * lookSensitivity * -1 * 0.5f;
 
         yRotationExternalCam = Math.Clamp(yRotationExternalCam, -70f, 70f);
         xRotationExternalCam = Math.Clamp(xRotationExternalCam, -50f, 70f);
