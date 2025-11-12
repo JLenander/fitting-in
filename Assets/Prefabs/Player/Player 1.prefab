@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 7
-  lookSensitivity: 3.5
+  lookSensitivity: 4
   stepSfx: {fileID: -2862781930355676998}
   stepInterval: 0.5
   gravity: -0.02

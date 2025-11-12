@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BrainUIHandler : OverlayUIHandler
+public class BrainUIHandler : TerminalUIHandler
 {
     public static BrainUIHandler Instance;
     public PopUpUIHandler popUpUIHandler;
@@ -17,6 +17,8 @@ public class BrainUIHandler : OverlayUIHandler
     private Label taskDescription, terminalDesc, urgencyDesc;
     private string activeTitle;
     private List<string> visibleTitles = new List<string>();
+
+    public const int NumTasks = 5;
 
     public void Awake()
     {
@@ -234,7 +236,7 @@ public class BrainUIHandler : OverlayUIHandler
 
     void InitTaskVisualElements()
     {
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= NumTasks; i++)
         {
             Label task = root.Query<Label>("TaskTitle" + i).First();
             tasks.Add(task);
