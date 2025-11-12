@@ -5185,6 +5185,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 2013113685}
+    - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 430151590}
@@ -5236,6 +5240,10 @@ PrefabInstance:
       propertyPath: Destination
       value: 
       objectReference: {fileID: 1477183871}
+    - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 2013113684}
     - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
