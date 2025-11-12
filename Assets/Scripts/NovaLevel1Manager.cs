@@ -171,6 +171,7 @@ public class NovaLevel1Manager : MonoBehaviour
 
         yield return StartCoroutine(EatCake());
 
+
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
 

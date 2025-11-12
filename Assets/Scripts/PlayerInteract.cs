@@ -9,12 +9,12 @@ public class PlayerInteract : MonoBehaviour
     // [SerializeField] private GameObject hudPrefab;
     public float reach = 1f;
     private Camera fpsCam;
-    Interactable currentItem;
+    public Interactable currentItem;
 
     private InputAction _interactAction;
     private InputAction _returnAction;
 
-    private Interactable interacting;
+    public Interactable interacting;
     private int playerId;
     
     // Variables to enable interact and return to share an action

@@ -397,8 +397,6 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
             // increase overall intensity over time
             intensity = Mathf.Clamp01(time / 2f); // max intensity after 2 seconds
 
-            Debug.Log(intensity);
-
             burnOverlay.style.backgroundColor = new Color(burnColour.r, burnColour.g, burnColour.b, pulse * intensity);
 
             yield return null;
