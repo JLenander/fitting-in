@@ -4517,6 +4517,28 @@ MonoBehaviour:
   - {fileID: 1912099141}
   notificationFire: []
   firePause: 1
+--- !u!114 &601818731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8163664760754894619, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae98d8f9f96e9942a4cba3fd16bf15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandMovement
+--- !u!114 &601818732 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fae98d8f9f96e9942a4cba3fd16bf15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandMovement
 --- !u!65 &617736837 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 739928607601017466, guid: 771f9bf88273ec14788dbd89fc8792e7, type: 3}
@@ -12842,6 +12864,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 601818732}
+    - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 1138850547}
@@ -12905,6 +12931,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 601818731}
     - target: {fileID: 8906263634828512205, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: handRigTarget
       value: 

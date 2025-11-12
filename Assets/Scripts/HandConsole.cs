@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class HandConsole : Interactable
 {
     public GameObject handRigTarget;
+    public HandMovement target;
     public HeadConsole headConsole; // for grapple arm jamming
     private bool _canInteract = true;
     public bool left;
@@ -45,7 +46,7 @@ public class HandConsole : Interactable
 
         // if interactable
         player.GetComponent<Player>().TurnOff();
-        HandMovement target = handRigTarget.GetComponent<HandMovement>();
+        //HandMovement target = handRigTarget.GetComponent<HandMovement>();
         target.TurnOn(player);
         target.headConsole = headConsole;
         _canInteract = false;
@@ -59,7 +60,8 @@ public class HandConsole : Interactable
     public override void Return(GameObject player)
     {
         player.GetComponent<Player>().TurnOn();
-        handRigTarget.GetComponent<HandMovement>().TurnOff(player);
+        target.TurnOff(player);
+        //handRigTarget.GetComponent<HandMovement>().TurnOff(player);
         _canInteract = true; // current player leaves
 
         _currPlayer = null;
@@ -81,7 +83,13 @@ public class HandConsole : Interactable
         {
             PlayerInteract playerInteract = _currPlayer.GetComponent<PlayerInteract>();
             if (playerInteract != null)
+            {
+                if (target.currObj != null)
+                {
+                    target.StopInteractingWithObject(target.currObj);
+                }
                 playerInteract.LeaveCurrInteractable();
+            }
         }
 
         _canInteract = false;
