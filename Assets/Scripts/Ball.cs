@@ -77,10 +77,8 @@ public class Ball : InteractableObject
             // hit the hoop
             velocity = rg.linearVelocity.magnitude;
             velocity = Mathf.InverseLerp(minSpeed, maxSpeed, velocity);
-            Debug.Log(velocity);
             hoopSfx.SetParameter("ballspeed", velocity);
             hoopSfx.Play();
-            // TODO: add sound for hoop hit
 
         }
         else if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -88,7 +86,6 @@ public class Ball : InteractableObject
             // Velocity on contact
             velocity = rg.linearVelocity.magnitude;
             velocity = Mathf.InverseLerp(minSpeed, maxSpeed, velocity);
-            Debug.Log(velocity);
             groundSfx.SetParameter("ballspeed", velocity);
             groundSfx.Play();
             // TODO: add sound for ground hit
