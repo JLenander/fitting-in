@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Tray : MonoBehaviour
 {
@@ -10,18 +9,18 @@ public class Tray : MonoBehaviour
     public GameObject drinkPrefab;
     public Transform leftDrinkSpawn;
     public Transform rightDrinkSpawn;
-    private GameObject leftDrinkInstance;
-    private GameObject rightDrinkInstance;
+    private GameObject _leftDrinkInstance;
+    private GameObject _rightDrinkInstance;
     
     public Transform traySpawnPoint;
-    private Rigidbody rb;
-    private bool isTwoHanded;
-    private Transform ogParent;
+    private Rigidbody _rb;
+    private bool _isTwoHanded;
+    private Transform _ogParent;
 
     public void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        ogParent = transform.parent;
+        _rb = GetComponent<Rigidbody>();
+        _ogParent = transform.parent;
         // disabling outline because outline goes through cups and looks kinda weird
         var outline = GetComponent<Outline>();
         if (outline) outline.enabled = false;
@@ -47,8 +46,8 @@ public class Tray : MonoBehaviour
 
     private void StartTwoHandControl()
     {
-        isTwoHanded = true;
-        rb.isKinematic = true;
+        _isTwoHanded = true;
+        _rb.isKinematic = true;
         // Unfreeze both hands so they can move freely while carrying
         leftAttach.currentHand.FreezeWristPosition(false);
         rightAttach.currentHand.FreezeWristPosition(false);
@@ -59,10 +58,10 @@ public class Tray : MonoBehaviour
 
     private void StopTwoHandControl()
     {
-        isTwoHanded = false;
+        _isTwoHanded = false;
         StopAllCoroutines();
-        rb.isKinematic = false;
-        transform.parent = ogParent;
+        _rb.isKinematic = false;
+        transform.parent = _ogParent;
         leftAttach.LetGoCurrentHand();
         rightAttach.LetGoCurrentHand();
         Debug.Log("Tray released");
@@ -70,7 +69,7 @@ public class Tray : MonoBehaviour
 
     IEnumerator FollowHands()
     {
-        while (isTwoHanded)
+        while (_isTwoHanded)
         {
             Vector3 leftPos = leftAttach.currentHand.transform.position;
             Vector3 rightPos = rightAttach.currentHand.transform.position;
@@ -103,32 +102,23 @@ public class Tray : MonoBehaviour
 
             transform.position = newPos;
             
-            // Note: can't freeze xy because then moving body doesnt move tray
+            // Note: can't freeze xy because then moving body doesn't move tray
 
             yield return null;
         }
     }
     
-    private void SpawnCups()
-    {
-        // Destroy any old cups
-        if (leftDrinkInstance) Destroy(leftDrinkInstance);
-        if (rightDrinkInstance) Destroy(rightDrinkInstance);
-        
-        StartCoroutine(SpawnCupsSmooth());
-    }
-    
     private IEnumerator SpawnCupsSmooth()
     {
         // Temporarily freeze tray
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
         
         // Spawn new cups
-        leftDrinkInstance = Instantiate(drinkPrefab, leftDrinkSpawn.position, Quaternion.identity, transform);
-        rightDrinkInstance = Instantiate(drinkPrefab, rightDrinkSpawn.position, Quaternion.identity, transform);
+        _leftDrinkInstance = Instantiate(drinkPrefab, leftDrinkSpawn.position, Quaternion.identity, transform);
+        _rightDrinkInstance = Instantiate(drinkPrefab, rightDrinkSpawn.position, Quaternion.identity, transform);
 
-        Rigidbody leftRb = leftDrinkInstance.GetComponent<Rigidbody>();
-        Rigidbody rightRb = rightDrinkInstance.GetComponent<Rigidbody>();
+        Rigidbody leftRb = _leftDrinkInstance.GetComponent<Rigidbody>();
+        Rigidbody rightRb = _rightDrinkInstance.GetComponent<Rigidbody>();
 
         leftRb.isKinematic = true;
         rightRb.isKinematic = true;
@@ -137,8 +127,8 @@ public class Tray : MonoBehaviour
         yield return new WaitForFixedUpdate();
         yield return new WaitForSeconds(0.1f);
 
-        leftDrinkInstance.GetComponent<Drink>().Init(this);
-        rightDrinkInstance.GetComponent<Drink>().Init(this);
+        _leftDrinkInstance.GetComponent<Drink>().Init(this);
+        _rightDrinkInstance.GetComponent<Drink>().Init(this);
 
         // Wait one physics tick
         yield return new WaitForFixedUpdate();
@@ -146,15 +136,14 @@ public class Tray : MonoBehaviour
         // Unfreeze everything
         leftRb.isKinematic = false;
         rightRb.isKinematic = false;
-        rb.isKinematic = false;
+        _rb.isKinematic = false;
     }
 
     public void OnCupFell()
     {
         Debug.Log("A cup fell! Resetting tray task...");
         
-        // TODO: enable reset when cup falling not too hard
-        // StartCoroutine(ResetRoutine());
+        StartCoroutine(ResetRoutine());
     }
 
     private IEnumerator ResetRoutine()
@@ -163,18 +152,22 @@ public class Tray : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // Reset tray position
-        transform.parent = ogParent;
+        transform.parent = _ogParent;
         transform.position = traySpawnPoint.position;
         transform.rotation = traySpawnPoint.rotation;
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.isKinematic = false;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        _rb.isKinematic = false;
 
         // Respawn cups
-        SpawnCups();
+        // Destroy any old cups
+        if (_leftDrinkInstance) Destroy(_leftDrinkInstance);
+        if (_rightDrinkInstance) Destroy(_rightDrinkInstance);
+        
+        StartCoroutine(SpawnCupsSmooth());
 
         // Detach hands if still attached
-        if (isTwoHanded)
+        if (_isTwoHanded)
         {
             StopTwoHandControl();
         }
@@ -184,7 +177,7 @@ public class Tray : MonoBehaviour
     
     public bool IsTwoHanded()
     {
-        return isTwoHanded;
+        return _isTwoHanded;
     }
 
     public void TrySnapToTable(Transform snapPoint)
@@ -192,7 +185,7 @@ public class Tray : MonoBehaviour
         StopTwoHandControl();
 
         // Snap tray safely
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
         transform.position = snapPoint.position;
         transform.rotation = snapPoint.rotation;
 
