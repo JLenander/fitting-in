@@ -126,12 +126,16 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
             uiDoc.rootVisualElement.style.display = DisplayStyle.Flex;
 
             // Change player box border and label colors based on player colors
-            var playerManager = FindAnyObjectByType<GlobalPlayerManager>();
-            if (playerManager != null)
+            if (GlobalPlayerManager.Instance != null)
             {
                 for (int i = 0; i < NumPlayers; i++)
                 {
-                    var playerColor = playerManager.Players[i].PlayerColor;
+                    if (!GlobalPlayerManager.Instance.Players[i].Valid)
+                    {
+                        continue;
+                    }
+                    
+                    var playerColor = GlobalPlayerManager.Instance.Players[i].PlayerColor;
                     _playerBoxBorders[i].style.borderTopColor = playerColor;
                     _playerBoxBorders[i].style.borderBottomColor = playerColor;
                     _playerBoxBorders[i].style.borderLeftColor = playerColor;
