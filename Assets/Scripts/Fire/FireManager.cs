@@ -9,7 +9,8 @@ public class FireManager : MonoBehaviour
     public FireArea leftArmFireArea;
     public FireArea rightArmFireArea;
     public FireArea beginFireArea;
-    public FireArea spawnFireArea;
+    public FireArea legFireArea;
+    public FireArea lowerFireArea;
     public BlinkConsole blinkConsole;
     public HandConsole leftArmConsole;
     public HandConsole rightArmConsole;
@@ -26,7 +27,8 @@ public class FireManager : MonoBehaviour
             { "eye", eyeFireArea },
             { "leftArm", leftArmFireArea },
             { "rightArm", rightArmFireArea },
-            { "spawn", spawnFireArea },
+            { "leg", legFireArea },
+            { "lower", lowerFireArea},
             { "begin", beginFireArea }
         };
 
@@ -75,11 +77,20 @@ public class FireManager : MonoBehaviour
         {
             rightArmConsole.EnableInteract();
         }
-        else if (name == "spawn")
+        else if (name == "leg")
         {
             // TODO: reenable legs
 
         }
+        else if (name == "lower")
+        {
+            leftArmConsole.EnableInteract();
+            rightArmConsole.EnableInteract();
+            Level1TaskManager.CompleteTaskPutOutFires();
+            NovaLevel1Manager.Instance.firesOut = true;
+            Debug.Log("fires out");
+        }
+
         else if (name == "begin")
         {
             TutorialManager.Instance.beginFire = true;

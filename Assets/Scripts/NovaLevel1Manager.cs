@@ -30,6 +30,7 @@ public class NovaLevel1Manager : MonoBehaviour
     private float timer = 0f;
     private int cakeIndex = 0;
     public bool ate = false;
+    public bool firesOut = false;
 
     public Coroutine levelCoroutine;
 
@@ -158,6 +159,8 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
+        yield return new WaitUntil(() => firesOut);
+
         // eat third slice
         yield return new WaitForSeconds(30f);
 
@@ -167,6 +170,7 @@ public class NovaLevel1Manager : MonoBehaviour
         yield return new WaitForSeconds(30f);
 
         yield return StartCoroutine(EatCake());
+
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;

@@ -28,8 +28,6 @@ public class CoffeePot : InteractableObject
     private FillCup cup;
     private LayerMask layerMask;
 
-    private bool first = true;
-
     void Awake()
     {
         layerMask = LayerMask.GetMask("Cup");
@@ -157,30 +155,5 @@ public class CoffeePot : InteractableObject
         target.handAnimator.SetTrigger("Neutral"); // sets the opposite hand back to neutral
         grappleCollider.enabled = true;
         DisableOutline();
-    }
-
-    IEnumerator BurnArm(bool left)
-    {
-        yield return new WaitForSeconds(5);
-
-        if (left)
-        {
-            // start fire
-            FireManager.Instance.StartFireArea("leftArm");
-
-            // disable the relevant arm
-            leftConsole.DisableInteract();
-        }
-        else
-        {
-            // start fire
-            FireManager.Instance.StartFireArea("rightArm");
-
-            // disable the relevant arm
-            rightConsole.DisableInteract();
-        }
-
-        // output dialogue
-        GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
     }
 }

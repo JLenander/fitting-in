@@ -56,10 +56,7 @@ public class FillCup : MonoBehaviour
 
     public void AddCoffee()
     {
-        if (full)
-        {
-            return;
-        }
+        if (full) return;
 
         EnableOutline();
 
@@ -69,6 +66,7 @@ public class FillCup : MonoBehaviour
             full = true;
             ScoreKeeper.Instance.IncrementScoring("Filled Nova's coffee");
             Level1TaskManager.CompleteTaskPourCoffee();
+            StartCoroutine(BurnArm());
         }
 
         float fillProgress = fillCounter / secondsTillFull;
@@ -91,21 +89,15 @@ public class FillCup : MonoBehaviour
 
     IEnumerator BurnArm()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
 
+        //Level1TaskManager.Instance
         // start fire
-        FireManager.Instance.StartFireArea("leftArm");
-
-        // disable the relevant arm
+        FireManager.Instance.StartFireArea("lower");
         leftConsole.DisableInteract();
-
-        // start fire
-        FireManager.Instance.StartFireArea("rightArm");
-
-        // disable the relevant arm
         rightConsole.DisableInteract();
-
-        FireManager.Instance.StartFireArea("spawn");
+        Level1TaskManager.StartTaskPutOutFires();
+        Debug.Log("fire start");
 
         // output dialogue
         GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
