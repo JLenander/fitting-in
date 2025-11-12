@@ -30,7 +30,6 @@ public class NovaLevel1Manager : MonoBehaviour
     private float timer = 0f;
     private int cakeIndex = 0;
     public bool ate = false;
-    public bool firesOut = false;
 
     public Coroutine levelCoroutine;
 
@@ -161,8 +160,6 @@ public class NovaLevel1Manager : MonoBehaviour
         // prompt to refill the drink
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-
-        yield return new WaitUntil(() => firesOut);
 
         // eat third slice
         yield return new WaitForSeconds(30f);

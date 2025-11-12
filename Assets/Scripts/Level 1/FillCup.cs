@@ -65,8 +65,6 @@ public class FillCup : MonoBehaviour
         {
             full = true;
             ScoreKeeper.Instance.IncrementScoring("Filled Nova's coffee");
-            Level1TaskManager.CompleteTaskPourCoffee();
-            StartCoroutine(BurnArm());
         }
 
         float fillProgress = fillCounter / secondsTillFull;
@@ -85,23 +83,5 @@ public class FillCup : MonoBehaviour
     public void EnableOutline()
     {
         outline.enabled = true;
-    }
-
-    IEnumerator BurnArm()
-    {
-        yield return new WaitForSeconds(1);
-
-        //Level1TaskManager.Instance
-        // start fire
-        FireManager.Instance.StartFireArea("lower");
-        leftConsole.DisableInteract();
-        rightConsole.DisableInteract();
-        Level1TaskManager.StartTaskPutOutFires();
-        Debug.Log("fire start");
-
-        // output dialogue
-        GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
-
-
     }
 }

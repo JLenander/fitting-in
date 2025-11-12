@@ -27,6 +27,7 @@ public class CoffeePot : InteractableObject
     //[SerializeField] private float volume; // TODO: limit the pot
     private FillCup cup;
     private LayerMask layerMask;
+    private bool first = true;
 
     void Awake()
     {
@@ -115,14 +116,6 @@ public class CoffeePot : InteractableObject
     {
         if (canInteract && canPickup)
         {
-            // first time pickup, start a fire
-            // if (first)
-            // {
-            //     first = false;
-
-            //     StartCoroutine(BurnArm(target.left));
-            // }
-
             // move to hand
             DisableOutline();
             transform.parent = obj;
@@ -142,6 +135,8 @@ public class CoffeePot : InteractableObject
             target.handAnimator.SetTrigger("Pot"); // sets current hand to pot anim
 
             grappleCollider.enabled = false;
+
+            if (first) StartCoroutine(BurnArm());
         }
     }
 
@@ -155,5 +150,21 @@ public class CoffeePot : InteractableObject
         target.handAnimator.SetTrigger("Neutral"); // sets the opposite hand back to neutral
         grappleCollider.enabled = true;
         DisableOutline();
+    }
+
+    IEnumerator BurnArm()
+    {
+        yield return new WaitForSeconds(5);
+
+        // start fire
+        FireManager.Instance.StartFireArea("lower");
+        leftConsole.DisableInteract();
+        rightConsole.DisableInteract();
+        Level1TaskManager.StartTaskPutOutFires();
+        Debug.Log("fire start");
+
+        // output dialogue
+        GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
+        first = false;
     }
 }

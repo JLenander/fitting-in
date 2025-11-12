@@ -87,7 +87,6 @@ public class FireManager : MonoBehaviour
             leftArmConsole.EnableInteract();
             rightArmConsole.EnableInteract();
             Level1TaskManager.CompleteTaskPutOutFires();
-            NovaLevel1Manager.Instance.firesOut = true;
             Debug.Log("fires out");
         }
 
