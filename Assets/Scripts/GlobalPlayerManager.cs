@@ -15,7 +15,7 @@ public class GlobalPlayerManager : MonoBehaviour
 
     private int _playerLimit;
     private PlayerData[] _players;
-    private GlobalPlayerUIManager uiManager; // use to aggregate player UI
+    private GlobalPlayerUIManager _uiManager; // use to aggregate player UI
     // The UI handler for the character select screen
     [SerializeField] private GameObject characterSelectScreen;
     private ICharacterSelectScreen _characterSelectScreen;
@@ -23,7 +23,7 @@ public class GlobalPlayerManager : MonoBehaviour
 
     public StudioEventEmitter pauseSS;
 
-    // To replace by colors player pick - to ference for conflict or pass to PlayerData when all ready
+    // To replace by colors player pick - to reference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
     {
         Color.clear,      // Player 1
@@ -51,7 +51,7 @@ public class GlobalPlayerManager : MonoBehaviour
         _characterSelectScreen = characterSelectScreen.GetComponent<ICharacterSelectScreen>();
         _pauseMenuUIHandler = FindAnyObjectByType<PauseMenuUIHandler>();
 
-        // initalize player data
+        // initialize player data
         _playerLimit = PlayerInputManager.instance.maxPlayerCount;
         _players = new PlayerData[_playerLimit];
         for (int i = 0; i < _playerLimit; i++)
@@ -75,6 +75,12 @@ public class GlobalPlayerManager : MonoBehaviour
     {
         if (SceneConstants.IsCharacterSelectScene())
         {
+            // Ignore join from non-Player
+            if (playerInput.gameObject.GetComponent<Player>() == null)
+            {
+                return;
+            }
+            
             var idx = playerInput.playerIndex;
             Debug.Log("Player " + idx + " Joined - Character Select Scene");
             _players[idx].Input = playerInput;
@@ -85,7 +91,7 @@ public class GlobalPlayerManager : MonoBehaviour
             _players[idx].Valid = true;
 
             // Add player to the character selection screen so they can start selecting their character.
-            _characterSelectScreen.AddPlayer(idx);
+            _characterSelectScreen.AddPlayer(idx, playerInput);
 
             // register callbacks for the character select screen color change actions
             _players[idx].LeftActionDelegate = ctx => _characterSelectScreen.ChangeColor(idx, -1);
@@ -128,7 +134,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 {
                     // All players are ready and someone pressed the submit action so we load level select
                     Debug.Log("All players ready - starting");
-
+                    
                     // Assign player colors from selector to player data
                     for (int i = 0; i < _playerLimit; i++)
                     {
@@ -173,6 +179,8 @@ public class GlobalPlayerManager : MonoBehaviour
                         }
                     }
 
+                    _characterSelectScreen.DestroyPlorps();
+                    
                     // pass these players to UI manager
                     GlobalPlayerUIManager.Instance.PassPlayers(_players);
 
@@ -399,7 +407,7 @@ public interface ICharacterSelectScreen
     /// Add a player to the character selection screen to allow them to select their character.
     /// </summary>
     /// <param name="playerIndex"></param>
-    public void AddPlayer(int playerIndex);
+    public void AddPlayer(int playerIndex, PlayerInput playerInput);
 
     /// <summary>
     /// Remove a player by index from the character selection screen.
@@ -422,10 +430,12 @@ public interface ICharacterSelectScreen
     /// <summary>
     /// Change the color selection for a player.
     /// </summary>
-    /// <param name="playerIndex">The index of the player changing their color</param
+    /// <param name="playerIndex">The index of the player changing their color</param>
     public void ChangeColor(int playerIndex, int direction);
 
     public void ShowColorConflictWarning(int playerIndex, int otherIndex);
 
     public void HideColorConflictWarning(int playerIndex);
+    
+    public void DestroyPlorps();
 }
