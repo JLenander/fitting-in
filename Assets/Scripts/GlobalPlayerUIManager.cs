@@ -45,14 +45,14 @@ public class GlobalPlayerUIManager : MonoBehaviour
         {
             Instance = this;
         }
-        
+
         DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
     {
         _splitscreenUIHandler = FindAnyObjectByType<SplitscreenUIHandler>();
-        
+
         // Register scene change handler after loading the UI to start with 
         SceneManager.activeSceneChanged += UpdateUIForSceneChange;
         InitializeUI();
@@ -187,6 +187,11 @@ public class GlobalPlayerUIManager : MonoBehaviour
         dialogueDisplay.StartDialogue(content);
     }
 
+    public void StopText()
+    {
+        dialogueDisplay.ClearDialogue();
+    }
+
     IEnumerator FadeRoutine(float time)
     {
         if (cameraDim == null)
@@ -228,7 +233,7 @@ public class GlobalPlayerUIManager : MonoBehaviour
                 playerCameraLocalPos[player.Index] = player.Input.camera.transform.localPosition;
             }
         }
-        
+
         if (_walkingShakeCoroutine == null)
             _walkingShakeCoroutine = StartCoroutine(WalkingShakeRoutine());
     }

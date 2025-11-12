@@ -11,6 +11,8 @@ public class FireArea : MonoBehaviour
     [SerializeField] private string areaName;
     [SerializeField] private List<Fire> fires = new List<Fire>();
     public List<GameObject> notificationFire = new List<GameObject>();
+
+    public float firePause = 2f;
     private bool active;
     private int fireCount;
     private Collider detectCollider;
@@ -126,7 +128,7 @@ public class FireArea : MonoBehaviour
             fire.StartFire();
             fireCount++;
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(firePause);
         }
     }
 
