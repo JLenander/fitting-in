@@ -16,6 +16,11 @@ public class FillCup : MonoBehaviour
 
     public Outline outline;
 
+    [SerializeField] private HandConsole leftConsole;
+    [SerializeField] private HandConsole rightConsole;
+
+    [SerializeField] private DialogueScriptableObj burnDialogue;
+
     void Start()
     {
         fillCounter = 0.0f;
@@ -60,7 +65,6 @@ public class FillCup : MonoBehaviour
         {
             full = true;
             ScoreKeeper.Instance.IncrementScoring("Filled Nova's coffee");
-            Level1TaskManager.CompleteTaskPourCoffee();
         }
 
         float fillProgress = fillCounter / secondsTillFull;

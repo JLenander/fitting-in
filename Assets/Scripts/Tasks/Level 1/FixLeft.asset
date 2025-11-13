@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FixLeft
   m_EditorClassIdentifier: Assembly-CSharp::TaskInfoSO
   id: FixLeft
-  title: Left Grapple
-  description: Unlock the door and go into the left arm to fix it!
+  title: Left Arm Fires
+  description: Put out the fires in the left arm!
   location: Left Arm Interior
   urgency: High
   targetProgress: 1

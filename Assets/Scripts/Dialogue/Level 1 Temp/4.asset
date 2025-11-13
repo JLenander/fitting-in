@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
   - Oh!!!
-  - You want to keep it?
-  - Sure!
-  - Still got plenty more, but let's eat first
+  - You want to keep it? Sure!
+  - It's great to finally meet someone just interested!
+  - We can chat more while we eat!
   spirteA: {fileID: 21300000, guid: c879e5dc88cd6b54883e90583eb8da78, type: 3}
   spirteB: {fileID: 21300000, guid: d8665aaa2da204c4090b2027ed9ab093, type: 3}

@@ -117,6 +117,9 @@ public class NovaLevel1Manager : MonoBehaviour
         yield return new WaitUntil(() => ate);
 
         // evidence falls out
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+        yield return new WaitForSeconds(3f);
         talking = false;
         novaAnimator.SetTrigger("Evidence");
         yield return new WaitForSeconds(1f);
@@ -167,6 +170,7 @@ public class NovaLevel1Manager : MonoBehaviour
         yield return new WaitForSeconds(30f);
 
         yield return StartCoroutine(EatCake());
+
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;

@@ -10,6 +10,7 @@ public class FireManager : MonoBehaviour
     public FireArea rightArmFireArea;
     public FireArea beginFireArea;
     public FireArea legFireArea;
+    public FireArea lowerFireArea;
     public BlinkConsole blinkConsole;
     public HandConsole leftArmConsole;
     public HandConsole rightArmConsole;
@@ -27,6 +28,7 @@ public class FireManager : MonoBehaviour
             { "leftArm", leftArmFireArea },
             { "rightArm", rightArmFireArea },
             { "leg", legFireArea },
+            { "lower", lowerFireArea},
             { "begin", beginFireArea }
         };
 
@@ -80,6 +82,14 @@ public class FireManager : MonoBehaviour
             // TODO: reenable legs
 
         }
+        else if (name == "lower")
+        {
+            leftArmConsole.EnableInteract();
+            rightArmConsole.EnableInteract();
+            Level1TaskManager.CompleteTaskPutOutFires();
+            Debug.Log("fires out");
+        }
+
         else if (name == "begin")
         {
             TutorialManager.Instance.beginFire = true;

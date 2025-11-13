@@ -18,7 +18,9 @@ public class FoodBite : InteractableObject, IPooledObject
     public AudioSource audioSource;
     
     // The offset to place the object in on pickup for the hand
-    public Vector3 handOffset = new Vector3(-0.9f, 3.5f, -0.92f);
+    public Vector3 handOffset = new Vector3(-0.66f, 3.7f, -1.58f);
+
+    [SerializeField] private ParticleSystem pastaSauce;
 
     public override void Start()
     {
@@ -26,6 +28,7 @@ public class FoodBite : InteractableObject, IPooledObject
         popUp.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody>();
         EnableOutline();
+        pastaSauce.Play();
     }
 
     public void OnSpawn()
@@ -64,6 +67,10 @@ public class FoodBite : InteractableObject, IPooledObject
         transform.parent = ogParent;
         canPickup = true;
         rb.isKinematic = false;
+        
+        // Move spaghetti down slightly to avoid it bouncinng on your hand
+        transform.position += Vector3.down * 1.5f;
+        
         target.handAnimator.SetTrigger("Neutral"); // sets the current hand back to neutral
         if (bag != null) bag.DisableOutline();
         DisableOutline();
@@ -92,9 +99,13 @@ public class FoodBite : InteractableObject, IPooledObject
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
 
-            transform.position = collision.contacts[0].point + Vector3.up * 0.01f;
+            // transform.position = collision.contacts[0].point + Vector3.up * 0.01f;
 
-            canInteract = false;
+            pastaSauce.Stop();
+
+            //Animator novaAnimator = NovaLevel1Manager.Instance.novaAnimator;
+            // play sus animation
+            // play sus dialogue
         }
         else if (collision.gameObject.CompareTag("Bag"))
         {

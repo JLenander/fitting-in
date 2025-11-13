@@ -44,4 +44,7 @@ public class Level1TaskManager : TaskManager
     
     public static void StartTaskTray() { Instance.StartTask("Tray"); }
     public static void CompleteTaskTray() { Instance.CompleteTask("Tray"); }
+
+    public static void StartTaskPutOutFires() { Instance.StartTask("PutOutFires"); }
+    public static void CompleteTaskPutOutFires() { Instance.CompleteTask("PutOutFires"); }
 }

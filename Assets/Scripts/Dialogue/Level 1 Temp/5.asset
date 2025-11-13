@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - This is bad
-  - If she has more of these photos
-  - We have to get rid of as much as we can
+  - Looks like we dodged a bullet there
+  - Let's hope she doesn't have more of those
+  - Otherwise our days on Earth will be numbered
   spirteA: {fileID: 21300000, guid: 7cf1f3e381de4504d8c4445353b39e1d, type: 3}
   spirteB: {fileID: 21300000, guid: 14195ce6032b9da4ab6a0eba52e7c89b, type: 3}
