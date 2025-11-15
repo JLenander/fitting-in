@@ -4,8 +4,12 @@
         <ui:VisualElement name="ButtonInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; width: 30%; padding-left: 100px;">
             <ui:VisualElement name="TopInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; margin-bottom: 30px;">
                 <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-bottom: 60px; margin-left: 20px;">
-                    <ui:VisualElement name="JoinText" class="button-icon" style="width: 460px; height: 139.5px; background-image: resource(&apos;UI/CharSelect/Text/join_ready&apos;); position: relative;" />
-                    <ui:VisualElement name="JoinButtonIcon" class="button-icon" style="width: 122px; height: 122px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/PS4KEYS_BnW/Cross&apos;); -unity-background-image-tint-color: rgb(151, 222, 136); position: absolute; top: 9px; left: 12px;" />
+                    <ui:VisualElement name="Circle" class="button-icon" style="width: 130px; height: 130px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/CharSelect/Circle&apos;); margin-right:20px;" />
+                    <ui:VisualElement name="JoinButtonIcon" class="button-icon" style="width: 122px; height: 122px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/PS4KEYS_BnW/Cross&apos;); -unity-background-image-tint-color: rgb(151, 222, 136); position: absolute; top: 19px; left: 3px;" />
+                    <ui:VisualElement name="SlashIcon" class="button-icon" style="width: 53px; height: 160px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/CharSelect/Slash&apos;); margin-right:20px;" />
+                    <ui:VisualElement name="Circle" class="button-icon" style="width: 130px; height: 130px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/CharSelect/Circle&apos;); margin-right:20px;" />
+                    <ui:VisualElement name="JoinButtonIconxbox" class="button-icon" style="width: 114px; height: 114px; background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;UI/KeysPNG/Xbox_keys/A&apos;); -unity-background-image-tint-color: rgb(151, 222, 136); position: absolute; top: 23px; left: 231px;" />
+                    <ui:VisualElement name="JoinText" class="button-icon" style="width: 384.6px; height: 142px; background-image: resource(&apos;UI/CharSelect/Join&apos;); position: relative;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-left: 20px;">
                     <ui:VisualElement name="LeaveText" class="button-icon" style="width: 551px; height: 139.5px; background-image: resource(&apos;UI/CharSelect/Text/Leave_unready&apos;); position: relative;" />
