@@ -57,7 +57,6 @@ public class NovaLevel1Manager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             biteSfx.Play();
             novaRightHandCake.SetActive(false);
-            yield return new WaitForSeconds(1f);
             talking = true;
         }
     }
@@ -80,42 +79,34 @@ public class NovaLevel1Manager : MonoBehaviour
 
     public void StealFood()
     {
-        GlobalPlayerUIManager.Instance.LoadText(stealFoodDialogue);
-        // StartCoroutine(StealFoodRoutine());
+        // GlobalPlayerUIManager.Instance.LoadText(stealFoodDialogue);
+        StartCoroutine(StealFoodRoutine());
     }
 
     IEnumerator StealFoodRoutine()
     {
-        bool prevState = talking;
-        talking = false;
-
         // play anim
         novaAnimator.SetTrigger("Sus");
         // comment on food drop
+        GlobalPlayerUIManager.Instance.StopText();
         GlobalPlayerUIManager.Instance.LoadText(stealFoodDialogue);
         yield return new WaitForSeconds(2.5f);
-
-        talking = prevState;
     }
 
     public void DropFood()
     {
-        GlobalPlayerUIManager.Instance.LoadText(dropFoodDialogue);
-        // StartCoroutine(DropFoodRoutine());
+        // GlobalPlayerUIManager.Instance.LoadText(dropFoodDialogue);
+        StartCoroutine(DropFoodRoutine());
     }
 
     IEnumerator DropFoodRoutine()
     {
-        bool prevState = talking;
-        talking = false;
-
         // play anim
         novaAnimator.SetTrigger("Sus");
         // comment on food drop
+        GlobalPlayerUIManager.Instance.StopText();
         GlobalPlayerUIManager.Instance.LoadText(dropFoodDialogue);
         yield return new WaitForSeconds(2.5f);
-
-        talking = prevState;
     }
 
     IEnumerator WaitForTaskManager()
@@ -177,36 +168,10 @@ public class NovaLevel1Manager : MonoBehaviour
         Level1TaskManager.StartTaskEatFood();
         yield return new WaitUntil(() => ate);
 
-        // evidence falls out
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        yield return new WaitForSeconds(3f);
-        talking = false;
-        novaAnimator.SetTrigger("Evidence");
-        yield return new WaitForSeconds(1f);
-        evidenceSpawner.SpawnTempSpecial();
-
-        // blurb about having to get the evidence
-        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
-        index++;
-
-        Level1TaskManager.StartTaskPolaroid();
-
-        // wait until evidence is grabbed
-        yield return new WaitUntil(() => grabbed);
-
-        Level1TaskManager.CompleteTaskPolaroid();
-        talking = true;
-
-        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
-        index++;
-        yield return new WaitForSeconds(15f);
 
         yield return StartCoroutine(EatCake());
-
-        // talk about having to do it before she finishes
-        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
-        index++;
 
         float timeout = 35f;
         float timer = 0f;
@@ -246,9 +211,37 @@ public class NovaLevel1Manager : MonoBehaviour
         index++;
 
         // drink coffee
-        StartCoroutine(DrinkCoffee());
+        yield return StartCoroutine(DrinkCoffee());
 
-        yield return new WaitForSeconds(15f);
+        // something to show you
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+        yield return new WaitForSeconds(3f);
+        talking = false;
+        novaAnimator.SetTrigger("Evidence");
+        yield return new WaitForSeconds(1f);
+        evidenceSpawner.SpawnTempSpecial();
+
+        // blurb about having to get the evidence
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+
+        Level1TaskManager.StartTaskPolaroid();
+
+        // wait until evidence is grabbed
+        yield return new WaitUntil(() => grabbed);
+
+        Level1TaskManager.CompleteTaskPolaroid();
+        talking = true;
+
+        GlobalPlayerUIManager.Instance.StopText();
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+        yield return new WaitForSeconds(10);
+
+        // damn i guess we gotta do it again
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
 
         // eat last slice
         yield return StartCoroutine(EatCake());

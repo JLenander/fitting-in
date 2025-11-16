@@ -17,6 +17,8 @@ public class NovaMouth : MonoBehaviour
     {
         counter = 0;
         crumbs.SetActive(false);
+        spagParticle.Stop();
+        miscParticle.Stop();
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -10072,6 +10072,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1568381343}
     - target: {fileID: 411164773002391776, guid: 771f9bf88273ec14788dbd89fc8792e7, type: 3}
+      propertyPath: fireDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: ac60f3289a3464348b2539371d840631, type: 2}
+    - target: {fileID: 411164773002391776, guid: 771f9bf88273ec14788dbd89fc8792e7, type: 3}
       propertyPath: rightConsole
       value: 
       objectReference: {fileID: 1568381342}
@@ -17077,12 +17081,13 @@ MonoBehaviour:
   dialogues:
   - {fileID: 11400000, guid: e6e5f2984d544ef40a6866762e3f65bb, type: 2}
   - {fileID: 11400000, guid: 178f51564a424ac4da6dca61a858ef8f, type: 2}
+  - {fileID: 11400000, guid: 2543fa2e70ba55b428dc742b9453d8db, type: 2}
+  - {fileID: 11400000, guid: 9cebc863979599a4abe2ed801ae13d5e, type: 2}
+  - {fileID: 11400000, guid: cfcdb3977a888574f857e44dee4dab59, type: 2}
   - {fileID: 11400000, guid: 3fde3cf596c9e8b47bf76811b3ea7901, type: 2}
   - {fileID: 11400000, guid: 2dd3490947c52a84bab91b11a4b6d1fa, type: 2}
   - {fileID: 11400000, guid: 796f4859a72758c42b2bee69f3c6ed0f, type: 2}
   - {fileID: 11400000, guid: acb0ca1757b245a468de73daa227d09d, type: 2}
-  - {fileID: 11400000, guid: 9cebc863979599a4abe2ed801ae13d5e, type: 2}
-  - {fileID: 11400000, guid: cfcdb3977a888574f857e44dee4dab59, type: 2}
   - {fileID: 11400000, guid: 56dd58cf88f8b634dab434a1760b4b23, type: 2}
   - {fileID: 11400000, guid: ce956362fb15603499444053938855db, type: 2}
   - {fileID: 11400000, guid: ce249f0b373b71b489fa2ea0cff70800, type: 2}
