@@ -20,12 +20,14 @@ public class NovaLevel1Manager : MonoBehaviour
 
     public bool grabbed = false;
     public bool bagDiscarded = false;
+    public bool poured = false;
 
     public Transform bag;
     public GameObject garbageCan;
     public GameObject tableCup;
     public GameObject handCup;
     public bool talking = false;
+    public Food food;
     private float switchInterval = 10f;
     private float timer = 0f;
     public bool ate = false;
@@ -84,9 +86,6 @@ public class NovaLevel1Manager : MonoBehaviour
         // make nova hand cup disappear
         handCup.SetActive(false);
         talking = true;
-
-        // start the drink task
-        Level1TaskManager.StartTaskPourCoffee();
     }
 
     public void PlayLevelRoutine()
@@ -144,11 +143,15 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
-        yield return new WaitForSeconds(35f);
+        float timeout = 35f;
+        float timer = 0f;
 
-        //Level1TaskManager.StartTaskPickupEvidence();
-
-        //yield return new WaitForSeconds(20f);
+        // progress when either food is all done or timer runs out
+        while (food.canPickup && timer < timeout)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
 
         // after a while she eats another slice
         yield return StartCoroutine(EatCake());
@@ -157,6 +160,9 @@ public class NovaLevel1Manager : MonoBehaviour
 
         // drink coffee
         StartCoroutine(DrinkCoffee());
+
+        // start the drink task
+        Level1TaskManager.StartTaskPourCoffee();
 
         // prompt to refill the drink
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
@@ -167,11 +173,20 @@ public class NovaLevel1Manager : MonoBehaviour
 
         yield return StartCoroutine(EatCake());
 
+        // dont eat and end until coffee pour is attempted
+        yield return new WaitUntil(() => poured);
+
+        // thank them for filling it up
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
+        index++;
+
+        // drink coffee
+        StartCoroutine(DrinkCoffee());
+
+        yield return new WaitForSeconds(15f);
+
         // eat last slice
-        yield return new WaitForSeconds(30f);
-
         yield return StartCoroutine(EatCake());
-
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;

@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class FillCup : MonoBehaviour
 {
     [SerializeField] private Transform liquid;
-    [FormerlySerializedAs("fullCounter")] [SerializeField] private float secondsTillFull;
+    [FormerlySerializedAs("fullCounter")][SerializeField] private float secondsTillFull;
     [SerializeField] private float maxFillHeight = 1f;
     [SerializeField] private float initialHeight = 0.1f;
 
@@ -65,6 +65,9 @@ public class FillCup : MonoBehaviour
         {
             full = true;
             ScoreKeeper.Instance.IncrementScoring("Filled Nova's coffee");
+
+            // tell level manager coffee is filled
+            NovaLevel1Manager.Instance.poured = true;
         }
 
         float fillProgress = fillCounter / secondsTillFull;

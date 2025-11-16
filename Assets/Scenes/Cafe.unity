@@ -10622,61 +10622,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8205758751929356408, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1292706324}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8750977823623774169, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1151882675}
-    - targetCorrespondingSourceObject: {fileID: 4797930010746266580, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1151882676}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
---- !u!1 &1151882672 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8750977823623774169, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
-  m_PrefabInstance: {fileID: 1151882671}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1151882673 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8205758751929356408, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
-  m_PrefabInstance: {fileID: 1151882671}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1151882674 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4797930010746266580, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
-  m_PrefabInstance: {fileID: 1151882671}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1151882675
+--- !u!114 &1151882672 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7353872514460214543, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
+  m_PrefabInstance: {fileID: 1151882671}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151882672}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b51a22fb85c8e7b4c93d6a02f7a05dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
---- !u!114 &1151882676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!4 &1151882673 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8205758751929356408, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
+  m_PrefabInstance: {fileID: 1151882671}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151882674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2861c3763d37ead40b43a4695a01cc75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  outline: {fileID: 0}
-  canInteract: 1
-  canPickup: 1
-  _robotHead: {fileID: 0}
-  triggerCollider: {fileID: 0}
-  grappleCollider: {fileID: 0}
-  handOffset: {x: -0.66, y: 3.7, z: -1.58}
-  cakeManager: {fileID: 0}
 --- !u!1 &1166341218
 GameObject:
   m_ObjectHideFlags: 0
@@ -16731,7 +16694,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56dd58cf88f8b634dab434a1760b4b23, type: 2}
   - {fileID: 11400000, guid: ce956362fb15603499444053938855db, type: 2}
   - {fileID: 11400000, guid: ce249f0b373b71b489fa2ea0cff70800, type: 2}
-  cakeManager: {fileID: 0}
+  cakeManager: {fileID: 1151882672}
   evidenceSpawner: {fileID: 1210528887}
   novaRightHandCake: {fileID: 8568069718544949073}
   eatSource: {fileID: 1582269022}

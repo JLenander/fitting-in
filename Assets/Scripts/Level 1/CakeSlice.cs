@@ -14,6 +14,7 @@ public class CakeSlice : InteractableObject
     public override void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         DisableOutline();
         ogParent = transform.parent;
     }
