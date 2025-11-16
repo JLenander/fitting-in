@@ -4346,6 +4346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cup
       objectReference: {fileID: 0}
+    - target: {fileID: 9156140339986578002, guid: 86df93a7914d2644fbfd58e017a35572, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4354,6 +4358,11 @@ PrefabInstance:
 --- !u!1 &450646048 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8599105018881482518, guid: 86df93a7914d2644fbfd58e017a35572, type: 3}
+  m_PrefabInstance: {fileID: 450646047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &450646049 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 9156140339986578002, guid: 86df93a7914d2644fbfd58e017a35572, type: 3}
   m_PrefabInstance: {fileID: 450646047}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &450646050 stripped
@@ -13150,6 +13159,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 577890828565873055, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
+      propertyPath: m_text
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 577890828565873055, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2686172117624947067, guid: c084f33167cac5e4f8cfeb16afdf7b7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 225.56
@@ -16691,6 +16708,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 796f4859a72758c42b2bee69f3c6ed0f, type: 2}
   - {fileID: 11400000, guid: acb0ca1757b245a468de73daa227d09d, type: 2}
   - {fileID: 11400000, guid: 9cebc863979599a4abe2ed801ae13d5e, type: 2}
+  - {fileID: 11400000, guid: cfcdb3977a888574f857e44dee4dab59, type: 2}
   - {fileID: 11400000, guid: 56dd58cf88f8b634dab434a1760b4b23, type: 2}
   - {fileID: 11400000, guid: ce956362fb15603499444053938855db, type: 2}
   - {fileID: 11400000, guid: ce249f0b373b71b489fa2ea0cff70800, type: 2}
@@ -16701,11 +16719,13 @@ MonoBehaviour:
   biteSfx: {fileID: 1582269023}
   grabbed: 0
   bagDiscarded: 0
+  poured: 0
   bag: {fileID: 1286585087}
   garbageCan: {fileID: 1900401257}
   tableCup: {fileID: 450646048}
   handCup: {fileID: 2021013548}
   talking: 0
+  food: {fileID: 0}
   ate: 0
 --- !u!82 &1582269021
 AudioSource:
@@ -17361,6 +17381,18 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 617736837}
+          m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 450646049}
           m_TargetAssemblyTypeName: UnityEngine.BoxCollider, UnityEngine
           m_MethodName: set_enabled
           m_Mode: 6

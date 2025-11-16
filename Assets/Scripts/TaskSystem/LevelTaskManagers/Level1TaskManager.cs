@@ -14,20 +14,21 @@ public class Level1TaskManager : TaskManager
         base.Awake();
         Instance = this;
     }
-    
+
     // Level 1 specific tasks
     // Start Level 1 (level 1 intro)
     public static void StartTaskLevel1Intro() { Instance.StartTask("Start1"); }
     public static void CompleteTaskLevel1Intro() { Instance.CompleteTask("Start1"); }
+
+    // Grab Polaroid
+    public static void StartTaskPolaroid() { Instance.StartTask("Evidence"); }
+    public static void CompleteTaskPolaroid() { Instance.CompleteTask("Evidence"); }
     // Pour Coffee pot
     public static void StartTaskPourCoffee() { Instance.StartTask("Coffee"); }
     public static void CompleteTaskPourCoffee() { Instance.CompleteTask("Coffee"); }
     // Eat food
     public static void StartTaskEatFood() { Instance.StartTask("Food"); }
     public static void CompleteTaskEatFood() { Instance.CompleteTask("Food"); }
-    // Pickup evidence
-    public static void StartTaskPickupEvidence() { Instance.StartTask("Evidence"); }
-    public static void CompleteTaskPickupEvidence() { Instance.CompleteTask("Evidence"); }
 
     // Throw food in garbage can
     public static void StartTaskDiscardFood() { Instance.StartTask("DiscardFood"); }
@@ -41,7 +42,7 @@ public class Level1TaskManager : TaskManager
     // Leave the cafe
     public static void StartTaskLeaveCafe() { Instance.StartTask("Leave"); }
     public static void CompleteTaskLeaveCafe() { Instance.CompleteTask("Leave"); }
-    
+
     public static void StartTaskTray() { Instance.StartTask("Tray"); }
     public static void CompleteTaskTray() { Instance.CompleteTask("Tray"); }
 

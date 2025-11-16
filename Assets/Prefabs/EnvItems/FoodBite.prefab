@@ -132,8 +132,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.6867173, y: 2.8125124, z: 3.349815}
+  m_Center: {x: -0.19816433, y: 0, z: 0}
 --- !u!82 &9084605516717041414
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15029,7 +15029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +3
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1e189df835e7534e800c40b8edbef3a, type: 2}
   m_sharedMaterial: {fileID: -2791108427287794094, guid: f1e189df835e7534e800c40b8edbef3a, type: 2}
@@ -15063,7 +15063,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

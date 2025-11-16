@@ -129,8 +129,12 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
+        Level1TaskManager.StartTaskPolaroid();
+
         // wait until evidence is grabbed
         yield return new WaitUntil(() => grabbed);
+
+        Level1TaskManager.CompleteTaskPolaroid();
         talking = true;
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
