@@ -10,7 +10,7 @@ public class NovaLevel1Manager : MonoBehaviour
 
     public List<DialogueScriptableObj> dialogues = new List<DialogueScriptableObj>();
 
-    public List<GameObject> cakeSlices = new List<GameObject>();
+    public CakeManager cakeManager;
 
     public EvidenceSpawner evidenceSpawner;
     public GameObject novaRightHandCake;
@@ -28,7 +28,6 @@ public class NovaLevel1Manager : MonoBehaviour
     public bool talking = false;
     private float switchInterval = 10f;
     private float timer = 0f;
-    private int cakeIndex = 0;
     public bool ate = false;
 
     public Coroutine levelCoroutine;
@@ -41,17 +40,19 @@ public class NovaLevel1Manager : MonoBehaviour
 
     IEnumerator EatCake()
     {
-        talking = false;
-        novaAnimator.SetTrigger("Eat");
-        cakeSlices[cakeIndex].SetActive(false);
-        cakeIndex++;
-        yield return new WaitForSeconds(1f);
-        novaRightHandCake.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        biteSfx.Play();
-        novaRightHandCake.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        talking = true;
+        if (cakeManager.CanRemoveSlice())
+        {
+            talking = false;
+            novaAnimator.SetTrigger("Eat");
+            cakeManager.RemoveSlice().SetActive(false);
+            yield return new WaitForSeconds(1f);
+            novaRightHandCake.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            biteSfx.Play();
+            novaRightHandCake.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            talking = true;
+        }
     }
 
     IEnumerator WaitForTaskManager()
