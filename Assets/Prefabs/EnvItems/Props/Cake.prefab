@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5302248, y: 0.21040532, z: 0.5005498}
-  m_Center: {x: 0.026122026, y: 0.12197, z: 0.011824078}
+  m_Size: {x: 0.5302248, y: 0.15296596, z: 0.4615649}
+  m_Center: {x: 0.026122026, y: 0.0932503, z: -0.007668213}
 --- !u!1 &1303693681737146798
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 2797313361611619208}
   m_Layer: 0
   m_Name: Cake Piece (2)
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,7 +254,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.07420672, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &1793678962359332012
 GameObject:
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 1340272498839950623}
   m_Layer: 0
   m_Name: Cake Piece (3)
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -724,7 +724,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.07420672, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &3905356227209177672
 GameObject:
@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 4161276815084763430}
   m_Layer: 0
   m_Name: Cake Piece
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1194,7 +1194,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.07420672, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &7241718633266254743
 GameObject:
@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 3303020042192366201}
   m_Layer: 0
   m_Name: Cake Piece (1)
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1486,7 +1486,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.07420672, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &7836478936386461359
 GameObject:

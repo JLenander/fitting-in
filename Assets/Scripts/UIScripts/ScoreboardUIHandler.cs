@@ -249,7 +249,15 @@ public class ScoreboardUIHandler : MonoBehaviour
 
         yield return new WaitForSeconds(2f); // small pause
 
-        letterGrade.text = data.letter;
+        float elapsedTime = data.time;
+
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+        int milliseconds = Mathf.FloorToInt((elapsedTime * 1000f) % 1000f);
+
+        string formatted = $"{minutes:00}:{seconds:00}:{milliseconds:000}";
+
+        letterGrade.text = formatted;
         letterGrade.visible = true;
 
         bool inputDetected = false;

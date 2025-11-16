@@ -68,6 +68,7 @@ public class FillCup : MonoBehaviour
 
             // tell level manager coffee is filled
             NovaLevel1Manager.Instance.poured = true;
+            Level1TaskManager.CompleteTaskPourCoffee();
         }
 
         float fillProgress = fillCounter / secondsTillFull;

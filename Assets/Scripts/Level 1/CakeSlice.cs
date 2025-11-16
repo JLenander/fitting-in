@@ -9,6 +9,7 @@ public class CakeSlice : InteractableObject
 
     private Rigidbody rb;
     private Transform ogParent;
+    private bool first;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -17,6 +18,7 @@ public class CakeSlice : InteractableObject
         rb.isKinematic = true;
         DisableOutline();
         ogParent = transform.parent;
+        first = true;
     }
 
     public override void InteractWithHand(Transform obj, HandMovement target)
@@ -24,7 +26,11 @@ public class CakeSlice : InteractableObject
         if (canInteract && canPickup)
         {
             // remove from cake list
-            cakeManager.GrabbedSlice(this);
+            if (first)
+            {
+                cakeManager.GrabbedSlice(this);
+                first = false;
+            }
 
             // move to hand
             transform.parent = obj;

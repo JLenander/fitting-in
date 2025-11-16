@@ -9,6 +9,11 @@ public class NovaLevel1Manager : MonoBehaviour
     public Animator novaAnimator;
 
     public List<DialogueScriptableObj> dialogues = new List<DialogueScriptableObj>();
+    public DialogueScriptableObj dropFoodDialogue;
+    public DialogueScriptableObj stealFoodDialogue;
+
+    public DialogueScriptableObj feedFoodDialogue;
+    public DialogueScriptableObj forceFeedDialogue;
 
     public CakeManager cakeManager;
 
@@ -57,6 +62,62 @@ public class NovaLevel1Manager : MonoBehaviour
         }
     }
 
+    public void ThankForFood(int counter)
+    {
+        biteSfx.Play();
+
+        if (counter > 2)
+        {
+            // ok thats a lil too much
+            GlobalPlayerUIManager.Instance.LoadText(forceFeedDialogue);
+        }
+        else
+        {
+            // aww thanks
+            GlobalPlayerUIManager.Instance.LoadText(feedFoodDialogue);
+        }
+    }
+
+    public void StealFood()
+    {
+        GlobalPlayerUIManager.Instance.LoadText(stealFoodDialogue);
+        // StartCoroutine(StealFoodRoutine());
+    }
+
+    IEnumerator StealFoodRoutine()
+    {
+        bool prevState = talking;
+        talking = false;
+
+        // play anim
+        novaAnimator.SetTrigger("Sus");
+        // comment on food drop
+        GlobalPlayerUIManager.Instance.LoadText(stealFoodDialogue);
+        yield return new WaitForSeconds(2.5f);
+
+        talking = prevState;
+    }
+
+    public void DropFood()
+    {
+        GlobalPlayerUIManager.Instance.LoadText(dropFoodDialogue);
+        // StartCoroutine(DropFoodRoutine());
+    }
+
+    IEnumerator DropFoodRoutine()
+    {
+        bool prevState = talking;
+        talking = false;
+
+        // play anim
+        novaAnimator.SetTrigger("Sus");
+        // comment on food drop
+        GlobalPlayerUIManager.Instance.LoadText(dropFoodDialogue);
+        yield return new WaitForSeconds(2.5f);
+
+        talking = prevState;
+    }
+
     IEnumerator WaitForTaskManager()
     {
         yield return new WaitUntil(() => Level1TaskManager.Instance != null);
@@ -99,7 +160,7 @@ public class NovaLevel1Manager : MonoBehaviour
 
         int index = 0;
         // seat nova at seat, intro dialogue
-        transform.position = new Vector3(254.8f, -26.8f, 9.8f);
+        transform.position = new Vector3(254.8f, -26.8f, 5.8f);
         transform.localRotation = new Quaternion(0, 0, 0, 0);
 
         talking = true;

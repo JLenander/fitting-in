@@ -22,6 +22,8 @@ public class FoodBite : InteractableObject, IPooledObject
 
     [SerializeField] private ParticleSystem pastaSauce;
 
+    public DialogueScriptableObj dropDialogue;
+
     public override void Start()
     {
         base.Start();
@@ -56,6 +58,7 @@ public class FoodBite : InteractableObject, IPooledObject
 
             target.handAnimator.SetTrigger("Pot"); // sets current hand to hold anim
             target.SetTargetCurrentObject(this);
+            handMovement = target;
 
             if (bag != null) bag.EnableOutline();
         }
@@ -103,9 +106,8 @@ public class FoodBite : InteractableObject, IPooledObject
 
             pastaSauce.Stop();
 
-            //Animator novaAnimator = NovaLevel1Manager.Instance.novaAnimator;
-            // play sus animation
-            // play sus dialogue
+            // play suspicion dialogue
+            NovaLevel1Manager.Instance.DropFood();
         }
         else if (collision.gameObject.CompareTag("Bag"))
         {

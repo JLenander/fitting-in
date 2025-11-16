@@ -10,7 +10,7 @@ public abstract class InteractableObject : MonoBehaviour
     public Outline outline;
     public bool canInteract = true;
     public bool canPickup = true;
-    private HandMovement handMovement;
+    public HandMovement handMovement;
     private Hand hand;
     public Transform _robotHead;
 
@@ -72,7 +72,7 @@ public abstract class InteractableObject : MonoBehaviour
     {
         canInteract = false;
     }
-    
+
     public void EnableCanPickup()
     {
         canPickup = true;

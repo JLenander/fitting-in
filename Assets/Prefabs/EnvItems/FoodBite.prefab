@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9084605516717041414}
   m_Layer: 0
   m_Name: FoodBite
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   audioSource: {fileID: 9084605516717041414}
   handOffset: {x: 0, y: 3.5, z: -1.7}
   pastaSauce: {fileID: 5154158129052883714}
+  dropDialogue: {fileID: 0}
 --- !u!65 &5938523467898302478
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class TriggerSeat : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (playerInside) return;
-        if (other != null && other.CompareTag("Hand"))
+        if (other != null && other.CompareTag("Robot"))
         {
             if (!triggered) novaLevel1Manager.PlayLevelRoutine();
             robotMovement.disable = true;
@@ -37,17 +37,18 @@ public class TriggerSeat : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other != null && other.CompareTag("Hand"))
+        if (other != null && other.CompareTag("Robot"))
         {
-            handCount++;
-            Debug.Log(handCount);
-            if (handCount == 2)
-            {
-                playerInside = false;
-                BoxCollider collider = GetComponent<BoxCollider>();
-                collider.enabled = true;
-                handCount = 0;
-            }
+            // handCount++;
+            // Debug.Log(handCount);
+            // if (handCount == 2)
+            // {
+
+            //     handCount = 0;
+            // }
+            playerInside = false;
+            BoxCollider collider = GetComponent<BoxCollider>();
+            collider.enabled = true;
         }
     }
 

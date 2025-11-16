@@ -7,9 +7,14 @@ public class CakeManager : MonoBehaviour
     // keeps track of the four cake slices
     public List<CakeSlice> cakeSlices = new List<CakeSlice>();
 
+    public bool novaCake = true;
+
     public void GrabbedSlice(CakeSlice cakeSlice)
     {
         cakeSlices.Remove(cakeSlice);
+
+        if (novaCake)
+            NovaLevel1Manager.Instance.StealFood();
 
         if (cakeSlices.Count <= 0)
         {

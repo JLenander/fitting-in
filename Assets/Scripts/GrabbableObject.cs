@@ -36,6 +36,8 @@ public class GrabbableObject : InteractableObject
 
             target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
             target.SetTargetCurrentObject(this);
+
+            handMovement = target;
         }
     }
 
