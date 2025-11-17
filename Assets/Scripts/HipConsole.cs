@@ -7,6 +7,7 @@ public class HipConsole : Interactable
     private bool _canInteract = true;
     [SerializeField] Transform robotBody;
     public AudioSource audioSource;
+    public AudioSource denySource;
     public StudioEventEmitter enterSfx;
 
     private TerminalUIHandler uIHandler;
@@ -22,7 +23,13 @@ public class HipConsole : Interactable
     }
     public override void Interact(GameObject player)
     {
-
+        if (!_canInteract)
+        {
+            if (denySource != null)
+                denySource.Play();
+            return;
+        }
+        
         if (TutorialManager.Instance != null)
         {
             TutorialManager.Instance.interactLegTerminal = true;
@@ -77,10 +84,10 @@ public class HipConsole : Interactable
 
     public void DisableInteract()
     {
+        _canInteract = false;
         hoverMessage = "[LEGS DISABLED]";
         msgColour = new Color(1, 0, 0, 1);
         outlineColour = new Color(1, 0, 0, 1);
-        // _currPlayer = null;
     }
 
     public void EnableInteract()
