@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TaskInfoSO
   id: Evidence
   title: Collect the Evidence!
-  description: Grab all the pictures, maps, and notebooks you can find!
+  description: Grab that polaroid!
   location: Arms
   urgency: Normal
   targetProgress: 1

@@ -16,6 +16,8 @@ TagManager:
   - Tray
   - Basketball
   - Hoop
+  - Food
+  - Robot
   layers:
   - Default
   - TransparentFX

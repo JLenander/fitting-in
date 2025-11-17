@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: 7
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - Yummers
-  - That was a good meal
+  - This was great!
   - Let us do this again sometime
   spirteA: {fileID: 21300000, guid: c879e5dc88cd6b54883e90583eb8da78, type: 3}
   spirteB: {fileID: 21300000, guid: d8665aaa2da204c4090b2027ed9ab093, type: 3}

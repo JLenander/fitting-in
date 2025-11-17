@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9084605516717041414}
   m_Layer: 0
   m_Name: FoodBite
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   audioSource: {fileID: 9084605516717041414}
   handOffset: {x: 0, y: 3.5, z: -1.7}
   pastaSauce: {fileID: 5154158129052883714}
+  dropDialogue: {fileID: 0}
 --- !u!65 &5938523467898302478
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132,8 +133,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.6867173, y: 2.8125124, z: 3.349815}
+  m_Center: {x: -0.19816433, y: 0, z: 0}
 --- !u!82 &9084605516717041414
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15029,7 +15030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +3
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1e189df835e7534e800c40b8edbef3a, type: 2}
   m_sharedMaterial: {fileID: -2791108427287794094, guid: f1e189df835e7534e800c40b8edbef3a, type: 2}
@@ -15063,7 +15064,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
