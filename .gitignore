@@ -102,3 +102,5 @@ InitTestScene*.unity*
 
 # FMOD cache file
 Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+
+.idea/
