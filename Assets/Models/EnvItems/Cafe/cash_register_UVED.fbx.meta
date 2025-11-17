@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 45e290be6814625419bad8fbd214f23f
+guid: d28a01cebfa127841a4c6bd91a589458
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_cashRegister
+    second: {fileID: 2100000, guid: 3d46ea1ebd1cfd8478ba99150b1fdb91, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

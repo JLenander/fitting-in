@@ -27,6 +27,7 @@ public class ScoreKeeper : MonoBehaviour
     private int leftGrabCount; // number of times left hand used grab
     private int rightGrabCount; // number of times right hand used grab
     private int hurtDateCount; // num of times accidentally hit date
+    private float elapsedTime;
 
     void Awake()
     {
@@ -42,8 +43,14 @@ public class ScoreKeeper : MonoBehaviour
         rightGrabCount = 0;
         hurtDateCount = 0;
         events = new List<Scoring>();
+        elapsedTime = 0f;
         // _splitscreenUIHandler = FindAnyObjectByType<SplitscreenUIHandler>();
         // _splitscreenUIHandler.ChangeScoreText(0); // for debugging for now
+    }
+
+    private void Update()
+    {
+        elapsedTime += Time.deltaTime;
     }
 
     /// <summary>
@@ -143,20 +150,22 @@ public class ScoreKeeper : MonoBehaviour
         return sum;
     }
 
-    string LetterScore(int currScore)
+    float FinalTime()
     {
-        // give the player a letter grade based on what they got compared
-        if (maxScore == 0) return "N/A";
-        if (maxScore < 0) return "F";
+        // simple returns a time finished
+        return elapsedTime;
+        // // give the player a letter grade based on what they got compared
+        // if (maxScore == 0) return "N/A";
+        // if (maxScore < 0) return "F";
 
-        float ratio = currScore / maxScore;
+        // float ratio = currScore / maxScore;
 
-        if (ratio >= 0.90f) return "S";
-        if (ratio >= 0.80f) return "A";
-        if (ratio >= 0.65f) return "B";
-        if (ratio >= 0.50f) return "C";
-        if (ratio >= 0.35f) return "D";
-        return "F";
+        // if (ratio >= 0.90f) return "S";
+        // if (ratio >= 0.80f) return "A";
+        // if (ratio >= 0.65f) return "B";
+        // if (ratio >= 0.50f) return "C";
+        // if (ratio >= 0.35f) return "D";
+        // return "F";
     }
 
     // called by scoreboard to get all data (done once at the end)
@@ -170,7 +179,7 @@ public class ScoreKeeper : MonoBehaviour
         scoreboardData.dominanteLeft = leftGrabCount > rightGrabCount;
         scoreboardData.hurtDateCount = hurtDateCount;
 
-        scoreboardData.letter = LetterScore(overallScore + OverallEventScore());
+        scoreboardData.time = FinalTime();
 
         scoreboardData.events = events;
 
@@ -190,7 +199,7 @@ public struct ScoreboardData
     public int evidenceCount;
     public bool dominanteLeft;
     public int hurtDateCount;
-    public string letter;
+    public float time;
     public List<Scoring> events;
 }
 

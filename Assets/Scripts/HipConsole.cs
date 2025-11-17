@@ -58,9 +58,12 @@ public class HipConsole : Interactable
         if (enterSfx != null)
             enterSfx.Stop();
         uIHandler.HideUI(player);
-        if (playerChair && triggerSeat.PlayerInsideSeat())
+        if (triggerSeat != null)
         {
-            triggerSeat.SeatRobot();
+            if (playerChair && triggerSeat.PlayerInsideSeat())
+            {
+                triggerSeat.SeatRobot();
+            }
         }
     }
 
