@@ -58,6 +58,8 @@ public class HipConsole : Interactable
 
     public override void Return(GameObject player)
     {
+        RuntimeManager.PlayOneShot("event:/SFX/Interior/terminal_exit");
+
         player.GetComponent<Player>().TurnOn();
         player.GetComponent<Player>().switchOffLegs();
 

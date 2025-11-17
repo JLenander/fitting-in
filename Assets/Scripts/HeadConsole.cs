@@ -158,6 +158,8 @@ public class HeadConsole : Interactable
 
     public override void Return(GameObject player)
     {
+        RuntimeManager.PlayOneShot("event:/SFX/Interior/terminal_exit");
+
         HideOutsideCamera();
 
         player.GetComponent<Player>().TurnOn();

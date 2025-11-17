@@ -83,6 +83,8 @@ public class BrainConsole : Interactable
     }
     public override void Return(GameObject player)
     {
+        RuntimeManager.PlayOneShot("event:/SFX/Interior/terminal_exit");
+
         player.GetComponent<Player>().TurnOn();
         //playerTaskPanel.SetActive(false);
         _canInteract = true;
