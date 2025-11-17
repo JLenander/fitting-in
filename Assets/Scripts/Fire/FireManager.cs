@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 public class FireManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class FireManager : MonoBehaviour
     public HandConsole rightArmConsole;
     public HipConsole hipConsole;
     public StudioEventEmitter fireSfx;
+    public float isFire = 0f;
+    public StudioEventEmitter mus;
+    private EventInstance instance;
 
     private Dictionary<string, FireArea> fireAreas;
 
@@ -43,6 +47,7 @@ public class FireManager : MonoBehaviour
         }
 
         fireSfx.EventInstance.setVolume(3f);
+        instance = mus.EventInstance;
     }
 
     public void StartFireArea(string name)
@@ -54,6 +59,8 @@ public class FireManager : MonoBehaviour
             {
                 Debug.Log($"Fire sound start");
                 fireSfx.Play();
+                isFire = 1f;
+                mus.SetParameter("Emergency", isFire);
             }
         }
         else
@@ -111,5 +118,7 @@ public class FireManager : MonoBehaviour
 
         Debug.Log($"Fire sound stop");
         fireSfx.Stop();
+        isFire = 0f;
+        mus.SetParameter("Emergency", isFire);
     }
 }
