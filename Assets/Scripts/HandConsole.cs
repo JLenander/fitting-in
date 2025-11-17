@@ -57,6 +57,8 @@ public class HandConsole : Interactable
 
     public override void Return(GameObject player)
     {
+        RuntimeManager.PlayOneShot("event:/SFX/Interior/terminal_exit");
+
         player.GetComponent<Player>().TurnOn();
         target.TurnOff(player);
         _canInteract = true; // current player leaves
