@@ -31,4 +31,6 @@ public class Level0TaskManager : TaskManager
     // 4. Leave Phone
     public static void StartTaskLeavePhone() { Instance.StartTask("LeavePhone"); }
     public static void CompleteTaskLeavePhone() { Instance.CompleteTask("LeavePhone"); }
+    
+    public static void ClearAllLevel1Tasks() { Instance.ClearActiveTasks(); }
 }
