@@ -281,4 +281,16 @@ public class HeadConsole : Interactable
     {
         return exteriorCamera.transform.position;
     }
+    
+    public void ForcedReturn()
+    {
+        if (_currPlayer != null)
+        {
+            PlayerInteract playerInteract = _currPlayer.GetComponent<PlayerInteract>();
+            if (playerInteract != null)
+            {
+                playerInteract.LeaveCurrInteractable();
+            }
+        }
+    }
 }

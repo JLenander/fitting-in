@@ -76,6 +76,9 @@ public class BlinkConsole : Interactable
                     isFullyPixelated = true;
 
                     // disable head console
+                    // must return for player so CanInteract works properly
+                    // else DisableInteract sets CanInteract to false without returning and Return puts it back to true
+                    headConsole.ForcedReturn();
                     headConsole.DisableInteract();
 
                     // start fire buffer countdown before the fire starts to give players time to blink
