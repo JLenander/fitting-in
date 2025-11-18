@@ -181,5 +181,12 @@ public abstract class TaskManager : MonoBehaviour
     {
         return activeTasks;
     }
+    
+    // remove all active tasks on level reset
+    public void ClearActiveTasks()
+    {
+        activeTasks.Clear();
+        PassDataUI();
+    }
 
 }

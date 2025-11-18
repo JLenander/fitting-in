@@ -4511,9 +4511,17 @@ PrefabInstance:
       value: 0.157
       objectReference: {fileID: 0}
     - target: {fileID: 276867141054492880, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 276867141054492880, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: m_Resource
       value: 
       objectReference: {fileID: 8300000, guid: e0073802adf023447ba918a4a02bc8a1, type: 3}
+    - target: {fileID: 397365818852289157, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3329251026055516755, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -4567,6 +4575,10 @@ PrefabInstance:
       value: EmerencyEventHandler
       objectReference: {fileID: 0}
     - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      propertyPath: mus
+      value: 
+      objectReference: {fileID: 1917217008}
+    - target: {fileID: 7929926126811079903, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
       propertyPath: fireSfx
       value: 
       objectReference: {fileID: 1917217006}
@@ -4609,19 +4621,58 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6624155605218546144, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1917217008}
   m_SourcePrefab: {fileID: 100100000, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
 --- !u!114 &1917217006 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4709538606492710203, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
   m_PrefabInstance: {fileID: 1917217005}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1917217007}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+--- !u!1 &1917217007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6624155605218546144, guid: b5a2c18e3581b4c4995cd16e7a91b516, type: 3}
+  m_PrefabInstance: {fileID: 1917217005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1917217008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917217007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1835340458
+      Data2: 1217364803
+      Data3: -87900757
+      Data4: -786578346
+    Path: event:/Music/level_one
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1936426256 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5606073057600776069, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
