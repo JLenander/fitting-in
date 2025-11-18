@@ -94,6 +94,12 @@ public class GlobalLevelManager : MonoBehaviour
     /// </summary>
     public void LoadLevelSelectScreen()
     {
+        // Clear active tasks before returning to level select
+        if (TaskManager.GenericInstance != null)
+        {
+            TaskManager.GenericInstance.ClearActiveTasks();
+        }
+        
         LoadScene(SceneConstants.LevelSelectScene);
     }
     

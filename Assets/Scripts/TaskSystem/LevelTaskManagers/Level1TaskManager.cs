@@ -48,4 +48,6 @@ public class Level1TaskManager : TaskManager
 
     public static void StartTaskPutOutFires() { Instance.StartTask("PutOutFires"); }
     public static void CompleteTaskPutOutFires() { Instance.CompleteTask("PutOutFires"); }
+    
+    public static void ClearAllLevel1Tasks() { Instance.ClearActiveTasks(); }
 }
