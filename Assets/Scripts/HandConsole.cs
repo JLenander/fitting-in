@@ -11,7 +11,6 @@ public class HandConsole : Interactable
     private bool _canInteract = true;
     public bool left;
 
-    public AudioSource audioSource;
     public StudioEventEmitter enterSfx;
 
     private GameObject _currPlayer;

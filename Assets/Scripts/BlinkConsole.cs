@@ -15,7 +15,6 @@ public class BlinkConsole : Interactable
     public float pressAnimationCountdown;
     public float fireBufferCountdown;
     public HeadConsole headConsole;
-    public AudioSource audioSource;
     public StudioEventEmitter enterSfx;
 
     private bool timerIsRunning;
