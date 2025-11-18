@@ -30,6 +30,11 @@ public class TutorialManager : MonoBehaviour
     public HeadConsole headConsole;
     public BlinkConsole blinkConsole;
 
+    public GameObject blinkLight;
+    public GameObject headLight;
+    public List<GameObject> armLights = new List<GameObject>();
+    public List<GameObject> legLights = new List<GameObject>();
+
     public bool beginFire = false;
     public bool blinked = false;
     public bool interactEyeTerminal = false;
@@ -49,10 +54,7 @@ public class TutorialManager : MonoBehaviour
         StartCoroutine(StartLevel());
 
         // disable all normal lights
-        foreach (GameObject light in normalLights)
-        {
-            light.SetActive(false);
-        }
+        SetLightsDeactive(normalLights);
 
         // disable all terminals first
         headConsole.DisableInteract();
@@ -60,6 +62,11 @@ public class TutorialManager : MonoBehaviour
         rightConsole.DisableInteract();
         hipConsole.DisableInteract();
         blinkConsole.DisableInteract();
+
+        blinkLight.SetActive(false);
+        headLight.SetActive(false);
+        SetLightsDeactive(armLights);
+        SetLightsDeactive(legLights);
     }
 
     IEnumerator StartLevel()
@@ -74,10 +81,7 @@ public class TutorialManager : MonoBehaviour
 
         yield return new WaitUntil(() => beginFire);
 
-        foreach (GameObject light in normalLights)
-        {
-            light.SetActive(true);
-        }
+        SetLightsActive(normalLights);
 
         // 2. fire is put out yay!
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
@@ -85,11 +89,15 @@ public class TutorialManager : MonoBehaviour
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
+        yield return new WaitForSeconds(27f);
 
         // blink to ensure fires are gone
         blinkConsole.EnableInteract();
         blinkConsole.EnableOutline();
         headConsole.DisableInteract();
+
+        blinkLight.SetActive(true);
+        SetLightsDeactive(normalLights);
 
         repeatDialogue = blinkRepeatDialogue;
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
@@ -101,13 +109,18 @@ public class TutorialManager : MonoBehaviour
         blinkConsole.DisableInteract();
         blinkConsole.enabled = false;
 
-        Debug.Log(3);
+        blinkLight.SetActive(false);
+        SetLightsActive(normalLights);
+
         // 3. message from general plorp about eye terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
+        yield return new WaitForSeconds(5f);
 
-        // re-enable arms n head
+        // re-enable head
         headConsole.EnableInteract();
+        headLight.SetActive(true);
+        SetLightsDeactive(normalLights);
 
         repeatDialogue = eyeRepeatDialog;
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
@@ -116,17 +129,21 @@ public class TutorialManager : MonoBehaviour
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
+        headLight.SetActive(false);
+        SetLightsActive(normalLights);
+
         // 4. move until the rectile becomes green
-        Debug.Log(4);
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        headConsole.first = true;
+        yield return new WaitForSeconds(5f);
         yield return new WaitUntil(() => eyeAim);
-
 
         // 5. message from general plorp about arm terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
+        yield return new WaitForSeconds(10f);
+        SetLightsActive(armLights);
+        SetLightsDeactive(normalLights);
 
         leftConsole.EnableInteract();
         rightConsole.EnableInteract();
@@ -142,6 +159,8 @@ public class TutorialManager : MonoBehaviour
         rightConsole.DisableOutline();
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
+        SetLightsDeactive(armLights);
+        SetLightsActive(normalLights);
 
         // 6. what the arm does
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
@@ -185,9 +204,14 @@ public class TutorialManager : MonoBehaviour
         hipConsole.EnableInteract();
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
+        yield return new WaitForSeconds(5f);
+        SetLightsActive(legLights);
+        SetLightsDeactive(normalLights);
 
         yield return new WaitUntil(() => interactLegTerminal);
         GlobalPlayerUIManager.Instance.StopText();
+        SetLightsDeactive(legLights);
+        SetLightsActive(normalLights);
 
         // 10. How to walk
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
@@ -218,6 +242,22 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(30f);
 
             GlobalPlayerUIManager.Instance.LoadText(repeatDialogue);
+        }
+    }
+
+    private void SetLightsActive(List<GameObject> lightsList)
+    {
+        foreach (GameObject light in lightsList)
+        {
+            light.SetActive(true);
+        }
+    }
+
+    private void SetLightsDeactive(List<GameObject> lightsList)
+    {
+        foreach (GameObject light in lightsList)
+        {
+            light.SetActive(false);
         }
     }
 }

@@ -17153,6 +17153,7 @@ MonoBehaviour:
   talking: 0
   food: {fileID: 1148863390}
   ate: 0
+  blinkConsole: {fileID: 1568381345}
 --- !u!82 &1582269021
 AudioSource:
   m_ObjectHideFlags: 0

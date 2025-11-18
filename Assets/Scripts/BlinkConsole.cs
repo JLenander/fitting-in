@@ -31,7 +31,7 @@ public class BlinkConsole : Interactable
         timeToNextBlink = timeBetweenBlinks;
         pressAnimationCountdown = eyeAnimationTime;
         fireBufferCountdown = fireBufferTime;
-        timerIsRunning = true;
+        timerIsRunning = false;
         _canInteract = true;
 
         PopUpUIHandler.Instance.HideBlinkPopUp();
@@ -67,7 +67,7 @@ public class BlinkConsole : Interactable
         }
         else
         {
-            if (pressAnimationCountdown > 0)
+            if (pressAnimationCountdown > 0 && timerIsRunning)
             {
                 pressAnimationCountdown -= Time.deltaTime;
             }
@@ -84,7 +84,7 @@ public class BlinkConsole : Interactable
                     isInFireBuffer = true;
                 }
 
-                if (isInFireBuffer)
+                if (isInFireBuffer && timerIsRunning)
                 {
                     fireBufferCountdown -= Time.deltaTime;
 
@@ -181,5 +181,10 @@ public class BlinkConsole : Interactable
         hoverMessage = "Blink";
         msgColour = new Color(1, 1, 1, 1);
         outlineColour = new Color(1, 1, 1, 1);
+    }
+
+    public void SetTimerIsRunning(bool isRunning)
+    {
+        timerIsRunning = isRunning;
     }
 }
