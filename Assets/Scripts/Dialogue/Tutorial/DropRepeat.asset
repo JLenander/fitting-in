@@ -10,15 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd9abb2785530084480ddfaf79158313, type: 3}
-  m_Name: 3
+  m_Name: DropRepeat
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - Is this thing back on?
-  - That was a close call
-  - And before you ask...
-  - No, we didn't arrive to Earth yet
-  - But, before we put you all back to sleep
-  - We'll need to do a few checks first
-  - First let's blink to make sure those fires don't happen again
+  - Take a look at the control layout
+  - To drop, use the same button you did to pick it up
   spirteA: {fileID: 21300000, guid: 7cf1f3e381de4504d8c4445353b39e1d, type: 3}
   spirteB: {fileID: 21300000, guid: 14195ce6032b9da4ab6a0eba52e7c89b, type: 3}

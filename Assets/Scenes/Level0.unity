@@ -312,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346766902915464917, guid: 4d2a0350f81215b4288a9917e555e431, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.4
+      value: 7.9
       objectReference: {fileID: 0}
     - target: {fileID: 6346766902915464917, guid: 4d2a0350f81215b4288a9917e555e431, type: 3}
       propertyPath: m_LocalPosition.z
@@ -627,26 +627,35 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51661a811041c9340b79cc81b4824c4b, type: 2}
   - {fileID: 11400000, guid: f4761b0cb2e7b9247a766cce2901357b, type: 2}
   - {fileID: 11400000, guid: 57d97298a4695f6469d0e41f7e52cc5d, type: 2}
+  - {fileID: 11400000, guid: b68a099aa8eaf0d49b49284e5bc65fca, type: 2}
+  - {fileID: 11400000, guid: 801046297b78e174e9eb321c034d480e, type: 2}
   - {fileID: 11400000, guid: 18dad686bf08906479a4f0a954aa8ea4, type: 2}
   - {fileID: 11400000, guid: e8e38a2aca358a241a28f3f04467c517, type: 2}
   - {fileID: 11400000, guid: e81b81f0c910b0a409063456f2d52ec9, type: 2}
+  - {fileID: 11400000, guid: d008c20346081c54fb2c944945a50bdb, type: 2}
+  - {fileID: 11400000, guid: f98f19ced194ff244a0dd31ec57b1480, type: 2}
   - {fileID: 11400000, guid: 0c9aa1e987dcad54e8233baec6cd7294, type: 2}
   - {fileID: 11400000, guid: 0b5c70451ac62464aa363132956532c8, type: 2}
   - {fileID: 11400000, guid: 50df030a7cf373e48849630125de1223, type: 2}
   - {fileID: 11400000, guid: 80032d595221b8d428b8ad8891c5a499, type: 2}
   - {fileID: 11400000, guid: 01ddc891a5bff634bbede914357fda34, type: 2}
+  blinkRepeatDialogue: {fileID: 11400000, guid: a08d17b996c98bc4ab81e188fa12812c, type: 2}
   armRepeatDialog: {fileID: 11400000, guid: 52347d08249a88b438ef3b66a089c7c2, type: 2}
   eyeRepeatDialog: {fileID: 11400000, guid: 0f3a528e2188eb24fbe8418c0e6d161b, type: 2}
   grabRepeatDialog: {fileID: 11400000, guid: 72923c381f8741147a64190949e963d7, type: 2}
+  dropRepeatDialogue: {fileID: 11400000, guid: c6e39588ad293024682c5a30a5f3f4c2, type: 2}
   leftConsole: {fileID: 2856489600915246523}
   rightConsole: {fileID: 2856489600915246522}
   hipConsole: {fileID: 2856489600915246521}
   headConsole: {fileID: 372060015}
   blinkConsole: {fileID: 2856489600915246524}
   beginFire: 0
+  blinked: 0
   interactEyeTerminal: 0
+  eyeAim: 0
   interactArmTerminal: 0
   grabBall: 0
+  dropBall: 0
   scoreBall: 0
   interactLegTerminal: 0
 --- !u!4 &163476299
@@ -1685,7 +1694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346766902915464917, guid: 4d2a0350f81215b4288a9917e555e431, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.59
+      value: 6.3
       objectReference: {fileID: 0}
     - target: {fileID: 6346766902915464917, guid: 4d2a0350f81215b4288a9917e555e431, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3830,7 +3839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346766902915464917, guid: 4d2a0350f81215b4288a9917e555e431, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.1
+      value: 6.3
       objectReference: {fileID: 0}
     - target: {fileID: 6346766902915464917, guid: 4d2a0350f81215b4288a9917e555e431, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5184,6 +5193,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6199189934196734565, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: target
       value: 
@@ -5192,6 +5205,10 @@ PrefabInstance:
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 430151590}
+    - target: {fileID: 7515541054656848059, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8061766155699826322, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.33

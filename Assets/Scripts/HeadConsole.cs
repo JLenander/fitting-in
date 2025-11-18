@@ -28,6 +28,8 @@ public class HeadConsole : Interactable
     private TerminalUIHandler uIHandler;
     private int layerMask;
 
+    public bool first = false;
+
     void Start()
     {
         DisableOutline();
@@ -117,6 +119,11 @@ public class HeadConsole : Interactable
             if (hit.collider.CompareTag("GrappleStop"))
             {
                 _splitscreenUIHandler.ReticleHit();
+                if (first && TutorialManager.Instance != null)
+                {
+                    TutorialManager.Instance.eyeAim = true;
+                    first = false;
+                }
             }
         }
         else

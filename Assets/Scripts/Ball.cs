@@ -64,6 +64,10 @@ public class Ball : InteractableObject
         target.handAnimator.SetTrigger("Neutral"); // sets the current hand back to neutral
 
         grappleCollider.enabled = true;
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.dropBall = true;
+        }
     }
 
     void OnCollisionEnter(Collision collision)

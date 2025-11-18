@@ -14,11 +14,15 @@ public class TutorialManager : MonoBehaviour
 
     public List<DialogueScriptableObj> dialogues = new List<DialogueScriptableObj>();
 
+    public DialogueScriptableObj blinkRepeatDialogue;
+
     public DialogueScriptableObj armRepeatDialog;
 
     public DialogueScriptableObj eyeRepeatDialog;
 
     public DialogueScriptableObj grabRepeatDialog;
+
+    public DialogueScriptableObj dropRepeatDialogue;
 
     public HandConsole leftConsole;
     public HandConsole rightConsole;
@@ -27,9 +31,12 @@ public class TutorialManager : MonoBehaviour
     public BlinkConsole blinkConsole;
 
     public bool beginFire = false;
+    public bool blinked = false;
     public bool interactEyeTerminal = false;
+    public bool eyeAim = false;
     public bool interactArmTerminal = false;
     public bool grabBall = false;
+    public bool dropBall = false;
     public bool scoreBall = false;
     public bool interactLegTerminal = false;
     private int index;
@@ -52,7 +59,7 @@ public class TutorialManager : MonoBehaviour
         leftConsole.DisableInteract();
         rightConsole.DisableInteract();
         hipConsole.DisableInteract();
-        blinkConsole.enabled = false;
+        blinkConsole.DisableInteract();
     }
 
     IEnumerator StartLevel()
@@ -76,6 +83,25 @@ public class TutorialManager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+
+        // blink to ensure fires are gone
+        blinkConsole.EnableInteract();
+        blinkConsole.EnableOutline();
+        headConsole.DisableInteract();
+
+        repeatDialogue = blinkRepeatDialogue;
+        repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
+
+        yield return new WaitUntil(() => blinked);
+        StopCoroutine(repeatDialogueRoutine);
+        GlobalPlayerUIManager.Instance.StopText();
+
+        blinkConsole.DisableInteract();
+        blinkConsole.enabled = false;
+
+        Debug.Log(3);
         // 3. message from general plorp about eye terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
@@ -90,25 +116,38 @@ public class TutorialManager : MonoBehaviour
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
-        // 4. message from general plorp about arm terminals
+        // 4. move until the rectile becomes green
+        Debug.Log(4);
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+        headConsole.first = true;
+        yield return new WaitUntil(() => eyeAim);
+
+
+        // 5. message from general plorp about arm terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
         leftConsole.EnableInteract();
         rightConsole.EnableInteract();
 
+        leftConsole.EnableOutline();
+        rightConsole.EnableOutline();
+
         repeatDialogue = armRepeatDialog;
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
 
         yield return new WaitUntil(() => interactArmTerminal);
+        leftConsole.DisableOutline();
+        rightConsole.DisableOutline();
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
-        // 5. what the arm does
+        // 6. what the arm does
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
-        // 6. how to grapple
+        // 7. how to grapple
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         repeatDialogue = grabRepeatDialog;
         index++;
@@ -119,7 +158,21 @@ public class TutorialManager : MonoBehaviour
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
-        // 7. how to play basketball
+        // drop ball
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+
+        repeatDialogue = dropRepeatDialogue;
+        repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
+        yield return new WaitUntil(() => dropBall);
+        StopCoroutine(repeatDialogueRoutine);
+        GlobalPlayerUIManager.Instance.StopText();
+
+        // Start play basketball
+        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        index++;
+
+        // 8. how to play basketball
         repeatDialogue = dialogues[index];
         index++;
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
@@ -128,7 +181,7 @@ public class TutorialManager : MonoBehaviour
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
-        // 8. Leg terminal
+        // 9. Leg terminal
         hipConsole.EnableInteract();
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
@@ -136,17 +189,17 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitUntil(() => interactLegTerminal);
         GlobalPlayerUIManager.Instance.StopText();
 
-        // 9. How to walk
+        // 10. How to walk
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
         // done tutorial
         yield return new WaitForSeconds(15f);
-        // 10. Brain terminal online
+        // 11. Brain terminal online
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
-        // 11. General signing off
+        // 12. General signing off
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
 
@@ -155,6 +208,7 @@ public class TutorialManager : MonoBehaviour
 
         // reenable blinking fires 
         blinkConsole.enabled = true;
+        blinkConsole.EnableInteract();
     }
 
     IEnumerator RepeatDialogue()

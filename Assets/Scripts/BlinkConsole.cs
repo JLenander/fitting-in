@@ -23,6 +23,7 @@ public class BlinkConsole : Interactable
     private bool isFullyPixelated = false;
     private bool isInFireBuffer = false;
     private bool fireOver = false;
+    private bool _canInteract = false;
 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class BlinkConsole : Interactable
         pressAnimationCountdown = eyeAnimationTime;
         fireBufferCountdown = fireBufferTime;
         timerIsRunning = true;
+        _canInteract = true;
 
         PopUpUIHandler.Instance.HideBlinkPopUp();
     }
@@ -107,6 +109,8 @@ public class BlinkConsole : Interactable
 
     public override void Interact(GameObject player)
     {
+        if (!_canInteract) return;
+
         PlayerInteract playerInteract = player.GetComponent<PlayerInteract>();
         if (!isFullyPixelated || (isFullyPixelated && isInFireBuffer))
             ResetTimers(); // only allow lever to reset timer if not at critical
@@ -120,6 +124,11 @@ public class BlinkConsole : Interactable
 
         if (enterSfx != null)
             enterSfx.Play();
+
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.blinked = true;
+        }
     }
 
     public void ResetTimers()
@@ -153,5 +162,24 @@ public class BlinkConsole : Interactable
 
         hoverMessage = "Blink";
         msgColour = new Color(1, 1, 1, 1);
+    }
+
+    public void DisableInteract()
+    {
+        _canInteract = false;
+        timerIsRunning = false;
+        hoverMessage = "[CONTROL DISABLED]";
+        msgColour = new Color(1, 0, 0, 1);
+        outlineColour = new Color(1, 0, 0, 1);
+    }
+
+    public void EnableInteract()
+    {
+        _canInteract = true;
+        ResetTimers();
+        timerIsRunning = true;
+        hoverMessage = "Blink";
+        msgColour = new Color(1, 1, 1, 1);
+        outlineColour = new Color(1, 1, 1, 1);
     }
 }
