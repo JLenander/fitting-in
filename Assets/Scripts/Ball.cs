@@ -13,14 +13,24 @@ public class Ball : InteractableObject
     float minSpeed = 0f;
     float maxSpeed = 10f;
 
+    private float globalGravity = -9.81f;
+    private float gravityScale = 5.0f;
+
     public override void Start()
     {
         base.Start();
         parent = transform.parent;
 
         rg = GetComponent<Rigidbody>();
+        rg.useGravity = false;
 
         hoopSfx.SetParameter("ballspeed", velocity);
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
+        rg.AddForce(gravity, ForceMode.Acceleration);
     }
 
     public override void InteractWithHand(Transform obj, HandMovement target)
