@@ -13,7 +13,7 @@ public class Hoop : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object entering the hoop has the correct tag
-        if (other.CompareTag(ballTag) || other.CompareTag(phoneTag))
+        if (other.CompareTag(ballTag))
         {
             if (TutorialManager.Instance != null)
             {
