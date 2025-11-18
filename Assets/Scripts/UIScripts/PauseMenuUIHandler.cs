@@ -182,7 +182,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         }
     }
 
-    private void ReturnToGameButtonHandler()
+    private void ReturnToLevelButtonHandler()
     {
         GlobalLevelManager.Instance.LoadLevelSelectScreen();
     }
@@ -207,7 +207,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         // Return to game handler is setup by each player later on (RegisterPlayerSettingsCallback) as it needs to pass specific data to each player
         
         // Setup return to level select button callback
-        _returnToLevelSelectButton.clicked += ReturnToGameButtonHandler;
+        _returnToLevelSelectButton.clicked += ReturnToLevelButtonHandler;
         
         // Setup quit game button callback
         _quitGameButton.clicked += QuitGameButtonHandler;
