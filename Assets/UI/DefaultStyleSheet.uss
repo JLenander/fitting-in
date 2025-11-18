@@ -42,11 +42,11 @@
 }
 
 .custom-image-button-border {
-    -unity-background-image-tint-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(90, 178, 82);
 }
 
 .custom-image-button:focus .custom-image-button-border {
-    -unity-background-image-tint-color: rgb(90, 178, 82);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
 .custom-image-button {
