@@ -1,38 +1,45 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/CharacterSelect/CharacterSelect.uss?fileID=7433441132597879392&amp;guid=dc71b3340487bd840ad68aa282f11ad4&amp;type=3#CharacterSelect" />
-    <ui:VisualElement name="PlainColorBackground" style="flex-grow: 1; background-color: rgba(205, 205, 205, 0); justify-content: space-evenly; align-content: center; align-items: center; flex-direction: row;">
-        <ui:VisualElement name="ButtonInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; width: 25%; padding-left: 70px; padding-top: 100px;">
+    <ui:VisualElement name="PlainColorBackground" style="flex-grow: 1; background-color: rgb(255, 255, 255); justify-content: space-evenly; align-content: center; align-items: center; flex-direction: row; background-image: url(&quot;project://database/Assets/CameraView_RT.renderTexture?fileID=8400000&amp;guid=fbdb23be50b66b24baac07872c482b3e&amp;type=2#CameraView_RT&quot;); background-size: 100% 100%;">
+        <ui:VisualElement name="ButtonInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; width: 30%;">
             <ui:VisualElement name="TopInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px;">
-                <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-bottom: 50px; margin-left: 15px;">
+                <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px;">
                     <ui:VisualElement name="JoinText" class="button-icon" style="width: 503.46px; height: 110.77px; background-image: resource(&apos;UI/CharSelect/Text/Join&apos;);" />
                 </ui:VisualElement>
-                <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-left: 16px;">
+                <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; padding-left: 5px;">
                     <ui:VisualElement name="LeaveText" class="button-icon" style="width: 571.15px; height: 110.77px; background-image: resource(&apos;UI/CharSelect/Text/leave&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="StartInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-top: 50px; margin-left: 20px; margin-bottom: 200px; visibility: hidden;">
+            <ui:VisualElement name="StartInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; visibility: hidden; padding-left: 10px;">
                 <ui:VisualElement name="StartButtonIcon" class="button-icon" style="width: 243.08px; height: 110.77px; background-image: resource(&apos;UI/CharSelect/Text/start_icons&apos;);" />
                 <ui:VisualElement name="StartText" class="button-icon" style="width: 191.12px; height: 110.77px; background-image: resource(&apos;UI/CharSelect/Text/start_text&apos;);" />
             </ui:VisualElement>
         </ui:VisualElement>
-        
-        <ui:VisualElement name="PlayerInfo" style="height: 100%; width: 75%; position: relative; ">
-            <ui:VisualElement name="P1Label" class="button-icon" style="width: 140px; height: 140px; background-image: resource(&apos;UI/CharSelect/P1_P2_P3/P1&apos;); position: absolute; top: 290px; left: 340px; visibility: hidden;" />
-            <ui:VisualElement name="P2Label" class="button-icon" style="width: 150px; height: 150px; background-image: resource(&apos;UI/CharSelect/P1_P2_P3/P2&apos;); position: absolute; top: 260px; left: 695px; visibility: hidden;" />
-            <ui:VisualElement name="P3Label" class="button-icon" style="width: 140px; height: 140px; background-image: resource(&apos;UI/CharSelect/P1_P2_P3/P3&apos;); position: absolute; top: 290px; left: 1070px; visibility: hidden;" />
-
-            <ui:VisualElement name="P1L1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/L1&apos;); position: absolute; top: 720px; left: 350px; visibility: hidden;" />
-            <ui:VisualElement name="P1R1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/R1&apos;); position: absolute; top: 720px; left: 420px; visibility: hidden;" />
-            <ui:VisualElement name="P2L1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/L1&apos;); position: absolute; top: 760px; left: 715px; visibility: hidden;" />
-            <ui:VisualElement name="P2R1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/R1&apos;); position: absolute; top: 760px; left: 785px; visibility: hidden;" />
-            <ui:VisualElement name="P3L1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/L1&apos;); position: absolute; top: 720px; left: 1070px; visibility: hidden;" />
-            <ui:VisualElement name="P3R1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/R1&apos;); position: absolute; top: 720px; left: 1140px; visibility: hidden;" />
-            
-            <ui:Label name="Player1ColorWarning" text="Color taken by Player 1" style="width: 100px; height: 100px; color: red; font-size: 24px; position: absolute; top: 870px; left: 260px; visibility: hidden;" />
-            <ui:Label name="Player2ColorWarning" text="Color taken by Player 1" style="width: 100px; height: 100px; color: red; font-size: 26px; position: absolute; top: 910px; left: 640px; visibility: hidden;" />
-            <ui:Label name="Player3ColorWarning" text="Color taken by Player 1" style="width: 100px; height: 100px; color: red; font-size: 24px; position: absolute; top: 870px; left: 1045px; visibility: hidden;" />
-
+        <ui:VisualElement name="PlayerInfo" style="height: 100%; width: 70%; position: relative; flex-direction: row; align-items: center;">
+            <ui:VisualElement name="P1VialElements" style="flex-grow: 0; flex-shrink: 0; height: 70%; width: 20%; align-items: center; left: 5.5%; position: relative;">
+                <ui:VisualElement name="P1Label" class="button-icon" style="width: 140px; height: 140px; background-image: resource(&apos;UI/CharSelect/P1_P2_P3/P1&apos;); position: relative; visibility: hidden; top: 6%;" />
+                <ui:VisualElement name="P1L1R1" style="flex-grow: 0; width: 120px; height: 60px; flex-direction: row; bottom: 24%; position: absolute;">
+                    <ui:VisualElement name="P1L1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/L1&apos;); position: relative; visibility: hidden;" />
+                    <ui:VisualElement name="P1R1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/R1&apos;); visibility: hidden;" />
+                </ui:VisualElement>
+                <ui:Label name="Player1ColorWarning" text="Color taken by Player 1" style="color: red; font-size: 24px; visibility: hidden; -unity-text-align: upper-center; bottom: 10%; position: absolute;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="P2VialElements" style="flex-grow: 0; height: 70%; width: 20%; left: 15%; align-items: center;">
+                <ui:VisualElement name="P2Label" class="button-icon" style="width: 150px; height: 150px; background-image: resource(&apos;UI/CharSelect/P1_P2_P3/P2&apos;); visibility: hidden; top: 2%;" />
+                <ui:VisualElement name="P2L1R1" style="flex-grow: 0; width: 120px; height: 60px; flex-direction: row; bottom: 20%; position: absolute;">
+                    <ui:VisualElement name="P2L1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/L1&apos;); visibility: hidden;" />
+                    <ui:VisualElement name="P2R1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/R1&apos;); visibility: hidden;" />
+                </ui:VisualElement>
+                <ui:Label name="Player2ColorWarning" text="Color taken by Player 1" style="color: red; font-size: 26px; visibility: hidden; -unity-text-align: upper-center; bottom: 4%; position: absolute;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="P3VialElements" style="flex-grow: 0; width: 20%; height: 70%; left: 20%; align-items: center;">
+                <ui:VisualElement name="P3Label" class="button-icon" style="width: 140px; height: 140px; background-image: resource(&apos;UI/CharSelect/P1_P2_P3/P3&apos;); visibility: hidden; top: 6%;" />
+                <ui:VisualElement name="P3L1R1" style="flex-grow: 0; width: 120px; height: 60px; flex-direction: row; position: absolute; bottom: 24%;">
+                    <ui:VisualElement name="P3L1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/L1&apos;); visibility: hidden;" />
+                    <ui:VisualElement name="P3R1" class="button-icon" style="width: 60px; height: 60px; background-image: resource(&apos;UI/CharSelect/L1R1/R1&apos;); visibility: hidden;" />
+                </ui:VisualElement>
+                <ui:Label name="Player3ColorWarning" text="Color taken by Player 1" style="color: red; font-size: 24px; visibility: hidden; -unity-text-align: upper-center; bottom: 10%; position: absolute;" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        
     </ui:VisualElement>
 </ui:UXML>
