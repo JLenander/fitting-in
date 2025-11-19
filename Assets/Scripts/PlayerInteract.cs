@@ -63,6 +63,10 @@ public class PlayerInteract : MonoBehaviour
                 
                 interacting?.Return(gameObject);
                 interacting = null;
+                if (GlobalPlayerManager.Instance != null)
+                {
+                    GlobalPlayerManager.Instance.numPlayersOnTerminal--;
+                }
             }
         }
         else
@@ -113,6 +117,10 @@ public class PlayerInteract : MonoBehaviour
                 if (newInteractable.enabled)
                 {
                     SetNewCurrInteractable(newInteractable);
+                    if (GlobalPlayerManager.Instance != null)
+                    {
+                        GlobalPlayerManager.Instance.numPlayersOnTerminal++;
+                    }
                 }
                 else
                 {

@@ -23,6 +23,8 @@ public class GlobalPlayerManager : MonoBehaviour
 
     public StudioEventEmitter pauseSS;
 
+    public int numPlayersOnTerminal = 0;
+
     // To replace by colors player pick - to reference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
     {
