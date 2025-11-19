@@ -102,7 +102,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(playerColor);
             };
 
-            // register callback for opening and closing pause menu
+            // register callback for opening (pausing game time)
             _players[idx].PauseMenuDelegate = ctx =>
             {
                 // Set all players in UI
@@ -123,6 +123,16 @@ public class GlobalPlayerManager : MonoBehaviour
                 
                 // Pause game on pause menu open
                 Time.timeScale = 0;
+            };
+            
+            // register callback for closing pause menu (unpausing game time)
+            Action closePauseMenuDelegate = () =>
+            {
+                // Resume game on pause menu open
+                Time.timeScale = 1;
+                _pauseMenuUIHandler.HidePauseMenu();
+                //stop lowpass audio
+                RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 0f);
             };
 
             // register callbacks for the character select screen actions.
@@ -156,16 +166,14 @@ public class GlobalPlayerManager : MonoBehaviour
                             _pauseMenuUIHandler.RegisterPlayerSettingsCallback(i, UpdatePlayerSettings);
                             _pauseMenuUIHandler.ShowPlayerSettings(i);
 
-                            // assign pause menu open/close delegates
+                            // assign pause menu open/close input action delegates
                             InputActionMapper.GetPlayerOpenPauseMenuAction(_players[i].Input).started += Players[i].PauseMenuDelegate;
                             InputActionMapper.GetUIClosePauseMenuAction(_players[i].Input).started += ctx =>
                             {
-                                // Resume game on pause menu open
-                                Time.timeScale = 1;
                                 _pauseMenuUIHandler.ClosePauseMenu();
-                                //stop lowpass audio
-                                RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 0f);
                             };
+                            // assign pause menu close delegate for the return to game button in the pause menu.
+                            _pauseMenuUIHandler.RegisterClosePauseMenuHandler(closePauseMenuDelegate);
 
                             // Inform pause menu of player colors
                             _pauseMenuUIHandler.SetPlayerColor(i, _players[i].PlayerColor);
@@ -376,7 +384,6 @@ public class GlobalPlayerManager : MonoBehaviour
         _players[playerIndex].Player.SetLookSensitivity(playerSettings.LookSensitivity / 10.0f);
         _players[playerIndex].Input.SwitchCurrentActionMap("Player");
         _players[playerIndex].Player.SetNotInPauseMenu();
-        _pauseMenuUIHandler.HidePauseMenu();
     }
 }
 
