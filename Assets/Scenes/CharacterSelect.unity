@@ -599,6 +599,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3307863404234606352, guid: 1894d05cb8ba31e44ac7fbb9cd100c8a, type: 3}
+      propertyPath: '_loadingAnimationSprites.Array.data[19]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 053d760e620a3fe438e9e972ab9b6d32, type: 3}
     - target: {fileID: 4491436819563510747, guid: 1894d05cb8ba31e44ac7fbb9cd100c8a, type: 3}
       propertyPath: m_Name
       value: GlobalLevelManager

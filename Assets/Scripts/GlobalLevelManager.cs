@@ -18,8 +18,7 @@ public class GlobalLevelManager : MonoBehaviour
 {
     public static GlobalLevelManager Instance { get; private set; }
 
-    [SerializeField] private UIDocument loadingScreen;
-    private VisualElement _loadingScreenRoot;
+    [SerializeField] private LoadingScreenUIHandler _loadingScreenUIHandler;
     private AsyncOperation asyncLevelLoad;
     
     private Dictionary<string, int> _sceneNameToLevelIndexMap;
@@ -34,17 +33,14 @@ public class GlobalLevelManager : MonoBehaviour
         {
             Instance = this;
         }
-
-        _loadingScreenRoot = loadingScreen.rootVisualElement;
-        HideLoadingScreen();
-
-        SceneManager.sceneLoaded += SceneLoadHandler;
         
         DontDestroyOnLoad(this);
     }
     
     public void Start()
     {
+        _loadingScreenUIHandler.HideLoadingScreen();
+        
         _sceneNameToLevelIndexMap = new Dictionary<string, int>();
         for (var i = 0; i < GameConfig.Levels.Length; i++)
         {
@@ -52,11 +48,6 @@ public class GlobalLevelManager : MonoBehaviour
         }
             
         SanityCheckSceneNames();
-    }
-
-    public void SceneLoadHandler(Scene oldScene, LoadSceneMode mode)
-    {
-        HideLoadingScreen();
     }
 
     public Level[] GetLevels()
@@ -99,8 +90,8 @@ public class GlobalLevelManager : MonoBehaviour
         {
             TaskManager.GenericInstance.ClearActiveTasks();
         }
-
-        LoadScene(SceneConstants.LevelSelectScene);
+        
+        StartCoroutine(LoadScene(SceneConstants.LevelSelectScene));
     }
     
     /// <summary>
@@ -110,11 +101,21 @@ public class GlobalLevelManager : MonoBehaviour
     /// Do not use this method for <i>game levels</i> unless you want to bypass the level select screen and ignore level locked status.
     /// </summary>
     /// <param name="sceneName">The name of the scene to load. Do not use magic strings, see <see cref="SceneConstants"/></param>
-    public void LoadScene(string sceneName)
+    public IEnumerator LoadScene(string sceneName)
     {
-        ShowLoadingScreen();
+        // Start loading screen (and wait for fade in animation)
+        yield return _loadingScreenUIHandler.ShowLoadingScreen();
+        
         GlobalPlayerManager.Instance?.PrepareAllPlayersForSceneChange();
-        SceneManager.LoadScene(sceneName);
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!loadOperation.isDone)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        
+        // hide and wait for fade out of loading screen animation.
+        yield return _loadingScreenUIHandler.HideLoadingScreen();
     }
     
     /// <summary>
@@ -134,22 +135,12 @@ public class GlobalLevelManager : MonoBehaviour
         
         if (level.status != LevelStatus.Locked)
         {
-            LoadScene(level.sceneName);
+            StartCoroutine(LoadScene(level.sceneName));
         }
         else
         {
             Debug.Log("Level at index " + levelIndex + " is locked");
         }
-    }
-
-    private void ShowLoadingScreen()
-    {
-        _loadingScreenRoot.style.display = DisplayStyle.Flex;
-    }
-
-    private void HideLoadingScreen()
-    {
-        _loadingScreenRoot.style.display = DisplayStyle.None;
     }
 
     private void SanityCheckSceneNames()

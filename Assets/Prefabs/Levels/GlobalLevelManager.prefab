@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8307155189481445372}
   - component: {fileID: 3140903682302014024}
   - component: {fileID: 293253197033429057}
+  - component: {fileID: 3307863404234606352}
   m_Layer: 0
   m_Name: GlobalLevelManager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88eb7dbd43ccbf54fa3f6ad3744b5d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  loadingScreen: {fileID: 293253197033429057}
+  _loadingScreenUIHandler: {fileID: 3307863404234606352}
 --- !u!114 &293253197033429057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,3 +70,38 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &3307863404234606352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491436819563510747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f9a67080a18bf4ab176d04807ff75f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadingScreenUIHandler
+  loadingScreen: {fileID: 293253197033429057}
+  fps: 10
+  fadeAnimationSeconds: 0.4
+  _loadingAnimationSprites:
+  - {fileID: 2800000, guid: d864be15346da574db4169e8c065e309, type: 3}
+  - {fileID: 2800000, guid: fd1109c5227c991428022ab55b30c060, type: 3}
+  - {fileID: 2800000, guid: 6deb1f75e29b6034482d20822b3da5ef, type: 3}
+  - {fileID: 2800000, guid: 6d3f48faeb30a32449fab2ecfb34043d, type: 3}
+  - {fileID: 2800000, guid: ada516372187a6643b461455f54a7488, type: 3}
+  - {fileID: 2800000, guid: 0d666a1bb88915449bf53a9a5d9ca218, type: 3}
+  - {fileID: 2800000, guid: bb49a6f7106c6ae4684f6e9b442fc3c8, type: 3}
+  - {fileID: 2800000, guid: ba88d4a4f560ad740a669faa34fca651, type: 3}
+  - {fileID: 2800000, guid: 9bf8d25af1416a841b35983d739940c1, type: 3}
+  - {fileID: 2800000, guid: d4674529929374740bb79d94798e6dc9, type: 3}
+  - {fileID: 2800000, guid: c34058b7d25648c4290918945d011ee9, type: 3}
+  - {fileID: 2800000, guid: 83d36df8ed5600c4293397cc4e4d9b5c, type: 3}
+  - {fileID: 2800000, guid: 8e8cf47b23f79e4459f0cacde51630fb, type: 3}
+  - {fileID: 2800000, guid: 38c30f908d06a9641bf456dce32918f7, type: 3}
+  - {fileID: 2800000, guid: 5eee30264f6ff384298027af6473e25b, type: 3}
+  - {fileID: 2800000, guid: db5e8bda52ed9eb4ea43545ce3300e1e, type: 3}
+  - {fileID: 2800000, guid: 22058ecf80258054996e5b7e19e20a8b, type: 3}
+  - {fileID: 2800000, guid: 05f9f7af5b6f0c649ada8abc2eeef280, type: 3}
+  - {fileID: 2800000, guid: 053d760e620a3fe438e9e972ab9b6d32, type: 3}
