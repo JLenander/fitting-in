@@ -307,6 +307,9 @@ public class GlobalPlayerManager : MonoBehaviour
         
         // Reset timescale to 1 if we are paused
         Time.timeScale = 1;
+
+        // Undo the pause menu audio effect in case we were paused.
+        pauseSS.Stop();
     }
 
     /// <summary>
