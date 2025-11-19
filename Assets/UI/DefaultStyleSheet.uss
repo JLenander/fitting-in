@@ -32,10 +32,10 @@
     border-right-width: 6px;
     border-bottom-width: 6px;
     border-left-width: 6px;
-    border-left-color: rgb(150, 221, 136);
-    border-right-color: rgb(150, 221, 136);
-    border-top-color: rgb(150, 221, 136);
-    border-bottom-color: rgb(150, 221, 136);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
 }
 
 .button {

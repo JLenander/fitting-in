@@ -171,6 +171,7 @@ public struct Level
     public string levelArtSpriteName;
     // The name of the scene corresponding to the level to unlock after this level is completed.
     public string[] unlocksScenes;
+    private Texture2D _levelArtSprite;
 
     public Level(string displayName, string sceneName, LevelStatus status, string[] unlocksScenes = null, string levelArtSpriteName = "default_level")
     {
@@ -178,7 +179,8 @@ public struct Level
         {
             levelArtSpriteName = "default_level";
         }
-            
+
+        this._levelArtSprite = null;
         this.displayName = displayName;
         this.sceneName = sceneName;
         this.status = status;
@@ -193,8 +195,11 @@ public struct Level
     public Sprite GetLevelArtSprite()
     {
         // For some reason Resources.Load<Sprite> doesn't work
-        var texture = Resources.Load<Texture2D>(levelArtSpriteName);
-        var resource = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+        if (_levelArtSprite == null)
+        {
+            _levelArtSprite = Resources.Load<Texture2D>(levelArtSpriteName);
+        }
+        var resource = Sprite.Create(_levelArtSprite, new Rect(0, 0, _levelArtSprite.width, _levelArtSprite.height), Vector2.zero);
         return resource;
     }
 }
