@@ -51,7 +51,7 @@ public class Ball : InteractableObject
             DisableOutline();
             applyGravity = false;
             transform.parent = obj;
-            transform.localPosition = new Vector3(-1.12f, 1.88f, -7.67f);
+            transform.localPosition = new Vector3(-0.55f, 4.28f, -6.77f);
             //transform.localRotation = Quaternion.Euler(-88f, 10f, 0f);
             canPickup = false;
 

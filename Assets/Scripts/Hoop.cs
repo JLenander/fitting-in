@@ -10,6 +10,9 @@ public class Hoop : MonoBehaviour
     public int score = 0;
     public StudioEventEmitter scoreSfx;
 
+    private float phoneCooldown = 0.5f;
+    private float lastPhoneScoreTime = -1f;
+
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object entering the hoop has the correct tag
@@ -19,8 +22,22 @@ public class Hoop : MonoBehaviour
             {
                 TutorialManager.Instance.scoreBall = true;
             }
-
+            
             score++;
+            scoreSfx.Play();
+
+            if (scoreText != null)
+            {
+                scoreText.text = score.ToString();
+            }
+        }
+        else if (other.CompareTag(phoneTag))
+        {
+            if (Time.time - lastPhoneScoreTime < phoneCooldown)
+                return;
+
+            lastPhoneScoreTime = Time.time;
+            score += 10;
             scoreSfx.Play();
 
             if (scoreText != null)
