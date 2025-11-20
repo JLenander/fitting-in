@@ -333,6 +333,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 charController.enabled = false;
                 Debug.Log("Attempting scene change player " + player.Index + " teleport to anchor for new scene " + newScene.name);
                 player.PlayerObject.transform.position = spawnAnchor.transform.position;
+                player.PlayerObject.GetComponent<Player>().ResetLook();
                 charController.enabled = prevState;
 
                 // Switch action map to player action map if not character selection screen
