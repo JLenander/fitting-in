@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 9182400989961908325}
   - component: {fileID: 5365399774034592686}
   - component: {fileID: 6134447613992591747}
+  - component: {fileID: 4173374379253353355}
   m_Layer: 0
   m_Name: ExteriorEyeScreenCamera
   m_TagString: Untagged
@@ -436,6 +437,19 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &4173374379253353355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776627885417149895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aef339cbcc661641bd24649e800389b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraAspectRatio
+  aspectRatio: 2.6666667
 --- !u!1001 &1299075497192300576
 PrefabInstance:
   m_ObjectHideFlags: 0
