@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/SplitscreenUnderlay/SplitscreenUI.uss?fileID=7433441132597879392&amp;guid=cc718fcb780cf4c42a437b8b34ef10cb&amp;type=3" />
+    <Style src="project://database/Assets/UI/SplitscreenUnderlay/SplitscreenUI.uss?fileID=7433441132597879392&amp;guid=cc718fcb780cf4c42a437b8b34ef10cb&amp;type=3#SplitscreenUI" />
     <ui:VisualElement name="UnderlayContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: flex-start; width: 100%; height: 100%; top: 0; position: absolute; left: 0; flex-shrink: 0;">
         <ui:VisualElement name="Player1" style="flex-grow: 0; width: 33.3333%; height: 33.3333%; position: absolute; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; left: 0; bottom: 0;">
             <ui:VisualElement name="Player1GreyscaleOverlay" class="greyscale-overlay" />
@@ -42,7 +42,7 @@
                 <ui:VisualElement name="AimReticleBorder" style="flex-grow: 0; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/reticle_border.png?fileID=2800000&amp;guid=b8fecfbf0873eae43b6dd6e0dd3c3c98&amp;type=3#reticle_border&quot;); -unity-background-image-tint-color: rgb(0, 0, 0);" />
             </ui:VisualElement>
             <ui:VisualElement name="OutsideCamOffOverlay" style="flex-grow: 1; background-color: rgb(165, 213, 223); justify-content: center; flex-direction: row; align-items: center;">
-                <ui:Label text="EYE Power Lost.&#10;Plorp Required!" name="CamOffText" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/AreaKilometer50-gxmEq.otf?fileID=12800000&amp;guid=ef001ebbe0814b84986d79c8d1de465a&amp;type=3#AreaKilometer50-gxmEq&quot;); font-size: 70px;" />
+                <ui:Label text="EYE Power Lost!" name="CamOffText" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/AreaKilometer50-gxmEq.otf?fileID=12800000&amp;guid=ef001ebbe0814b84986d79c8d1de465a&amp;type=3#AreaKilometer50-gxmEq&quot;); font-size: 70px;" />
                 <ui:VisualElement name="CamOffIndicator" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Sprites/UI/Plorp-2D-filled.png?fileID=2800000&amp;guid=560871f419a5e5346bd0d5b6ad65f0a1&amp;type=3#Plorp-2D-filled&quot;); -unity-background-scale-mode: scale-to-fit; height: 400px; width: 400px;" />
             </ui:VisualElement>
             <ui:VisualElement name="DialogueContainer" style="flex-grow: 0; width: 100%; position: absolute;">
