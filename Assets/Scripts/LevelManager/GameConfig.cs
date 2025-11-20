@@ -8,6 +8,6 @@ public class GameConfig
     // Holds the level configuration for the game.
     public static readonly Level[] Levels = {
         new("Tutorial", "Level0", LevelStatus.Unlocked, levelArtSpriteName: "TutorialLevel"),
-        new("Level 1 - Cafe", "Cafe", LevelStatus.Unlocked, levelArtSpriteName: "CafeLevel"),
+        new("Cafe", "Cafe", LevelStatus.Unlocked, levelArtSpriteName: "CafeLevel"),
     };
 }
