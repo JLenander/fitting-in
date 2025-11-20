@@ -10,6 +10,7 @@ public class FillCup : MonoBehaviour
     [SerializeField] private float initialHeight = 0.1f;
 
     private bool full = false;
+    public float fillProgress = 0f;
 
     [SerializeField] private float fillCounter;
     private Vector3 baseScale;
@@ -71,7 +72,7 @@ public class FillCup : MonoBehaviour
             Level1TaskManager.CompleteTaskPourCoffee();
         }
 
-        float fillProgress = fillCounter / secondsTillFull;
+        fillProgress = fillCounter / secondsTillFull;
         float newYScale = Mathf.Lerp(initialHeight, maxFillHeight, fillProgress);
         float yOffset = (newYScale - initialHeight) / 1.5f;
 
