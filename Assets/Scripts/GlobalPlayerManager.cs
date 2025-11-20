@@ -21,8 +21,6 @@ public class GlobalPlayerManager : MonoBehaviour
     private ICharacterSelectScreen _characterSelectScreen;
     private PauseMenuUIHandler _pauseMenuUIHandler;
 
-    public StudioEventEmitter pauseSS;
-
     // To replace by colors player pick - to reference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
     {
@@ -117,7 +115,7 @@ public class GlobalPlayerManager : MonoBehaviour
                     }
                 }
                 //lowpass audio
-                pauseSS.Play();
+                RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 1f);
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(_players[idx].PlayerColor);
                 // Show and focus the pause menu.
                 _pauseMenuUIHandler.ShowPauseMenu();
@@ -166,7 +164,7 @@ public class GlobalPlayerManager : MonoBehaviour
                                 Time.timeScale = 1;
                                 _pauseMenuUIHandler.ClosePauseMenu();
                                 //stop lowpass audio
-                                pauseSS.Stop();
+                                RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 0f);
                             };
 
                             // Inform pause menu of player colors

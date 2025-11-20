@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -77,6 +78,12 @@ public class PlayerInteract : MonoBehaviour
                     interacting = currentItem;
                     currentItem.Interact(gameObject);
                     DisableCurrInteractable();
+                }
+                // Play reject sound if cannot interact
+                // do here because terminal Interact() doesnt actally get called
+                else
+                {
+                    RuntimeManager.PlayOneShot("event:/SFX/Interior/terminal_reject");
                 }
             }
         }
