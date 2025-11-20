@@ -255,4 +255,13 @@ public class Player : MonoBehaviour
     {
         lookSensitivity = sensitivity;
     }
+
+    /// <summary>
+    /// Reset the player to look in the default direction.
+    /// </summary>
+    public void ResetLook()
+    {
+        xRotationPlayerCam = 0f;
+        yRotationPlayerCam = 0f;
+    }
 }

@@ -10514,6 +10514,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1590754953}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4776627885417149895, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1411609138}
     - targetCorrespondingSourceObject: {fileID: 1247843849156549410, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 370547641}
@@ -14884,6 +14887,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3246218d179db74418e260db3faf52ab, type: 3}
+--- !u!1 &1411609137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4776627885417149895, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1411609138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411609137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aef339cbcc661641bd24649e800389b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraAspectRatio
+  aspectRatio: 2.6666667
 --- !u!64 &1413964609
 MeshCollider:
   m_ObjectHideFlags: 0

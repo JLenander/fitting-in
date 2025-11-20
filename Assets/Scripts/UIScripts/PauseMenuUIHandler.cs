@@ -249,6 +249,16 @@ public class PauseMenuUIHandler : MonoBehaviour
     }
 
     /// <summary>
+    /// Register a callback for general actions performed when the close pause menu button is clicked.
+    /// May include closing the pause menu, unpausing game time, etc.
+    /// </summary>
+    /// <param name="callback"></param>
+    public void RegisterClosePauseMenuHandler(Action callback)
+    {
+        _returnToGameButton.clicked += callback;
+    }
+
+    /// <summary>
     /// Register the callback for a particular player's updated settings. Intended to register one callback per player
     /// that runs when the pause menu is closed.
     /// </summary>
@@ -267,7 +277,8 @@ public class PauseMenuUIHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Close the pause menu and save all settings
+    /// Close the pause menu and trigger all actions associated with closing the pause menu
+    /// (ex. save player settings and other callbacks)
     /// </summary>
     public void ClosePauseMenu()
     {
@@ -301,11 +312,17 @@ public class PauseMenuUIHandler : MonoBehaviour
         _playerLookSensitivities[playerIndex].style.display = DisplayStyle.None;
     }
 
+    /// <summary>
+    /// Visually show the pause menu (does trigger any callbacks)
+    /// </summary>
     public void ShowPauseMenu()
     {
         root.style.display = DisplayStyle.Flex;
     }
 
+    /// <summary>
+    /// Visually hide the pause menu (does not save or trigger any callbacks)
+    /// </summary>
     public void HidePauseMenu()
     {
         root.style.display = DisplayStyle.None;

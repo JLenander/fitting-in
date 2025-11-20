@@ -1,12 +1,19 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/DefaultStyleSheet.uss?fileID=7433441132597879392&amp;guid=9107073a6abb0d64a85c8de9603265e8&amp;type=3#DefaultStyleSheet" />
-    <ui:VisualElement name="LevelContainer" focusable="true" class="unity-button" style="flex-grow: 0; width: 600px; height: 400px;">
-        <ui:VisualElement name="Level" focusable="true" style="flex-grow: 0; align-self: auto; width: 100%; height: 100%; flex-shrink: 0; position: absolute; top: 0; left: 0;">
-            <ui:VisualElement name="LevelImage" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI/Resources/LevelSelect/default_level.png?fileID=2800000&amp;guid=d6afadd9911e4904fb6a26df14ae9059&amp;type=3#default_level&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 100% 100%;" />
-            <ui:Label text="Level Name" name="LevelDisplayName" style="-unity-text-align: middle-center; font-size: 28px;" />
+    <ui:VisualElement style="flex-grow: 0; flex-shrink: 0; align-items: center;">
+        <ui:VisualElement style="flex-grow: 0; top: 0%; height: 100px;">
+            <ui:Label text="Level Name" name="LevelDisplayName" style="-unity-text-align: middle-center; font-size: 42px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/AreaKilometer50-gxmEq.otf?fileID=12800000&amp;guid=ef001ebbe0814b84986d79c8d1de465a&amp;type=3#AreaKilometer50-gxmEq&quot;);" />
         </ui:VisualElement>
-        <ui:VisualElement name="LockedOverlay" style="flex-grow: 0; width: 100%; height: 100%; flex-shrink: 0; position: absolute; top: 0; left: 0; background-color: rgba(134, 134, 134, 0.5); visibility: hidden;">
-            <ui:VisualElement name="LockIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI/Images/lock-icon.png?fileID=2800000&amp;guid=68e92614fd4c7d8429ef9bb6a2d5976c&amp;type=3#lock-icon&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-background-scale-mode: scale-to-fit; background-size: contain; flex-shrink: 0; width: 24%; height: 100%; align-self: center;" />
+        <ui:VisualElement name="LevelContainer" focusable="true" class="unity-button" style="flex-grow: 0; width: 600px; height: 400px; background-color: rgba(89, 89, 89, 0); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;">
+            <ui:VisualElement name="Level" focusable="true" style="flex-grow: 0; align-self: auto; width: 100%; height: 100%; flex-shrink: 0; position: absolute; top: 0; left: 0; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(188, 188, 188, 0);">
+                <ui:VisualElement name="LevelImage" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI/Resources/LevelSelect/default_level.png?fileID=2800000&amp;guid=d6afadd9911e4904fb6a26df14ae9059&amp;type=3#default_level&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 100% 100%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(53, 58, 61, 0); border-right-color: rgba(53, 58, 61, 0); border-top-color: rgba(53, 58, 61, 0); border-bottom-color: rgba(53, 58, 61, 0); margin-top: 6px; margin-right: 6px; margin-bottom: 6px; margin-left: 6px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="LockedOverlay" style="flex-grow: 0; width: 100%; height: 100%; flex-shrink: 0; position: absolute; top: 0; left: 0; background-color: rgba(134, 134, 134, 0.5); visibility: hidden;">
+                <ui:VisualElement name="LockIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI/Images/lock-icon.png?fileID=2800000&amp;guid=68e92614fd4c7d8429ef9bb6a2d5976c&amp;type=3#lock-icon&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-background-scale-mode: scale-to-fit; background-size: contain; flex-shrink: 0; width: 24%; height: 100%; align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; height: 100px; visibility: hidden;">
+            <ui:Label text="Level Name" name="LevelDisplayNameSpacer" style="-unity-text-align: middle-center; font-size: 42px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/AreaKilometer50-gxmEq.otf?fileID=12800000&amp;guid=ef001ebbe0814b84986d79c8d1de465a&amp;type=3#AreaKilometer50-gxmEq&quot;);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
