@@ -309,7 +309,7 @@ public class GlobalPlayerManager : MonoBehaviour
         Time.timeScale = 1;
 
         // Undo the pause menu audio effect in case we were paused.
-        pauseSS.Stop();
+        RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 0f);
     }
 
     /// <summary>
