@@ -45,6 +45,7 @@ public class DialogueSystem : MonoBehaviour
 
     public void ClearDialogue()
     {
+        if (!_isDialogueActive) return;
         _dialogueQueue.Clear();
         _isDialogueActive = false;
         StopCoroutine(dialoguePlayer);

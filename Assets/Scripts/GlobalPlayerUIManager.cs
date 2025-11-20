@@ -78,6 +78,10 @@ public class GlobalPlayerUIManager : MonoBehaviour
         dialogueDisplay.gameObject.SetActive(false);
         PopUpUIHandler.Instance.HideBlinkPopUp();
         PopUpUIHandler.Instance.HideNewTaskPopUp();
+
+        // Clear dialogue and stop walking shake before returning to level select
+        StopText();
+        StopWalkingShake();
     }
 
     // log players' cameras

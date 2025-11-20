@@ -117,6 +117,7 @@ public class HeadConsole : Interactable
             if (hit.collider.CompareTag("GrappleStop"))
             {
                 _splitscreenUIHandler.ReticleHit();
+                Debug.Log(hit.collider.gameObject.name);
                 if (TutorialManager.Instance != null)
                 {
                     TutorialManager.Instance.eyeAim = true;

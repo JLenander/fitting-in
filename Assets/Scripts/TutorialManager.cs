@@ -136,7 +136,9 @@ public class TutorialManager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
         yield return new WaitForSeconds(5f);
-        yield return new WaitUntil(() => eyeAim);
+        eyeAim = false;
+        yield return new WaitUntil(() => eyeAim && interactEyeTerminal);
+        Debug.Log("eye aim " + eyeAim);
 
         // 5. message from general plorp about arm terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);

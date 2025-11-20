@@ -100,13 +100,6 @@ public class GlobalLevelManager : MonoBehaviour
             TaskManager.GenericInstance.ClearActiveTasks();
         }
 
-        // Clear dialogue and stop walking shake before returning to level select
-        if (GlobalPlayerUIManager.Instance != null)
-        {
-            GlobalPlayerUIManager.Instance.StopText();
-            GlobalPlayerUIManager.Instance.StopWalkingShake();
-        }
-        
         LoadScene(SceneConstants.LevelSelectScene);
     }
     

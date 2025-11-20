@@ -25,6 +25,8 @@ public class BlinkConsole : Interactable
     private bool fireOver = false;
     private bool _canInteract = false;
 
+    private bool runBlink = true;
+
     private void Start()
     {
         DisableOutline();
@@ -39,6 +41,7 @@ public class BlinkConsole : Interactable
 
     void Update()
     {
+        if (!runBlink) return;
         if (timerIsRunning)
         {
             if (timeToNextBlink > 0)
@@ -67,7 +70,7 @@ public class BlinkConsole : Interactable
         }
         else
         {
-            if (pressAnimationCountdown > 0 && timerIsRunning)
+            if (pressAnimationCountdown > 0)
             {
                 pressAnimationCountdown -= Time.deltaTime;
             }
@@ -84,7 +87,7 @@ public class BlinkConsole : Interactable
                     isInFireBuffer = true;
                 }
 
-                if (isInFireBuffer && timerIsRunning)
+                if (isInFireBuffer)
                 {
                     fireBufferCountdown -= Time.deltaTime;
 
@@ -167,7 +170,7 @@ public class BlinkConsole : Interactable
     public void DisableInteract()
     {
         _canInteract = false;
-        timerIsRunning = false;
+        runBlink = false;
         hoverMessage = "[CONTROL DISABLED]";
         msgColour = new Color(1, 0, 0, 1);
         outlineColour = new Color(1, 0, 0, 1);
@@ -177,7 +180,7 @@ public class BlinkConsole : Interactable
     {
         _canInteract = true;
         ResetTimers();
-        timerIsRunning = true;
+        runBlink = true;
         hoverMessage = "Blink";
         msgColour = new Color(1, 1, 1, 1);
         outlineColour = new Color(1, 1, 1, 1);
@@ -185,6 +188,6 @@ public class BlinkConsole : Interactable
 
     public void SetTimerIsRunning(bool isRunning)
     {
-        timerIsRunning = isRunning;
+        runBlink = isRunning;
     }
 }
