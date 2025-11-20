@@ -3,10 +3,10 @@
     <ui:VisualElement name="PlainColorBackground" style="flex-grow: 1; background-color: rgb(255, 255, 255); justify-content: space-evenly; align-content: center; align-items: center; flex-direction: row; background-image: url(&quot;project://database/Assets/CameraView_RT.renderTexture?fileID=8400000&amp;guid=fbdb23be50b66b24baac07872c482b3e&amp;type=2#CameraView_RT&quot;); background-size: 100% 100%;">
         <ui:VisualElement name="ButtonInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px; width: 30%;">
             <ui:VisualElement name="TopInstructions" style="flex-direction: column; align-items: flex-start; gap: 120px;">
-                <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px;">
+                <ui:VisualElement name="JoinInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; margin-bottom: 15px;">
                     <ui:VisualElement name="JoinText" class="button-icon" style="width: 503.46px; height: 110.77px; background-image: resource(&apos;UI/CharSelect/Text/Join&apos;);" />
                 </ui:VisualElement>
-                <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; padding-left: 5px;">
+                <ui:VisualElement name="LeaveInstruction" class="button-instruction" style="flex-direction: row; align-items: center; gap: 50px; padding-left: 5px; margin-bottom: 15px;">
                     <ui:VisualElement name="LeaveText" class="button-icon" style="width: 571.15px; height: 110.77px; background-image: resource(&apos;UI/CharSelect/Text/leave&apos;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
