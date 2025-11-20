@@ -6,8 +6,6 @@ public class HipConsole : Interactable
 {
     private bool _canInteract = true;
     [SerializeField] Transform robotBody;
-    public AudioSource audioSource;
-    public AudioSource denySource;
     public StudioEventEmitter enterSfx;
 
     private TerminalUIHandler uIHandler;
@@ -25,8 +23,6 @@ public class HipConsole : Interactable
     {
         if (!_canInteract)
         {
-            if (denySource != null)
-                denySource.Play();
             return;
         }
         

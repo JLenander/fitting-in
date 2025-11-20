@@ -20,8 +20,6 @@ public class HeadConsole : Interactable
     private GameObject _currPlayer;
 
     public AudioSource hookSource;
-    public AudioSource interactSource;
-    public AudioSource denySource;
 
     public StudioEventEmitter interactSfx;
 
@@ -60,12 +58,6 @@ public class HeadConsole : Interactable
     //                 }
     //                 leftGrappleArmSpline.GetComponent<SplineController>().SetExtending(_leftTriggerAction.ReadValue<float>());
     //             }
-    //             else
-    //             {
-    //                 if (denySource != null)
-    //                     denySource.Play();
-    //             }
-
     //         }
     //         else
     //         {
@@ -91,12 +83,6 @@ public class HeadConsole : Interactable
     //                 }
     //                 rightGrappleArmSpline.GetComponent<SplineController>().SetExtending(_rightTriggerAction.ReadValue<float>());
     //             }
-    //             else
-    //             {
-    //                 if (denySource != null)
-    //                     denySource.Play();
-    //             }
-
     //         }
     //         else
     //         {
@@ -133,8 +119,6 @@ public class HeadConsole : Interactable
     {
         if (!_canInteract)
         {
-            if (denySource != null)
-                denySource.Play();
             return;
         }
 
@@ -284,5 +268,17 @@ public class HeadConsole : Interactable
     public Vector3 GetExternalCameraPosition()
     {
         return exteriorCamera.transform.position;
+    }
+    
+    public void ForcedReturn()
+    {
+        if (_currPlayer != null)
+        {
+            PlayerInteract playerInteract = _currPlayer.GetComponent<PlayerInteract>();
+            if (playerInteract != null)
+            {
+                playerInteract.LeaveCurrInteractable();
+            }
+        }
     }
 }

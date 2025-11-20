@@ -1,3 +1,5 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +15,9 @@ public class CoffeePot : InteractableObject
     public float pourThresholdAngle = 60f; // degrees below horizontal
 
     public AudioSource audioSource;
+    public StudioEventEmitter coffeeSfx;
+    private EventInstance instance;
+
     [SerializeField] private HandConsole leftConsole;
     [SerializeField] private HandConsole rightConsole;
 
@@ -79,6 +84,7 @@ public class CoffeePot : InteractableObject
         // optional raycast visualization
         if (isPouring)
         {
+            instance = coffeeSfx.EventInstance;
             if (Physics.Raycast(origin, direction, out RaycastHit hit, rayLength, layerMask))
             {
                 Debug.DrawLine(origin, hit.point, Color.cyan);
@@ -86,6 +92,27 @@ public class CoffeePot : InteractableObject
                 {
                     cup = hit.collider.GetComponent<FillCup>();
                     cup.AddCoffee();
+                    Debug.Log(cup.fillProgress);
+                    if (cup.fillProgress < 0.25f)
+                    {
+                        coffeeSfx.SetParameter("coffeeMiss", 0.01f);
+                    }
+                    else if (cup.fillProgress < 0.5f)
+                    {
+                        coffeeSfx.SetParameter("coffeeMiss", 0.25f);
+                    }
+                    else if (cup.fillProgress < 0.75f)
+                    {
+                        coffeeSfx.SetParameter("coffeeMiss", 0.50f);
+                    }
+                    else if (cup.fillProgress < 1f)
+                    {
+                        coffeeSfx.SetParameter("coffeeMiss", 0.75f);
+                    }
+                    else
+                    {
+                        coffeeSfx.SetParameter("coffeeMiss", 1.9f);
+                    }
                 }
                 else
                 {
@@ -100,8 +127,8 @@ public class CoffeePot : InteractableObject
     {
         Debug.Log("Started pouring!");
         coffeePourEffect.Play();
-        if (audioSource != null)
-            audioSource.Play();
+        if (coffeeSfx != null)
+            coffeeSfx.Play();
     }
 
     private void OnStopPour()
@@ -109,8 +136,8 @@ public class CoffeePot : InteractableObject
         Debug.Log("Stopped pouring!");
         coffeePourEffect.Stop();
 
-        if (audioSource != null)
-            audioSource.Stop();
+        if (coffeeSfx != null)
+            coffeeSfx.Stop();
     }
 
     public override void InteractWithHand(Transform obj, HandMovement target)
