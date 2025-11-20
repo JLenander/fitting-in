@@ -13,14 +13,29 @@ public class Ball : InteractableObject
     float minSpeed = 0f;
     float maxSpeed = 10f;
 
+    private float globalGravity = -9.81f;
+    private float gravityScale = 5.0f;
+    private bool applyGravity = true;
+
     public override void Start()
     {
         base.Start();
         parent = transform.parent;
 
         rg = GetComponent<Rigidbody>();
+        rg.useGravity = false;
 
         hoopSfx.SetParameter("ballspeed", velocity);
+    }
+
+    void FixedUpdate()
+    {
+        if (applyGravity)
+        {
+            Vector3 gravity = globalGravity * gravityScale * Vector3.up;
+            rg.AddForce(gravity, ForceMode.Acceleration);
+
+        }
     }
 
     public override void InteractWithHand(Transform obj, HandMovement target)
@@ -34,13 +49,14 @@ public class Ball : InteractableObject
 
             // move to hand
             DisableOutline();
-
+            applyGravity = false;
             transform.parent = obj;
-            transform.localPosition = new Vector3(0.0f, 5.2f, -1.0f);
-            transform.localRotation = Quaternion.Euler(-88f, 10f, 0f);
+            transform.localPosition = new Vector3(-0.55f, 4.28f, -6.77f);
+            //transform.localRotation = Quaternion.Euler(-88f, 10f, 0f);
             canPickup = false;
 
             rg.isKinematic = true;
+            rg.interpolation = RigidbodyInterpolation.None;
             triggerCollider.enabled = false;
             Debug.Log("pickup success");
 
@@ -55,15 +71,21 @@ public class Ball : InteractableObject
     public override void StopInteractWithHand(HandMovement target)
     {
         // return to original position
+        applyGravity = true;
         transform.parent = parent;
 
         canPickup = true;
 
         rg.isKinematic = false;
+        rg.interpolation = RigidbodyInterpolation.Interpolate;
         triggerCollider.enabled = true;
         target.handAnimator.SetTrigger("Neutral"); // sets the current hand back to neutral
 
         grappleCollider.enabled = true;
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.dropBall = true;
+        }
     }
 
     void OnCollisionEnter(Collision collision)

@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1401090296469437495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55,6 +55,7 @@ MonoBehaviour:
   outline: {fileID: 4281295598824289921}
   canInteract: 1
   canPickup: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 8590696995257644555}
   grappleCollider: {fileID: 3516257495333985253}
@@ -80,7 +81,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 7.31
-  m_Center: {x: 0, y: 5.02, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7296307097571121242
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -103,7 +104,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
@@ -127,8 +128,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 16.5
-  m_Center: {x: 0, y: 5.02, z: 0}
+  m_Radius: 16
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &592968372886374776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Outline
   outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 10
   precomputeOutline: 0
   bakeKeys: []
@@ -294,7 +295,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 16.57, y: 13.416758, z: 11.52}
-  m_Center: {x: 0, y: 5.6583786, z: -0.5999999}
+  m_Center: {x: 0, y: 0, z: -0.5999999}
 --- !u!1 &7468454833425289800
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +348,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 7.31
-  m_Center: {x: 0, y: 5.02, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &114392856643813798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f16c45ce1caa7d246877e5c187319110, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0355
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f16c45ce1caa7d246877e5c187319110, type: 3}
       propertyPath: m_LocalPosition.z

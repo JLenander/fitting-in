@@ -18,6 +18,7 @@ TagManager:
   - Hoop
   - Food
   - Robot
+  - Phone
   layers:
   - Default
   - TransparentFX

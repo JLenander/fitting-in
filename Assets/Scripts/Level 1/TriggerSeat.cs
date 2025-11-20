@@ -16,11 +16,6 @@ public class TriggerSeat : MonoBehaviour
     // Where the robot's original position is
     private Vector3 robotPositionBeforeSit;
 
-    // only enable collider if we found two hands
-    private int handCount = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-
     // trigger level start at trigger enter
     private void OnTriggerEnter(Collider other)
     {
@@ -39,13 +34,6 @@ public class TriggerSeat : MonoBehaviour
     {
         if (other != null && other.CompareTag("Robot"))
         {
-            // handCount++;
-            // Debug.Log(handCount);
-            // if (handCount == 2)
-            // {
-
-            //     handCount = 0;
-            // }
             playerInside = false;
             BoxCollider collider = GetComponent<BoxCollider>();
             collider.enabled = true;
@@ -61,7 +49,6 @@ public class TriggerSeat : MonoBehaviour
         GlobalPlayerUIManager.Instance.StopWalkingShake();
         BoxCollider collider = GetComponent<BoxCollider>();
         collider.enabled = false;
-        handCount = 0;
     }
 
     public void StandRobot()
@@ -71,7 +58,6 @@ public class TriggerSeat : MonoBehaviour
         robotCharController.enabled = true;
         // enable the exit door collier
         sceneExitDoor.enabled = true;
-        handCount = 0;
     }
 
     public bool PlayerInsideSeat()

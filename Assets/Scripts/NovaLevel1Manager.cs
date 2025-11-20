@@ -39,10 +39,13 @@ public class NovaLevel1Manager : MonoBehaviour
 
     public Coroutine levelCoroutine;
 
+    [SerializeField] BlinkConsole blinkConsole;
+
     void Start()
     {
         Instance = this;
         StartCoroutine(WaitForTaskManager());
+        blinkConsole.SetTimerIsRunning(true);
     }
 
     IEnumerator EatCake()

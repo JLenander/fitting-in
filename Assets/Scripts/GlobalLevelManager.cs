@@ -99,7 +99,7 @@ public class GlobalLevelManager : MonoBehaviour
         {
             TaskManager.GenericInstance.ClearActiveTasks();
         }
-        
+
         LoadScene(SceneConstants.LevelSelectScene);
     }
     
