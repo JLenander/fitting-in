@@ -132,6 +132,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
                 {
                     if (!GlobalPlayerManager.Instance.Players[i].Valid)
                     {
+                        _playerLabels[i].visible = false;
                         continue;
                     }
                     
