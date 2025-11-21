@@ -14,7 +14,7 @@ namespace UIScripts
         private Label[] _playerColorWarnings;
         private VisualElement[] _playerArrows;
         private VisualElement[] _playerLabels;
-        
+
         public GameObject[] plorpSpawns; // assign in inspector
         private PlorpSelect[] _plorps = new PlorpSelect[3];
         public GameObject plorpPrefab;
@@ -23,14 +23,9 @@ namespace UIScripts
         private int _playerCount;
 
         private readonly Color[] _availableColors = {
-            HexToColor("#e74848ff"),
-            HexToColor("#5656f3ff"),
-            HexToColor("#e4e40fff"),
-            HexToColor("#38d45aff"),
-            HexToColor("#ff83f5ff"),
-            HexToColor("#2cebf1ff"),
-            HexToColor("#c340ffff"),
-            HexToColor("#ffb327ff"),
+            new Color(0f, 0f, 0f, 0f),
+            new Color(0f, 0f, 0.01f, 0f),
+            new Color(0f, 0f, 0.02f, 0f),
         };
 
         private static Color HexToColor(string hex)
@@ -73,17 +68,17 @@ namespace UIScripts
             var plorpGameObj = Instantiate(plorpPrefab, plorpSpawns[playerIndex].transform.position, plorpSpawns[playerIndex].transform.rotation);
             _plorps[playerIndex] = plorpGameObj.GetComponent<PlorpSelect>();
             _plorps[playerIndex].Initialize(playerInput);
-            
+
             _playerArrows[playerIndex].visible = true;
             _playerArrows[playerIndex + 3].visible = true;
             _playerLabels[playerIndex].visible = true;
-            
+
             // Set player select box background color to player color
             _plorps[playerIndex].ChangeColor(_availableColors[playerIndex]);
-            
+
             // Player default select default color
             _playerManager.playerColorSelector[playerIndex] = _availableColors[playerIndex];
-            
+
             _playerCount++;
             _readyText.visible = AllPlayersReady();
         }
@@ -93,17 +88,17 @@ namespace UIScripts
             // destroy player prefab
             Destroy(_plorps[playerIndex].gameObject);
             _plorps[playerIndex] = null;
-            
+
             _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = false;
             _playerArrows[playerIndex + 3].visible = false;
             _playerLabels[playerIndex].visible = false;
-            
+
             // Free up color from selector
             _playerManager.playerColorSelector[playerIndex] = Color.clear;
-            
+
             _playerCount--;
-            
+
             // if now rest of players all ready, show "all players ready" text
             _readyText.visible = AllPlayersReady();
         }
@@ -112,11 +107,11 @@ namespace UIScripts
         {
             // Play ready animation
             _plorps[playerIndex].Ready();
-            
+
             _readyPlayers++;
             // if that was last player to ready, show "all players ready" text
             _readyText.visible = AllPlayersReady();
-            
+
             // _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = false;
             _playerArrows[playerIndex + 3].visible = false;
@@ -126,13 +121,13 @@ namespace UIScripts
         {
             // back to idle animation
             _plorps[playerIndex].Unready();
-            
+
             _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = true;
             _playerArrows[playerIndex + 3].visible = true;
-            
+
             _readyPlayers--;
-            
+
             // if all players were ready now not, hide "all players ready" text
             _readyText.visible = AllPlayersReady();
         }
@@ -149,15 +144,15 @@ namespace UIScripts
             // Ignore color change if player is ready
             if (_playerManager.Players[playerIndex].Ready)
                 return;
-            
+
             // Cycle index
             var max = _availableColors.Length;
             _playerColorIndices[playerIndex] = (_playerColorIndices[playerIndex] + direction + max) % max;
             var newColor = _availableColors[_playerColorIndices[playerIndex]];
-            
+
             // Update plorp outline color
             _plorps[playerIndex].ChangeColor(newColor);
-            
+
             // Update GlobalPlayerManager’s color selector
             _playerManager.playerColorSelector[playerIndex] = newColor;
             HideColorConflictWarning(playerIndex);

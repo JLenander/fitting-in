@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     // lookSensitivity controls the camera sensitivity for the player as a plorp only (not in terminal)
     [SerializeField] private float lookSensitivity;
 
-    
+
     public StudioEventEmitter stepSfx;
     [SerializeField] private float stepInterval = 0.5f;
     private CharacterController _characterController;
@@ -17,12 +17,12 @@ public class Player : MonoBehaviour
     private Camera _outsideCamera;
     private InputAction _moveAction;
     private InputAction _lookAction;
-    
+
     private float xRotationPlayerCam = 0f;
     private float yRotationPlayerCam = 0f; // left/right (yaw)
     private float xRotationExternalCam = 0f;
     private float yRotationExternalCam = 0f;
-    
+
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundMask;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
     private RobotMovement _robotMovement;
     private int playerID;
-    
+
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     {
         // No control if in some UI.
         if (inPauseMenu) return;
-        
+
         _controlFunc();
     }
 
@@ -71,34 +71,35 @@ public class Player : MonoBehaviour
     {
         if (!disableMovement)
         {
-            isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
-            // Movement
-
-            if (isGrounded && velocity.y < 0)
-            {
-                velocity.y = -2f; // small downward force to keep grounded
-            }
 
             Vector2 moveValue = _moveAction.ReadValue<Vector2>();
-            // Camera directions (ignore vertical tilt)
-            Vector3 forward = transform.forward;
-            forward.y = 0;
-            forward.Normalize();
 
-            Vector3 right = transform.right;
-            right.y = 0;
-            right.Normalize();
+            Transform cam = _playerCamera.transform;
+            Vector3 forward = cam.forward;
+            Vector3 right = cam.right;
 
             // Combine input with camera directions
-            Vector3 moveDir = (forward * moveValue.y + right * moveValue.x).normalized;
+            float vertical = 0f;
+            if (Keyboard.current.spaceKey.isPressed) vertical += 1f;
+            if (Keyboard.current.leftCtrlKey.isPressed) vertical -= 1f;
+
+            // Combine
+            Vector3 moveDir =
+                forward * moveValue.y +
+                right * moveValue.x +
+                cam.up * vertical;
+
+            if (moveDir.sqrMagnitude > 0.01f)
+                moveDir.Normalize();
+
+            // NO gravity, NO grounded checks, NO velocity
             _characterController.Move(moveDir * moveSpeed * Time.deltaTime);
 
-            velocity.y += gravity;
-            _characterController.Move(velocity * Time.deltaTime);
-
+            // Animate
             float speed = moveDir.magnitude;
             animator.SetFloat("Speed", speed);
 
+            // Footstep logic optional (usually disable for noclip)
             if (speed != 0)
             {
                 stepTimer -= Time.fixedDeltaTime;
@@ -179,7 +180,7 @@ public class Player : MonoBehaviour
     public void switchToHead(Camera outsideCamera)
     {
         SwitchOnConsole();
-        
+
         _outsideCamera = outsideCamera;
         _controlFunc = ControlEyeCam;
     }
@@ -206,7 +207,7 @@ public class Player : MonoBehaviour
 
         _controlFunc = ControlPlayer;
     }
-    
+
     /// <summary>
     /// Set the player's state so they are in the pause menu and cannot control anything.
     /// </summary>

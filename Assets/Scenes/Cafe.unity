@@ -16673,6 +16673,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 984563275}
     - target: {fileID: 3058777039347956642, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: outlineColour.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058777039347956642, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: leftGrappleArmSpline
       value: 
       objectReference: {fileID: 984563274}
@@ -16732,6 +16736,10 @@ PrefabInstance:
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 1138850547}
+    - target: {fileID: 7452373238767763242, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: outlineColour.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7525589340187091645, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -16779,6 +16787,22 @@ PrefabInstance:
     - target: {fileID: 8061766155699826322, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235254237585185610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: outlineColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235254237585185610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: outlineColor.b
+      value: 0.11658952
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235254237585185610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: outlineColor.g
+      value: 0.11658952
+      objectReference: {fileID: 0}
+    - target: {fileID: 8235254237585185610, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: outlineColor.r
+      value: 0.18867922
       objectReference: {fileID: 0}
     - target: {fileID: 8467054180586661436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: fireArea

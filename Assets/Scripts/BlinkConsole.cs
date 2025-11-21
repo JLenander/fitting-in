@@ -32,7 +32,7 @@ public class BlinkConsole : Interactable
         timeToNextBlink = timeBetweenBlinks;
         pressAnimationCountdown = eyeAnimationTime;
         fireBufferCountdown = fireBufferTime;
-        timerIsRunning = false;
+        timerIsRunning = true;
         _canInteract = true;
 
         PopUpUIHandler.Instance.HideBlinkPopUp();
