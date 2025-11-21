@@ -14,7 +14,8 @@ public class BrainUIHandler : TerminalUIHandler
     private Color neutralColour, redColour, blackColour;
 
     private List<Label> tasks = new List<Label>();
-    private Label taskDescription, terminalDesc, urgencyDesc;
+    private Label taskDescription;
+    private VisualElement terminalDesc;
     private string activeTitle;
     private List<string> visibleTitles = new List<string>();
 
@@ -37,10 +38,8 @@ public class BrainUIHandler : TerminalUIHandler
 
         InitTaskVisualElements();
         taskDescription = root.Query<Label>("DescText").First();
-
-        terminalDesc = root.Query<Label>("TerminalDesc").First();
-        urgencyDesc = root.Query<Label>("UrgencyDesc").First();
-
+        terminalDesc = root.Query<VisualElement>("TerminalDesc").First();
+        
         ColorUtility.TryParseHtmlString("#2BD575", out neutralColour);
         ColorUtility.TryParseHtmlString("#D52B30", out redColour);
         ColorUtility.TryParseHtmlString("#1B1B1B", out blackColour);
@@ -157,8 +156,6 @@ public class BrainUIHandler : TerminalUIHandler
     void ClearDetails()
     {
         taskDescription.text = "";
-        terminalDesc.text = "";
-        urgencyDesc.text = "";
 
         tasks[0].text = "No tasks!";
         tasks[0].style.color = neutralColour;
@@ -177,15 +174,21 @@ public class BrainUIHandler : TerminalUIHandler
         Task task = TaskManager.GenericInstance.GetTaskData(activeTitle);
 
         taskDescription.text = task.description;
-        terminalDesc.text = task.location;
-
-        string urgencyText = task.urgency;
-        urgencyDesc.text = urgencyText;
-
-        if (urgencyText == "High")
-            urgencyDesc.style.color = redColour;
-        else
-            urgencyDesc.style.color = neutralColour;
+        UpdateLocationImage(task.location);
+    }
+    
+    private void UpdateLocationImage(string location)
+    {
+        string imagePath = location switch
+        {
+            "Legs" => "UI/Terminals/feet",
+            "Arms" => "UI/Terminals/r_hand",
+            "Right Arm Interior" => "UI/Terminals/r_hand",
+            "Left Arm Interior" => "UI/Terminals/l_hand",
+            _ => "UI/Terminals/brain"
+        };
+        var background = new StyleBackground(Resources.Load<Texture2D>(imagePath));
+        terminalDesc.style.backgroundImage = background;
     }
 
     IEnumerator DoorCountdownRoutine(bool left, int seconds)

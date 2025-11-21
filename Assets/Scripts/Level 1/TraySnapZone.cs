@@ -6,7 +6,6 @@ public class TraySnapZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entering Table!!!");
         Tray tray = other.GetComponent<Tray>();
         if (tray != null && tray.IsTwoHanded()) // only snap if tray being held
         {
