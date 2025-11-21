@@ -12,7 +12,7 @@ public class TerminalUIHandler : MonoBehaviour
 
     protected virtual void Start()
     {
-        root = terminalUIAsset.CloneTree();;
+        root = terminalUIAsset.CloneTree();
         
         splitscreenUIHandler = FindAnyObjectByType<SplitscreenUIHandler>();
     }
@@ -34,6 +34,10 @@ public class TerminalUIHandler : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Show the terminal Ui for the specified player (virtual so ArmUIHandlers can override)
+    /// </summary>
+    /// <param name="player"></param>
     public virtual void ShowUI(GameObject player)
     {
         if (player != null) 

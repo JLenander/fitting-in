@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class LeftArmUIHandler : TerminalUIHandler
@@ -12,6 +11,7 @@ public class LeftArmUIHandler : TerminalUIHandler
         Instance = this;
     }
     
+    // Get hand image element from the UI after calling base Start
     protected override void Start()
     {
         base.Start();
@@ -21,6 +21,7 @@ public class LeftArmUIHandler : TerminalUIHandler
         }
     }
     
+    // First change the hand image to left hand, then call base ShowUI
     public override void ShowUI(GameObject player)
     {
         if (_handElem != null)

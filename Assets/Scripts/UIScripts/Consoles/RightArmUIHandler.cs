@@ -11,6 +11,7 @@ public class RightArmUIHandler : TerminalUIHandler
         Instance = this;
     }
     
+    // Get hand image element from the UI after calling base Start
     protected override void Start()
     {
         base.Start();
@@ -20,6 +21,7 @@ public class RightArmUIHandler : TerminalUIHandler
         }
     }
     
+    // First change the hand image to right hand, then call base ShowUI
     public override void ShowUI(GameObject player)
     {
         if (_handElem != null)

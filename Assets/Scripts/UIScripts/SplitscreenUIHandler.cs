@@ -10,9 +10,9 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     [SerializeField] private float cameraOverlayTransitionStep = 0.05f;
     
     // Outside camera fade animation current timestep
-    private float cameraOverlayTransitionCurrTime;
-    private float cameraOverlayTransitionDuration;
-    private Coroutine cameraOverlayTransitionRoutine;
+    private float _cameraOverlayTransitionCurrTime;
+    private float _cameraOverlayTransitionDuration;
+    private Coroutine _cameraOverlayTransitionRoutine;
 
     // Player containing box (area containing the player camera
     private VisualElement[] _playerBoxes;
@@ -35,7 +35,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     // Player Burn overlay
     private VisualElement[] _playerBurnOverlays;
     private Coroutine[] _burnCoroutines;
-    private Color burnColour;
+    private Color _burnColour;
 
     // Camera (outside view or eyes) off overlay
     private VisualElement _outsideCamOverlay;
@@ -86,12 +86,10 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
             _playerGreyscaleOverlays[i].visible = false;
 
             _playerBurnOverlays[i] = root.Query<VisualElement>("Player" + (i + 1) + "BurnOverlay").First();
-            Color startColor = _playerBurnOverlays[i].style.backgroundColor.value;
-            Color targetColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
         }
 
         _burnCoroutines = new Coroutine[NumPlayers];
-        ColorUtility.TryParseHtmlString("#FF6E45", out burnColour);
+        ColorUtility.TryParseHtmlString("#FF6E45", out _burnColour);
 
         _outsideCamOverlay = root.Query<VisualElement>("OutsideCamOffOverlay").First();
 
@@ -132,6 +130,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
                 {
                     if (!GlobalPlayerManager.Instance.Players[i].Valid)
                     {
+                        // Hide player label when player not joined (already says on screen)
                         _playerLabels[i].visible = false;
                         continue;
                     }
@@ -256,9 +255,9 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     // No animation, this is instant
     public void ShowOutsideCamera()
     {
-        if (cameraOverlayTransitionRoutine != null)
+        if (_cameraOverlayTransitionRoutine != null)
         {
-            StopCoroutine(cameraOverlayTransitionRoutine);
+            StopCoroutine(_cameraOverlayTransitionRoutine);
         }
         _outsideCamOverlay.style.opacity = 0.0f;
     }
@@ -266,14 +265,14 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     // fade in animation
     private IEnumerator HideOutsideCameraAnimation()
     {
-        while (cameraOverlayTransitionCurrTime > 0)
+        while (_cameraOverlayTransitionCurrTime > 0)
         {
             // Compute new step of opacity
-            float newOpacity = Mathf.InverseLerp(cameraOverlayTransitionDuration, 0.0f, cameraOverlayTransitionCurrTime);
+            float newOpacity = Mathf.InverseLerp(_cameraOverlayTransitionDuration, 0.0f, _cameraOverlayTransitionCurrTime);
             _outsideCamOverlay.style.opacity = newOpacity;
             
             // timestep
-            cameraOverlayTransitionCurrTime -= cameraOverlayTransitionStep;
+            _cameraOverlayTransitionCurrTime -= cameraOverlayTransitionStep;
             yield return new WaitForSeconds(cameraOverlayTransitionStep);
         }
     }
@@ -281,9 +280,9 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     public void HideOutsideCamera(float animationSeconds)
     {
         // Reset the animation if started twice.
-        if (cameraOverlayTransitionRoutine != null)
+        if (_cameraOverlayTransitionRoutine != null)
         {
-            StopCoroutine(cameraOverlayTransitionRoutine);
+            StopCoroutine(_cameraOverlayTransitionRoutine);
         }
         
         // Instantly hide the outside with the overlay
@@ -293,11 +292,11 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
             return;
         }
         
-        cameraOverlayTransitionCurrTime = animationSeconds;
-        cameraOverlayTransitionDuration = animationSeconds;
+        _cameraOverlayTransitionCurrTime = animationSeconds;
+        _cameraOverlayTransitionDuration = animationSeconds;
 
         
-        cameraOverlayTransitionRoutine = StartCoroutine(HideOutsideCameraAnimation());
+        _cameraOverlayTransitionRoutine = StartCoroutine(HideOutsideCameraAnimation());
     }
 
     public void InitializeDialogue()
@@ -320,20 +319,20 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         _dialogueUI.visible = false;
     }
 
-    public Sprite GetArtSprite(string artSrpiteName)
+    public Sprite GetArtSprite(string artSpriteName)
     {
         // Cache the sprites or else we blow up
-        if (_spriteCache.TryGetValue(artSrpiteName, out var cachedSprite))
+        if (_spriteCache.TryGetValue(artSpriteName, out var cachedSprite))
         {
             return cachedSprite;
         }
 
         // For some reason Resources.Load<Sprite> doesn't work
-        var texture = Resources.Load<Texture2D>(artSrpiteName);
+        var texture = Resources.Load<Texture2D>(artSpriteName);
         var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-        if (!_spriteCache.TryAdd(artSrpiteName, sprite))
+        if (!_spriteCache.TryAdd(artSpriteName, sprite))
         {
-            Debug.LogError("Sprite already exists in cache but recreated: " + artSrpiteName);
+            Debug.LogError("Sprite already exists in cache but recreated: " + artSpriteName);
         }
         return sprite;
     }
@@ -398,12 +397,12 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
             // increase overall intensity over time
             intensity = Mathf.Clamp01(time / 2f); // max intensity after 2 seconds
 
-            burnOverlay.style.backgroundColor = new Color(burnColour.r, burnColour.g, burnColour.b, pulse * intensity);
+            burnOverlay.style.backgroundColor = new Color(_burnColour.r, _burnColour.g, _burnColour.b, pulse * intensity);
 
             yield return null;
         }
 
-        burnOverlay.style.backgroundColor = new StyleColor(new Color(burnColour.r, burnColour.g, burnColour.b, 1f));
+        burnOverlay.style.backgroundColor = new StyleColor(new Color(_burnColour.r, _burnColour.g, _burnColour.b, 1f));
     }
 
     private IEnumerator FadeOutOverlay(VisualElement burnOverlay, float duration = 0.5f)
