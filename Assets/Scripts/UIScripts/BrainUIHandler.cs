@@ -156,6 +156,7 @@ public class BrainUIHandler : TerminalUIHandler
     void ClearDetails()
     {
         taskDescription.text = "";
+        terminalDesc.style.backgroundImage = new StyleBackground();
 
         tasks[0].text = "No tasks!";
         tasks[0].style.color = neutralColour;
@@ -182,7 +183,7 @@ public class BrainUIHandler : TerminalUIHandler
         string imagePath = location switch
         {
             "Legs" => "UI/Terminals/feet",
-            "Arms" => "UI/Terminals/r_hand",
+            "Arms" => "UI/Terminals/both_hands",
             "Right Arm Interior" => "UI/Terminals/r_hand",
             "Left Arm Interior" => "UI/Terminals/l_hand",
             _ => "UI/Terminals/brain"

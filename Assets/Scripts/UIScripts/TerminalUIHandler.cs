@@ -34,7 +34,7 @@ public class TerminalUIHandler : MonoBehaviour
         }
     }
     
-    public void ShowUI(GameObject player)
+    public virtual void ShowUI(GameObject player)
     {
         if (player != null) 
         {
