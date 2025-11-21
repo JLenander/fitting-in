@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using FMODUnity;
 
 namespace UIScripts
 {
@@ -86,6 +87,7 @@ namespace UIScripts
             
             _playerCount++;
             _readyText.visible = AllPlayersReady();
+            RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
         }
 
         public void RemovePlayer(int playerIndex)
@@ -106,6 +108,7 @@ namespace UIScripts
             
             // if now rest of players all ready, show "all players ready" text
             _readyText.visible = AllPlayersReady();
+            RuntimeManager.PlayOneShot("event:/SFX/UI/back");
         }
 
         public void ReadyPlayer(int playerIndex)
@@ -120,6 +123,7 @@ namespace UIScripts
             // _playerColorWarnings[playerIndex].visible = false;
             _playerArrows[playerIndex].visible = false;
             _playerArrows[playerIndex + 3].visible = false;
+            RuntimeManager.PlayOneShot("event:/SFX/UI/char_choose");
         }
 
         public void UnreadyPlayer(int playerIndex)
@@ -135,6 +139,7 @@ namespace UIScripts
             
             // if all players were ready now not, hide "all players ready" text
             _readyText.visible = AllPlayersReady();
+            RuntimeManager.PlayOneShot("event:/SFX/UI/back");
         }
 
         // True if all players (at least 1) have readied up
@@ -161,6 +166,7 @@ namespace UIScripts
             // Update GlobalPlayerManager’s color selector
             _playerManager.playerColorSelector[playerIndex] = newColor;
             HideColorConflictWarning(playerIndex);
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
         }
 
         public void ShowColorConflictWarning(int playerIndex, int otherIndex)
@@ -168,6 +174,7 @@ namespace UIScripts
             string message = "Color taken by Player " + (otherIndex + 1);
             _playerColorWarnings[playerIndex].text = message;
             _playerColorWarnings[playerIndex].visible = true;
+            RuntimeManager.PlayOneShot("event:/SFX/UI/brain_move");
         }
 
         public void HideColorConflictWarning(int playerIndex)
