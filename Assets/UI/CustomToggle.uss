@@ -1,0 +1,27 @@
+:root {
+}
+
+.unity-toggle__checkmark {
+    width: 32px;
+    height: 32px;
+    background-color: rgb(151, 222, 134);
+    border-left-color: rgb(90, 178, 82);
+    border-right-color: rgb(90, 178, 82);
+    border-top-color: rgb(90, 178, 82);
+    border-bottom-color: rgb(90, 178, 82);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.unity-toggle:focus .unity-toggle__checkmark {
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}

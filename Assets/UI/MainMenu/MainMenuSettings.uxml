@@ -1,0 +1,20 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/DefaultStyleSheet.uss?fileID=7433441132597879392&amp;guid=9107073a6abb0d64a85c8de9603265e8&amp;type=3#DefaultStyleSheet" />
+    <Style src="project://database/Assets/UI/CustomSliderUSS.uss?fileID=7433441132597879392&amp;guid=5079578a7edc3d447bcc0fc7aa7753f3&amp;type=3#CustomSliderUSS" />
+    <Style src="project://database/Assets/UI/CustomToggle.uss?fileID=7433441132597879392&amp;guid=ecb04687a6022e84a92ba62a84733121&amp;type=3#CustomToggle" />
+    <ui:VisualElement name="BGColorOverlay" style="flex-grow: 1; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.71);" />
+    <ui:VisualElement name="BackgroundGraphic" style="flex-grow: 1; width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Sprites/UI/PauseScreenBackground.png?fileID=2800000&amp;guid=4c4be0cd79bcd0e4286df2dc487d84b7&amp;type=3#PauseScreenBackground&quot;); -unity-background-scale-mode: scale-and-crop; max-width: 2560px; max-height: 1440px; position: absolute; top: 0; align-self: center; align-items: center; justify-content: center;">
+        <ui:VisualElement name="ContentContainer" style="flex-grow: 0; width: 85%; height: 65%; margin-top: 0; align-items: center; justify-content: center; -unity-font-definition: url(&quot;project://database/Assets/Fonts/AreaKilometer50-gxmEq.otf?fileID=12800000&amp;guid=ef001ebbe0814b84986d79c8d1de465a&amp;type=3#AreaKilometer50-gxmEq&quot;);">
+            <ui:Button text="Save and Return" name="ReturnButton" class="custom-image-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI/Button_700px.png?fileID=2800000&amp;guid=d9a96e29670fda648b3b7e776b17b3ca&amp;type=3#Button_700px&quot;); width: 700px; height: 65px; font-size: 32px;">
+                <ui:VisualElement name="ReturnButtonBorder" class="custom-image-button-border" style="flex-grow: 1; width: 700px; height: 65px; background-image: url(&quot;project://database/Assets/Sprites/UI/Button_700px_Border.png?fileID=2800000&amp;guid=ee30615f4fa6e6e4c967476c06239658&amp;type=3#Button_700px_Border&quot;);" />
+            </ui:Button>
+            <ui:VisualElement name="ResolutionSettings" style="flex-grow: 0; flex-direction: row; width: 700px; align-items: center; justify-content: center; margin-top: 34px; margin-bottom: 18px;">
+                <ui:Label text="Enable Fullscreen" name="FullscreenToggleLabel" style="font-size: 28px;" />
+                <ui:Toggle name="FullscreenToggle" value="true" toggle-on-label-click="true" style="-unity-text-align: middle-center; font-size: 24px;" />
+                <ui:DropdownField label="Dropdown" name="ResolutionDropdown" style="display: none;" />
+            </ui:VisualElement>
+            <ui:Slider label="Audio Volume" value="42" high-value="100" name="MasterAudioSlider" show-input-field="true" style="width: 70%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Title" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/UI/SettingsScreen_TITLE.png?fileID=2800000&amp;guid=5c5a20fbfbe89a746aa2806ce88ffb58&amp;type=3#SettingsScreen_TITLE&quot;); width: 100%; height: 100%; position: absolute; max-width: 2560px; max-height: 1440px; -unity-background-scale-mode: scale-and-crop; top: 0; align-self: center;" />
+</ui:UXML>

@@ -10,7 +10,10 @@ namespace UIScripts
     public class MainMenuHandler : MonoBehaviour
     {
         private Button _startButton;
+        private Button _settingsButton;
         private Button _quitButton;
+        
+        [SerializeField] private MainMenuSettingsUIHandler mainMenuSettingsUIHandler;
 
         void Start()
         {
@@ -18,12 +21,16 @@ namespace UIScripts
             // https://docs.unity3d.com/6000.2/Documentation/Manual/UIE-UQuery.html
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
             _startButton = root.Query<Button>("StartButton").First();
+            _settingsButton = root.Query<Button>("SettingsButton").First();
             _quitButton = root.Query<Button>(name: "QuitButton").First();
 
             // According to https://docs.unity3d.com/Packages/com.unity.inputsystem@1.14/manual/UISupport.html
             // This is how to register the click handler while supporting mouse click and gamepad submit actions
             _startButton.clicked += StartButtonPressed;
+            _settingsButton.clicked += SettingsButtonPressed;
             _quitButton.clicked += QuitButtonPressed;
+
+            mainMenuSettingsUIHandler.RegisterReturnToMainMenuCallback(FocusSettingsButton);
         }
 
         private void StartButtonPressed()
@@ -39,6 +46,12 @@ namespace UIScripts
             SceneManager.LoadScene(sceneName);
         }
 
+        private void SettingsButtonPressed()
+        {
+            // Open settings panel
+            mainMenuSettingsUIHandler.ShowSettingsPanel();
+        }
+
         private static void QuitButtonPressed()
         {
             Debug.Log("QuitButtonPressed");
@@ -47,6 +60,16 @@ namespace UIScripts
 #else
         Application.Quit(0);
 #endif
+        }
+        
+        // Main Menu Settings panel handlers
+        
+        /// <summary>
+        /// Focus back on the main menu panel. Focus is on the settings button since this is what it's used for
+        /// </summary>
+        private void FocusSettingsButton()
+        {
+            _settingsButton.Focus();
         }
     }
 }
