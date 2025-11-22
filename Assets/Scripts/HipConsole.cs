@@ -70,6 +70,8 @@ public class HipConsole : Interactable
                 triggerSeat.SeatRobot();
             }
         }
+        
+        GlobalPlayerUIManager.Instance.StopWalkingShake();
     }
 
 
