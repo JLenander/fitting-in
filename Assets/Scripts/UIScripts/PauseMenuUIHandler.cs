@@ -32,6 +32,9 @@ public class PauseMenuUIHandler : MonoBehaviour
     // Time since we started holding
     private double _timeSinceFirstSliderInput;
     
+    // Master audio slider
+    private Slider _masterAudioSlider;
+    
     // The list of elements that update the current active player (player inputting to UI)
     private List<VisualElement> customButtonElements;
     private VisualElement _playerColorBorderElement;
@@ -48,6 +51,8 @@ public class PauseMenuUIHandler : MonoBehaviour
         _playerLookSensitivities[0] = root.Query<Slider>("Player1InputSensitivity").First();
         _playerLookSensitivities[1] = root.Query<Slider>("Player2InputSensitivity").First();
         _playerLookSensitivities[2] = root.Query<Slider>("Player3InputSensitivity").First();
+        
+        _masterAudioSlider = root.Query<Slider>("MasterAudioSlider").First();
 
         // Intialize to negative value to prevent false positive on quick startup
         _timeSinceFirstSliderInput = -10.0f;
@@ -64,15 +69,29 @@ public class PauseMenuUIHandler : MonoBehaviour
         HidePauseMenu();
     }
 
+    private void Start()
+    {
+        // Register master audio slider logic
+        _masterAudioSlider.RegisterValueChangedCallback(evt =>
+        {
+            // Master audio volume
+            float masterVolume = Mathf.InverseLerp(0.0f, _masterAudioSlider.highValue, _masterAudioSlider.value);
+            GlobalGameSettingsManager.Instance.SetMasterVolume(masterVolume);
+        });
+    }
+
     /// <summary>
     /// Setup the custom sliders to have smoother movement by increasing the step interval after a few seconds.
     /// Code in Update() checks for if the slider inputs are neutral which resets the timeSinceSliderLastHeld
     /// </summary>
     private void SetupCustomSliders()
     {
-        for (int i = 0; i < _playerLookSensitivities.Length; i++)
+        var allSliders = root.Query<Slider>().ToList();
+        Debug.Log(allSliders.Count + " sliders setting up");
+        
+        for (int i = 0; i < allSliders.Count; i++)
         {
-            var slider = _playerLookSensitivities[i];
+            var slider = allSliders[i];
             // Handler for when the value is changed, increasing the change if input has been held enough.
             slider.RegisterValueChangedCallback((evt) =>
             {
@@ -317,6 +336,7 @@ public class PauseMenuUIHandler : MonoBehaviour
     /// </summary>
     public void ShowPauseMenu()
     {
+        UpdateUIState();
         root.style.display = DisplayStyle.Flex;
     }
 
@@ -341,6 +361,11 @@ public class PauseMenuUIHandler : MonoBehaviour
     public void SetCurrentActivePlayerColor(Color color)
     {
         _currentActivePlayerColor = color;
+    }
+
+    private void UpdateUIState()
+    {
+        _masterAudioSlider.value = Mathf.Lerp(0f, 100f, GlobalGameSettingsManager.Instance.GetMasterVolume());
     }
 }
 
