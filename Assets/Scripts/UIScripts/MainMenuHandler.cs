@@ -31,6 +31,9 @@ namespace UIScripts
             _quitButton.clicked += QuitButtonPressed;
 
             mainMenuSettingsUIHandler.RegisterReturnToMainMenuCallback(FocusSettingsButton);
+            
+            // Start by having the start menu button focused
+            _startButton.Focus();
         }
 
         private void StartButtonPressed()
