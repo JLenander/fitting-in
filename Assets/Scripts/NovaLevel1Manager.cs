@@ -45,7 +45,7 @@ public class NovaLevel1Manager : MonoBehaviour
     {
         Instance = this;
         StartCoroutine(WaitForTaskManager());
-        blinkConsole.SetTimerIsRunning(true);
+        blinkConsole.SetRunBlinkSystem(true);
     }
 
     IEnumerator EatCake()
