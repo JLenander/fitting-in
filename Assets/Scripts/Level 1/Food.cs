@@ -51,6 +51,9 @@ public class Food : InteractableObject
             {
                 foodBite.SetBag(bag);
                 foodBite.SetFoodBiteSpawner(this);
+                // Disable dropping foodbite on spawn until the hand has left the plate area
+                // this prevents players from dropping the foodbite immediately
+                foodBite.canDrop = false;
             }
             target.StopInteractingWithObject(this);
             target.InteractWithObject(foodBite);
@@ -69,6 +72,46 @@ public class Food : InteractableObject
             Debug.Log("No more food bites!");
             target.StopInteractingWithObject(this);
             canPickup = false;
+        }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        
+        // Logic to stop dropping of foodbite when hand is in plate.
+        if (other != null && other.CompareTag("Hand"))
+        {
+            var hand = other.GetComponent<Hand>();
+            if (hand != null)
+            {
+                handMovement = hand.GetHandMovement();
+                FoodBite foodBite = handMovement.currObj as FoodBite;
+                if (foodBite != null)
+                {
+                    foodBite.canDrop = false;
+                }
+            }
+        }
+    }
+    
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+
+        // Logic to stop dropping of foodbite when hand is in plate.
+        if (other != null && other.CompareTag("Hand"))
+        {
+            var hand = other.GetComponent<Hand>();
+            if (hand != null)
+            {
+                handMovement = hand.GetHandMovement();
+                FoodBite foodBite = handMovement.currObj as FoodBite;
+                if (foodBite != null)
+                {
+                    foodBite.canDrop = true;
+                }
+            }
         }
     }
 

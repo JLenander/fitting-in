@@ -406,9 +406,16 @@ public class HandMovement : MonoBehaviour
 
     public void StopInteractingWithObject(InteractableObject interactableObject)
     {
-        Debug.Log("Stopping interaction with " + interactableObject);
-        interactableObject.StopInteractWithHand(this);
-        currObj = null;
+        if (interactableObject.canDrop)
+        {
+            Debug.Log("Stopping interaction with " + interactableObject);
+            interactableObject.StopInteractWithHand(this);
+            currObj = null;
+        }
+        else
+        {
+            Debug.Log("Cannot stop interaction with " + interactableObject);
+        }
     }
 
     public void SetTargetCurrentObject(InteractableObject obj)
