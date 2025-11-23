@@ -103,9 +103,9 @@ public class GlobalPlayerUIManager : MonoBehaviour
         start = true;
     }
 
-    public void EnableInteractionText(int player, string content, Color msgColour, string buttonPath)
+    public void EnableInteractionText(int player, string content, Color msgColour, ButtonIconManager.GamepadButton button)
     {
-        _splitscreenUIHandler.EnablePlayerInteractionText(player, content, msgColour, buttonPath);
+        _splitscreenUIHandler.EnablePlayerInteractionText(player, content, msgColour, button);
     }
 
     public void DisableInteractionText(int player)
