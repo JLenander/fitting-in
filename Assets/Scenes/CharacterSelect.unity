@@ -730,7 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55f5063b7ed3fa47b87fd6e273df62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RightArmUIHandler
-  terminalUIAsset: {fileID: 9197481963319205126, guid: bf007295bc0837e488464fa947492baa, type: 3}
+  terminalUIAsset: {fileID: 9197481963319205126, guid: a0106077313bcd442ba2b7c2bf218b05, type: 3}
 --- !u!114 &1413962073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2ea9d6d1db54f4b89052e597b7048a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LeftArmUIHandler
-  terminalUIAsset: {fileID: 9197481963319205126, guid: bf007295bc0837e488464fa947492baa, type: 3}
+  terminalUIAsset: {fileID: 9197481963319205126, guid: 6b7ebe5c6563df745807da64dd01dc53, type: 3}
 --- !u!114 &1413962074
 MonoBehaviour:
   m_ObjectHideFlags: 0
