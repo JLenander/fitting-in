@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 625451517066395489, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
       propertyPath: startPositionOffset.x
-      value: -0.59
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2536348764463169634, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
       propertyPath: m_LocalPosition.x

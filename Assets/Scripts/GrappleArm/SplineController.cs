@@ -22,8 +22,7 @@ public class SplineController : MonoBehaviour
     [SerializeField] private bool extending;
     // The anchor for the starting position of the spline segment
     [SerializeField] private Transform startObject;
-    [SerializeField] private Vector3 startPositionOffset;
-    // The transform of the object to be placed on the end of this spline segment
+     // The transform of the object to be placed on the end of this spline segment
     [SerializeField] [CanBeNull] private Transform endObject;
     [SerializeField] private Vector3 endPositionOffset;
     // [SerializeField] private Vector3 endInitialRotation;
@@ -62,7 +61,7 @@ public class SplineController : MonoBehaviour
         targetObjRest = targetObject.localPosition;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateStartEndObjectTransforms();
         UpdateSplineSegment();
@@ -108,7 +107,7 @@ public class SplineController : MonoBehaviour
         var midpointDirectionVector = endpointRelativeMidpointPos - midpointPos;
         // Lag behind if extending (or extended) for a bendy look
         float midpointLagBehindFactor = 1.0f;
-        if (!OverrideExtend && !extending)
+        if (OverrideExtend || extending)
         {
             midpointLagBehindFactor = 0.7f;
         }
@@ -122,12 +121,11 @@ public class SplineController : MonoBehaviour
     // and update the end object relative to the end of our spline segment.
     private void UpdateStartEndObjectTransforms()
     {
-        _splineContainer.transform.position = startObject.position + startPositionOffset;
+        _splineContainer.transform.position = startObject.position;
         if (endObject != null)
         {
             endObject.position = GetKnotWorldPosition(_endKnot) + endPositionOffset;
         }
-        
     }
 
     private Vector3 GetKnotLocalPosition(BezierKnot knot)
