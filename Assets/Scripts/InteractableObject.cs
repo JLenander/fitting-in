@@ -10,6 +10,7 @@ public abstract class InteractableObject : MonoBehaviour
     public Outline outline;
     public bool canInteract = true;
     public bool canPickup = true;
+    public bool canDrop = true;
     public HandMovement handMovement;
     private Hand hand;
     public Transform _robotHead;
@@ -19,7 +20,7 @@ public abstract class InteractableObject : MonoBehaviour
         DisableOutline();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other != null && other.CompareTag("Hand") && canPickup)
         {
@@ -34,7 +35,7 @@ public abstract class InteractableObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other != null && other.CompareTag("Hand") && canPickup)
         {

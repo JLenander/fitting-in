@@ -17,6 +17,7 @@ public class BlinkConsole : Interactable
     public HeadConsole headConsole;
     public StudioEventEmitter enterSfx;
 
+    // timerIsRunning is true if we are in the countdown to next blink phase
     private bool timerIsRunning;
     [FormerlySerializedAs("warning")] public bool isPixelatingPhase = false;
     private bool isFullyPixelated = false;
@@ -24,6 +25,7 @@ public class BlinkConsole : Interactable
     private bool fireOver = false;
     private bool _canInteract = false;
 
+    // runBlink is true if the blink system is enabled. If false, no timers are updated.
     private bool runBlink = true;
 
     private void Start()
@@ -32,7 +34,7 @@ public class BlinkConsole : Interactable
         timeToNextBlink = timeBetweenBlinks;
         pressAnimationCountdown = eyeAnimationTime;
         fireBufferCountdown = fireBufferTime;
-        timerIsRunning = false;
+        timerIsRunning = true;
         _canInteract = true;
 
         PopUpUIHandler.Instance.HideBlinkPopUp();
@@ -188,7 +190,7 @@ public class BlinkConsole : Interactable
         outlineColour = new Color(1, 1, 1, 1);
     }
 
-    public void SetTimerIsRunning(bool isRunning)
+    public void SetRunBlinkSystem(bool isRunning)
     {
         runBlink = isRunning;
     }

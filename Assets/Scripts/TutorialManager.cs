@@ -62,6 +62,9 @@ public class TutorialManager : MonoBehaviour
         rightConsole.DisableInteract();
         hipConsole.DisableInteract();
         blinkConsole.DisableInteract();
+        
+        // Disable blink system
+        blinkConsole.SetRunBlinkSystem(false);
 
         blinkLight.SetActive(false);
         headLight.SetActive(false);
@@ -235,6 +238,7 @@ public class TutorialManager : MonoBehaviour
         // reenable blinking fires 
         blinkConsole.enabled = true;
         blinkConsole.EnableInteract();
+        blinkConsole.SetRunBlinkSystem(true);
     }
 
     IEnumerator RepeatDialogue()

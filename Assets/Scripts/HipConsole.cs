@@ -40,7 +40,7 @@ public class HipConsole : Interactable
         uIHandler.ShowUI(player);
 
         // this is only for level 1
-        if (triggerSeat != null)
+        if (triggerSeat != null && triggerSeat.PlayerInsideSeat())
         {
             triggerSeat.StandRobot();
             if (Level1TaskManager.Instance.GetTaskData("Leave") == null && playerChair)
@@ -70,6 +70,8 @@ public class HipConsole : Interactable
                 triggerSeat.SeatRobot();
             }
         }
+        
+        GlobalPlayerUIManager.Instance.StopWalkingShake();
     }
 
 

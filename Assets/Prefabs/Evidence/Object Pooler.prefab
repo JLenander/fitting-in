@@ -48,9 +48,6 @@ MonoBehaviour:
   - tag: Polaroid
     prefab: {fileID: 2061832606263270835, guid: d30d701aceece8f48a6aad419a40b296, type: 3}
     size: 10
-  - tag: Map
-    prefab: {fileID: 7215277795985572918, guid: 5b678c57584358c488103ade519581b4, type: 3}
-    size: 10
-  - tag: Notepad
-    prefab: {fileID: 3355777681123209379, guid: 32370de2a72d6b144b1b58a6e816384c, type: 3}
-    size: 10
+  - tag: FoodBite
+    prefab: {fileID: 1339221773309266245, guid: 06ec518514ca77a40955413f9c9aaf01, type: 3}
+    size: 50

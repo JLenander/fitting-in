@@ -119,7 +119,7 @@ public class FoodBite : InteractableObject, IPooledObject
             Debug.Log("Eating point");
             NovaLevel1Manager.Instance.ate = true;
             StartCoroutine(DisappearRoutine());
-        }
+        } 
     }
 
     IEnumerator DisappearRoutine()

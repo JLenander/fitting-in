@@ -19,6 +19,7 @@ TagManager:
   - Food
   - Robot
   - Phone
+  - Plate
   layers:
   - Default
   - TransparentFX

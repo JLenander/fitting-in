@@ -129,7 +129,7 @@ MonoBehaviour:
   moveSpeed: 7
   lookSensitivity: 4
   stepSfx: {fileID: -2862781930355676998}
-  stepInterval: 0.5
+  stepInterval: 0.1
   gravity: -0.02
   groundCheckDistance: 0.2
   groundMask:
@@ -178,6 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
   reach: 5
+  currentItem: {fileID: 0}
+  interacting: {fileID: 0}
 --- !u!114 &5478721749943547906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1083,6 +1085,14 @@ PrefabInstance:
     - target: {fileID: 899123840481630010, guid: 3dec4dd181cbe944f83c3de5f6cd3b39, type: 3}
       propertyPath: m_TagString
       value: Ignore
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142802485124660548, guid: 3dec4dd181cbe944f83c3de5f6cd3b39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.524
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142802485124660548, guid: 3dec4dd181cbe944f83c3de5f6cd3b39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.393
       objectReference: {fileID: 0}
     - target: {fileID: 2907990113230361672, guid: 3dec4dd181cbe944f83c3de5f6cd3b39, type: 3}
       propertyPath: m_LocalPosition.x
