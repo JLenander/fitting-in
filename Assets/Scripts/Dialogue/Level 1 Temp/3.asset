@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - That's a pictrure.....
+  - That's a picture.....
   - of us????
   - Quick! Take it from her
   spirteA: {fileID: 21300000, guid: 7cf1f3e381de4504d8c4445353b39e1d, type: 3}
