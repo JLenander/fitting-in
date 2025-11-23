@@ -102,6 +102,8 @@ MonoBehaviour:
   outline: {fileID: 6828464677427300517}
   canInteract: 1
   canPickup: 1
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   groundMask:
     serializedVersion: 2
@@ -133,8 +135,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6867173, y: 2.8125124, z: 3.349815}
-  m_Center: {x: -0.19816433, y: 0, z: 0}
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &9084605516717041414
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15123,15 +15125,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.329
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.138
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.008
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a8f999ea47e30334986a39f185d9b1dd, type: 3}
       propertyPath: m_LocalRotation.w
