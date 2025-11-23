@@ -6,6 +6,7 @@ public class LevelSelectUIHandler : MonoBehaviour, ILevelSelectUIHandler
 {
     private VisualElement _root;
     [SerializeField] private VisualTreeAsset levelTemplate;
+    private VisualElement[] _levelElements;
 
     // Needs to initialize before Start
     public void Awake()
@@ -16,7 +17,8 @@ public class LevelSelectUIHandler : MonoBehaviour, ILevelSelectUIHandler
     public void SetupLevelSelectScreen(Level[] levels, Action<int> levelStartHandler)
     {
         var levelsRoot = _root.Query<VisualElement>("Levels").First();
-
+        _levelElements = new VisualElement[levels.Length];
+        
         for (int i = 0; i < levels.Length; i++)
         {
             // Create template element
@@ -60,6 +62,18 @@ public class LevelSelectUIHandler : MonoBehaviour, ILevelSelectUIHandler
             
             // Add to levels display
             levelsRoot.Add(level);
+            _levelElements[i] = level;
+        }
+        
+        FocusFirstLevel();
+    }
+
+    public void FocusFirstLevel()
+    {
+        if (_levelElements != null && _levelElements.Length > 0)
+        {
+            var first = _levelElements[0].Query<VisualElement>("LevelContainer").First();
+            first?.Focus();    
         }
     }
 }
@@ -72,6 +86,11 @@ public interface ILevelSelectUIHandler
     /// <param name="levels">The array of level information from the level manager to set up</param>
     /// <param name="levelStartHandler">The handler for starting a level, passed the index of the level based on the levels array</param>
     public void SetupLevelSelectScreen(Level[] levels, Action<int> levelStartHandler);
+
+    /// <summary>
+    /// Bring focus to the first level element
+    /// </summary>
+    public void FocusFirstLevel();
 }
 
 

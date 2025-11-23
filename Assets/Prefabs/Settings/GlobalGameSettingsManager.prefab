@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1018315831166596765
+--- !u!1 &6628146295538219986
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2482136414551549490}
-  - component: {fileID: 652838180889732351}
+  - component: {fileID: 2284241829435695702}
+  - component: {fileID: 7807778107781223520}
   m_Layer: 0
-  m_Name: Object Pooler
+  m_Name: GlobalGameSettingsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2482136414551549490
+--- !u!4 &2284241829435695702
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018315831166596765}
+  m_GameObject: {fileID: 6628146295538219986}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 358.53116, y: 7.7, z: -6.60976}
+  m_LocalPosition: {x: 55.8163, y: -224.6641, z: -229.51328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &652838180889732351
+--- !u!114 &7807778107781223520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018315831166596765}
+  m_GameObject: {fileID: 6628146295538219986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b80f782fec0477443a2708fe9dfb0c0e, type: 3}
+  m_Script: {fileID: 11500000, guid: ca910859ad0e32743ad9f2cb4811842c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
-  pools:
-  - tag: Polaroid
-    prefab: {fileID: 2061832606263270835, guid: d30d701aceece8f48a6aad419a40b296, type: 3}
-    size: 10
-  - tag: FoodBite
-    prefab: {fileID: 1339221773309266245, guid: 06ec518514ca77a40955413f9c9aaf01, type: 3}
-    size: 50
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalGameSettingsManager

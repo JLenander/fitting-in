@@ -60,7 +60,9 @@ public class NovaLevel1Manager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             biteSfx.Play();
             novaRightHandCake.SetActive(false);
+            yield return new WaitForSeconds(1f);
             talking = true;
+            timer = switchInterval + 1;
         }
     }
 
