@@ -3,7 +3,7 @@ using FMODUnity;
 using UnityEngine;
 
 /// <summary>
-/// Global settings manager to handle persistent game settings like audio settings
+/// Global settings manager to handle persistent game settings like audio settings.
 /// </summary>
 public class GlobalGameSettingsManager : MonoBehaviour
 {
