@@ -457,8 +457,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SplineController
   OverrideExtend: 0
   extending: 0
-  startObject: {fileID: 119430455514101004}
-  startPositionOffset: {x: 0.59, y: 0, z: -0.5}
+  startObject: {fileID: 6466181536612907028}
+  startPositionOffset: {x: 0, y: 0, z: 0}
   endObject: {fileID: 4607181767309699373}
   endPositionOffset: {x: 0, y: 0, z: 0}
   targetObject: {fileID: 5644754071235285436}
@@ -694,6 +694,7 @@ Transform:
   m_Children:
   - {fileID: 343705689597766785}
   - {fileID: 7258395926828420493}
+  - {fileID: 6466181536612907028}
   m_Father: {fileID: 9158118932537520870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2620817856316183631
@@ -1399,6 +1400,52 @@ Transform:
   - {fileID: 2167919564173934219}
   m_Father: {fileID: 5710807735223163965}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5016188566003009462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6466181536612907028}
+  - component: {fileID: 763134105229858175}
+  m_Layer: 0
+  m_Name: SplineCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6466181536612907028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016188566003009462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.14, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 119430455514101004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &763134105229858175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016188566003009462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2242a826c53478a44b5e65098cbfd452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DrawDebugOutline
+  gizmoColor: {r: 0.74176407, g: 0, b: 1, a: 0.75}
+  cubeSize: 1
 --- !u!1 &5159885983520701242
 GameObject:
   m_ObjectHideFlags: 0
