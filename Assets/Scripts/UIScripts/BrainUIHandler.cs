@@ -8,15 +8,17 @@ public class BrainUIHandler : TerminalUIHandler
 {
     public static BrainUIHandler Instance;
     public PopUpUIHandler popUpUIHandler;
-    private VisualElement doorUI;
-    private VisualElement taskUI;
-    private Label leftDoorText, rightDoorText, l2, r2;
-    private Color neutralColour, redColour, blackColour;
+    private VisualElement _doorUI;
+    private VisualElement _taskUI;
+    private Label _leftDoorText, _rightDoorText, _l2, _r2;
+    private Color _neutralColour, _redColour, _blackColour;
 
-    private List<Label> tasks = new List<Label>();
-    private Label taskDescription, terminalDesc, urgencyDesc;
-    private string activeTitle;
-    private List<string> visibleTitles = new List<string>();
+    private List<Label> _tasks = new List<Label>();
+    private Label _taskDescription;
+    private VisualElement _terminalDesc;
+    private string _activeTitle;
+    private List<string> _visibleTitles = new List<string>();
+    private Dictionary<string, Texture2D> _imageCache = new();
 
     public const int NumTasks = 5;
 
@@ -28,33 +30,31 @@ public class BrainUIHandler : TerminalUIHandler
     protected override void Start()
     {
         base.Start();
-        doorUI = root.Query<VisualElement>("DoorWindow").First();
-        taskUI = root.Query<VisualElement>("TaskWindow").First();
-        leftDoorText = root.Query<Label>("LeftDoorDesc").First();
-        rightDoorText = root.Query<Label>("RightDoorDesc").First();
-        l2 = root.Query<Label>("L2").First();
-        r2 = root.Query<Label>("R2").First();
+        _doorUI = root.Query<VisualElement>("DoorWindow").First();
+        _taskUI = root.Query<VisualElement>("TaskWindow").First();
+        _leftDoorText = root.Query<Label>("LeftDoorDesc").First();
+        _rightDoorText = root.Query<Label>("RightDoorDesc").First();
+        _l2 = root.Query<Label>("L2").First();
+        _r2 = root.Query<Label>("R2").First();
 
         InitTaskVisualElements();
-        taskDescription = root.Query<Label>("DescText").First();
+        _taskDescription = root.Query<Label>("DescText").First();
+        _terminalDesc = root.Query<VisualElement>("TerminalDesc").First();
+        
+        ColorUtility.TryParseHtmlString("#2BD575", out _neutralColour);
+        ColorUtility.TryParseHtmlString("#D52B30", out _redColour);
+        ColorUtility.TryParseHtmlString("#1B1B1B", out _blackColour);
 
-        terminalDesc = root.Query<Label>("TerminalDesc").First();
-        urgencyDesc = root.Query<Label>("UrgencyDesc").First();
-
-        ColorUtility.TryParseHtmlString("#2BD575", out neutralColour);
-        ColorUtility.TryParseHtmlString("#D52B30", out redColour);
-        ColorUtility.TryParseHtmlString("#1B1B1B", out blackColour);
-
-        doorUI.visible = false;
-        activeTitle = null;
+        _doorUI.visible = false;
+        _activeTitle = null;
         ClearDetails();
     }
 
     // switch between door and task UI
     public void SwitchScreen()
     {
-        doorUI.visible = !doorUI.visible;
-        taskUI.visible = !taskUI.visible;
+        _doorUI.visible = !_doorUI.visible;
+        _taskUI.visible = !_taskUI.visible;
     }
 
     // lock one of the doors
@@ -68,37 +68,37 @@ public class BrainUIHandler : TerminalUIHandler
         if (taskNames == null || taskNames.Count == 0)
         {
             // no more tasks, empty everything
-            activeTitle = null;
+            _activeTitle = null;
             ClearDetails();
             return;
         }
 
         // no active before, set as newest task
-        if (activeTitle == null || !taskNames.Contains(activeTitle))
+        if (_activeTitle == null || !taskNames.Contains(_activeTitle))
         {
-            activeTitle = taskNames.LastOrDefault();
+            _activeTitle = taskNames.LastOrDefault();
 
-            if (activeTitle == null)
+            if (_activeTitle == null)
             {
                 ClearDetails();
                 return;
             }
         }
 
-        visibleTitles = taskNames;
+        _visibleTitles = taskNames;
 
         // display the data in the list of tasks
         // empty out list
-        for (int i = 0; i < tasks.Count; i++)
+        for (int i = 0; i < _tasks.Count; i++)
         {
-            tasks[i].text = "";
+            _tasks[i].text = "";
         }
 
         // put in task names, 
         int index = 0;
         for (int i = taskNames.Count - 1; i >= 0; i--)
         {
-            tasks[index].text = taskNames[i];
+            _tasks[index].text = taskNames[i];
             index++;
         }
 
@@ -108,25 +108,25 @@ public class BrainUIHandler : TerminalUIHandler
     // called by brain console to scroll up or down
     public void ChangeActiveTask(bool down)
     {
-        if (activeTitle == null) return;
+        if (_activeTitle == null) return;
 
         // go through visible names to find
 
-        for (int i = 0; i < visibleTitles.Count; i++)
+        for (int i = 0; i < _visibleTitles.Count; i++)
         {
-            if (visibleTitles[i] == activeTitle)
+            if (_visibleTitles[i] == _activeTitle)
             {
                 if (down)
                 {
                     // next title 
-                    if (i != (visibleTitles.Count - 1))
-                        activeTitle = visibleTitles[i + 1];
+                    if (i != (_visibleTitles.Count - 1))
+                        _activeTitle = _visibleTitles[i + 1];
                 }
                 else
                 {
                     // prev title
                     if (i != 0)
-                        activeTitle = visibleTitles[i - 1];
+                        _activeTitle = _visibleTitles[i - 1];
                 }
 
                 RefreshTitles();
@@ -138,17 +138,17 @@ public class BrainUIHandler : TerminalUIHandler
     // only highlight the active title
     void RefreshTitles()
     {
-        foreach (Label task in tasks)
+        foreach (Label task in _tasks)
         {
-            if (task.text == activeTitle)
+            if (task.text == _activeTitle)
             {
-                task.style.backgroundColor = neutralColour;
-                task.style.color = blackColour;
+                task.style.backgroundColor = _neutralColour;
+                task.style.color = _blackColour;
                 UpdateTaskInfo();
             }
             else
             {
-                task.style.color = neutralColour;
+                task.style.color = _neutralColour;
                 task.style.backgroundColor = new Color(0f, 0f, 0f, 0f);
             }
         }
@@ -156,50 +156,67 @@ public class BrainUIHandler : TerminalUIHandler
 
     void ClearDetails()
     {
-        taskDescription.text = "";
-        terminalDesc.text = "";
-        urgencyDesc.text = "";
+        _taskDescription.text = "";
+        _terminalDesc.style.backgroundImage = new StyleBackground();
 
-        tasks[0].text = "No tasks!";
-        tasks[0].style.color = neutralColour;
-        tasks[0].style.backgroundColor = new Color(0f, 0f, 0f, 0f);
+        _tasks[0].text = "No tasks!";
+        _tasks[0].style.color = _neutralColour;
+        _tasks[0].style.backgroundColor = new Color(0f, 0f, 0f, 0f);
 
-        for (int i = 1; i < tasks.Count; i++)
+        for (int i = 1; i < _tasks.Count; i++)
         {
-            tasks[i].text = "";
-            tasks[i].style.backgroundColor = new Color(0f, 0f, 0f, 0f);
+            _tasks[i].text = "";
+            _tasks[i].style.backgroundColor = new Color(0f, 0f, 0f, 0f);
         }
     }
 
     public void UpdateTaskInfo()
     {
         //string desc, string terminal, string urgency
-        Task task = TaskManager.GenericInstance.GetTaskData(activeTitle);
+        Task task = TaskManager.GenericInstance.GetTaskData(_activeTitle);
 
-        taskDescription.text = task.description;
-        terminalDesc.text = task.location;
-
-        string urgencyText = task.urgency;
-        urgencyDesc.text = urgencyText;
-
-        if (urgencyText == "High")
-            urgencyDesc.style.color = redColour;
-        else
-            urgencyDesc.style.color = neutralColour;
+        _taskDescription.text = task.description;
+        UpdateLocationImage(task.location);
     }
+    
+    private void UpdateLocationImage(string location)
+    {
+        string imagePath = location switch
+        {
+            "Legs" => "UI/Terminals/feet",
+            "Arms" => "UI/Terminals/both_hands",
+            "Right Arm Interior" => "UI/Terminals/r_hand",
+            "Left Arm Interior" => "UI/Terminals/l_hand",
+            _ => "UI/Terminals/brain"
+        };
+        Texture2D tex = GetTex(imagePath);
+        var background = new StyleBackground(tex);
+        _terminalDesc.style.backgroundImage = background;
+    }
+    
+    private Texture2D GetTex(string path)
+    {
+        if (_imageCache.TryGetValue(path, out var tex))
+            return tex;
+
+        tex = Resources.Load<Texture2D>(path);
+        _imageCache[path] = tex;
+        return tex;
+    }
+
 
     IEnumerator DoorCountdownRoutine(bool left, int seconds)
     {
         int currSeconds = seconds;
         if (left)
         {
-            leftDoorText.style.color = neutralColour;
-            l2.visible = false;
+            _leftDoorText.style.color = _neutralColour;
+            _l2.visible = false;
         }
         else
         {
-            rightDoorText.style.color = neutralColour;
-            r2.visible = false;
+            _rightDoorText.style.color = _neutralColour;
+            _r2.visible = false;
         }
 
         while (currSeconds >= 0)
@@ -208,11 +225,11 @@ public class BrainUIHandler : TerminalUIHandler
 
             if (left)
             {
-                leftDoorText.text = content;
+                _leftDoorText.text = content;
             }
             else
             {
-                rightDoorText.text = content;
+                _rightDoorText.text = content;
             }
 
             currSeconds -= 1;
@@ -222,15 +239,15 @@ public class BrainUIHandler : TerminalUIHandler
 
         if (left)
         {
-            leftDoorText.text = "LOCKED";
-            leftDoorText.style.color = redColour;
-            l2.visible = true;
+            _leftDoorText.text = "LOCKED";
+            _leftDoorText.style.color = _redColour;
+            _l2.visible = true;
         }
         else
         {
-            rightDoorText.text = "LOCKED";
-            rightDoorText.style.color = redColour;
-            r2.visible = true;
+            _rightDoorText.text = "LOCKED";
+            _rightDoorText.style.color = _redColour;
+            _r2.visible = true;
         }
     }
 
@@ -239,7 +256,7 @@ public class BrainUIHandler : TerminalUIHandler
         for (int i = 1; i <= NumTasks; i++)
         {
             Label task = root.Query<Label>("TaskTitle" + i).First();
-            tasks.Add(task);
+            _tasks.Add(task);
 
             task.text = "";
         }
