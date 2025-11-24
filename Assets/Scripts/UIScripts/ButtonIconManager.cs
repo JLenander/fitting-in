@@ -10,7 +10,8 @@ public class ButtonIconManager : MonoBehaviour
     public static ButtonIconManager Instance;
 
     [SerializeField] private Texture2D missingIconTexture;
-    private Dictionary<GamepadButton, GamepadButtonSprites> _iconCache = new();
+    private readonly Dictionary<GamepadButton, PlatformBasedTextures> _iconCache = new();
+    private readonly Dictionary<ControlsImage, PlatformBasedTextures> _controlsImgCache = new();
     
     public void Awake()
     {
@@ -23,86 +24,109 @@ public class ButtonIconManager : MonoBehaviour
         DontDestroyOnLoad(this);
         
         LoadGamepadButtonTextures();
+        LoadControlsImages();
     }
 
     private void LoadGamepadButtonTextures()
     {
         _iconCache.Clear();
-        _iconCache.Add(GamepadButton.ButtonNorth, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.ButtonNorth, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_ButtonNorth"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_ButtonNorth")
         ));
-        _iconCache.Add(GamepadButton.ButtonSouth, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.ButtonSouth, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_ButtonSouth"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_ButtonSouth")
         ));
-        _iconCache.Add(GamepadButton.ButtonEast, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.ButtonEast, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_ButtonEast"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_ButtonEast")
         ));
-        _iconCache.Add(GamepadButton.ButtonWest, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.ButtonWest, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_ButtonWest"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_ButtonWest")
         ));
-        _iconCache.Add(GamepadButton.LeftShoulder, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.LeftShoulder, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_LShoulder"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_LShoulder")
         ));
-        _iconCache.Add(GamepadButton.RightShoulder, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.RightShoulder, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_RShoulder"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_RShoulder")
         ));
-        _iconCache.Add(GamepadButton.LeftTrigger, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.LeftTrigger, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_LTrigger"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_LTrigger")
         ));
-        _iconCache.Add(GamepadButton.RightTrigger, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.RightTrigger, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_RTrigger"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_RTrigger")
         ));
-        _iconCache.Add(GamepadButton.Start, new GamepadButtonSprites(
+        _iconCache.Add(GamepadButton.Start, new PlatformBasedTextures(
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/PS_Option"),
             Resources.Load<Texture2D>("UI/GamepadButtons/Buttons/XBOX_Option")
         ));
         
         // The following are shared between platforms
         Texture2D texture;
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Neutral");
-        _iconCache.Add(GamepadButton.LeftStickNeutral, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Up");
-        _iconCache.Add(GamepadButton.LeftStickUp, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Down");
-        _iconCache.Add(GamepadButton.LeftStickDown, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Left");
-        _iconCache.Add(GamepadButton.LeftStickLeft, new GamepadButtonSprites(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Neutral");
+        _iconCache.Add(GamepadButton.LeftStickNeutral, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Up");
+        _iconCache.Add(GamepadButton.LeftStickUp, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Down");
+        _iconCache.Add(GamepadButton.LeftStickDown, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Left");
+        _iconCache.Add(GamepadButton.LeftStickLeft, new PlatformBasedTextures(texture, texture));
         texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/L_Right");
-        _iconCache.Add(GamepadButton.LeftStickRight, new GamepadButtonSprites(texture, texture));
+        _iconCache.Add(GamepadButton.LeftStickRight, new PlatformBasedTextures(texture, texture));
         
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Neutral");
-        _iconCache.Add(GamepadButton.RightStickNeutral, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Up");
-        _iconCache.Add(GamepadButton.RightStickUp, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Down");
-        _iconCache.Add(GamepadButton.RightStickDown, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Left");
-        _iconCache.Add(GamepadButton.RightStickLeft, new GamepadButtonSprites(texture, texture));
-        texture =  Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Right");
-        _iconCache.Add(GamepadButton.RightStickRight, new GamepadButtonSprites(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Neutral");
+        _iconCache.Add(GamepadButton.RightStickNeutral, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Up");
+        _iconCache.Add(GamepadButton.RightStickUp, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Down");
+        _iconCache.Add(GamepadButton.RightStickDown, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Left");
+        _iconCache.Add(GamepadButton.RightStickLeft, new PlatformBasedTextures(texture, texture));
+        texture = Resources.Load<Texture2D>("UI/GamepadButtons/Sticks/R_Right");
+        _iconCache.Add(GamepadButton.RightStickRight, new PlatformBasedTextures(texture, texture));
     }
 
-    public Texture2D GetButtonIconForPlayer(int playerIndex, GamepadButton button)
+    private void LoadControlsImages()
+    {
+        _controlsImgCache.Add(ControlsImage.ArmTerminalControls, new PlatformBasedTextures(
+            Resources.Load<Texture2D>("UI/arm_controls_text"),
+            Resources.Load<Texture2D>("UI/arm_controls_xbox")
+        ));
+        _controlsImgCache.Add(ControlsImage.LegTerminalControls, new PlatformBasedTextures(
+            Resources.Load<Texture2D>("UI/leg_controls_text"),
+            Resources.Load<Texture2D>("UI/leg_controls_xbox")
+        ));
+        _controlsImgCache.Add(ControlsImage.EyeTerminalControls, new PlatformBasedTextures(
+            Resources.Load<Texture2D>("UI/eye_controls_text"),
+            Resources.Load<Texture2D>("UI/eye_controls_xbox")
+        ));
+    }
+
+    /// <summary>
+    /// Return the platform of the gamepad for the requested player.
+    /// Returns GamepadType.Invalid if arguments are invalid (ex. index out of range)
+    /// </summary>
+    /// <param name="playerIndex">The index of the player matching the GlobalPlayerManager's players list</param>
+    /// <returns></returns>
+    public GamepadType GetGamepadTypeForPlayer(int playerIndex)
     {
         if (playerIndex < 0 || playerIndex >= GlobalPlayerManager.Instance.Players.Length)
         {
             Debug.LogError("PlayerIndex out of range");
-            return missingIconTexture;
+            return GamepadType.Invalid;
         }
         
         var player = GlobalPlayerManager.Instance.Players[playerIndex];
         if (!player.Valid)
         {
             Debug.LogError("Player not valid");
-            return missingIconTexture;
+            return GamepadType.Invalid;
         }
 
         var gamepad = player.Input.GetDevice<Gamepad>();
@@ -111,18 +135,30 @@ public class ButtonIconManager : MonoBehaviour
             case null:
                 // default to playstation if gamepad can't be found (mouse and keyboard for development or other)
                 Debug.Log("Defaulting to playstation. Can't find gamepad for player " + playerIndex);
-                return GetButtonIcon(button, GamepadType.Playstation);
+                return GamepadType.Playstation;
             // It's possible XInputController is not an xbox controller exactly as XInput is a protocol
             // This also may not work on a macos build
             case XInputController:
-                return GetButtonIcon(button, GamepadType.Xbox);
+                return GamepadType.Xbox;
             case DualShockGamepad:
-                return GetButtonIcon(button, GamepadType.Playstation);
+                return GamepadType.Playstation;
             default:
                 // If we can't recognize this as a playstation or xbox controller then default to playstation
                 Debug.LogWarning("Couldn't recognize gamepad format. Defaulting to playstation.");
-                return GetButtonIcon(button, GamepadType.Playstation);
+                return GamepadType.Playstation;
         }
+    }
+
+    /// <summary>
+    /// Return the button icon for the requested player's gamepad platform
+    /// </summary>
+    /// <param name="playerIndex">The index of the player matching the GlobalGameManager's list of players</param>
+    /// <param name="button"></param>
+    /// <returns></returns>
+    public Texture2D GetButtonIconForPlayer(int playerIndex, GamepadButton button)
+    {
+        var gamepadType = GetGamepadTypeForPlayer(playerIndex);
+        return GetButtonIcon(button, gamepadType);
     }
 
     /// <summary>
@@ -145,6 +181,48 @@ public class ButtonIconManager : MonoBehaviour
                 return icons.PlaystationTexture;
             case GamepadType.Xbox:
                 return icons.XboxTexture;
+            case GamepadType.Invalid:
+                return missingIconTexture;
+            default:
+                Debug.LogError("Unhandled gamepadType");
+                return missingIconTexture;
+        }
+    }
+    
+    /// <summary>
+    /// Return a Texture2D for the requested controls image for the requested player
+    /// </summary>
+    /// <param name="playerIndex">The index of the player matching the GlobalGameManager's list of players</param>
+    /// <param name="image"></param>
+    /// <returns></returns>
+    public Texture2D GetControlsImageForPlayer(int playerIndex, ControlsImage image)
+    {
+        var gamepadType = GetGamepadTypeForPlayer(playerIndex);
+        return GetControlsImage(image, gamepadType);
+    }
+
+    /// <summary>
+    /// Return a Texture2D for the requested controls image for the requested gamepad platform
+    /// </summary>
+    /// <param name="image"></param>
+    /// <param name="gamepadType"></param>
+    /// <returns></returns>
+    public Texture2D GetControlsImage(ControlsImage image, GamepadType gamepadType)
+    {
+        if (!_controlsImgCache.TryGetValue(image, out var icons))
+        {
+            Debug.LogError("Controls Image not found for request: " + image);
+            return missingIconTexture;
+        }
+
+        switch (gamepadType)
+        {
+            case GamepadType.Playstation:
+                return icons.PlaystationTexture;
+            case GamepadType.Xbox:
+                return icons.XboxTexture;
+            case GamepadType.Invalid:
+                return missingIconTexture;
             default:
                 Debug.LogError("Unhandled gamepadType");
                 return missingIconTexture;
@@ -187,10 +265,18 @@ public class ButtonIconManager : MonoBehaviour
     public enum GamepadType
     {
         Playstation,
-        Xbox
+        Xbox,
+        Invalid
+    }
+
+    public enum ControlsImage
+    {
+        ArmTerminalControls,
+        LegTerminalControls,
+        EyeTerminalControls
     }
     
-    private record GamepadButtonSprites(Texture2D PlaystationTexture, Texture2D XboxTexture)
+    private record PlatformBasedTextures(Texture2D PlaystationTexture, Texture2D XboxTexture)
     {
         public Texture2D PlaystationTexture { get; set; } = PlaystationTexture;
         public Texture2D XboxTexture { get; set; } = XboxTexture;
