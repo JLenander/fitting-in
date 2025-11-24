@@ -18,6 +18,7 @@ public class BrainUIHandler : TerminalUIHandler
     private VisualElement _terminalDesc;
     private string _activeTitle;
     private List<string> _visibleTitles = new List<string>();
+    private Dictionary<string, Texture2D> _imageCache = new();
 
     public const int NumTasks = 5;
 
@@ -188,9 +189,21 @@ public class BrainUIHandler : TerminalUIHandler
             "Left Arm Interior" => "UI/Terminals/l_hand",
             _ => "UI/Terminals/brain"
         };
-        var background = new StyleBackground(Resources.Load<Texture2D>(imagePath));
+        Texture2D tex = GetTex(imagePath);
+        var background = new StyleBackground(tex);
         _terminalDesc.style.backgroundImage = background;
     }
+    
+    private Texture2D GetTex(string path)
+    {
+        if (_imageCache.TryGetValue(path, out var tex))
+            return tex;
+
+        tex = Resources.Load<Texture2D>(path);
+        _imageCache[path] = tex;
+        return tex;
+    }
+
 
     IEnumerator DoorCountdownRoutine(bool left, int seconds)
     {
