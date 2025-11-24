@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -52,10 +51,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     private VisualElement _blinkAlert;
 
     private const int NumPlayers = 3;
-
-    // Cache for art sprites
-    private Dictionary<string, Sprite> _spriteCache = new();
-
+    
     void Awake()
     {
         DontDestroyOnLoad(this);
@@ -187,7 +183,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         }
     }
 
-    public void EnablePlayerInteractionText(int playerIndex, string content, Color msgColour, string buttonPath)
+    public void EnablePlayerInteractionText(int playerIndex, string content, Color msgColour, ButtonIconManager.GamepadButton button)
     {
         if (playerIndex < 0 || playerIndex >= NumPlayers)
         {
@@ -202,7 +198,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         interactionText.text = content;
 
         var interactionButton = group.Q<VisualElement>("InteractionButton");
-        interactionButton.style.backgroundImage = new StyleBackground(GetArtSprite(buttonPath));
+        interactionButton.style.backgroundImage = new StyleBackground(ButtonIconManager.Instance.GetButtonIconForPlayer(playerIndex, button));
         interactionButton.style.unityBackgroundImageTintColor = GlobalPlayerManager.Instance.Players[playerIndex].PlayerColor;
 
         group.visible = true;
@@ -317,24 +313,6 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     public void HideDialogue()
     {
         _dialogueUI.visible = false;
-    }
-
-    public Sprite GetArtSprite(string artSpriteName)
-    {
-        // Cache the sprites or else we blow up
-        if (_spriteCache.TryGetValue(artSpriteName, out var cachedSprite))
-        {
-            return cachedSprite;
-        }
-
-        // For some reason Resources.Load<Sprite> doesn't work
-        var texture = Resources.Load<Texture2D>(artSpriteName);
-        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-        if (!_spriteCache.TryAdd(artSpriteName, sprite))
-        {
-            Debug.LogError("Sprite already exists in cache but recreated: " + artSpriteName);
-        }
-        return sprite;
     }
 
     public void ReticleHit()

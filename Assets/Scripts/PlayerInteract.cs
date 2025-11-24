@@ -157,7 +157,7 @@ public class PlayerInteract : MonoBehaviour
         currentItem.EnableOutline();
 
         if (GlobalPlayerUIManager.Instance != null)
-            GlobalPlayerUIManager.Instance.EnableInteractionText(playerId, currentItem.hoverMessage, currentItem.msgColour, "UI/KeysPNG/PS4KEYS_BnW/Cross");
+            GlobalPlayerUIManager.Instance.EnableInteractionText(playerId, currentItem.hoverMessage, currentItem.msgColour, ButtonIconManager.GamepadButton.ButtonSouth);
     }
 
     /// <summary>
