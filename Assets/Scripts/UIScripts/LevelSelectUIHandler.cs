@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -24,6 +25,20 @@ public class LevelSelectUIHandler : MonoBehaviour, ILevelSelectUIHandler
             // Create template element
             VisualElement level = levelTemplate.CloneTree();
 
+            // Register UI nav audio
+            level.RegisterCallback<FocusInEvent>(evt =>
+            {
+                if (evt.relatedTarget == null)
+                {
+                    return;
+                }
+                RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+            });
+            level.RegisterCallback<NavigationSubmitEvent>(evt =>
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+            });
+            
             // Register click handler (mouse) and nav submit handler (gamepad)
             // Copy the int to pass to the event handler
             var levelIndex = i;

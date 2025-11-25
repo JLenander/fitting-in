@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using UIScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -41,6 +42,7 @@ public class MainMenuSettingsUIHandler : MonoBehaviour
 
         SetupCustomSliders();
         SetupSliderOptimization();
+        SetupUISFX();
         
         HideSettingsPanel();
     }
@@ -110,6 +112,35 @@ public class MainMenuSettingsUIHandler : MonoBehaviour
         _fullscreenToggle.RegisterCallback<FocusInEvent>(evt =>
         {
             focusOnSlider = false;
+        });
+    }
+
+    private void SetupUISFX()
+    {
+        _returnButton.clicked += () =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+        };
+        _fullscreenToggle.RegisterValueChangedCallback(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+        });
+        
+        _returnButton.RegisterCallback<FocusInEvent>(evt => 
+        {
+            if (evt.relatedTarget == null)
+            {
+                return;
+            }
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+        });
+        _masterAudioSlider.RegisterCallback<FocusInEvent>(evt => 
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+        });
+        _fullscreenToggle.RegisterCallback<FocusInEvent>(evt => 
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
         });
     }
     

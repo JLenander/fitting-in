@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -63,6 +64,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         customButtonElements = root.Query(className: "custom-image-button").ToList();
         SetupCustomSliders();
         SetupCustomButtons();
+        SetupUISFX();
 
         SceneManager.activeSceneChanged += PauseSceneChangeHandler;
         
@@ -123,6 +125,46 @@ public class PauseMenuUIHandler : MonoBehaviour
                 _playerColorBorderElement.style.unityBackgroundImageTintColor = _currentActivePlayerColor;
             });
         }
+    }
+
+    private void SetupUISFX()
+    {
+        _returnToGameButton.RegisterCallback<FocusInEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+        });
+        _masterAudioSlider.RegisterCallback<FocusInEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+        });
+        for (int i = 0; i < NumPlayers; i++)
+        {
+            _playerLookSensitivities[i].RegisterCallback<FocusInEvent>(evt =>
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+            });
+        }
+        _returnToLevelSelectButton.RegisterCallback<FocusInEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+        });
+        _quitGameButton.RegisterCallback<FocusInEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+        });
+        
+        _returnToGameButton.RegisterCallback<NavigationSubmitEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+        });
+        _returnToLevelSelectButton.RegisterCallback<NavigationSubmitEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+        });
+        _quitGameButton.RegisterCallback<NavigationSubmitEvent>(evt =>
+        {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+        });
     }
     
     /// <summary>
