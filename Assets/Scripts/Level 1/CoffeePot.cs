@@ -97,10 +97,6 @@ public class CoffeePot : InteractableObject
                     {
                         coffeeSfx.SetParameter("coffeeMiss", 0f);
                     }
-                    else if (cup.fillProgress == 0.99f)
-                    {
-                        RuntimeManager.PlayOneShot("event:/SFX/Exterior/pour_end");
-                    }
                     else
                     {
                         coffeeSfx.SetParameter("coffeeMiss", 1.9f);

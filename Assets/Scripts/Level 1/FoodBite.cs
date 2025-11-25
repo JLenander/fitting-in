@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -14,8 +15,6 @@ public class FoodBite : InteractableObject, IPooledObject
     [SerializeField] private Transform graphic;
     public float floatSpeed = 1f;
     public int score = 2;
-
-    public AudioSource audioSource;
 
     // The offset to place the object in on pickup for the hand
     public Vector3 handOffset = new Vector3(-0.66f, 3.7f, -1.58f);
@@ -92,8 +91,7 @@ public class FoodBite : InteractableObject, IPooledObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (audioSource != null)
-            audioSource.Play();
+        RuntimeManager.PlayOneShot("event:/SFX/Exterior/splat");
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
@@ -115,6 +113,7 @@ public class FoodBite : InteractableObject, IPooledObject
             {
                 ScoreKeeper.Instance.ModifyScore(score);
                 ScoreKeeper.Instance.IncrementScoring("Spaghetti completion");
+                RuntimeManager.PlayOneShot("event:/SFX/UI/ping");
             }
             Debug.Log("Eating point");
             NovaLevel1Manager.Instance.ate = true;

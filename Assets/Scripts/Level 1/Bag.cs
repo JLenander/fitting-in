@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -85,6 +86,7 @@ public class Bag : InteractableObject
             Level1TaskManager.CompleteTaskDiscardFood();
             NovaLevel1Manager novaLevel1Manager = NovaLevel1Manager.Instance;
             novaLevel1Manager.bagDiscarded = true;
+            RuntimeManager.PlayOneShot("event:/SFX/UI/ping");
         }
     }
 
