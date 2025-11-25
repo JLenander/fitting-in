@@ -93,21 +93,13 @@ public class CoffeePot : InteractableObject
                     cup = hit.collider.GetComponent<FillCup>();
                     cup.AddCoffee();
                     Debug.Log(cup.fillProgress);
-                    if (cup.fillProgress < 0.25f)
+                    if (cup.fillProgress < 1f)
                     {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.01f);
+                        coffeeSfx.SetParameter("coffeeMiss", 0f);
                     }
-                    else if (cup.fillProgress < 0.5f)
+                    else if (cup.fillProgress == 1f)
                     {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.25f);
-                    }
-                    else if (cup.fillProgress < 0.75f)
-                    {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.50f);
-                    }
-                    else if (cup.fillProgress < 1f)
-                    {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.75f);
+                        RuntimeManager.PlayOneShot("event:/SFX/Exterior/pour_end");
                     }
                     else
                     {
@@ -117,6 +109,7 @@ public class CoffeePot : InteractableObject
                 else
                 {
                     if (cup != null) cup.DisableOutline();
+                    coffeeSfx.SetParameter("coffeeMiss", 1.9f);
                 }
             }
             //volume--;
@@ -164,7 +157,7 @@ public class CoffeePot : InteractableObject
 
             grappleCollider.enabled = false;
 
-            if (first) StartCoroutine(BurnArm());
+            //if (first) StartCoroutine(BurnArm());
         }
     }
 
