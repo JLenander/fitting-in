@@ -16,8 +16,6 @@ public class BrainConsole : Interactable
     [SerializeField] GameObject leftEscapeDoorObj;
     [SerializeField] GameObject rightEscapeDoorObj;
 
-    public AudioSource interactSound;
-    public AudioSource buttonSound;
     public StudioEventEmitter enterSfx;
 
     private Door leftDoor, rightDoor, leftEscapeDoor, rightEscapeDoor;
@@ -127,8 +125,7 @@ public class BrainConsole : Interactable
 
                 if (dir != 0 && lastStickDir == 0)
                 {
-                    if (buttonSound != null)
-                        buttonSound.Play();
+                    RuntimeManager.PlayOneShot("event:/SFX/UI/brain_move");
                     uIHandler.ChangeActiveTask(dir == -1);
                 }
 
