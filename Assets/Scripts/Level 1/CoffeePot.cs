@@ -97,7 +97,7 @@ public class CoffeePot : InteractableObject
                     {
                         coffeeSfx.SetParameter("coffeeMiss", 0f);
                     }
-                    else if (cup.fillProgress == 1f)
+                    else if (cup.fillProgress == 0.99f)
                     {
                         RuntimeManager.PlayOneShot("event:/SFX/Exterior/pour_end");
                     }
@@ -157,7 +157,7 @@ public class CoffeePot : InteractableObject
 
             grappleCollider.enabled = false;
 
-            //if (first) StartCoroutine(BurnArm());
+            if (first) StartCoroutine(BurnArm());
         }
     }
 
