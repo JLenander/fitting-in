@@ -1,6 +1,7 @@
 using System.Collections;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -32,8 +33,47 @@ namespace UIScripts
 
             mainMenuSettingsUIHandler.RegisterReturnToMainMenuCallback(FocusSettingsButton);
             
+            SetupUISFX();
+            
             // Start by having the start menu button focused
             _startButton.Focus();
+        }
+
+        private void SetupUISFX()
+        {
+            // Start button click handled in StartButtonPressed
+            _settingsButton.clicked += () =>
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+            };
+            _quitButton.clicked += () =>
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
+            };
+
+            _startButton.RegisterCallback<FocusInEvent>(evt =>
+            {
+                if (evt.relatedTarget == null)
+                {
+                    return;
+                }
+                RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+            });
+            _settingsButton.RegisterCallback<FocusInEvent>(evt =>
+            {
+                // Don't play the sound when previous focused element is null
+                // (this occurs when coming from settings panel among other things because old element is no longer visible
+                // and lost focus before transition)
+                if (evt.relatedTarget == null)
+                {
+                    return;
+                }
+                RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+            });
+            _quitButton.RegisterCallback<FocusInEvent>(evt =>
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/move");
+            });
         }
 
         private void StartButtonPressed()
