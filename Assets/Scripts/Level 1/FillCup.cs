@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
+using FMODUnity;
 
 public class FillCup : MonoBehaviour
 {
@@ -66,6 +67,7 @@ public class FillCup : MonoBehaviour
         {
             full = true;
             ScoreKeeper.Instance.IncrementScoring("Filled Nova's coffee");
+            RuntimeManager.PlayOneShot("event:/SFX/Exterior/pour_end");
 
             // tell level manager coffee is filled
             NovaLevel1Manager.Instance.poured = true;

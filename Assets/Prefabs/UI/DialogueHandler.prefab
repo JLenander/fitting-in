@@ -52,3 +52,4 @@ MonoBehaviour:
   textDelay: 0.05
   audioSource: {fileID: 0}
   clip: {fileID: 8300000, guid: 0eb5449b20403ad4891cc86b0fae3a14, type: 3}
+  dialogueSfx: {fileID: 0}

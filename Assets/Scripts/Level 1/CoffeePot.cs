@@ -59,7 +59,7 @@ public class CoffeePot : InteractableObject
         Vector3 direction = isPouring ? Vector3.down : transform.forward.normalized;
 
         // visualize the spout ray
-        Debug.DrawRay(spoutTip.position, direction * rayLength, isPouring ? Color.green : Color.red);
+        Debug.DrawRay(origin + new Vector3(0, 10, 0), direction * rayLength, isPouring ? Color.green : Color.red);
 
         // is it tilted downward enough
         float downwardDot = Vector3.Dot(transform.forward, Vector3.down);
@@ -84,30 +84,19 @@ public class CoffeePot : InteractableObject
         // optional raycast visualization
         if (isPouring)
         {
+            Vector3 temp = origin + new Vector3(0, 10, 0);
             instance = coffeeSfx.EventInstance;
-            if (Physics.Raycast(origin, direction, out RaycastHit hit, rayLength, layerMask))
+            if (Physics.Raycast(temp, direction, out RaycastHit hit, rayLength, layerMask))
             {
-                Debug.DrawLine(origin, hit.point, Color.cyan);
+                Debug.DrawLine(temp, hit.point, Color.cyan);
                 if (hit.collider.CompareTag("Cup"))
                 {
                     cup = hit.collider.GetComponent<FillCup>();
                     cup.AddCoffee();
                     Debug.Log(cup.fillProgress);
-                    if (cup.fillProgress < 0.25f)
+                    if (cup.fillProgress < 1f)
                     {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.01f);
-                    }
-                    else if (cup.fillProgress < 0.5f)
-                    {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.25f);
-                    }
-                    else if (cup.fillProgress < 0.75f)
-                    {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.50f);
-                    }
-                    else if (cup.fillProgress < 1f)
-                    {
-                        coffeeSfx.SetParameter("coffeeMiss", 0.75f);
+                        coffeeSfx.SetParameter("coffeeMiss", 0f);
                     }
                     else
                     {
@@ -117,6 +106,7 @@ public class CoffeePot : InteractableObject
                 else
                 {
                     if (cup != null) cup.DisableOutline();
+                    coffeeSfx.SetParameter("coffeeMiss", 1.9f);
                 }
             }
             //volume--;

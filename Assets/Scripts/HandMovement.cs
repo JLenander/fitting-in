@@ -13,8 +13,6 @@ public class HandMovement : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _leftTriggerAction;
     private InputAction _rightTriggerAction;
-    private InputAction _leftBumperAction;
-    private InputAction _rightBumperAction;
     private InputAction _lookAction;
     private InputAction _interactAction;
 
@@ -31,9 +29,10 @@ public class HandMovement : MonoBehaviour
     private bool _grappleDisabled;
 
     private bool _isMoving;
-    public AudioSource moveSource;
-    public AudioSource stopSource;
-
+    public StudioEventEmitter moveSfx;
+    public StudioEventEmitter stopSfx;
+    public StudioEventEmitter grappleSfx;
+    
     private GameObject _currPlayer;
 
     [FormerlySerializedAs("lookSensitivity")] public float handPitchYawSensitivity = 0.4f;
@@ -46,7 +45,7 @@ public class HandMovement : MonoBehaviour
     [SerializeField] private Transform wristPitchYaw;
     [SerializeField] private Transform wristBone;
 
-    private bool grappleShot;
+    private bool _grappleShot;
 
     private Vector3 _wristRotation;
 
@@ -57,30 +56,27 @@ public class HandMovement : MonoBehaviour
     private bool _canInteract;  // can interact status
 
     [SerializeField] private GameObject grappleArmSpline;
-
-    public AudioSource hookSource;
-    public StudioEventEmitter grappleSfx;
-
+    
     public HeadConsole headConsole;
 
     public bool left;
 
     [SerializeField] private Transform grappleTarget;
 
-    private bool triggerWasPressed = false;
+    private bool _triggerWasPressed;
 
-    private Vector3 targetObjRest;
-    private Vector3 lastTargetPos;
+    private Vector3 _targetObjRest;
+    private Vector3 _lastTargetPos;
 
-    private Vector3 shootPos;
+    private Vector3 _shootPos;
 
     private void Start()
     {
         _ogPosition = transform.localPosition;
         _wristRotation = Vector3.zero;
         _disable = true;
-        grappleShot = false;
-        targetObjRest = grappleTarget.localPosition;
+        _grappleShot = false;
+        _targetObjRest = grappleTarget.localPosition;
     }
 
     private void Update()
@@ -116,15 +112,15 @@ public class HandMovement : MonoBehaviour
             }
 
             // so hand stays in position when frozen and walking
-            grappleTarget.position = lastTargetPos;
-            targetObjRest = grappleTarget.localPosition;
+            grappleTarget.position = _lastTargetPos;
+            _targetObjRest = grappleTarget.localPosition;
             return;
         }
 
         // hand rigid body movement
         Vector2 leftStickMove = _moveAction.ReadValue<Vector2>();
         Vector3 moveVector;
-        if (!grappleShot)
+        if (!_grappleShot)
         {
             // Move vector for arm rig target
             moveVector = new Vector3(leftStickMove.x, leftStickMove.y, 0);
@@ -165,8 +161,8 @@ public class HandMovement : MonoBehaviour
             _isMoving = true;
 
             // != expensive but confirmed the right approach
-            if (moveSource != null && !moveSource.isPlaying && !grappleShot)
-                moveSource.Play();
+            if (moveSfx != null && !moveSfx.IsPlaying() && !_grappleShot)
+                moveSfx.Play();
         }
 
         // Movement stopped
@@ -174,11 +170,11 @@ public class HandMovement : MonoBehaviour
         {
             _isMoving = false;
 
-            if (moveSource != null && moveSource.isPlaying)
-                moveSource.Stop();
+            if (moveSfx != null && moveSfx.IsPlaying())
+                moveSfx.Stop();
 
-            if (stopSource != null && !grappleShot)
-                stopSource.Play();
+            if (stopSfx != null && !_grappleShot)
+                stopSfx.Play();
         }
 
         // check if hand is empty and is there an object to interact with
@@ -203,9 +199,9 @@ public class HandMovement : MonoBehaviour
 
         bool triggerPressed = leftTrigger > 0.1f || rightTrigger > 0.1f;
 
-        if (triggerPressed && !triggerWasPressed && !_grappleDisabled)
+        if (triggerPressed && !_triggerWasPressed && !_grappleDisabled)
         {
-            if (!grappleShot)
+            if (!_grappleShot)
             {
                 // EmergencyEvent.Instance.IncrementCount(true); // or pass correct value
 
@@ -219,7 +215,7 @@ public class HandMovement : MonoBehaviour
                 {
                     grappleArmSpline.GetComponent<SplineController>().SetExtending(grappleTargetDist);
                     grappleTarget.position = grappleTargetPos;
-                    targetObjRest = grappleTarget.localPosition;
+                    _targetObjRest = grappleTarget.localPosition;
                 }
                 else
                 {
@@ -227,40 +223,40 @@ public class HandMovement : MonoBehaviour
                     grappleArmSpline.GetComponent<SplineController>().SetExtending(defaultGrappleDistance);
                     var defaultGrapplePos = headConsole.GetExternalCameraPosition() + (headConsole.GetExternalCameraDirection() * defaultGrappleDistance);
                     grappleTarget.position = defaultGrapplePos;
-                    targetObjRest = grappleTarget.localPosition;
+                    _targetObjRest = grappleTarget.localPosition;
                 }
 
 
                 // save shoot pos
-                shootPos = movement;
+                _shootPos = movement;
 
                 movement = new Vector3(0, 0, 0); // change when we get direction from head
             }
             else
             {
-                movement = shootPos;
+                movement = _shootPos;
                 grappleArmSpline.GetComponent<SplineController>().SetRetracting();
             }
 
-            grappleShot = !grappleShot;
+            _grappleShot = !_grappleShot;
         }
 
-        triggerWasPressed = triggerPressed;
+        _triggerWasPressed = triggerPressed;
 
         // Calculate movement of the grapple target
-        if (grappleShot)
+        if (_grappleShot)
         {
             Vector3 grappleMvt;
             // control grapple target,
             if (!left)
             {
-                grappleMvt = movement * speed + targetObjRest;
+                grappleMvt = movement * speed + _targetObjRest;
             }
             else
             {
                 Vector3 tmpMvt = movement;
                 tmpMvt.x *= -1.0f;
-                grappleMvt = tmpMvt * speed + targetObjRest;
+                grappleMvt = tmpMvt * speed + _targetObjRest;
             }
 
             // totalMvt.x = Mathf.Clamp(totalMvt.x, -20f, 28f);
@@ -269,7 +265,7 @@ public class HandMovement : MonoBehaviour
 
             grappleTarget.localPosition = new Vector3(grappleMvt.x, currentY, grappleMvt.z);
 
-            Vector3 clampedMovement = (grappleTarget.localPosition - targetObjRest) / speed;
+            Vector3 clampedMovement = (grappleTarget.localPosition - _targetObjRest) / speed;
             if (left)
                 clampedMovement.x *= -1.0f;
 
@@ -365,8 +361,6 @@ public class HandMovement : MonoBehaviour
         _lookAction = InputActionMapper.GetPlayerLookAction(input);
         _leftTriggerAction = InputActionMapper.GetPlayerLeftTriggerAction(input);
         _rightTriggerAction = InputActionMapper.GetPlayerRightTriggerAction(input);
-        _leftBumperAction = InputActionMapper.GetPlayerLeftBumperAction(input);
-        _rightBumperAction = InputActionMapper.GetPlayerRightBumperAction(input);
         _interactAction = InputActionMapper.GetPlayerItemInteractAction(input);
         _disable = false;
     }
@@ -378,17 +372,17 @@ public class HandMovement : MonoBehaviour
         // so all interaction/move/rotate/launching will mess up 
 
         _disable = true;
-        grappleShot = false;
+        _grappleShot = false;
         
         // Stop movement sound and play stop sound if we were moving
-        if (moveSource != null && moveSource.isPlaying)
-            moveSource.Stop();
+        if (moveSfx != null && moveSfx.IsPlaying())
+            moveSfx.Stop();
         if (_isMoving)
         {
             _isMoving = false;
 
-            if (stopSource != null)
-                stopSource.Play();
+            if (stopSfx != null)
+                stopSfx.Play();
         }
     }
 
@@ -432,24 +426,24 @@ public class HandMovement : MonoBehaviour
     {
         if (freeze)
         {
-            lastTargetPos = grappleTarget.position;
+            _lastTargetPos = grappleTarget.position;
         }
         _freeze = freeze;
     }
 
     // Make sure both hands not launched when both holding object
     // Also restrict xymovement
-    public void attachedCheckGrapple()
+    public void AttachedCheckGrapple()
     {
-        if (grappleShot)
+        if (_grappleShot)
         {
-            movement = shootPos;
+            movement = _shootPos;
             grappleArmSpline.GetComponent<SplineController>().SetRetracting();
-            grappleShot = false;
+            _grappleShot = false;
         }
     }
 
-    public void disableGrapple(bool disable)
+    public void DisableGrapple(bool disable)
     {
         _grappleDisabled = disable;
     }

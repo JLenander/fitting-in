@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -73,7 +74,7 @@ public class DialogueSystem : MonoBehaviour
                 {
                     _showingImageA = !_showingImageA;
                     dialogueUI.ChangeDialogueSprite(_showingImageA ? _spriteA : _spriteB);
-                    audioSource.PlayOneShot(clip);
+                    RuntimeManager.PlayOneShot("event:/SFX/UI/dialogue");
                 }
 
                 yield return new WaitForSeconds(textDelay);
