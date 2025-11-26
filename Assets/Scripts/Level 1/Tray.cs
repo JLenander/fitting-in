@@ -32,8 +32,8 @@ public class Tray : MonoBehaviour
     {
         if (leftAttach.isHeld && rightAttach.isHeld)
         {
-            leftAttach.currentHand.attachedCheckGrapple();
-            rightAttach.currentHand.attachedCheckGrapple();
+            leftAttach.currentHand.AttachedCheckGrapple();
+            rightAttach.currentHand.AttachedCheckGrapple();
             StartTwoHandControl();
         }
     }

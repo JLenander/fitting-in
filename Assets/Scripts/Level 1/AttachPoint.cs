@@ -12,7 +12,7 @@ public class AttachPoint : InteractableObject
 
         isHeld = true;
         currentHand = target;
-        currentHand.disableGrapple(true);
+        currentHand.DisableGrapple(true);
         DisableOutline();
            
         // Disable interactivity while held
@@ -36,7 +36,7 @@ public class AttachPoint : InteractableObject
         // currentHand.attachedCheckGrapple();
         target.handAnimator.SetTrigger("Neutral");
         
-        currentHand.disableGrapple(false);
+        currentHand.DisableGrapple(false);
         isHeld = false;
         currentHand = null;
 
@@ -56,7 +56,7 @@ public class AttachPoint : InteractableObject
         {
             currentHand.SetTargetCurrentObject(null);
             currentHand.FreezeWristPosition(false);
-            currentHand.disableGrapple(false);
+            currentHand.DisableGrapple(false);
             currentHand.handAnimator.SetTrigger("Neutral");
             
             isHeld = false;

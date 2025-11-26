@@ -2980,37 +2980,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325418663}
   m_Mesh: {fileID: 5302568919011541938, guid: 7fd09de4ab3c45f42abc2fecf6b481b8, type: 3}
---- !u!114 &330007765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138850548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -394028744
-      Data2: 1132443671
-      Data3: -1138375235
-      Data4: -1047548548
-    Path: event:/SFX/Robot/grapple
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &331559114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,37 +3248,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -453414060628706315, guid: 082c41686c23c064f94c12b3359df3e6, type: 3}
---- !u!114 &370547641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138850547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -394028744
-      Data2: 1132443671
-      Data3: -1138375235
-      Data4: -1047548548
-    Path: event:/SFX/Robot/grapple
-  Event: 
-  EventPlayTrigger: 0
-  EventStopTrigger: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1001 &387888858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7740,6 +7678,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5393f090a51c42945a02ac7e25906276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &836854584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3376348630468032531, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+--- !u!114 &836854585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7312105851982166274, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+--- !u!114 &836854586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3476169833123751740, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
 --- !u!1 &845748548
 GameObject:
   m_ObjectHideFlags: 0
@@ -10489,9 +10460,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: moveSfx
+      value: 
+      objectReference: {fileID: 836854586}
+    - target: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: stopSfx
+      value: 
+      objectReference: {fileID: 836854585}
+    - target: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       propertyPath: grappleSfx
       value: 
-      objectReference: {fileID: 370547641}
+      objectReference: {fileID: 836854584}
+    - target: {fileID: 4672791790501556749, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: stopSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6563188557207657235, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -10503,8 +10486,10 @@ PrefabInstance:
     - target: {fileID: 8163664760754894619, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       propertyPath: grappleSfx
       value: 
-      objectReference: {fileID: 330007765}
-    m_RemovedComponents: []
+      objectReference: {fileID: 1309008196}
+    m_RemovedComponents:
+    - {fileID: 585833833204788680, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+    - {fileID: 6563188557207657235, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 605633835941839844, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
@@ -10513,13 +10498,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7839684266347174250, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1590754953}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1247843849156549410, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 370547641}
-    - targetCorrespondingSourceObject: {fileID: 2360737117090242100, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 330007765}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
 --- !u!1 &1138850547 stripped
 GameObject:
@@ -13952,6 +13931,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4001574505551165258, guid: 4f278429725e75849bd0f234599bce71, type: 3}
   m_PrefabInstance: {fileID: 1306863408}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1309008196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2254347967197871365, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+  m_PrefabInstance: {fileID: 1138850546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138850548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
 --- !u!1 &1311418351
 GameObject:
   m_ObjectHideFlags: 0
