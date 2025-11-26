@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: robot
       value: 
       objectReference: {fileID: 1282057155417698829, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+    - target: {fileID: 3925338915680463869, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
+      propertyPath: moveSource
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5644754071235285436, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
       propertyPath: m_LocalPosition.y
       value: 10
@@ -100,7 +104,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftGrappleArm Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8682444517587383604, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
+    - {fileID: 9115779696011899960, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
+    - {fileID: 3293728549715247843, guid: 39b5bbd54a019c84ab798ea6a4dad3fb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
