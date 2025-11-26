@@ -81,8 +81,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5826494110080677601}
+  m_Children: []
   m_Father: {fileID: 7071939707644096687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5978132825412212643
@@ -119,6 +118,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 228214157781448378}
+  - {fileID: 5826494110080677601}
   - {fileID: 838067025856432034}
   - {fileID: 7494219197368693531}
   m_Father: {fileID: 0}
@@ -159,16 +159,19 @@ MonoBehaviour:
   outline: {fileID: 0}
   canInteract: 1
   canPickup: 1
-  interactPopUp: {fileID: 0}
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 7334841506576856424}
   grappleCollider: {fileID: 739928607601017466}
   rayLength: 50
   pourThresholdAngle: 60
   audioSource: {fileID: 0}
+  coffeeSfx: {fileID: 0}
   leftConsole: {fileID: 0}
   rightConsole: {fileID: 0}
   burnDialogue: {fileID: 11400000, guid: cda96d2ea8768a540bde1a1edb94bd6f, type: 2}
+  fireDialogue: {fileID: 0}
   spoutTip: {fileID: 838067025856432034}
   coffeePour: {fileID: 6910735435490514365}
 --- !u!54 &3763328431830505262
@@ -337,7 +340,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 838067025856432034}
+    m_TransformParent: {fileID: 7071939707644096687}
     m_Modifications:
     - target: {fileID: 709859257356526778, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
@@ -364,6 +367,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.70000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.6999999
       objectReference: {fileID: 0}
@@ -377,11 +384,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -389,15 +396,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2813141558825351560, guid: 637f98afa8bce6644b542120ffad59bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
