@@ -110,7 +110,7 @@ CharacterController:
   m_Height: 1.28
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 1
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.44, z: 0}
@@ -129,8 +129,8 @@ MonoBehaviour:
   moveSpeed: 7
   lookSensitivity: 4
   stepSfx: {fileID: -2862781930355676998}
-  stepInterval: 0.1
-  gravity: -0.02
+  stepInterval: 0.5
+  gravity: -0.01
   groundCheckDistance: 0.2
   groundMask:
     serializedVersion: 2
