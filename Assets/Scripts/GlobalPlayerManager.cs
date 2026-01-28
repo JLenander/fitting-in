@@ -13,6 +13,9 @@ public class GlobalPlayerManager : MonoBehaviour
 {
     public static GlobalPlayerManager Instance;
 
+    // Minimum number of players to proceed through character select
+    public const int MinPlayers = 2;
+
     private int _playerLimit;
     private PlayerData[] _players;
     private GlobalPlayerUIManager _uiManager; // use to aggregate player UI
@@ -140,6 +143,14 @@ public class GlobalPlayerManager : MonoBehaviour
             {
                 if (AllPlayersReady())
                 {
+                    // Verify at least 2 players have joined the game before starting
+                    if (NumPlayersJoined() < MinPlayers)
+                    {
+                        Debug.Log("Tried to start with too few players");
+                        // TODO: show warning to players
+                        return;
+                    }
+                    
                     // All players are ready and someone pressed the submit action so we load level select
                     Debug.Log("All players ready - starting");
                     
@@ -367,6 +378,12 @@ public class GlobalPlayerManager : MonoBehaviour
         {
             PlayerInputManager.instance.DisableJoining();
         }
+    }
+    
+    /// <returns>Returns the number of players who have joined</returns>
+    private int NumPlayersJoined()
+    {
+        return _players.Count(player => player.Valid);
     }
 
     /// <returns>True iff all valid players are ready and at least one player is valid</returns>
