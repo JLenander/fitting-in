@@ -7243,6 +7243,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: cf4ea487208c7e143869733e94b7db23, type: 2}
+    - target: {fileID: 7259241177533133573, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259241177533133573, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259241177533133573, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259241177533133573, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cf4ea487208c7e143869733e94b7db23, type: 2}
     - target: {fileID: 7403295312984145015, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_Color.b
       value: 0.48235294
@@ -7327,6 +7343,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8427229012854240177, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427229012854240177, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427229012854240177, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427229012854240177, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cf4ea487208c7e143869733e94b7db23, type: 2}
     - target: {fileID: 8467054180586661436, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: fireArea
       value: 
@@ -7359,6 +7391,22 @@ PrefabInstance:
       propertyPath: handRigTarget
       value: 
       objectReference: {fileID: 396891100}
+    - target: {fileID: 8911145389779350156, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911145389779350156, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.g
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911145389779350156, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Color.r
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911145389779350156, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cf4ea487208c7e143869733e94b7db23, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6257408601727427921, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
