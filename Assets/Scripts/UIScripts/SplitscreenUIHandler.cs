@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
 {
+    public static SplitscreenUIHandler Instance { get; private set; }
+    
     [SerializeField] private UIDocument uiDoc;
     [SerializeField] private float cameraOverlayTransitionStep = 0.05f;
     
@@ -54,7 +56,19 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
     
     void Awake()
     {
+        // Setup singleton
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+        
         DontDestroyOnLoad(this);
+        
+        
         var root = uiDoc.rootVisualElement;
 
         _player2Overlay = root.Query<VisualElement>("Player2NotJoined").First();
