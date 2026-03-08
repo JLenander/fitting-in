@@ -80,13 +80,13 @@ namespace UIScripts
         {
             RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
             // doing delay so that the sound effect can play before switching scenes
-            StartCoroutine(LoadSceneAfterDelay(SceneConstants.CharacterSelectScene, 0.2f));
+            StartCoroutine(LoadCharacterSelectAfterDelay(0.2f));
         }
 
-        private IEnumerator LoadSceneAfterDelay(string sceneName, float delay)
+        private IEnumerator LoadCharacterSelectAfterDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
-            SceneManager.LoadScene(sceneName);
+            GlobalLevelManager.Instance.LoadCharacterSelect();
         }
 
         private void SettingsButtonPressed()
