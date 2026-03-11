@@ -121,9 +121,25 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         SceneManager.activeSceneChanged += OnSceneChange;
     }
 
+    /// <summary>Destroy this singleton leaving no instance left</summary>
+    private void DestroySingleton()
+    {
+        SceneManager.activeSceneChanged -= OnSceneChange;
+        Destroy(gameObject);
+        Instance = null;
+    }
+    
     // Handler method to enable or disable Splitscreen UI components based on scene
     private void OnSceneChange(Scene oldScene, Scene newScene)
     {
+        // Kill this object if we go back to the main menu (done this way to enable return to main menu easily)
+        // This object could be refactored to work in the main scene and not need this but this is faster and guaranteed to work.
+        if (SceneConstants.IsMainMenuScene())
+        {
+            DestroySingleton();
+            return; // Destroy is async, don't continue to logic below
+        }
+        
         // Activate the UI when we enter a scene that is not the Main Menu, Level Select, or Character Select scenes.
         if (SceneConstants.IsCharacterSelectScene() || SceneConstants.IsLevelSelectScene())
         {

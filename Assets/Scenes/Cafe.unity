@@ -10527,9 +10527,13 @@ PrefabInstance:
       propertyPath: grappleSfx
       value: 
       objectReference: {fileID: 1309008196}
+    - target: {fileID: 8168391943883310693, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 585833833204788680, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
-    - {fileID: 6563188557207657235, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 605633835941839844, guid: 08b2094efe6813847a68ed2ada05a34f, type: 3}
