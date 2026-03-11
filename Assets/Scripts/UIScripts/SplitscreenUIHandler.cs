@@ -59,7 +59,7 @@ public class SplitscreenUIHandler : MonoBehaviour, ISplitscreenUIHandler
         // Setup singleton
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

@@ -37,7 +37,7 @@ public class GlobalPlayerManager : MonoBehaviour
         // Only allow one Global Player Manager
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

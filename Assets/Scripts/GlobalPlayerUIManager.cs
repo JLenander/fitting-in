@@ -39,7 +39,7 @@ public class GlobalPlayerUIManager : MonoBehaviour
         // Setup singleton
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

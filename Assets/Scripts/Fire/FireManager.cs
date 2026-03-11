@@ -39,7 +39,7 @@ public class FireManager : MonoBehaviour
         // init singleton
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

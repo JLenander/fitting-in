@@ -12,10 +12,10 @@ public class PopUpUIHandler : MonoBehaviour
 
     private void Awake()
     {
-        // Only allow one level manager
+        // Only allow one popupuihandler
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {

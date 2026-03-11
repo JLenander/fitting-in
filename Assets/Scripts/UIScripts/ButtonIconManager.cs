@@ -17,7 +17,8 @@ public class ButtonIconManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
+            return;
         }
         Instance = this;
         

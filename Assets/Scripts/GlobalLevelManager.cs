@@ -28,7 +28,7 @@ public class GlobalLevelManager : MonoBehaviour
         // Only allow one level manager
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         } else 
         {
             Instance = this;
