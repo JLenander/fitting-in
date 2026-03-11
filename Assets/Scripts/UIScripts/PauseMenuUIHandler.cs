@@ -14,7 +14,7 @@ public class PauseMenuUIHandler : MonoBehaviour
 
     private Button _returnToGameButton;
     private Button _returnToLevelSelectButton;
-    private Button _quitGameButton;
+    private Button _returnToMainMenuButton;
     
     private const int NumPlayers = 3;
     
@@ -148,7 +148,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         {
             RuntimeManager.PlayOneShot("event:/SFX/UI/move");
         });
-        _quitGameButton.RegisterCallback<FocusInEvent>(evt =>
+        _returnToMainMenuButton.RegisterCallback<FocusInEvent>(evt =>
         {
             RuntimeManager.PlayOneShot("event:/SFX/UI/move");
         });
@@ -161,7 +161,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         {
             RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
         });
-        _quitGameButton.RegisterCallback<NavigationSubmitEvent>(evt =>
+        _returnToMainMenuButton.RegisterCallback<NavigationSubmitEvent>(evt =>
         {
             RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
         });
@@ -257,13 +257,18 @@ public class PauseMenuUIHandler : MonoBehaviour
                 Application.Quit(0);
 #endif
     }
+
+    private void ReturnToMainMenuButtonHandler()
+    {
+        GlobalLevelManager.Instance.LoadMainMenu();
+    }
     
     // Setup the clickables for our custom buttons
     private void SetupButtonClickables()
     {
         _returnToGameButton = root.Query<Button>("ReturnToGameButton").First();
         _returnToLevelSelectButton = root.Query<Button>("LevelSelectButton").First();
-        _quitGameButton = root.Query<Button>("QuitGameButton").First();
+        _returnToMainMenuButton = root.Query<Button>("ExitToMainMenuButton").First();
         
         // Return to game handler is setup by each player later on (RegisterPlayerSettingsCallback) as it needs to pass specific data to each player
         
@@ -271,7 +276,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         _returnToLevelSelectButton.clicked += ReturnToLevelButtonHandler;
         
         // Setup quit game button callback
-        _quitGameButton.clicked += QuitGameButtonHandler;
+        _returnToMainMenuButton.clicked += ReturnToMainMenuButtonHandler;
     }
 
     /// <summary>
@@ -317,6 +322,16 @@ public class PauseMenuUIHandler : MonoBehaviour
     public void RegisterClosePauseMenuHandler(Action callback)
     {
         _returnToGameButton.clicked += callback;
+    }
+    
+    /// <summary>
+    /// Deregister a callback for general actions performed when the close pause menu button is clicked.
+    /// Necessary for proper handling.
+    /// </summary>
+    /// <param name="callback"></param>
+    public void DeregisterClosePauseMenuHandler(Action callback)
+    {
+        _returnToGameButton.clicked -= callback;
     }
 
     /// <summary>
