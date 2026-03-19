@@ -10,82 +10,82 @@ public static class InputActionMapper
 {
     public static InputAction GetCharacterSelectSubmitAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Submit", throwIfNotFound: true);
+        return playerInput.actions.FindAction(CharacterSelectActionMapName + "/Submit", throwIfNotFound: true);
     }
     
     public static InputAction GetCharacterSelectCancelAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Cancel", throwIfNotFound: true);
+        return playerInput.actions.FindAction(CharacterSelectActionMapName + "/Cancel", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerMoveAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Move", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/Move", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerLookAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Look", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/Look", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerInteractAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Interact", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/Interact", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerReturnAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Return", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/Return", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerItemInteractAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("ItemInteract", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/ItemInteract", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerLeftTriggerAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("LeftTrigger", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/LeftTrigger", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerRightTriggerAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("RightTrigger", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/RightTrigger", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerLeftBumperAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("LeftBumper", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/LeftBumper", throwIfNotFound: true);
     }
 
     public static InputAction GetPlayerRightBumperAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("RightBumper", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/RightBumper", throwIfNotFound: true);
     }
     
     public static InputAction GetPlayerOpenPauseMenuAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("OpenPauseMenu", throwIfNotFound: true);
+        return playerInput.actions.FindAction(PlayerActionMapName + "/OpenPauseMenu", throwIfNotFound: true);
     }
     
     public static InputAction GetUINavigateAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("Navigate", throwIfNotFound: true);
+        return playerInput.actions.FindAction(UIActionMapName + "/Navigate", throwIfNotFound: true);
     }
     
     public static InputAction GetUIClosePauseMenuAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("ClosePauseMenu", throwIfNotFound: true);
+        return playerInput.actions.FindAction(UIActionMapName + "/ClosePauseMenu", throwIfNotFound: true);
     }
     
     public static InputAction GetCharacterSelectLeftAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("LeftBumper", throwIfNotFound: true);
+        return playerInput.actions.FindAction(CharacterSelectActionMapName + "/LeftBumper", throwIfNotFound: true);
     }
     
     public static InputAction GetCharacterSelectRightAction(PlayerInput playerInput)
     {
-        return playerInput.actions.FindAction("RightBumper", throwIfNotFound: true);
+        return playerInput.actions.FindAction(CharacterSelectActionMapName + "/RightBumper", throwIfNotFound: true);
     }
     
     public const string CharacterSelectActionMapName = "CharacterSelect";

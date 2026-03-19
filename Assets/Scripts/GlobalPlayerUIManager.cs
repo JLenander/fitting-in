@@ -39,7 +39,7 @@ public class GlobalPlayerUIManager : MonoBehaviour
         // Setup singleton
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
@@ -47,6 +47,18 @@ public class GlobalPlayerUIManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        
+        // register sceneChangeHandler to kill this manager when we load the main menu scene
+        SceneManager.activeSceneChanged += MenuLoadHandler;
+    }
+    
+    /// <summary>Destroy this singleton leaving no instance left</summary>
+    private void DestroySingleton()
+    {
+        SceneManager.activeSceneChanged -= MenuLoadHandler;
+        SceneManager.activeSceneChanged -= UpdateUIForSceneChange;
+        Destroy(gameObject);
+        Instance = null;
     }
 
     public void Start()
@@ -56,6 +68,17 @@ public class GlobalPlayerUIManager : MonoBehaviour
         // Register scene change handler after loading the UI to start with 
         SceneManager.activeSceneChanged += UpdateUIForSceneChange;
         InitializeUI();
+    }
+    
+    private void MenuLoadHandler(Scene oldScene, Scene newScene)
+    {
+        // Kill this object if we go back to the main menu (done this way to enable return to main menu easily)
+        // This object could be refactored to work in the main scene (and keep player state)
+        // and not need this but this is faster and guaranteed to work.
+        if (SceneConstants.IsMainMenuScene())
+        {
+            DestroySingleton();
+        }
     }
 
     /// <summary>

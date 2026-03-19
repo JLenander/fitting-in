@@ -19,8 +19,10 @@ public class GlobalGameSettingsManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
+        
+        DontDestroyOnLoad(this);
         
         // Set framerate cap
         Application.targetFrameRate = 120;

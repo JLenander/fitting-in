@@ -13,6 +13,9 @@ public class GlobalPlayerManager : MonoBehaviour
 {
     public static GlobalPlayerManager Instance;
 
+    // Minimum number of players to proceed through character select
+    public const int MinPlayers = 2;
+
     private int _playerLimit;
     private PlayerData[] _players;
     private GlobalPlayerUIManager _uiManager; // use to aggregate player UI
@@ -20,6 +23,9 @@ public class GlobalPlayerManager : MonoBehaviour
     [SerializeField] private GameObject characterSelectScreen;
     private ICharacterSelectScreen _characterSelectScreen;
     private PauseMenuUIHandler _pauseMenuUIHandler;
+    
+    // Delegate for actions related to closing the pause menu. (Declared here as this class is responsible for setting timescale)
+    private Action _closePauseMenuDelegate;
 
     // To replace by colors player pick - to reference for conflict or pass to PlayerData when all ready
     public Color[] playerColorSelector =
@@ -34,7 +40,7 @@ public class GlobalPlayerManager : MonoBehaviour
         // Only allow one Global Player Manager
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
@@ -44,10 +50,61 @@ public class GlobalPlayerManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    /// <summary>Destroy this singleton leaving no instance left (and destroy players)</summary>
+    private void DestroySingleton()
+    {
+        // Destroy all players
+        foreach (var player in _players)
+        {
+            if (!player.Valid) continue;
+            
+            // Remove the registered callbacks if registered
+            var idx = player.Index;
+            if (Players[idx].InputActionDelegatesRegistered)
+            {
+                var playerInput = Players[idx].Input;
+                InputActionMapper.GetPlayerOpenPauseMenuAction(playerInput).started -= Players[idx].PauseMenuDelegate;
+                InputActionMapper.GetUIClosePauseMenuAction(playerInput).started -= Players[idx].UIClosePauseMenuDelegate;
+                InputActionMapper.GetCharacterSelectSubmitAction(playerInput).started -= _players[idx].SubmitActionDelegate;
+                InputActionMapper.GetCharacterSelectCancelAction(playerInput).started -= _players[idx].CancelActionDelegate;
+                InputActionMapper.GetCharacterSelectLeftAction(playerInput).started -= _players[idx].LeftActionDelegate;
+                InputActionMapper.GetCharacterSelectRightAction(playerInput).started -= _players[idx].RightActionDelegate;
+                InputActionMapper.GetUINavigateAction(playerInput).performed -= _players[idx].NavigateColorActionDelegate;
+            
+                Debug.Log("Callbacks deregistered for player " + idx);
+            }
+            
+            Destroy(player.PlayerObject);
+        }
+        
+        // Deregister callbacks
+        // WARNING this MUST happen after destroying / making the players leave in order to successfully deregister each player's callbacks
+        SceneManager.activeSceneChanged -= Instance.ActiveSceneChanged;
+        PlayerInputManager.instance.onPlayerJoined -= Instance.OnPlayerJoined;
+        PlayerInputManager.instance.onPlayerLeft -= Instance.OnPlayerLeft;
+        _pauseMenuUIHandler.DeregisterClosePauseMenuHandler(_closePauseMenuDelegate);
+        Debug.Log("Non player specific globalplayermanager callbacks deregistered");
+        Instance = null;
+        
+        Destroy(gameObject);
+    }
+
     void Start()
     {
         _characterSelectScreen = characterSelectScreen.GetComponent<ICharacterSelectScreen>();
         _pauseMenuUIHandler = FindAnyObjectByType<PauseMenuUIHandler>();
+        
+        // declare callback for closing pause menu (unpausing game time)
+        _closePauseMenuDelegate = () =>
+        {
+            // Resume game on pause menu open
+            Time.timeScale = 1;
+            _pauseMenuUIHandler.HidePauseMenu();
+            //stop lowpass audio
+            RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 0f);
+        };
+        // assign pause menu close delegate for the return to game button in the pause menu.
+        _pauseMenuUIHandler.RegisterClosePauseMenuHandler(_closePauseMenuDelegate);
 
         // initialize player data
         _playerLimit = PlayerInputManager.instance.maxPlayerCount;
@@ -67,6 +124,7 @@ public class GlobalPlayerManager : MonoBehaviour
 
     /// <summary>
     /// Handler method for when a player joins.
+    /// This method adds a bunch of event subscriptions that depend on the player index as a closure (so they're declared here)
     /// </summary>
     /// <param name="playerInput"></param>
     private void OnPlayerJoined(PlayerInput playerInput)
@@ -96,13 +154,13 @@ public class GlobalPlayerManager : MonoBehaviour
             _players[idx].RightActionDelegate = ctx => _characterSelectScreen.ChangeColor(idx, +1);
 
             // register callback for when the player navigates in order to set the current border color in the pause menu
-            playerInput.actions.FindAction("Navigate").performed += ctx =>
+            _players[idx].NavigateColorActionDelegate = ctx =>
             {
                 var playerColor = _players[idx].PlayerColor;
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(playerColor);
             };
-
-            // register callback for opening (pausing game time)
+            
+            // register callback for opening the pause menu (pausing game time)
             _players[idx].PauseMenuDelegate = ctx =>
             {
                 // Set all players in UI
@@ -124,103 +182,32 @@ public class GlobalPlayerManager : MonoBehaviour
                 // Pause game on pause menu open
                 Time.timeScale = 0;
             };
-            
-            // register callback for closing pause menu (unpausing game time)
-            Action closePauseMenuDelegate = () =>
-            {
-                // Resume game on pause menu open
-                Time.timeScale = 1;
-                _pauseMenuUIHandler.HidePauseMenu();
-                //stop lowpass audio
-                RuntimeManager.StudioSystem.setParameterByName("pauseLPF", 0f);
-            };
 
             // register callbacks for the character select screen actions.
             _players[idx].SubmitActionDelegate = ctx =>
             {
                 if (AllPlayersReady())
                 {
+                    // Verify at least 2 players have joined the game before starting
+                    if (NumPlayersJoined() < MinPlayers)
+                    {
+                        Debug.Log("Tried to start with too few players");
+                        // TODO: show warning to players
+                        return;
+                    }
+                    
                     // All players are ready and someone pressed the submit action so we load level select
                     Debug.Log("All players ready - starting");
                     
-                    // Assign player colors from selector to player data
-                    for (int i = 0; i < _playerLimit; i++)
-                    {
-                        if (_players[i].Valid)
-                        {
-                            _players[i].PlayerColor = playerColorSelector[i];
-                            // outline here instead of Player.cs Start(),
-                            // so that that script no need reference _players
-                            var outline = _players[i].PlayerGraphic.GetComponent<Outline>();
-                            if (outline != null)
-                            {
-                                outline.OutlineColor = _players[i].PlayerColor;
-                            }
-
-                            // Register settings UI callback and set default UI settings
-                            _pauseMenuUIHandler.SetPlayerSettings(i, new PlayerSettingsUI()
-                            {
-                                // Downscale by 10
-                                LookSensitivity = _players[i].Player.GetLookSensitivity() * 10.0f
-                            });
-                            _pauseMenuUIHandler.RegisterPlayerSettingsCallback(i, UpdatePlayerSettings);
-                            _pauseMenuUIHandler.ShowPlayerSettings(i);
-
-                            // assign pause menu open/close input action delegates
-                            InputActionMapper.GetPlayerOpenPauseMenuAction(_players[i].Input).started += Players[i].PauseMenuDelegate;
-                            InputActionMapper.GetUIClosePauseMenuAction(_players[i].Input).started += ctx =>
-                            {
-                                _pauseMenuUIHandler.ClosePauseMenu();
-                            };
-                            // assign pause menu close delegate for the return to game button in the pause menu.
-                            _pauseMenuUIHandler.RegisterClosePauseMenuHandler(closePauseMenuDelegate);
-
-                            // Inform pause menu of player colors
-                            _pauseMenuUIHandler.SetPlayerColor(i, _players[i].PlayerColor);
-                        }
-                        else
-                        {
-                            // Invalid so hide player settings in menu
-                            _pauseMenuUIHandler.HidePlayerSettings(i);
-                        }
-                    }
-
-                    _characterSelectScreen.DestroyPlorps();
-                    
-                    // pass these players to UI manager
-                    GlobalPlayerUIManager.Instance.PassPlayers(_players);
-
-                    // minimap initialize player dots *removed*
-
-                    // Load level select screen
-                    GlobalLevelManager.Instance.LoadLevelSelectScreen();
+                    SetupAndStartGame();
                 }
                 else
                 {
-                    // If player already ready, ignore
-                    if (_players[idx].Ready) return;
-
-                    // If current color taken, do not allow ready
-                    // else assign color and ready up
-                    var currentColor = playerColorSelector[idx];
-                    for (int i = 0; i < _playerLimit; i++)
-                    {
-                        if (i != idx && _players[i].Valid && _players[i].Ready && _players[i].PlayerColor == currentColor)
-                        {
-                            Debug.Log("Player " + idx + " attempted to ready with color taken by Player " + i);
-                            _characterSelectScreen.ShowColorConflictWarning(idx, i);
-                            return;
-                        }
-                    }
-                    Debug.Log("Player " + idx + " ready");
-                    // hide any previous warning, need do before ReadyPlayer, that uses warning area to show ready text
-                    _characterSelectScreen.HideColorConflictWarning(idx);
-                    _characterSelectScreen.ReadyPlayer(idx);
-                    _players[idx].Ready = true;
-                    _players[idx].PlayerColor = currentColor;
+                    MarkPlayerReady(idx);
                 }
                 Debug.Log("submit action");
             };
+            
             _players[idx].CancelActionDelegate = ctx =>
             {
                 // Unready a player or remove them if they're already unready.
@@ -248,10 +235,20 @@ public class GlobalPlayerManager : MonoBehaviour
                     Destroy(playerInput.gameObject);
                 }
             };
+            
+            // assign pause menu open/close input action delegates
+            Players[idx].UIClosePauseMenuDelegate = ctx => { _pauseMenuUIHandler.ClosePauseMenu(); };
+            
+            InputActionMapper.GetPlayerOpenPauseMenuAction(playerInput).started += Players[idx].PauseMenuDelegate;
+            InputActionMapper.GetUIClosePauseMenuAction(playerInput).started += Players[idx].UIClosePauseMenuDelegate;
             InputActionMapper.GetCharacterSelectSubmitAction(playerInput).started += _players[idx].SubmitActionDelegate;
             InputActionMapper.GetCharacterSelectCancelAction(playerInput).started += _players[idx].CancelActionDelegate;
             InputActionMapper.GetCharacterSelectLeftAction(playerInput).started += _players[idx].LeftActionDelegate;
             InputActionMapper.GetCharacterSelectRightAction(playerInput).started += _players[idx].RightActionDelegate;
+            InputActionMapper.GetUINavigateAction(playerInput).performed += _players[idx].NavigateColorActionDelegate;
+            
+            // mark delegates registered
+            Players[idx].InputActionDelegatesRegistered = true;
 
             // Ensure player is on the character select screen action map and disable by default
             playerInput.SwitchCurrentActionMap(InputActionMapper.CharacterSelectActionMapName);
@@ -269,20 +266,89 @@ public class GlobalPlayerManager : MonoBehaviour
     /// <param name="playerInput"></param>
     private void OnPlayerLeft(PlayerInput playerInput)
     {
+        var idx = playerInput.playerIndex;
         if (SceneConstants.IsCharacterSelectScene())
         {
-            Debug.Log("Player " + playerInput.playerIndex + " Left - Character Select Scene");
-
-            // Remove the registered callbacks
-            InputActionMapper.GetCharacterSelectSubmitAction(playerInput).started -= _players[playerInput.playerIndex].SubmitActionDelegate;
-            InputActionMapper.GetCharacterSelectCancelAction(playerInput).started -= _players[playerInput.playerIndex].CancelActionDelegate;
-            InputActionMapper.GetCharacterSelectLeftAction(playerInput).started -= _players[playerInput.playerIndex].LeftActionDelegate;
-            InputActionMapper.GetCharacterSelectRightAction(playerInput).started -= _players[playerInput.playerIndex].RightActionDelegate;
+            Debug.Log("Player " + idx + " Left - Character Select Scene");
         }
         else
         {
             Debug.Log("Player Left - Other Scene");
         }
+    }
+
+    /// <summary>
+    /// Setup player data and start the game
+    /// </summary>
+    private void SetupAndStartGame()
+    {
+        // Assign player colors from selector to player data
+        for (int i = 0; i < _playerLimit; i++)
+        {
+            if (_players[i].Valid)
+            {
+                _players[i].PlayerColor = playerColorSelector[i];
+                // outline here instead of Player.cs Start(),
+                // so that that script no need reference _players
+                var outline = _players[i].PlayerGraphic.GetComponent<Outline>();
+                if (outline != null)
+                {
+                    outline.OutlineColor = _players[i].PlayerColor;
+                }
+
+                // Register settings UI callback and set default UI settings
+                _pauseMenuUIHandler.SetPlayerSettings(i, new PlayerSettingsUI()
+                {
+                    // Downscale by 10
+                    LookSensitivity = _players[i].Player.GetLookSensitivity() * 10.0f
+                });
+                _pauseMenuUIHandler.RegisterPlayerSettingsCallback(i, UpdatePlayerSettings);
+                _pauseMenuUIHandler.ShowPlayerSettings(i);
+                
+                // Inform pause menu of player colors
+                _pauseMenuUIHandler.SetPlayerColor(i, _players[i].PlayerColor);
+            }
+            else
+            {
+                // Invalid so hide player settings in menu
+                _pauseMenuUIHandler.HidePlayerSettings(i);
+            }
+        }
+
+        _characterSelectScreen.DestroyPlorps();
+        
+        // pass these players to UI manager
+        GlobalPlayerUIManager.Instance.PassPlayers(_players);
+
+        // minimap initialize player dots *removed*
+
+        // Load level select screen
+        GlobalLevelManager.Instance.LoadLevelSelectScreen();
+    }
+
+    private void MarkPlayerReady(int playerIdx)
+    {
+        // If player already ready, ignore
+        if (_players[playerIdx].Ready) return;
+
+        // If current color taken, do not allow ready
+        // else assign color and ready up
+        var currentColor = playerColorSelector[playerIdx];
+        for (int i = 0; i < _playerLimit; i++)
+        {
+            if (i != playerIdx && _players[i].Valid && _players[i].Ready && _players[i].PlayerColor == currentColor)
+            {
+                Debug.Log("Player " + playerIdx + " attempted to ready with color taken by Player " + i);
+                _characterSelectScreen.ShowColorConflictWarning(playerIdx, i);
+                return;
+            }
+        }
+        Debug.Log("Player " + playerIdx + " ready");
+        // hide any previous warning, need do before ReadyPlayer, that uses warning area to show ready text
+        _characterSelectScreen.HideColorConflictWarning(playerIdx);
+        _characterSelectScreen.ReadyPlayer(playerIdx);
+        _players[playerIdx].Ready = true;
+        _players[playerIdx].PlayerColor = currentColor;
     }
 
     /// <summary>
@@ -319,6 +385,15 @@ public class GlobalPlayerManager : MonoBehaviour
     /// <param name="newScene"></param>
     private void ActiveSceneChanged(Scene oldScene, Scene newScene)
     {
+        // Kill this object if we go back to the main menu (done this way to enable return to main menu easily)
+        // This object could be refactored to work in the main scene (and keep player state)
+        // and not need this but this is faster and guaranteed to work.
+        if (SceneConstants.IsMainMenuScene())
+        {
+            DestroySingleton();
+            return; // Destroy is async, don't continue to logic below
+        }
+        
         foreach (var player in _players)
         {
             if (player.Valid)
@@ -358,7 +433,6 @@ public class GlobalPlayerManager : MonoBehaviour
                     player.Player.TurnOn();
                     Cursor.lockState = CursorLockMode.Locked;
                 }
-
             }
         }
 
@@ -367,6 +441,12 @@ public class GlobalPlayerManager : MonoBehaviour
         {
             PlayerInputManager.instance.DisableJoining();
         }
+    }
+    
+    /// <returns>Returns the number of players who have joined</returns>
+    private int NumPlayersJoined()
+    {
+        return _players.Count(player => player.Valid);
     }
 
     /// <returns>True iff all valid players are ready and at least one player is valid</returns>
@@ -402,12 +482,19 @@ public struct PlayerData
     public Player Player { get; set; }
     public GameObject PlayerObject { get; set; }
     public GameObject PlayerGraphic { get; set; }
+    public Color PlayerColor { get; set; }
+    
+    // Delegates for this player registered here. (In general these should have at least 3 usages:
+    // being 1. declared, 2. registered, and most importantly 3. deregistered when the player is destroyed by this object)
+    public bool InputActionDelegatesRegistered { get; set; }
     public Action<InputAction.CallbackContext> SubmitActionDelegate { get; set; }
     public Action<InputAction.CallbackContext> CancelActionDelegate { get; set; }
     public Action<InputAction.CallbackContext> LeftActionDelegate { get; set; }
     public Action<InputAction.CallbackContext> RightActionDelegate { get; set; }
     public Action<InputAction.CallbackContext> PauseMenuDelegate { get; set; }
-    public Color PlayerColor { get; set; }
+    public Action<InputAction.CallbackContext> NavigateColorActionDelegate { get; set; }
+    public Action<InputAction.CallbackContext> UIClosePauseMenuDelegate { get; set; }
+
 }
 
 public interface ICharacterSelectScreen

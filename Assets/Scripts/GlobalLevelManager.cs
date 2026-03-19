@@ -28,7 +28,7 @@ public class GlobalLevelManager : MonoBehaviour
         // Only allow one level manager
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         } else 
         {
             Instance = this;
@@ -78,6 +78,23 @@ public class GlobalLevelManager : MonoBehaviour
                 Debug.Log("Level " + GameConfig.Levels[index].sceneName + " completion unlocks " + GameConfig.Levels[unlockedIndex].sceneName);
             }
         }
+    }
+
+    /// <summary>
+    /// Load the Main Menu scene, handling the loading screen
+    /// </summary>
+    public void LoadMainMenu()
+    {
+        StartCoroutine(LoadScene(SceneConstants.MainMenuScene));
+    }
+    
+    /// <summary>
+    /// Load the character select scene, handling the loading screen
+    /// WARNING: not tested for loading the character select from anything besides the main menu, some game state might be weird.
+    /// </summary>
+    public void LoadCharacterSelect()
+    {
+        StartCoroutine(LoadScene(SceneConstants.CharacterSelectScene));
     }
 
     /// <summary>
