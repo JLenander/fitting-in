@@ -345,7 +345,7 @@ MonoBehaviour:
   - {fileID: 5102733308944532985}
   - {fileID: 1239342397800292048}
   - {fileID: 5210726578592782199}
-  plorpPrefab: {fileID: 3494399612162435902, guid: a645e0480694d194e8597dcbb26a9e73, type: 3}
+  plorpPrefab: {fileID: 2514337655388573056, guid: 49f575ecf5ffb264881ff1d5d7a65951, type: 3}
 --- !u!1 &413394183
 GameObject:
   m_ObjectHideFlags: 0
