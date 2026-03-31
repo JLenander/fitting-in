@@ -20,6 +20,7 @@ TagManager:
   - Robot
   - Phone
   - Plate
+  - PlayerExclusiveRender
   layers:
   - Default
   - TransparentFX
@@ -27,18 +28,18 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Player1
-  - Player2
-  - Player3
-  - Player4
+  - Player1IgnoreRender
+  - Player2IgnoreRender
+  - Player3IgnoreRender
+  - 
   - GrappleStop
   - Cup
   - Fire
   - HumanEnvironment
   - PlorpEnvironment
-  - 
-  - 
-  - 
+  - Player1OnlyRender
+  - Player2OnlyRender
+  - Player3OnlyRender
   - 
   - 
   - 
