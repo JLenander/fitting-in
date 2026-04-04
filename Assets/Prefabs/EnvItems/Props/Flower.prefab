@@ -159,6 +159,8 @@ MonoBehaviour:
   outline: {fileID: 7746140761362002314}
   canInteract: 1
   canPickup: 1
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 7704827400143605818}
   grappleCollider: {fileID: 1466154434870652694}
@@ -182,7 +184,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.48, y: 0.55, z: 0.61}
+  m_Size: {x: 0.4, y: 0.55, z: 0.43}
   m_Center: {x: 0, y: 0.1519624, z: -0.0000007338822}
 --- !u!114 &7746140761362002314
 MonoBehaviour:
@@ -253,5 +255,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.39946124, y: 0.30540866, z: 0.41059247}
-  m_Center: {x: -0.012871208, y: 0.16947167, z: 0.018300688}
+  m_Size: {x: 0.26, y: 0.33, z: 0.25}
+  m_Center: {x: 0, y: 0.16, z: 0}
