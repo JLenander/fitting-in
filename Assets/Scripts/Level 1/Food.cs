@@ -56,7 +56,7 @@ public class Food : InteractableObject
                 foodBite.canDrop = false;
             }
             target.StopInteractingWithObject(this);
-            target.InteractWithObject(foodBite);
+            target.ForceInteractionWithObject(foodBite);
 
             if (NovaLevel1Manager.Instance.ate)
                 foodBiteCount++;

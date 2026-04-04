@@ -36,6 +36,9 @@ public class SplineController : MonoBehaviour
     [SerializeField] private Vector3 restLocalPosition = new Vector3(0.0f, 0.0f, 0.0f);
     [SerializeField] private float restPositionSnapThreshold = 0.1f;
 
+    // The threshold for reporting if the spline is fully extended or retracted
+    [SerializeField] private float FullExtensionThreshold = 2f;
+    
     // SplineContainer is the unity component for the actual Spline.
     private SplineContainer _splineContainer;
     private BezierKnot _startKnot;
@@ -78,10 +81,48 @@ public class SplineController : MonoBehaviour
         extending = false;
     }
 
+    /// <summary>
+    /// The spline is fully extended (within some tolerance) if it is near the target length
+    /// </summary>
+    /// <returns>True if the spline is fully extended, false otherwise</returns>
+    public bool IsFullyExtended()
+    {
+        if (!extending) return false;
+        var localTargetPos = GetLocalTargetPosition();
+        var endpointPos = GetKnotLocalPosition(_endKnot);
+        return (localTargetPos - endpointPos).magnitude < FullExtensionThreshold;
+    }
+
+    /// <summary>
+    /// The spline is fully retracted (within some tolerance) if it is near the rest length
+    /// </summary>
+    /// <returns>True if the spline is fully extended, false otherwise</returns>
+    public bool IsFullyRetracted()
+    {
+        if (extending) return false;
+        var localTargetPos = GetLocalTargetPosition();
+        var endpointPos = GetKnotLocalPosition(_endKnot);
+        return (localTargetPos - endpointPos).magnitude < FullExtensionThreshold;
+    }
+
+    /// <returns>True if the grapple arm is extending or retracting</returns>
+    public bool IsGrappling()
+    {
+        return !IsFullyExtended() && !IsFullyRetracted();
+    }
+
+    /// <summary>
+    /// Get the target's position in local space relative to the Spline where (0,0,0) is the position of hte first knot
+    /// </summary>
+    /// <returns>The Vector3 local position of the spline target</returns>
+    private Vector3 GetLocalTargetPosition()
+    {
+        return OverrideExtend || extending ? _splineContainer.transform.InverseTransformPoint(targetObject.position) : restLocalPosition;
+    }
+
     private void UpdateSplineSegment()
     {
-        // The target's position in local space relative to the Spline where (0,0,0) is the position of the first knot).
-        var localTargetPos = OverrideExtend || extending ? _splineContainer.transform.InverseTransformPoint(targetObject.position) : restLocalPosition;
+        var localTargetPos = GetLocalTargetPosition();
         var endpointPos = GetKnotLocalPosition(_endKnot);
         
         // Update the End Knot

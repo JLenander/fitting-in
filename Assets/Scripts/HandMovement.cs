@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -51,11 +53,18 @@ public class HandMovement : MonoBehaviour
 
     public Animator oppositeHandAnimator; // animator of opposite hand
     public Animator handAnimator;
+    
+    // Interactable object information
     public InteractableObject currObj;    // currently interacting with hand
-    private GameObject _toInteractObj;  // check which object is it colliding with
-    private bool _canInteract;  // can interact status
-
+    // Ordered list of objects available to interact. First interactable object is priority for hand
+    private List<InteractableObject> _interactables = new List<InteractableObject>();
+    private Dictionary<InteractableObject, InteractableObjectData> _interactablesData = new Dictionary<InteractableObject, InteractableObjectData>();
+    // A delay counter for auto-picking up stuff after dropping an item
+    private float _pickupDelayCounter;
+    private const float AfterDropPickupDelay = 0.5f;
+    
     [SerializeField] private GameObject grappleArmSpline;
+    private SplineController _grappleArmSplineController;
     
     public HeadConsole headConsole;
 
@@ -72,18 +81,21 @@ public class HandMovement : MonoBehaviour
 
     private void Start()
     {
+        _grappleArmSplineController = grappleArmSpline.GetComponent<SplineController>();
+        
         _ogPosition = transform.localPosition;
         _wristRotation = Vector3.zero;
         _disable = true;
         _grappleShot = false;
         _targetObjRest = grappleTarget.localPosition;
+        _pickupDelayCounter = 0.0f;
     }
 
     private void Update()
     {
         if (_disable)
         {
-            grappleArmSpline.GetComponent<SplineController>().SetRetracting();
+            _grappleArmSplineController.SetRetracting();
             // keep arm retracting without player input
             return;
         }
@@ -107,7 +119,7 @@ public class HandMovement : MonoBehaviour
             // still allow stopping interaction with frozen hand
             if (_interactAction.WasPressedThisFrame() && currObj != null && _currPlayer!= null)
             {
-                Debug.Log("interaction " + _toInteractObj + _canInteract);
+                Debug.Log("Stopping interaction from frozen hand " + currObj);
                 StopInteractingWithObject(currObj);
             }
 
@@ -177,24 +189,38 @@ public class HandMovement : MonoBehaviour
                 stopSfx.Play();
         }
 
-        // check if hand is empty and is there an object to interact with
-        if (_interactAction.WasPressedThisFrame() && _toInteractObj != null && _canInteract && currObj == null)
+        // If hand is empty and there is an object we can grab, pick up the object
+        if (currObj == null)
         {
-            if (_toInteractObj.TryGetComponent(out InteractableObject interactable))
+            // After we drop an item, add a small delay before allowing the hand to automatically pickup something else
+            // (We will not pickup the same item after dropping it until the item leaves and re-enters the hand hitbox
+            //  but this delay helps to make the process feel better)
+            if (_pickupDelayCounter > 0.0f)
             {
-                if (interactable.canPickup)
+                _pickupDelayCounter -= Time.deltaTime;
+            }
+            else
+            {
+                // Do not auto-grab when extending or retracting
+                if (!_grappleArmSplineController.IsGrappling())
                 {
-                    InteractWithObject(interactable);
-                    _canInteract = false;
+                    InteractableObject obj = GetFirstInteractableObject();
+                    if (obj != null)
+                    {
+                        InteractWithObject(obj);
+                    }
                 }
             }
         }
-
-        // check if hand is not empty
-        else if (_interactAction.WasPressedThisFrame() && currObj != null)
+        else if (_interactAction.WasPressedThisFrame())
         {
-            Debug.Log("interaction " + _toInteractObj + _canInteract);
-            StopInteractingWithObject(currObj);
+            // If holding an object and interact is pressed, drop the object.
+            if (currObj.canDrop)
+            {
+                _interactablesData[currObj].SetIsDropped();
+                StopInteractingWithObject(currObj);
+                _pickupDelayCounter = Mathf.Max(_pickupDelayCounter, AfterDropPickupDelay);
+            }
         }
 
         bool triggerPressed = leftTrigger > 0.1f || rightTrigger > 0.1f;
@@ -213,14 +239,14 @@ public class HandMovement : MonoBehaviour
 
                 if (hit)
                 {
-                    grappleArmSpline.GetComponent<SplineController>().SetExtending(grappleTargetDist);
+                    _grappleArmSplineController.SetExtending(grappleTargetDist);
                     grappleTarget.position = grappleTargetPos;
                     _targetObjRest = grappleTarget.localPosition;
                 }
                 else
                 {
                     // no target, aim towards the reticle with a default distance
-                    grappleArmSpline.GetComponent<SplineController>().SetExtending(defaultGrappleDistance);
+                    _grappleArmSplineController.SetExtending(defaultGrappleDistance);
                     var defaultGrapplePos = headConsole.GetExternalCameraPosition() + (headConsole.GetExternalCameraDirection() * defaultGrappleDistance);
                     grappleTarget.position = defaultGrapplePos;
                     _targetObjRest = grappleTarget.localPosition;
@@ -235,7 +261,7 @@ public class HandMovement : MonoBehaviour
             else
             {
                 movement = _shootPos;
-                grappleArmSpline.GetComponent<SplineController>().SetRetracting();
+                _grappleArmSplineController.SetRetracting();
             }
 
             _grappleShot = !_grappleShot;
@@ -386,37 +412,6 @@ public class HandMovement : MonoBehaviour
         }
     }
 
-    public void SetCurrentInteractableObject(GameObject handUsing, bool canInteract)
-    {
-        _toInteractObj = handUsing;
-        _canInteract = canInteract;
-    }
-
-    public void InteractWithObject(InteractableObject interactableObject)
-    {
-        Debug.Log("Interacting with " + interactableObject);
-        interactableObject.InteractWithHand(wristBone, this);
-    }
-
-    public void StopInteractingWithObject(InteractableObject interactableObject)
-    {
-        if (interactableObject.canDrop)
-        {
-            Debug.Log("Stopping interaction with " + interactableObject);
-            interactableObject.StopInteractWithHand(this);
-            currObj = null;
-        }
-        else
-        {
-            Debug.Log("Cannot stop interaction with " + interactableObject);
-        }
-    }
-
-    public void SetTargetCurrentObject(InteractableObject obj)
-    {
-        currObj = obj;
-    }
-
     public GameObject GetCurrPlayer()
     {
         return _currPlayer;
@@ -438,7 +433,7 @@ public class HandMovement : MonoBehaviour
         if (_grappleShot)
         {
             movement = _shootPos;
-            grappleArmSpline.GetComponent<SplineController>().SetRetracting();
+            _grappleArmSplineController.SetRetracting();
             _grappleShot = false;
         }
     }
@@ -446,5 +441,145 @@ public class HandMovement : MonoBehaviour
     public void DisableGrapple(bool disable)
     {
         _grappleDisabled = disable;
+    }
+    
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // Interactable object related methods
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public record InteractableObjectData
+    {
+        public InteractableObject InteractableObj { get; }
+        // A HandInteractableObj cannot be picked up again once dropped (due to auto-grab)
+        // until the object hitbox leaves and re-enters the hand hitbox (which would cause this record to be recreated
+        // for the object
+        private bool _isDropped;
+        
+        public InteractableObjectData(InteractableObject obj)
+        {
+            InteractableObj = obj;
+            _isDropped = false;
+        }
+
+        /// <summary>
+        /// Set that this interactable object has been dropped which disallows interaction for this instance.
+        /// (This InteractableObjectData must be cleared from a queue and a new instance of interaction to occur, ex.
+        ///  object exits and re-enters interaction hitbox of hand, for it to be interactable again).
+        /// </summary>
+        public void SetIsDropped()
+        {
+            _isDropped = true;
+        }
+        
+        /// <returns>True if this interactable object is allowed to be interacted with</returns>
+        public bool CanInteract()
+        {
+            // This mirrors implementation before refactor (canInteract is not checked 
+            return !_isDropped && InteractableObj != null && InteractableObj.canPickup;
+        }
+    }
+
+    /// <summary>
+    /// Add an InteractableObject to the object(s) that this hand can interact with.
+    /// </summary>
+    public void AddInteractableObject(InteractableObject interactableObj)
+    {
+        if (_interactablesData.ContainsKey(interactableObj))
+        {
+            Debug.LogWarning("Duplicate interactableObject attempted to add to candidates " + interactableObj);
+            return;
+        }
+        _interactables.Add(interactableObj);
+        InteractableObjectData interactableData = new InteractableObjectData(interactableObj);
+        _interactablesData.Add(interactableObj, interactableData);
+    }
+    
+    /// <summary>
+    /// Remove an InteractableObject from the object(s) this hand can interact with.
+    /// </summary>
+    public void RemoveInteractableObject(InteractableObject interactableObj)
+    {
+        if (!_interactablesData.ContainsKey(interactableObj))
+        {
+            Debug.LogWarning("Game object "  + interactableObj + " was removed from hand interactables but not found");
+        }
+        if (!_interactables.Contains(interactableObj))
+        {
+            Debug.LogWarning("Game object "  + interactableObj + " was removed from hand interactables but not found");
+        }
+        _interactables.Remove(interactableObj);
+        _interactablesData.Remove(interactableObj);
+    }
+    
+    /// <summary>
+    /// Return the first interactable object in the interactables list (ordered by list order) or null if none are interactable.
+    /// </summary>
+    /// <returns>The Interactable Object or Null if no object is interactable</returns>
+    private InteractableObject GetFirstInteractableObject()
+    {
+        InteractableObject interactableObj = null;
+        foreach (InteractableObject interactableObject in _interactables)
+        {
+            if (_interactablesData[interactableObject].CanInteract())
+            {
+                interactableObj = interactableObject;
+                break;
+            }
+        }
+        return interactableObj;
+    }
+
+    /// <summary>
+    /// Force the hand to interact with an object (if the hand is empty). Normally the hand detects an interactable and
+    /// auto-grabs it but this method can be used if the hand needs to be forced to interact (such as grabbing the foodbite spawned
+    /// by the food plate).
+    /// </summary>
+    /// <returns>True if the force interaction was successful, false otherwise</returns>
+    public void ForceInteractionWithObject(InteractableObject interactableObj)
+    {
+        if (currObj == null)
+        {
+            AddInteractableObject(interactableObj);
+            InteractWithObject(interactableObj);
+        }
+        else
+        {
+            Debug.Log("Could not force hand to interact with " + interactableObj + " as hand is full");
+        }
+    }
+    
+    /// <summary>
+    /// Start interacting with a particular interactableObject, in particular informing that object that its
+    /// interacting with the hand.
+    /// </summary>
+    private void InteractWithObject(InteractableObject interactableObject)
+    {
+        Debug.Log("Interacting with " + interactableObject);
+        interactableObject.InteractWithHand(wristBone, this);
+    }
+
+    /// <summary>
+    /// Stop interacting with a particular object, only if the object can be dropped.
+    /// </summary>
+    public void StopInteractingWithObject(InteractableObject interactableObject)
+    {
+        if (interactableObject.canDrop)
+        {
+            Debug.Log("Stopping interaction with " + interactableObject);
+            interactableObject.StopInteractWithHand(this);
+            currObj = null;
+        }
+        else
+        {
+            Debug.Log("Cannot stop interaction with " + interactableObject);
+        }
+    }
+
+    // TODO: this should probably not be exposed.
+    /// <summary>
+    /// Set the current object this hand is holding.
+    /// </summary>
+    public void SetTargetCurrentObject(InteractableObject obj)
+    {
+        currObj = obj;
     }
 }
