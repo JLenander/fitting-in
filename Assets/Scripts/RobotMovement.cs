@@ -24,6 +24,9 @@ public class RobotMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundMask;
 
+    // The transform for the robot's camera used to inform walk forward direction.
+    [SerializeField] private Transform lookCameraTransform;
+    
     void Start()
     {
         var input = GetComponent<PlayerInput>();
@@ -51,8 +54,9 @@ public class RobotMovement : MonoBehaviour
         if (Mathf.Abs(leftInput) < 0.1f) leftInput = 0;
         if (Mathf.Abs(rightInput) < 0.1f) rightInput = 0;
 
+        // Move based on the camera forward look.
         float moveInput = (leftInput + rightInput) / 2f;
-        Vector3 moveDir = transform.forward * moveInput + _robotVelocity;
+        Vector3 moveDir = getCameraForward() * moveInput + _robotVelocity;
         _robotCharacterController.Move(moveDir * robotMoveSpeed * Time.deltaTime);
 
         float rotateInput = (leftInput - rightInput);
@@ -76,6 +80,14 @@ public class RobotMovement : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        var camForwardHorizontal = getCameraForward();
+        Debug.DrawRay(transform.position, lookCameraTransform.forward * 10, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * 10, Color.blue);
+        Debug.DrawRay(transform.position, camForwardHorizontal * 10, Color.green);
+    }
+
     public void PlayFootstep()
     {
         stepSfx.Play();
@@ -86,5 +98,12 @@ public class RobotMovement : MonoBehaviour
 
     public void SetLookAction(InputAction lookAction)
     { _lookAction = lookAction; }
-
+    
+    /// <returns>The horizontal component of the camera's forward look</returns>
+    private Vector3 getCameraForward()
+    {
+        Vector3 camForwardHorizontal = new Vector3(lookCameraTransform.forward.x, 0, lookCameraTransform.forward.z);
+        camForwardHorizontal.Normalize();
+        return camForwardHorizontal;
+    }
 }
