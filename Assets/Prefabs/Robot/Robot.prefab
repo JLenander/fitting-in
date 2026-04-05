@@ -59,6 +59,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  lookCameraTransform: {fileID: 9182400989961908325}
 --- !u!143 &6632339362198454148
 CharacterController:
   m_ObjectHideFlags: 0
