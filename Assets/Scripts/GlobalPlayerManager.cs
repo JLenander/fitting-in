@@ -50,6 +50,19 @@ public class GlobalPlayerManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    private void DeregisterPlayerCallbacks(PlayerInput playerInput, int playerIdx)
+    {
+        InputActionMapper.GetPlayerOpenPauseMenuAction(playerInput).started -= Players[playerIdx].PauseMenuDelegate;
+        InputActionMapper.GetUIClosePauseMenuAction(playerInput).started -= Players[playerIdx].UIClosePauseMenuDelegate;
+        InputActionMapper.GetCharacterSelectSubmitAction(playerInput).started -= _players[playerIdx].SubmitActionDelegate;
+        InputActionMapper.GetCharacterSelectCancelAction(playerInput).started -= _players[playerIdx].CancelActionDelegate;
+        InputActionMapper.GetCharacterSelectLeftAction(playerInput).started -= _players[playerIdx].LeftActionDelegate;
+        InputActionMapper.GetCharacterSelectRightAction(playerInput).started -= _players[playerIdx].RightActionDelegate;
+        InputActionMapper.GetUINavigateAction(playerInput).performed -= _players[playerIdx].NavigateColorActionDelegate;
+        
+        Debug.Log("Callbacks deregistered for player " + playerIdx);
+    }
+    
     /// <summary>Destroy this singleton leaving no instance left (and destroy players)</summary>
     private void DestroySingleton()
     {
@@ -63,15 +76,7 @@ public class GlobalPlayerManager : MonoBehaviour
             if (Players[idx].InputActionDelegatesRegistered)
             {
                 var playerInput = Players[idx].Input;
-                InputActionMapper.GetPlayerOpenPauseMenuAction(playerInput).started -= Players[idx].PauseMenuDelegate;
-                InputActionMapper.GetUIClosePauseMenuAction(playerInput).started -= Players[idx].UIClosePauseMenuDelegate;
-                InputActionMapper.GetCharacterSelectSubmitAction(playerInput).started -= _players[idx].SubmitActionDelegate;
-                InputActionMapper.GetCharacterSelectCancelAction(playerInput).started -= _players[idx].CancelActionDelegate;
-                InputActionMapper.GetCharacterSelectLeftAction(playerInput).started -= _players[idx].LeftActionDelegate;
-                InputActionMapper.GetCharacterSelectRightAction(playerInput).started -= _players[idx].RightActionDelegate;
-                InputActionMapper.GetUINavigateAction(playerInput).performed -= _players[idx].NavigateColorActionDelegate;
-            
-                Debug.Log("Callbacks deregistered for player " + idx);
+                DeregisterPlayerCallbacks(playerInput, idx);
             }
             
             Destroy(player.PlayerObject);
@@ -232,6 +237,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 {
                     Debug.Log("Player " + idx + " leaving");
                     _characterSelectScreen.RemovePlayer(idx);
+                    DeregisterPlayerCallbacks(playerInput, idx);
                     Destroy(playerInput.gameObject);
                 }
             };
