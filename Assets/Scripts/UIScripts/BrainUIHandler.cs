@@ -103,6 +103,9 @@ public class BrainUIHandler : TerminalUIHandler
         }
 
         RefreshTitles();
+        
+        // Update active tasks to newest task in list
+        ChangeActiveTaskToNewest();
     }
 
     // called by brain console to scroll up or down
@@ -132,6 +135,20 @@ public class BrainUIHandler : TerminalUIHandler
                 RefreshTitles();
                 return;
             }
+        }
+    }
+
+    /// <summary>
+    /// Change the active task to the newest (latest in the list)
+    /// </summary>
+    public void ChangeActiveTaskToNewest()
+    {
+        if (_activeTitle == null) return;
+        
+        // Newest task is last task
+        while (_visibleTitles.IndexOf(_activeTitle) != _visibleTitles.Count - 1)
+        {
+            ChangeActiveTask(true);
         }
     }
 
