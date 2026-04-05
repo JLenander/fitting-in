@@ -96,7 +96,8 @@ public class TutorialManager : MonoBehaviour
 
         // blink to ensure fires are gone
         blinkConsole.EnableInteract();
-        blinkConsole.EnableOutline();
+        blinkConsole.SetRunBlinkSystem(false);
+        EnableSilhouetteOutline(blinkConsole);
         headConsole.DisableInteract();
 
         blinkLight.SetActive(true);
@@ -106,12 +107,12 @@ public class TutorialManager : MonoBehaviour
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
 
         yield return new WaitUntil(() => blinked);
+        DisableSilhouetteOutline(blinkConsole);
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
         blinkConsole.DisableInteract();
-        blinkConsole.enabled = false;
-
+        blinkConsole.SetRunBlinkSystem(false);
         blinkLight.SetActive(false);
         SetLightsActive(normalLights);
 
@@ -124,11 +125,13 @@ public class TutorialManager : MonoBehaviour
         headConsole.EnableInteract();
         headLight.SetActive(true);
         SetLightsDeactive(normalLights);
+        EnableSilhouetteOutline(headConsole);
 
         repeatDialogue = eyeRepeatDialog;
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
 
         yield return new WaitUntil(() => interactEyeTerminal);
+        DisableSilhouetteOutline(headConsole);
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
@@ -149,19 +152,19 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(10f);
         SetLightsActive(armLights);
         SetLightsDeactive(normalLights);
-
+        
         leftConsole.EnableInteract();
         rightConsole.EnableInteract();
 
-        leftConsole.EnableOutline();
-        rightConsole.EnableOutline();
+        EnableSilhouetteOutline(leftConsole);
+        EnableSilhouetteOutline(rightConsole);
 
         repeatDialogue = armRepeatDialog;
         repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
 
         yield return new WaitUntil(() => interactArmTerminal);
-        leftConsole.DisableOutline();
-        rightConsole.DisableOutline();
+        DisableSilhouetteOutline(leftConsole);
+        DisableSilhouetteOutline(rightConsole);
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
         SetLightsDeactive(armLights);
@@ -207,6 +210,7 @@ public class TutorialManager : MonoBehaviour
 
         // 9. Leg terminal
         hipConsole.EnableInteract();
+        EnableSilhouetteOutline(hipConsole);
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
         yield return new WaitForSeconds(5f);
@@ -214,6 +218,7 @@ public class TutorialManager : MonoBehaviour
         SetLightsDeactive(normalLights);
 
         yield return new WaitUntil(() => interactLegTerminal);
+        DisableSilhouetteOutline(hipConsole);
         GlobalPlayerUIManager.Instance.StopText();
         SetLightsDeactive(legLights);
         SetLightsActive(normalLights);
@@ -236,7 +241,7 @@ public class TutorialManager : MonoBehaviour
         Level0TaskManager.StartTaskGoToPhone();
 
         // reenable blinking fires 
-        blinkConsole.enabled = true;
+        // blinkConsole.enabled = true;
         blinkConsole.EnableInteract();
         blinkConsole.SetRunBlinkSystem(true);
     }
@@ -265,5 +270,25 @@ public class TutorialManager : MonoBehaviour
         {
             light.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Enables the silhouette outline and outline mode for an interactable
+    /// </summary>
+    private void EnableSilhouetteOutline(Interactable interactable)
+    {
+        interactable.EnableForceOutline();
+        interactable.ChangeOutlineMode(Outline.Mode.OutlineAndSilhouette);
+        interactable.EnableOutline();
+    }
+
+    /// <summary>
+    /// Disables the interactable outline and resets the mode to original setting
+    /// </summary>
+    private void DisableSilhouetteOutline(Interactable interactable)
+    {
+        interactable.DisableForceOutline();
+        interactable.DisableOutline();
+        interactable.ResetOutlineModeToAssetSetting();
     }
 }
