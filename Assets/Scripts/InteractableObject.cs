@@ -30,7 +30,7 @@ public abstract class InteractableObject : MonoBehaviour
             if (hand != null)
             {
                 handMovement = hand.GetHandMovement();
-                handMovement.SetCurrentInteractableObject(gameObject, true);
+                handMovement.AddInteractableObject(this);
             }
         }
     }
@@ -42,7 +42,7 @@ public abstract class InteractableObject : MonoBehaviour
             DisableOutline();
             canInteract = false;
             if (handMovement != null)
-                handMovement.SetCurrentInteractableObject(null, false);
+                handMovement.RemoveInteractableObject(this);
         }
     }
 

@@ -35,6 +35,8 @@ public class Evidence : InteractableObject, IPooledObject
     {
         if (!grabbed)
         {
+            DisableCanInteract();
+            DisableCanPickup();
             grabbed = true;
             // disintegrate it (play animation)
 

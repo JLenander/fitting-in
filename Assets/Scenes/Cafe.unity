@@ -874,10 +874,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (5)
@@ -3296,10 +3292,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (7)
@@ -6821,10 +6813,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (2)
@@ -8571,10 +8559,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (3)
@@ -8944,10 +8928,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (9)
@@ -9144,10 +9124,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (13)
@@ -13965,10 +13941,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (12)
@@ -14815,10 +14787,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (10)
@@ -15050,10 +15018,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (1)
@@ -17706,10 +17670,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (11)
@@ -18209,10 +18169,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (8)
@@ -18754,10 +18710,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (4)
@@ -22095,10 +22047,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass (6)
@@ -26270,10 +26218,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6576767400703545202}
     m_Modifications:
-    - target: {fileID: 2433427169695059578, guid: 4f278429725e75849bd0f234599bce71, type: 3}
-      propertyPath: grappleCollider
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3203904883736393859, guid: 4f278429725e75849bd0f234599bce71, type: 3}
       propertyPath: m_Name
       value: Glass
