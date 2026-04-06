@@ -1,3 +1,4 @@
+using System;
 using FMODUnity;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,11 @@ public class Hoop : MonoBehaviour
 
     private float phoneCooldown = 0.5f;
     private float lastPhoneScoreTime = -1f;
+
+    private void OnDestroy()
+    {
+        scoreSfx.Stop();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

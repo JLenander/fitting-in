@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FMODUnity;
@@ -89,6 +90,13 @@ public class HandMovement : MonoBehaviour
         _grappleShot = false;
         _targetObjRest = grappleTarget.localPosition;
         _pickupDelayCounter = 0.0f;
+    }
+
+    private void OnDestroy()
+    {
+        moveSfx.Stop();
+        stopSfx.Stop();
+        grappleSfx.Stop();
     }
 
     private void Update()

@@ -36,6 +36,11 @@ public class RobotMovement : MonoBehaviour
             Debug.LogError("No CharacterController found");
     }
 
+    private void OnEnable()
+    {
+        stepSfx.Stop();
+    }
+
     public void ControlRobotMovement()
     {
         if (disable) return;

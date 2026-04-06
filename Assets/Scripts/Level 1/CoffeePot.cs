@@ -1,3 +1,4 @@
+using System;
 using FMOD.Studio;
 using FMODUnity;
 using System.Collections;
@@ -51,6 +52,11 @@ public class CoffeePot : InteractableObject
         coffeePourEffect = coffeePour.GetComponent<ParticleSystem>();
         Debug.Log(coffeePourEffect);
         coffeePourEffect.Stop(); // don�t play immediately
+    }
+    
+    private void OnDestroy()
+    {
+        OnStopPour();        
     }
 
     private void Update()
