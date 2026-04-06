@@ -82,6 +82,11 @@ public class PauseMenuUIHandler : MonoBehaviour
         });
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= PauseSceneChangeHandler;
+    }
+
     /// <summary>
     /// Setup the custom sliders to have smoother movement by increasing the step interval after a few seconds.
     /// Code in Update() checks for if the slider inputs are neutral which resets the timeSinceSliderLastHeld
