@@ -31,6 +31,7 @@ public class NovaLevel1Manager : MonoBehaviour
     public GameObject garbageCan;
     public GameObject tableCup;
     public GameObject handCup;
+    public CoffeePot coffeePot;
     public bool talking = false;
     public Food food;
     private float switchInterval = 10f;
@@ -197,6 +198,9 @@ public class NovaLevel1Manager : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
+        // Enable the coffee pot burning the arm on pickup
+        coffeePot.EnableBurnArm();
+        
         // drink coffee
         StartCoroutine(DrinkCoffee());
 

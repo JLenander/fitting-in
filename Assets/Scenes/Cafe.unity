@@ -10206,6 +10206,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 687215444}
   m_SourcePrefab: {fileID: 100100000, guid: 771f9bf88273ec14788dbd89fc8792e7, type: 3}
+--- !u!114 &1119936597 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 411164773002391776, guid: 771f9bf88273ec14788dbd89fc8792e7, type: 3}
+  m_PrefabInstance: {fileID: 1119936596}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687215436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec019abe9ea2cc04588548bd3dd79e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!114 &1119936598 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6965095409219973966, guid: 771f9bf88273ec14788dbd89fc8792e7, type: 3}
@@ -17296,6 +17307,7 @@ MonoBehaviour:
   garbageCan: {fileID: 1900401257}
   tableCup: {fileID: 450646048}
   handCup: {fileID: 2021013548}
+  coffeePot: {fileID: 1119936597}
   talking: 0
   food: {fileID: 1148863390}
   ate: 0
