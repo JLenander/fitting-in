@@ -32,7 +32,8 @@ namespace UIScripts
             // This is how to register the click handler while supporting mouse click and gamepad submit actions
             _startButton.clicked += StartButtonPressed;
             _settingsButton.clicked += SettingsButtonPressed;
-            _quitButton.clicked += QuitButtonPressed;
+            // _quitButton.clicked += QuitButtonPressed;
+            _quitButton.clicked += () => {RuntimeManager.PlayOneShot("event:/SFX/UI/brain_move");};
 
             mainMenuSettingsUIHandler.RegisterReturnToMainMenuCallback(FocusSettingsButton);
             
