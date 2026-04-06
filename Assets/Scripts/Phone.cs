@@ -65,7 +65,7 @@ public class Phone : InteractableObject
             if (first)
             {
                 first = false;
-                Level0TaskManager.CompleteTaskPickupPhone();
+                // Level0TaskManager.CompleteTaskPickupPhone();
                 Level0TaskManager.StartTaskUnlock();
             }
 
