@@ -6,7 +6,6 @@ public class TriggerSeat : MonoBehaviour
     public CharacterController robotCharController;
     public RobotMovement robotMovement;
     public Transform robot;
-    public SceneExitDoor sceneExitDoor;
 
     private bool triggered = false;
     private bool playerSitting = false;
@@ -18,11 +17,24 @@ public class TriggerSeat : MonoBehaviour
 
     private bool _isSitting;
 
+    private float _sitDownDelayCounter = 0f;
+    [SerializeField] private float SitBackDownDelay = 2f;
+
+    private void Awake()
+    {
+        _sitDownDelayCounter = 0f;
+    }
+
+    private void Update()
+    {
+        if (_sitDownDelayCounter > 0f) _sitDownDelayCounter -= Time.deltaTime;
+    }
+    
     // trigger level start at trigger enter
     private void OnTriggerEnter(Collider other)
     {
         if (playerSitting) return;
-        if (other != null && other.CompareTag("Robot"))
+        if (_sitDownDelayCounter <= 0f && other != null && other.CompareTag("Robot"))
         {
             if (!triggered) novaLevel1Manager.PlayLevelRoutine();
             robotMovement.disable = true;
@@ -36,6 +48,8 @@ public class TriggerSeat : MonoBehaviour
     {
         if (other != null && other.CompareTag("Robot"))
         {
+            // Add a small delay to sitting back down to prevent sitting back down too easily
+            _sitDownDelayCounter = SitBackDownDelay;
             playerSitting = false;
             BoxCollider collider = GetComponent<BoxCollider>();
             collider.enabled = true;
@@ -58,8 +72,6 @@ public class TriggerSeat : MonoBehaviour
         robot.position = robotPositionBeforeSit;
         robotMovement.disable = false;
         robotCharController.enabled = true;
-        // enable the exit door collier
-        sceneExitDoor.enabled = true;
     }
 
     public bool PlayerInsideSeat()

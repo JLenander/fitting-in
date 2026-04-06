@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CakeSlice : InteractableObject
 {
     public Collider triggerCollider;
     // The offset to place the object in on pickup for the hand
-    public Vector3 handOffset = new Vector3(-0.66f, 3.7f, -1.58f);
+    [FormerlySerializedAs("handOffset")] public Vector3 leftHandOffset = new Vector3(-5.12f, 5.43f, -0.44f);
+    public Vector3 rightHandOffset = new Vector3(3.72f,3.89f,-2.77f);
     public CakeManager cakeManager;
 
     private Rigidbody rb;
@@ -31,10 +33,10 @@ public class CakeSlice : InteractableObject
                 cakeManager.GrabbedSlice(this);
                 first = false;
             }
-
+            
             // move to hand
             transform.parent = obj;
-            transform.localPosition = handOffset;
+            transform.localPosition = target.left ? leftHandOffset : rightHandOffset;
             transform.localRotation = Quaternion.Euler(-88f, 10f, 0f);
             canPickup = false;
 

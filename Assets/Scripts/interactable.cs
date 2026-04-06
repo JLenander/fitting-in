@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
+/// <summary>
+/// Interactable is a PLORP interactable
+/// </summary>
 public class Interactable : MonoBehaviour
 {
     // The message that shows on the screen when a player hovers over this interactable
@@ -15,7 +18,14 @@ public class Interactable : MonoBehaviour
     public UnityEvent onReturn;
     public bool showOverlay = false;
 
-    // Start is called before the first frame update
+    private Outline.Mode _originalMode;
+    [SerializeField] private bool forceOutline = false;
+
+    void Awake()
+    {
+        _originalMode = outline.OutlineMode;
+    }
+    
     void Start()
     {
         DisableOutline();
@@ -39,6 +49,8 @@ public class Interactable : MonoBehaviour
 
     public void DisableOutline()
     {
+        // Prevent disabling outline if outline is forced.
+        if (forceOutline) return;
         outline.enabled = false;
     }
 
@@ -46,6 +58,44 @@ public class Interactable : MonoBehaviour
     {
         outline.OutlineColor = outlineColour;
         outline.enabled = true;
+    }
+
+    /// <summary>
+    /// Change the outline mode for this interactable.
+    /// Primarily used by tutorial to change terminal outlines to be silhouette for better nav before reverting to normal
+    /// </summary>
+    public void ChangeOutlineMode(Outline.Mode mode)
+    {
+        outline.OutlineMode = Outline.Mode.OutlineAndSilhouette;
+        outline.OutlineColor = outlineColour;
+        outline.enabled = true;
+    }
+
+    /// <summary>
+    /// Resets the outline mode to the setting this Interactable had when initialized.
+    /// </summary>
+    public void ResetOutlineModeToAssetSetting()
+    {
+        outline.OutlineMode = _originalMode;
+    }
+
+    /// <summary>
+    /// Forces the outline to remain on always until DisableForceOutline is called.
+    /// Used to prevent player looking a terminal from turning it off.
+    /// Does NOT turn ON the outline. Call EnableOutline().
+    /// </summary>
+    public void EnableForceOutline()
+    {
+        forceOutline = true;
+    }
+
+    /// <summary>
+    /// Disables forcing an outline on. Does not disable the outline
+    /// (call DisableOutline() after disabling force outline to stop the outline).
+    /// </summary>
+    public void DisableForceOutline()
+    {
+        forceOutline = false;
     }
 
     public virtual bool InteractionSuccess()

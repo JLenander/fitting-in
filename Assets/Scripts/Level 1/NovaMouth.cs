@@ -24,6 +24,15 @@ public class NovaMouth : MonoBehaviour
     {
         if (other.CompareTag("Food"))
         {
+            InteractableObject interactableObject = other.transform.GetComponent<InteractableObject>();
+            if (interactableObject == null)
+            {
+                Debug.LogWarning("Food item that isn't an interactableObject encountered by mouth " + other.name);
+                return;
+            }
+            // Verify food is being held by hand
+            if (interactableObject.handMovement == null) return;
+            
             // thanks for the food
             counter++;
             NovaLevel1Manager.Instance.ThankForFood(counter);
@@ -43,7 +52,6 @@ public class NovaMouth : MonoBehaviour
             }
 
             // stop the interaction
-            InteractableObject interactableObject = other.transform.GetComponent<InteractableObject>();
             interactableObject.handMovement.handAnimator.SetTrigger("Neutral");
 
             Destroy(other.gameObject);

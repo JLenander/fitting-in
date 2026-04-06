@@ -42,6 +42,11 @@ public class FoodBite : InteractableObject, IPooledObject
         rb = GetComponent<Rigidbody>();
     }
 
+    private void OnDestroy()
+    {
+        bag?.DisableOutline();
+    }
+
     public override void InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)

@@ -16,6 +16,9 @@ namespace UIScripts
         
         [SerializeField] private MainMenuSettingsUIHandler mainMenuSettingsUIHandler;
 
+        // Used to prevent button spamming
+        [SerializeField] private bool disableStartButton = false;
+
         void Start()
         {
             // JQuery like way of retrieving the specific UI elements we care about 
@@ -78,9 +81,15 @@ namespace UIScripts
 
         private void StartButtonPressed()
         {
+            if (disableStartButton) return;
             RuntimeManager.PlayOneShot("event:/SFX/UI/choose");
             // doing delay so that the sound effect can play before switching scenes
-            StartCoroutine(LoadCharacterSelectAfterDelay(0.2f));
+            GlobalLevelManager.Instance.LoadCharacterSelect();
+
+            // This was causing some bugs when buttons spammed so I'm disabling
+            // (The added loading screen allows the sfx to play
+            // StartCoroutine(LoadCharacterSelectAfterDelay(0.2f));
+            disableStartButton = true;
         }
 
         private IEnumerator LoadCharacterSelectAfterDelay(float delay)

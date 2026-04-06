@@ -90,8 +90,8 @@ public class Player : MonoBehaviour
             right.Normalize();
 
             // Combine input with camera directions
-            Vector3 moveDir = (forward * moveValue.y + right * moveValue.x).normalized;
-            _characterController.Move(moveDir * moveSpeed * Time.deltaTime);
+            Vector3 moveDir = forward * moveValue.y + right * moveValue.x;
+            _characterController.Move(moveDir * (moveSpeed * Time.deltaTime));
 
             velocity.y += gravity;
             _characterController.Move(velocity * Time.deltaTime);
@@ -126,10 +126,10 @@ public class Player : MonoBehaviour
     private void ControlEyeCam()
     {
         // Look
-        // Adjust lookSensitivity by 0.5 as the eye camera is twice as large as the player camera.
+        // Adjust lookSensitivity as the eye camera is twice as large as the player camera.
         Vector2 lookValue = _lookAction.ReadValue<Vector2>();
-        xRotationExternalCam -= lookValue.y * lookSensitivity * 0.5f;
-        yRotationExternalCam -= lookValue.x * lookSensitivity * -1 * 0.5f;
+        xRotationExternalCam -= lookValue.y * lookSensitivity * 0.45f;
+        yRotationExternalCam -= lookValue.x * lookSensitivity * -1 * 0.45f;
 
         yRotationExternalCam = Math.Clamp(yRotationExternalCam, -70f, 70f);
         xRotationExternalCam = Math.Clamp(xRotationExternalCam, -50f, 70f);

@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 /// <summary>
@@ -26,6 +28,7 @@ public class Extinguisher : MonoBehaviour
         ActivateExtinguisher(false);
         
         UpdateWaterStream();
+        SceneManager.activeSceneChanged += OnSceneChange;
     }
 
     // Update is called once per frame
@@ -46,6 +49,11 @@ public class Extinguisher : MonoBehaviour
         }
         
         UpdateWaterStream();
+    }
+
+    private void OnSceneChange(Scene current, Scene next)
+    {
+        ActivateExtinguisher(false);
     }
 
     public void ActivateExtinguisher(bool state)

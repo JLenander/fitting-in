@@ -33,7 +33,7 @@ public class CoffeePot : InteractableObject
     //[SerializeField] private float volume; // TODO: limit the pot
     private FillCup cup;
     private LayerMask layerMask;
-    private bool first = true;
+    private bool allowBurnArm = false;
 
     void Awake()
     {
@@ -154,7 +154,7 @@ public class CoffeePot : InteractableObject
 
             grappleCollider.enabled = false;
 
-            if (first) StartCoroutine(BurnArm());
+            if (allowBurnArm) StartCoroutine(BurnArm());
         }
     }
 
@@ -183,9 +183,21 @@ public class CoffeePot : InteractableObject
 
         // output dialogue
         GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
-        first = false;
+        allowBurnArm = false;
+        
 
         yield return new WaitForSeconds(13);
         GlobalPlayerUIManager.Instance.LoadText(fireDialogue);
+        
+        // Highlight coffee pot (will be turned off when player interacts with the item)
+        EnableOutline();
+    }
+
+    /// <summary>
+    /// Allow the coffee pot to burn the arm as part of the task.
+    /// </summary>
+    public void EnableBurnArm()
+    {
+        allowBurnArm = true;
     }
 }

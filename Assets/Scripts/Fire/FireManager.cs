@@ -50,6 +50,11 @@ public class FireManager : MonoBehaviour
         instance = mus.EventInstance;
     }
 
+    private void OnDestroy()
+    {
+        fireSfx.Stop();
+    }
+    
     public void StartFireArea(string name)
     {
         if (fireAreas.TryGetValue(name, out FireArea area))

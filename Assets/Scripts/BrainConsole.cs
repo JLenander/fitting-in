@@ -87,6 +87,9 @@ public class BrainConsole : Interactable
         //playerTaskPanel.SetActive(false);
         _canInteract = true;
 
+        // Also hide new task prompt on close in case a task was added while on the brain console
+        PopUpUIHandler.Instance.HideNewTaskPopUp();
+        
         uIHandler.HideUI(player);
     }
 
