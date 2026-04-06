@@ -7308,6 +7308,10 @@ PrefabInstance:
       value: 0.48235294
       objectReference: {fileID: 0}
     - target: {fileID: 875194351610826130, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 875194351610826130, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: cf4ea487208c7e143869733e94b7db23, type: 2}
@@ -7431,6 +7435,10 @@ PrefabInstance:
       propertyPath: wristPitchYawSource
       value: 
       objectReference: {fileID: 3233634353991162675}
+    - target: {fileID: 3994390959640234439, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
+      propertyPath: m_Name
+      value: WarningSignHead2
+      objectReference: {fileID: 0}
     - target: {fileID: 4009824482811066238, guid: ac43c6416a17b514cb0cabf330efd04c, type: 3}
       propertyPath: m_Color.b
       value: 0.48235294
