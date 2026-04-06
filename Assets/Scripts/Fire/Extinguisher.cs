@@ -51,6 +51,11 @@ public class Extinguisher : MonoBehaviour
         UpdateWaterStream();
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnSceneChange;
+    }
+
     private void OnSceneChange(Scene current, Scene next)
     {
         ActivateExtinguisher(false);
