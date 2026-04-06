@@ -167,10 +167,12 @@ public class NovaLevel1Manager : MonoBehaviour
         yield return new WaitForSeconds(12f);
 
         // blurb about food
+        Level1TaskManager.StartTaskEatFood();
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
         yield return new WaitForSeconds(7f);
-        Level1TaskManager.StartTaskEatFood();
+        
+        // Wait until at least one bite of food is eaten
         yield return new WaitUntil(() => ate);
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
@@ -178,7 +180,7 @@ public class NovaLevel1Manager : MonoBehaviour
 
         yield return StartCoroutine(EatCake());
 
-        float timeout = 35f;
+        float timeout = 15f;
         float timer = 0f;
 
         // progress when either food is all done or timer runs out
