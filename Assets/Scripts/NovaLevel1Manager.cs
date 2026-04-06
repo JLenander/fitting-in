@@ -210,6 +210,10 @@ public class NovaLevel1Manager : MonoBehaviour
         // prompt to refill the drink
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
+        
+        // Disable blink until coffee is poured (this doesn't 100% align with when coffee pot burns arm
+        // but this happens before so it prevents the head from unnecessarily burning when they are doing coffee pot.
+        blinkConsole.SetRunBlinkSystem(false);
 
         // eat third slice
         yield return new WaitForSeconds(30f);
@@ -218,6 +222,9 @@ public class NovaLevel1Manager : MonoBehaviour
 
         // dont eat and end until coffee pour is attempted
         yield return new WaitUntil(() => poured);
+        
+        // Restart blinking
+        blinkConsole.SetRunBlinkSystem(true);
 
         // thank them for filling it up
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
@@ -267,9 +274,10 @@ public class NovaLevel1Manager : MonoBehaviour
         index++;
         Level1TaskManager.StartTaskDiscardFood();
         yield return new WaitUntil(() => bagDiscarded);
-
+        
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
+        Level1TaskManager.CompleteTaskEatFood();
         Level1TaskManager.StartTaskLeaveCafe();
         sceneExitDoor.gameObject.SetActive(true);
         yield return new WaitForSeconds(10f);
