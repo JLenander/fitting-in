@@ -18256,7 +18256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 93f496dc3ecaa214aad62629d79da515, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51
+      value: 64.88
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 93f496dc3ecaa214aad62629d79da515, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18334,7 +18334,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.26, y: 0.42, z: 0.31}
+  m_Size: {x: 0.27, y: 0.42, z: 0.28}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1609978944
 MonoBehaviour:
@@ -18352,6 +18352,7 @@ MonoBehaviour:
   robotCharController: {fileID: 796993903}
   robotMovement: {fileID: 796993902}
   robot: {fileID: 76562116}
+  SitBackDownDelay: 2
 --- !u!4 &1609978945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93f496dc3ecaa214aad62629d79da515, type: 3}
