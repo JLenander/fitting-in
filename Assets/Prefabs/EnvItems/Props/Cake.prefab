@@ -49,7 +49,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.5302248, y: 0.15296596, z: 0.4615649}
   m_Center: {x: 0.026122026, y: 0.0932503, z: -0.007668213}
@@ -213,9 +213,12 @@ MonoBehaviour:
   outline: {fileID: 4711024258586075982}
   canInteract: 1
   canPickup: 1
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 2797313361611619208}
-  handOffset: {x: 3.51, y: 3.7, z: -2.32}
+  leftHandOffset: {x: -5.12, y: 5.43, z: -0.44}
+  rightHandOffset: {x: 3.72, y: 3.89, z: -2.77}
   cakeManager: {fileID: 7353872514460214543}
 --- !u!114 &4711024258586075982
 MonoBehaviour:
@@ -254,7 +257,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.05, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &1793678962359332012
 GameObject:
@@ -683,9 +686,12 @@ MonoBehaviour:
   outline: {fileID: 1992703119280898244}
   canInteract: 1
   canPickup: 1
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 1340272498839950623}
-  handOffset: {x: 3.51, y: 3.7, z: -2.32}
+  leftHandOffset: {x: -5.12, y: 5.43, z: -0.44}
+  rightHandOffset: {x: 3.72, y: 3.89, z: -2.77}
   cakeManager: {fileID: 7353872514460214543}
 --- !u!114 &1992703119280898244
 MonoBehaviour:
@@ -724,7 +730,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.05, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &3905356227209177672
 GameObject:
@@ -1153,9 +1159,12 @@ MonoBehaviour:
   outline: {fileID: 7078034666337980126}
   canInteract: 1
   canPickup: 1
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 4161276815084763430}
-  handOffset: {x: 3.51, y: 3.7, z: -2.32}
+  leftHandOffset: {x: -5.12, y: 5.43, z: -0.44}
+  rightHandOffset: {x: 3.72, y: 3.89, z: -2.77}
   cakeManager: {fileID: 7353872514460214543}
 --- !u!114 &7078034666337980126
 MonoBehaviour:
@@ -1194,7 +1203,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.05, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &7241718633266254743
 GameObject:
@@ -1445,9 +1454,12 @@ MonoBehaviour:
   outline: {fileID: 6153084105194758809}
   canInteract: 1
   canPickup: 1
+  canDrop: 1
+  handMovement: {fileID: 0}
   _robotHead: {fileID: 0}
   triggerCollider: {fileID: 3303020042192366201}
-  handOffset: {x: 3.51, y: 3.7, z: -2.32}
+  leftHandOffset: {x: -5.12, y: 5.43, z: -0.44}
+  rightHandOffset: {x: 3.72, y: 3.89, z: -2.77}
   cakeManager: {fileID: 7353872514460214543}
 --- !u!114 &6153084105194758809
 MonoBehaviour:
@@ -1486,7 +1498,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06846267, y: 0.1, z: 0.059999995}
+  m_Size: {x: 0.06846267, y: 0.05, z: 0.059999995}
   m_Center: {x: 0.034231335, y: 0.010714177, z: 0}
 --- !u!1 &7836478936386461359
 GameObject:
@@ -1632,3 +1644,4 @@ MonoBehaviour:
   - {fileID: 9209637418826285105}
   - {fileID: 6477098745992976982}
   - {fileID: 1719055992026765793}
+  novaCake: 1
