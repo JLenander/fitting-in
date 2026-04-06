@@ -1,3 +1,4 @@
+using System;
 using FMODUnity;
 using UnityEngine;
 
@@ -36,6 +37,12 @@ public class Ball : InteractableObject
             rg.AddForce(gravity, ForceMode.Acceleration);
 
         }
+    }
+
+    private void OnDestroy()
+    {
+        hoopSfx.Stop();
+        groundSfx.Stop();
     }
 
     public override void InteractWithHand(Transform obj, HandMovement target)
