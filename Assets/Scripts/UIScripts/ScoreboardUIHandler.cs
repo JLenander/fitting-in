@@ -23,6 +23,9 @@ public class ScoreboardUIHandler : MonoBehaviour
     private Label scoreboardContent;
     private Label letterGrade;
     private Label letterGradeTitle;
+    
+    // Keyboard used for checking continue input for endscreen.
+    private Keyboard _keyboard;
 
     private int textWidth = 55;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -260,30 +263,22 @@ public class ScoreboardUIHandler : MonoBehaviour
         letterGrade.text = formatted;
         letterGrade.visible = true;
 
-        bool inputDetected = false;
-
-        while (!inputDetected)
+        _keyboard = InputSystem.GetDevice<Keyboard>();
+        if (_keyboard == null)
         {
-
-            foreach (var gamepad in Gamepad.all)
-            {
-                if (gamepad == null) continue;
-
-                foreach (var control in gamepad.allControls)
-                {
-                    if (control is ButtonControl button && button.wasPressedThisFrame)
-                    {
-                        inputDetected = true;
-                        break;
-                    }
-                }
-
-                if (inputDetected)
-                    break;
-            }
-
-            yield return null; // wait next frame
+            Debug.LogError("No keyboard found");
         }
+        else
+        {
+            bool inputDetected = false;
+
+            while (!inputDetected)
+            {
+                inputDetected = _keyboard.spaceKey.isPressed;
+                yield return null; // wait next frame
+            }
+        }
+        
 
         // exit back to level select
         CloseScoreboard();

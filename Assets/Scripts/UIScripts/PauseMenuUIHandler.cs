@@ -248,7 +248,7 @@ public class PauseMenuUIHandler : MonoBehaviour
         }
     }
 
-    private void ReturnToLevelButtonHandler()
+    public void ReturnToLevelButtonHandler()
     {
         GlobalLevelManager.Instance.LoadLevelSelectScreen();
     }
@@ -263,7 +263,7 @@ public class PauseMenuUIHandler : MonoBehaviour
 #endif
     }
 
-    private void ReturnToMainMenuButtonHandler()
+    public void ReturnToMainMenuButtonHandler()
     {
         GlobalLevelManager.Instance.LoadMainMenu();
     }
