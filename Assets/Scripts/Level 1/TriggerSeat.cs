@@ -6,7 +6,6 @@ public class TriggerSeat : MonoBehaviour
     public CharacterController robotCharController;
     public RobotMovement robotMovement;
     public Transform robot;
-    public SceneExitDoor sceneExitDoor;
 
     private bool triggered = false;
     private bool playerSitting = false;
@@ -58,8 +57,6 @@ public class TriggerSeat : MonoBehaviour
         robot.position = robotPositionBeforeSit;
         robotMovement.disable = false;
         robotCharController.enabled = true;
-        // enable the exit door collier
-        sceneExitDoor.enabled = true;
     }
 
     public bool PlayerInsideSeat()

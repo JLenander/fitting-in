@@ -45,7 +45,6 @@ public class HipConsole : Interactable
             triggerSeat.StandRobot();
             if (Level1TaskManager.Instance.GetTaskData("Leave") == null && playerChair)
             {
-                triggerSeat.sceneExitDoor.enabled = false;
                 Collider collider = triggerSeat.GetComponent<Collider>();
                 collider.enabled = true;
             }

@@ -40,12 +40,14 @@ public class NovaLevel1Manager : MonoBehaviour
     public Coroutine levelCoroutine;
 
     [SerializeField] BlinkConsole blinkConsole;
+    [SerializeField] SceneExitDoor sceneExitDoor;
 
     void Start()
     {
         Instance = this;
         StartCoroutine(WaitForTaskManager());
         blinkConsole.SetRunBlinkSystem(true);
+        sceneExitDoor.gameObject.SetActive(false);
     }
 
     IEnumerator EatCake()
@@ -265,6 +267,7 @@ public class NovaLevel1Manager : MonoBehaviour
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]); // times up!!
         index++;
         Level1TaskManager.StartTaskLeaveCafe();
+        sceneExitDoor.gameObject.SetActive(true);
         yield return new WaitForSeconds(10f);
     }
     // Update is called once per frame

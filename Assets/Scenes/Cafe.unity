@@ -17296,6 +17296,7 @@ MonoBehaviour:
   food: {fileID: 1148863390}
   ate: 0
   blinkConsole: {fileID: 1568381345}
+  sceneExitDoor: {fileID: 8689347719959514125}
 --- !u!82 &1582269021
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18351,7 +18352,6 @@ MonoBehaviour:
   robotCharController: {fileID: 796993903}
   robotMovement: {fileID: 796993902}
   robot: {fileID: 76562116}
-  sceneExitDoor: {fileID: 8689347719959514125}
 --- !u!4 &1609978945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93f496dc3ecaa214aad62629d79da515, type: 3}
