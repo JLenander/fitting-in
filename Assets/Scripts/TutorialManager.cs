@@ -47,6 +47,13 @@ public class TutorialManager : MonoBehaviour
     private int index;
     private DialogueScriptableObj repeatDialogue;
     private Coroutine repeatDialogueRoutine;
+    
+    // Scene Exit door stuff
+    public SceneExitDoor sceneExitDoor;
+    public Vector3 target;
+
+    public Transform robotCameraTransform;
+    
     void Start()
     {
         Instance = this;
@@ -92,7 +99,7 @@ public class TutorialManager : MonoBehaviour
 
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        yield return new WaitForSeconds(27f);
+        yield return new WaitForSeconds(8.75f);
 
         // blink to ensure fires are gone
         blinkConsole.EnableInteract();
@@ -119,7 +126,7 @@ public class TutorialManager : MonoBehaviour
         // 3. message from general plorp about eye terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4.75f);
 
         // re-enable head
         headConsole.EnableInteract();
@@ -141,7 +148,7 @@ public class TutorialManager : MonoBehaviour
         // 4. move until the rectile becomes green
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
         eyeAim = false;
         yield return new WaitUntil(() => eyeAim && interactEyeTerminal);
         Debug.Log("eye aim " + eyeAim);
@@ -149,7 +156,7 @@ public class TutorialManager : MonoBehaviour
         // 5. message from general plorp about arm terminals
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(9.5f);
         SetLightsActive(armLights);
         SetLightsDeactive(normalLights);
         
@@ -185,15 +192,15 @@ public class TutorialManager : MonoBehaviour
         StopCoroutine(repeatDialogueRoutine);
         GlobalPlayerUIManager.Instance.StopText();
 
-        // drop ball
-        GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
-        index++;
-
-        repeatDialogue = dropRepeatDialogue;
-        repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
-        yield return new WaitUntil(() => dropBall);
-        StopCoroutine(repeatDialogueRoutine);
-        GlobalPlayerUIManager.Instance.StopText();
+        // // drop ball
+        // GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
+        // index++;
+        //
+        // repeatDialogue = dropRepeatDialogue;
+        // repeatDialogueRoutine = StartCoroutine(RepeatDialogue());
+        // yield return new WaitUntil(() => dropBall);
+        // StopCoroutine(repeatDialogueRoutine);
+        // GlobalPlayerUIManager.Instance.StopText();
 
         // Start play basketball
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
@@ -210,10 +217,10 @@ public class TutorialManager : MonoBehaviour
 
         // 9. Leg terminal
         hipConsole.EnableInteract();
-        EnableSilhouetteOutline(hipConsole);
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5.75f);
+        EnableSilhouetteOutline(hipConsole);
         SetLightsActive(legLights);
         SetLightsDeactive(normalLights);
 
@@ -228,7 +235,7 @@ public class TutorialManager : MonoBehaviour
         index++;
 
         // done tutorial
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(12f);
         // 11. Brain terminal online
         GlobalPlayerUIManager.Instance.LoadText(dialogues[index]);
         index++;
@@ -238,19 +245,38 @@ public class TutorialManager : MonoBehaviour
         index++;
 
         // start task chain
-        Level0TaskManager.StartTaskGoToPhone();
-
+        // Level0TaskManager.StartTaskGoToPhone();
+        yield return new WaitForSeconds(10.25f);
+        Level0TaskManager.StartTaskLeavePhone();
+        
         // reenable blinking fires 
         // blinkConsole.enabled = true;
         blinkConsole.EnableInteract();
         blinkConsole.SetRunBlinkSystem(true);
+
+        // Activate, after a delay, the door slide up sequence once the robot camera is looking at the door
+        yield return new WaitForSeconds(8f);
+        float angle;
+        do
+        {
+            angle = Vector3.Angle(robotCameraTransform.forward, -1 * sceneExitDoor.transform.forward);
+            // Debug.Log("Angle is " + angle);
+            yield return new WaitForSeconds(0.1f);
+        } while (angle > 45f);
+        Debug.Log("Activating door");
+        yield return new WaitForSeconds(1f);
+        while (Vector3.Distance(sceneExitDoor.transform.position, target) > 0.01f)
+        {
+            sceneExitDoor.transform.position = Vector3.MoveTowards(sceneExitDoor.transform.position, target, 10 * Time.deltaTime);
+            yield return null;
+        }
     }
 
     IEnumerator RepeatDialogue()
     {
         while (true)
         {
-            yield return new WaitForSeconds(30f);
+            yield return new WaitForSeconds(20f);
 
             GlobalPlayerUIManager.Instance.LoadText(repeatDialogue);
         }

@@ -102,7 +102,8 @@ public class PhoneUIController : MonoBehaviour
         {
             matchedText = true;
             swiping = false;
-            StartCoroutine(MatchRoutine());
+            // StartCoroutine(MatchRoutine());
+            MatchRoutine();
         }
         else
         {
@@ -134,30 +135,28 @@ public class PhoneUIController : MonoBehaviour
         }
     }
 
-    IEnumerator MatchRoutine()
+    void MatchRoutine()
     {
         // yield return new WaitForSeconds(2);
 
         locked = true; // lock swiping
         screenImage.sprite = match;
         nextImage.sprite = match;
-
-        yield return null;
-
+        
         Level0TaskManager.CompleteTaskSwipe();
 
         // enable exit door
-        sceneExitDoor.enabled = true;
+        // sceneExitDoor.enabled = true;
 
         // move the door into scene
-        while (Vector3.Distance(sceneExitDoor.transform.position, target) > 0.01f)
-        {
-            sceneExitDoor.transform.position = Vector3.MoveTowards(sceneExitDoor.transform.position, target, 10 * Time.deltaTime);
-            yield return null;
-        }
+        // while (Vector3.Distance(sceneExitDoor.transform.position, target) > 0.01f)
+        // {
+        //     sceneExitDoor.transform.position = Vector3.MoveTowards(sceneExitDoor.transform.position, target, 10 * Time.deltaTime);
+        //     yield return null;
+        // }
 
         // Snap to target just in case
-        sceneExitDoor.transform.position = target;
+        // sceneExitDoor.transform.position = target;
 
         Level0TaskManager.StartTaskLeavePhone();
 

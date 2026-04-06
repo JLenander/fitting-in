@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: 11
   m_EditorClassIdentifier: Assembly-CSharp::DialogueScriptableObj
   lines:
-  - Great! I was getting tired of talking
-  - Just follow what the brain terminal tells you to do
-  - I'm going back to sleep
+  - Check the brain terminal for what to do when you're not sure!
   spirteA: {fileID: 21300000, guid: 7cf1f3e381de4504d8c4445353b39e1d, type: 3}
   spirteB: {fileID: 21300000, guid: 14195ce6032b9da4ab6a0eba52e7c89b, type: 3}
