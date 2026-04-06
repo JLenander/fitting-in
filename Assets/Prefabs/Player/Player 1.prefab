@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed40283c00862dc1fb3b6b0c7f63344c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  moveSpeed: 7
+  moveSpeed: 6
   lookSensitivity: 4
   stepSfx: {fileID: -2862781930355676998}
   stepInterval: 0.5
