@@ -171,7 +171,7 @@ namespace UIScripts
 
         public void ShowColorConflictWarning(int playerIndex, int otherIndex)
         {
-            string message = "Color taken by Player " + (otherIndex + 1);
+            string message = "COLOR TAKEN BY PLAYER " + (otherIndex + 1);
             _playerColorWarnings[playerIndex].text = message;
             _playerColorWarnings[playerIndex].visible = true;
             RuntimeManager.PlayOneShot("event:/SFX/UI/brain_move");
