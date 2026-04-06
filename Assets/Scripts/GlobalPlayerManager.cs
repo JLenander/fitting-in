@@ -14,7 +14,7 @@ public class GlobalPlayerManager : MonoBehaviour
     public static GlobalPlayerManager Instance;
 
     // Minimum number of players to proceed through character select
-    public const int MinPlayers = 2;
+    public const int MinPlayers = 3;
 
     private int _playerLimit;
     private PlayerData[] _players;
@@ -23,7 +23,7 @@ public class GlobalPlayerManager : MonoBehaviour
     [SerializeField] private GameObject characterSelectScreen;
     private ICharacterSelectScreen _characterSelectScreen;
     private PauseMenuUIHandler _pauseMenuUIHandler;
-    
+
     // Delegate for actions related to closing the pause menu. (Declared here as this class is responsible for setting timescale)
     private Action _closePauseMenuDelegate;
 
@@ -59,10 +59,10 @@ public class GlobalPlayerManager : MonoBehaviour
         InputActionMapper.GetCharacterSelectLeftAction(playerInput).started -= _players[playerIdx].LeftActionDelegate;
         InputActionMapper.GetCharacterSelectRightAction(playerInput).started -= _players[playerIdx].RightActionDelegate;
         InputActionMapper.GetUINavigateAction(playerInput).performed -= _players[playerIdx].NavigateColorActionDelegate;
-        
+
         Debug.Log("Callbacks deregistered for player " + playerIdx);
     }
-    
+
     /// <summary>Destroy this singleton leaving no instance left (and destroy players)</summary>
     private void DestroySingleton()
     {
@@ -70,7 +70,7 @@ public class GlobalPlayerManager : MonoBehaviour
         foreach (var player in _players)
         {
             if (!player.Valid) continue;
-            
+
             // Remove the registered callbacks if registered
             var idx = player.Index;
             if (Players[idx].InputActionDelegatesRegistered)
@@ -78,10 +78,10 @@ public class GlobalPlayerManager : MonoBehaviour
                 var playerInput = Players[idx].Input;
                 DeregisterPlayerCallbacks(playerInput, idx);
             }
-            
+
             Destroy(player.PlayerObject);
         }
-        
+
         // Deregister callbacks
         // WARNING this MUST happen after destroying / making the players leave in order to successfully deregister each player's callbacks
         SceneManager.activeSceneChanged -= Instance.ActiveSceneChanged;
@@ -90,7 +90,7 @@ public class GlobalPlayerManager : MonoBehaviour
         _pauseMenuUIHandler.DeregisterClosePauseMenuHandler(_closePauseMenuDelegate);
         Debug.Log("Non player specific globalplayermanager callbacks deregistered");
         Instance = null;
-        
+
         Destroy(gameObject);
     }
 
@@ -98,7 +98,7 @@ public class GlobalPlayerManager : MonoBehaviour
     {
         _characterSelectScreen = characterSelectScreen.GetComponent<ICharacterSelectScreen>();
         _pauseMenuUIHandler = FindAnyObjectByType<PauseMenuUIHandler>();
-        
+
         // declare callback for closing pause menu (unpausing game time)
         _closePauseMenuDelegate = () =>
         {
@@ -141,7 +141,7 @@ public class GlobalPlayerManager : MonoBehaviour
             {
                 return;
             }
-            
+
             var idx = playerInput.playerIndex;
             Debug.Log("Player " + idx + " Joined - Character Select Scene");
             _players[idx].Input = playerInput;
@@ -164,7 +164,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 var playerColor = _players[idx].PlayerColor;
                 _pauseMenuUIHandler.SetCurrentActivePlayerColor(playerColor);
             };
-            
+
             // register callback for opening the pause menu (pausing game time)
             _players[idx].PauseMenuDelegate = ctx =>
             {
@@ -183,7 +183,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 // Show and focus the pause menu.
                 _pauseMenuUIHandler.ShowPauseMenu();
                 _pauseMenuUIHandler.FocusPanel();
-                
+
                 // Pause game on pause menu open
                 Time.timeScale = 0;
             };
@@ -200,10 +200,10 @@ public class GlobalPlayerManager : MonoBehaviour
                         // TODO: show warning to players
                         return;
                     }
-                    
+
                     // All players are ready and someone pressed the submit action so we load level select
                     Debug.Log("All players ready - starting");
-                    
+
                     SetupAndStartGame();
                 }
                 else
@@ -212,7 +212,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 }
                 Debug.Log("submit action");
             };
-            
+
             _players[idx].CancelActionDelegate = ctx =>
             {
                 // Unready a player or remove them if they're already unready.
@@ -241,10 +241,10 @@ public class GlobalPlayerManager : MonoBehaviour
                     Destroy(playerInput.gameObject);
                 }
             };
-            
+
             // assign pause menu open/close input action delegates
             Players[idx].UIClosePauseMenuDelegate = ctx => { _pauseMenuUIHandler.ClosePauseMenu(); };
-            
+
             InputActionMapper.GetPlayerOpenPauseMenuAction(playerInput).started += Players[idx].PauseMenuDelegate;
             InputActionMapper.GetUIClosePauseMenuAction(playerInput).started += Players[idx].UIClosePauseMenuDelegate;
             InputActionMapper.GetCharacterSelectSubmitAction(playerInput).started += _players[idx].SubmitActionDelegate;
@@ -252,7 +252,7 @@ public class GlobalPlayerManager : MonoBehaviour
             InputActionMapper.GetCharacterSelectLeftAction(playerInput).started += _players[idx].LeftActionDelegate;
             InputActionMapper.GetCharacterSelectRightAction(playerInput).started += _players[idx].RightActionDelegate;
             InputActionMapper.GetUINavigateAction(playerInput).performed += _players[idx].NavigateColorActionDelegate;
-            
+
             // mark delegates registered
             Players[idx].InputActionDelegatesRegistered = true;
 
@@ -310,7 +310,7 @@ public class GlobalPlayerManager : MonoBehaviour
                 });
                 _pauseMenuUIHandler.RegisterPlayerSettingsCallback(i, UpdatePlayerSettings);
                 _pauseMenuUIHandler.ShowPlayerSettings(i);
-                
+
                 // Inform pause menu of player colors
                 _pauseMenuUIHandler.SetPlayerColor(i, _players[i].PlayerColor);
             }
@@ -322,7 +322,7 @@ public class GlobalPlayerManager : MonoBehaviour
         }
 
         _characterSelectScreen.DestroyPlorps();
-        
+
         // pass these players to UI manager
         GlobalPlayerUIManager.Instance.PassPlayers(_players);
 
@@ -376,7 +376,7 @@ public class GlobalPlayerManager : MonoBehaviour
 
         // Close Pause Menu UI if in it
         _pauseMenuUIHandler.HidePauseMenu();
-        
+
         // Reset timescale to 1 if we are paused
         Time.timeScale = 1;
 
@@ -399,7 +399,7 @@ public class GlobalPlayerManager : MonoBehaviour
             DestroySingleton();
             return; // Destroy is async, don't continue to logic below
         }
-        
+
         foreach (var player in _players)
         {
             if (player.Valid)
@@ -448,7 +448,7 @@ public class GlobalPlayerManager : MonoBehaviour
             PlayerInputManager.instance.DisableJoining();
         }
     }
-    
+
     /// <returns>Returns the number of players who have joined</returns>
     private int NumPlayersJoined()
     {
@@ -489,7 +489,7 @@ public struct PlayerData
     public GameObject PlayerObject { get; set; }
     public GameObject PlayerGraphic { get; set; }
     public Color PlayerColor { get; set; }
-    
+
     // Delegates for this player registered here. (In general these should have at least 3 usages:
     // being 1. declared, 2. registered, and most importantly 3. deregistered when the player is destroyed by this object)
     public bool InputActionDelegatesRegistered { get; set; }
@@ -538,6 +538,6 @@ public interface ICharacterSelectScreen
     public void ShowColorConflictWarning(int playerIndex, int otherIndex);
 
     public void HideColorConflictWarning(int playerIndex);
-    
+
     public void DestroyPlorps();
 }
