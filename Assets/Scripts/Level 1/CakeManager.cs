@@ -8,12 +8,15 @@ public class CakeManager : MonoBehaviour
     public List<CakeSlice> cakeSlices = new List<CakeSlice>();
 
     public bool novaCake = true;
+    
+    [SerializeField] private TriggerSeat triggerSeat;
 
     public void GrabbedSlice(CakeSlice cakeSlice)
     {
         cakeSlices.Remove(cakeSlice);
 
-        if (novaCake)
+        // Only activate Nova's steal food dialog if the player is inside the seat to prevent weird animation.
+        if (novaCake && triggerSeat != null && triggerSeat.PlayerInsideSeat())
             NovaLevel1Manager.Instance.StealFood();
 
         if (cakeSlices.Count <= 0)

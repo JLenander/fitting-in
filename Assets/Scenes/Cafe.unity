@@ -10937,6 +10937,10 @@ PrefabInstance:
       propertyPath: handOffset.z
       value: -0.44
       objectReference: {fileID: 0}
+    - target: {fileID: 7353872514460214543, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
+      propertyPath: triggerSeat
+      value: 
+      objectReference: {fileID: 1609978944}
     - target: {fileID: 8062748990476841955, guid: 8e97996fba1a89143935af3f16289e7a, type: 3}
       propertyPath: handOffset.x
       value: -5.12
