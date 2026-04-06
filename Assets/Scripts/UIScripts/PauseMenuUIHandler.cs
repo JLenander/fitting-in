@@ -278,10 +278,12 @@ public class PauseMenuUIHandler : MonoBehaviour
         // Return to game handler is setup by each player later on (RegisterPlayerSettingsCallback) as it needs to pass specific data to each player
         
         // Setup return to level select button callback
-        _returnToLevelSelectButton.clicked += ReturnToLevelButtonHandler;
+        // _returnToLevelSelectButton.clicked += ReturnToLevelButtonHandler;
+        _returnToLevelSelectButton.clicked += () => {RuntimeManager.PlayOneShot("event:/SFX/UI/brain_move");};
         
         // Setup quit game button callback
-        _returnToMainMenuButton.clicked += ReturnToMainMenuButtonHandler;
+        // _returnToMainMenuButton.clicked += ReturnToMainMenuButtonHandler;
+        _returnToMainMenuButton.clicked += () => {RuntimeManager.PlayOneShot("event:/SFX/UI/brain_move");};
     }
 
     /// <summary>
