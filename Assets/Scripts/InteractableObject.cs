@@ -48,12 +48,18 @@ public abstract class InteractableObject : MonoBehaviour
 
     public void DisableOutline()
     {
-        outline.enabled = false;
+        if (outline != null)
+        {
+            outline.enabled = false;
+        }
     }
 
     public void EnableOutline()
     {
-        outline.enabled = true;
+        if (outline != null)
+        {
+            outline.enabled = true;
+        }
     }
 
     public virtual void InteractWithHand(Transform wrist, HandMovement target)
