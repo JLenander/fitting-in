@@ -75,6 +75,7 @@ public class PhoneUIController : MonoBehaviour
             // flick sceen image left
             StartSwipe(1);
             count++; // increase count
+            count = count % (profiles.Count + 1); // loop back to 0 
         }
     }
     public void SwipeLike()
@@ -83,12 +84,14 @@ public class PhoneUIController : MonoBehaviour
         {
             StartSwipe(-1);
             count++; // increase count
+            count = count % (profiles.Count + 1); // loop back to 0 
         }
     }
 
     private void StartSwipe(int direction)
     {
         swipeDirection = direction;
+        swiping = true;
 
         // once hit min swipes no matter left or right
         // start count down before showing nova's profile
@@ -98,17 +101,17 @@ public class PhoneUIController : MonoBehaviour
         //     GlobalPlayerUIManager.Instance.LoadText(cheekyDialogue);
         // }
 
-        if (count > countBeforeMatch && !matchedText)
-        {
-            matchedText = true;
-            swiping = false;
-            // StartCoroutine(MatchRoutine());
-            MatchRoutine();
-        }
-        else
-        {
-            swiping = true;
-        }
+        // if (count > countBeforeMatch && !matchedText)
+        // {
+        //     matchedText = true;
+        //     swiping = false;
+        //     // StartCoroutine(MatchRoutine());
+        //     MatchRoutine();
+        // }
+        // else
+        // {
+        //     swiping = true;
+        // }
     }
 
     private void Update()
@@ -142,7 +145,7 @@ public class PhoneUIController : MonoBehaviour
         locked = true; // lock swiping
         screenImage.sprite = match;
         nextImage.sprite = match;
-        
+
         Level0TaskManager.CompleteTaskSwipe();
 
         // enable exit door
