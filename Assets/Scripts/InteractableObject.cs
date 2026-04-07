@@ -14,6 +14,7 @@ public abstract class InteractableObject : MonoBehaviour
     public HandMovement handMovement;
     private Hand hand;
     public Transform _robotHead;
+    [SerializeField] private bool inHand = false;
 
     public virtual void Start()
     {
@@ -64,10 +65,12 @@ public abstract class InteractableObject : MonoBehaviour
 
     public virtual void InteractWithHand(Transform wrist, HandMovement target)
     {
+        inHand = true;
     }
 
     public virtual void StopInteractWithHand(HandMovement target)
     {
+        inHand = false;
     }
 
     public void EnableCanInteract()
@@ -88,5 +91,10 @@ public abstract class InteractableObject : MonoBehaviour
     public void DisableCanPickup()
     {
         canPickup = false;
+    }
+
+    public bool isInHand()
+    {
+        return inHand;
     }
 }

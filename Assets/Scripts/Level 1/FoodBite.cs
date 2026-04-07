@@ -51,6 +51,7 @@ public class FoodBite : InteractableObject, IPooledObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             // move to hand
             transform.parent = obj;
             transform.localPosition = handOffset;
@@ -70,6 +71,7 @@ public class FoodBite : InteractableObject, IPooledObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         // return to original position
         transform.parent = ogParent;
         canPickup = true;

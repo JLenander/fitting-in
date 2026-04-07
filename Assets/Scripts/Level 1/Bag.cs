@@ -37,6 +37,7 @@ public class Bag : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             // move to hand
             DisableOutline();
             transform.parent = obj;
@@ -59,6 +60,7 @@ public class Bag : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         // return to original position
         Quaternion currRotation = transform.rotation;
         transform.parent = ogParent;
