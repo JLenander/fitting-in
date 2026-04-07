@@ -178,6 +178,8 @@ public class CoffeePot : InteractableObject
 
     IEnumerator BurnArm()
     {
+        allowBurnArm = false;
+        
         yield return new WaitForSeconds(5);
 
         // start fire
@@ -189,8 +191,6 @@ public class CoffeePot : InteractableObject
 
         // output dialogue
         GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
-        allowBurnArm = false;
-        
 
         yield return new WaitForSeconds(13);
         GlobalPlayerUIManager.Instance.LoadText(fireDialogue);
