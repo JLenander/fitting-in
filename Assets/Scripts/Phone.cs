@@ -32,6 +32,7 @@ public class Phone : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             // move to hand
             DisableOutline();
 
@@ -76,6 +77,7 @@ public class Phone : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         // return to original position
         transform.parent = parent;
 

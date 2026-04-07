@@ -52,7 +52,10 @@ public class NovaMouth : MonoBehaviour
             }
 
             // stop the interaction
-            interactableObject.handMovement.handAnimator.SetTrigger("Neutral");
+            HandMovement handMovement = interactableObject.handMovement;
+            handMovement.handAnimator.SetTrigger("Neutral");
+            handMovement.StopInteractingWithObject(interactableObject);
+            handMovement.RemoveInteractableObject(interactableObject);
 
             Destroy(other.gameObject);
         }

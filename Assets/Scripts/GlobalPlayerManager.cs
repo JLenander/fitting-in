@@ -14,7 +14,7 @@ public class GlobalPlayerManager : MonoBehaviour
     public static GlobalPlayerManager Instance;
 
     // Minimum number of players to proceed through character select
-    public const int MinPlayers = 3;
+    public const int MinPlayers = 2;
 
     private int _playerLimit;
     private PlayerData[] _players;

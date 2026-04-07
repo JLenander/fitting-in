@@ -27,6 +27,7 @@ public class CakeSlice : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             // remove from cake list
             if (first)
             {
@@ -50,6 +51,7 @@ public class CakeSlice : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         canPickup = true;
         rb.isKinematic = false;
         transform.parent = ogParent;

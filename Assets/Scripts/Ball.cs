@@ -49,6 +49,7 @@ public class Ball : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             if (TutorialManager.Instance != null)
             {
                 TutorialManager.Instance.grabBall = true;
@@ -77,6 +78,7 @@ public class Ball : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         // return to original position
         applyGravity = true;
         transform.parent = parent;

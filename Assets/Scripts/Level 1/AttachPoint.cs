@@ -8,6 +8,7 @@ public class AttachPoint : InteractableObject
 
     public override void InteractWithHand(Transform wrist, HandMovement target)
     {
+        base.InteractWithHand(wrist, target);
         if (!canInteract || isHeld) return;
 
         isHeld = true;
@@ -28,6 +29,7 @@ public class AttachPoint : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         Debug.Log("Stop ATTACH and  " + target);
         if (!isHeld || currentHand != target) return;
 

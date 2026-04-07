@@ -22,6 +22,7 @@ public class GrabbableObject : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             // move to hand
             transform.parent = obj;
             transform.localPosition = handOffset;
@@ -43,6 +44,7 @@ public class GrabbableObject : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         canPickup = true;
         rb.isKinematic = false;
         transform.parent = ogParent;
