@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{7db28bed-cc64-4f9f-ad26-78c90a70190c}">
+		<property name="assetPath">
+			<value>SFX/Robot/sfx_arm_stop_nl.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>2.5965986394557823</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{92b73ad2-d1e6-4865-a21c-6c71f50710f4}</destination>
+		</relationship>
+	</object>
+</objects>

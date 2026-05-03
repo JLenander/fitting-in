@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{a5298b3c-af5e-46ef-94da-8187ddfa7d2c}">
+		<property name="assetPath">
+			<value>Music/mus_148bpm_level1ne_lp.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>77.842062499999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{92b73ad2-d1e6-4865-a21c-6c71f50710f4}</destination>
+		</relationship>
+	</object>
+</objects>

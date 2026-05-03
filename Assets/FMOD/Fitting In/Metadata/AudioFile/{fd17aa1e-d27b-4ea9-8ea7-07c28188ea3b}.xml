@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{fd17aa1e-d27b-4ea9-8ea7-07c28188ea3b}">
+		<property name="assetPath">
+			<value>SFX/Tasks/sfx_coffee_nl_04.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0336666666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{92b73ad2-d1e6-4865-a21c-6c71f50710f4}</destination>
+		</relationship>
+	</object>
+</objects>

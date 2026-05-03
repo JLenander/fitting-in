@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{bed0e36c-6481-4671-9cec-b5e9f42ae13b}">
+		<property name="name">
+			<value>hunslide</value>
+		</property>
+		<relationship name="folder">
+			<destination>{492866ef-624c-4481-b421-2dc17e426272}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1da04c96-582b-48fa-94e2-c410cbe1ba01}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1da04c96-582b-48fa-94e2-c410cbe1ba01}">
+		<property name="parameterType">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>101</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="MixerGroup" id="{4244e47f-71df-47f1-8719-a79e7b554a60}">
+		<property name="name">
+			<value>Exterior</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{f4e9c121-6f74-49ed-837f-a82b1b47186d}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{88d0837d-88bc-4997-8e14-e7596e0d01a1}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{f7c8c02d-c9b6-4f1f-97c7-ea0b5ff6744a}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{f4e9c121-6f74-49ed-837f-a82b1b47186d}">
+		<relationship name="effects">
+			<destination>{565b4bd9-18be-4974-8de8-a5e3a33bf2e8}</destination>
+			<destination>{48b08fc0-c35c-4867-9b30-12a971cc8c30}</destination>
+			<destination>{5c1bdf66-d943-4170-911c-64b3f37d3467}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{88d0837d-88bc-4997-8e14-e7596e0d01a1}" />
+	<object class="MixerBusFader" id="{565b4bd9-18be-4974-8de8-a5e3a33bf2e8}" />
+	<object class="DistortionEffect" id="{48b08fc0-c35c-4867-9b30-12a971cc8c30}">
+		<property name="level">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="MultibandEqEffect" id="{5c1bdf66-d943-4170-911c-64b3f37d3467}">
+		<property name="filterTypeA">
+			<value>4</value>
+		</property>
+		<property name="frequencyA">
+			<value>20</value>
+		</property>
+		<property name="qualityA">
+			<value>0.909627795</value>
+		</property>
+	</object>
+</objects>

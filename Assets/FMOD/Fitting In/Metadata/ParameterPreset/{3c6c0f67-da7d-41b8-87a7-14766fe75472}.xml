@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{3c6c0f67-da7d-41b8-87a7-14766fe75472}">
+		<property name="name">
+			<value>pauseLPF</value>
+		</property>
+		<relationship name="folder">
+			<destination>{492866ef-624c-4481-b421-2dc17e426272}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{e8473e6f-34a1-4bf9-9d17-1704af82e57d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{e8473e6f-34a1-4bf9-9d17-1704af82e57d}">
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{478fa35f-698b-4cb1-bb07-b8fcfd8b0317}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{478fa35f-698b-4cb1-bb07-b8fcfd8b0317}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>5</value>
+		</property>
+	</object>
+</objects>

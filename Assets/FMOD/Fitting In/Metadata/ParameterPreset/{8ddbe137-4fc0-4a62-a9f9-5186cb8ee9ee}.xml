@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{8ddbe137-4fc0-4a62-a9f9-5186cb8ee9ee}">
+		<property name="name">
+			<value>coffeeMiss</value>
+		</property>
+		<relationship name="folder">
+			<destination>{492866ef-624c-4481-b421-2dc17e426272}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{648b9583-901c-4048-b4b9-f06c239bd42d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{648b9583-901c-4048-b4b9-f06c239bd42d}">
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="initialValue">
+			<value>1.1000000000000001</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{9845711b-d468-4c8e-a5ce-863dd5097fef}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{9845711b-d468-4c8e-a5ce-863dd5097fef}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>25</value>
+		</property>
+	</object>
+</objects>
