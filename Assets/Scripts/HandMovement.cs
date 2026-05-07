@@ -58,7 +58,7 @@ public class HandMovement : MonoBehaviour
     // Interactable object information
     public InteractableObject currObj;    // currently interacting with hand
     // Ordered list of objects available to interact. First interactable object is priority for hand
-    private List<InteractableObject> _interactables = new List<InteractableObject>();
+    [SerializeField] private List<InteractableObject> _interactables = new List<InteractableObject>();
     private Dictionary<InteractableObject, InteractableObjectData> _interactablesData = new Dictionary<InteractableObject, InteractableObjectData>();
     // A delay counter for auto-picking up stuff after dropping an item
     private float _pickupDelayCounter;
@@ -524,15 +524,43 @@ public class HandMovement : MonoBehaviour
     /// <returns>The Interactable Object or Null if no object is interactable</returns>
     private InteractableObject GetFirstInteractableObject()
     {
+        string handType = left ? "left" : "right";
         InteractableObject interactableObj = null;
-        foreach (InteractableObject interactableObject in _interactables)
+        for (int i = 0; i < _interactables.Count; i++)
         {
-            if (_interactablesData[interactableObject].CanInteract())
+            InteractableObject obj = _interactables[i];
+            // hacks to ensure interaction not stuck
+            if (obj == null)
             {
-                interactableObj = interactableObject;
+                _interactables.RemoveAt(i);
+                i--;
+                Debug.LogWarning(handType + " hand pruned missing gameobject from interactable candidate list");
+            }
+            else if (obj.isInHand())
+            {
+                _interactables.RemoveAt(i);
+                i--;
+                Debug.LogWarning(handType + " hand had object that was in a hand");
+            }
+            else if (!obj.gameObject.activeSelf)
+            {
+                _interactables.RemoveAt(i);
+                i--;
+                Debug.LogWarning(handType + " hand had object that was inactive");
+            }
+            else if (obj.canInteract == false)
+            {
+                _interactables.RemoveAt(i);
+                i--;
+                Debug.LogWarning(handType + " hand had object that had canInteract false");
+            }
+            else if (_interactablesData[obj].CanInteract())
+            {
+                interactableObj = obj;
                 break;
             }
         }
+        
         return interactableObj;
     }
 
@@ -561,7 +589,8 @@ public class HandMovement : MonoBehaviour
     /// </summary>
     private void InteractWithObject(InteractableObject interactableObject)
     {
-        Debug.Log("Interacting with " + interactableObject);
+        string handType = left ? "left" : "right";
+        Debug.Log(handType + " hand interacting with " + interactableObject);
         interactableObject.InteractWithHand(wristBone, this);
     }
 
@@ -570,15 +599,16 @@ public class HandMovement : MonoBehaviour
     /// </summary>
     public void StopInteractingWithObject(InteractableObject interactableObject)
     {
+        string handType = left ? "left" : "right";
         if (interactableObject.canDrop)
         {
-            Debug.Log("Stopping interaction with " + interactableObject);
+            Debug.Log(handType + " hand stopping interaction with " + interactableObject);
             interactableObject.StopInteractWithHand(this);
             currObj = null;
         }
         else
         {
-            Debug.Log("Cannot stop interaction with " + interactableObject);
+            Debug.Log(handType + " hand cannot stop interaction with " + interactableObject);
         }
     }
 

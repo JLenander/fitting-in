@@ -140,6 +140,7 @@ public class CoffeePot : InteractableObject
     {
         if (canInteract && canPickup)
         {
+            base.InteractWithHand(obj, target);
             // move to hand
             DisableOutline();
             transform.parent = obj;
@@ -166,6 +167,7 @@ public class CoffeePot : InteractableObject
 
     public override void StopInteractWithHand(HandMovement target)
     {
+        base.StopInteractWithHand(target);
         // return to original position
         transform.parent = ogParent;
         canPickup = true;
@@ -178,6 +180,8 @@ public class CoffeePot : InteractableObject
 
     IEnumerator BurnArm()
     {
+        allowBurnArm = false;
+        
         yield return new WaitForSeconds(5);
 
         // start fire
@@ -189,8 +193,6 @@ public class CoffeePot : InteractableObject
 
         // output dialogue
         GlobalPlayerUIManager.Instance.LoadText(burnDialogue);
-        allowBurnArm = false;
-        
 
         yield return new WaitForSeconds(13);
         GlobalPlayerUIManager.Instance.LoadText(fireDialogue);
