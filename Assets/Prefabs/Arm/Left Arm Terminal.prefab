@@ -52,6 +52,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Left Arm Terminal
       objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Size.x
+      value: 5.358836
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Size.y
+      value: 4.612331
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Size.z
+      value: 3.7079077
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Center.x
+      value: -0.32349473
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Center.y
+      value: 2.2119322
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Center.z
+      value: -1.0060381
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -145,10 +145,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   showOverlay: 0
-  handRigTarget: {fileID: 0}
+  forceOutline: 0
+  target: {fileID: 0}
   headConsole: {fileID: 0}
   left: 1
-  audioSource: {fileID: 8984068795386295593}
   enterSfx: {fileID: 1325382212728810025}
 --- !u!65 &9200000814670586052
 BoxCollider:
@@ -169,8 +169,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.593854, y: 2.0765765, z: 2.3139682}
-  m_Center: {x: 0.05140585, y: 1.5602604, z: -0.3090676}
+  m_Size: {x: 5.1432366, y: 1.9611943, z: 3.8130834}
+  m_Center: {x: -0.27045643, y: 0.85972035, z: -1.0586262}
 --- !u!114 &5133671543983231644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +414,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4805241935139962544}
     m_Modifications:
+    - target: {fileID: -5936208762756603818, guid: 0516ec30d35b7364a994169a0c0d8356, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 53b26442f83ec364296c61b36379f138, type: 2}
     - target: {fileID: -8679921383154817045, guid: c9b2b8e3c21ef0942918f90f6b145391, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.13
@@ -494,10 +498,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: -5936208762756603818, guid: 0516ec30d35b7364a994169a0c0d8356, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 53b26442f83ec364296c61b36379f138, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
