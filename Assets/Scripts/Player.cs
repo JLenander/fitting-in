@@ -1,5 +1,7 @@
 using FMODUnity;
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +11,7 @@ public class Player : MonoBehaviour
     // lookSensitivity controls the camera sensitivity for the player as a plorp only (not in terminal)
     [SerializeField] private float lookSensitivity;
 
-    
+
     public StudioEventEmitter stepSfx;
     [SerializeField] private float stepInterval = 0.5f;
     private CharacterController _characterController;
@@ -17,15 +19,16 @@ public class Player : MonoBehaviour
     private Camera _outsideCamera;
     private InputAction _moveAction;
     private InputAction _lookAction;
-    
+
     private float xRotationPlayerCam = 0f;
     private float yRotationPlayerCam = 0f; // left/right (yaw)
     private float xRotationExternalCam = 0f;
     private float yRotationExternalCam = 0f;
-    
+
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private GameObject playerModel;
     private Vector3 velocity;
     private bool isGrounded;
 
@@ -43,7 +46,16 @@ public class Player : MonoBehaviour
 
     private RobotMovement _robotMovement;
     private int playerID;
-    
+
+    // Ragdoll physics
+    private List<Collider> ragdollColliders = new List<Collider>();
+    private List<Rigidbody> ragdollRigidbodies = new List<Rigidbody>();
+
+    void Awake()
+    {
+        GetRagdollColliders();
+    }
+
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -59,11 +71,36 @@ public class Player : MonoBehaviour
         _controlFunc = ControlPlayer;
     }
 
+    private void GetRagdollColliders()
+    {
+        // creates list of all colliders then disables them
+        Collider[] colliders = playerModel.GetComponentsInChildren<Collider>();
+        Rigidbody[] rigidbodies = playerModel.GetComponentsInChildren<Rigidbody>();
+
+        foreach (Collider col in colliders)
+        {
+            if (col != null)
+            {
+                ragdollColliders.Add(col);
+                col.isTrigger = true; // Start with colliders as triggers to disable ragdoll physics
+            }
+        }
+
+        foreach (Rigidbody rb in rigidbodies)
+        {
+            if (rb != null)
+            {
+                ragdollRigidbodies.Add(rb);
+                rb.isKinematic = true; // Start with rigidbodies as kinematic to disable ragdoll physics
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         // No control if in some UI.
         if (inPauseMenu) return;
-        
+
         _controlFunc();
     }
 
@@ -179,7 +216,7 @@ public class Player : MonoBehaviour
     public void switchToHead(Camera outsideCamera)
     {
         SwitchOnConsole();
-        
+
         _outsideCamera = outsideCamera;
         _controlFunc = ControlEyeCam;
     }
@@ -206,7 +243,7 @@ public class Player : MonoBehaviour
 
         _controlFunc = ControlPlayer;
     }
-    
+
     /// <summary>
     /// Set the player's state so they are in the pause menu and cannot control anything.
     /// </summary>
@@ -263,5 +300,56 @@ public class Player : MonoBehaviour
     {
         xRotationPlayerCam = 0f;
         yRotationPlayerCam = 0f;
+    }
+
+    /// <summary>
+    /// Turn on ragdoll
+    /// </summary>
+    public void EnableRagdoll(Vector3 forceDirection, float forceMagnitude)
+    {
+        // disable character controller and animator
+        TurnOff();
+        animator.enabled = false;
+
+        // disable collider for character controller
+        _characterController.enabled = false;
+
+        foreach (Collider col in ragdollColliders)
+        {
+            col.isTrigger = false; // Enable colliders to allow ragdoll physics
+        }
+
+        foreach (Rigidbody rb in ragdollRigidbodies)
+        {
+            rb.isKinematic = false; // Enable rigidbodies to allow ragdoll physics
+        }
+
+        // Apply a lil kick to rigidbodies
+        foreach (Rigidbody rb in ragdollRigidbodies)
+        {
+            // make sure force is always a bit upwards
+            Vector3 upwardForce = new Vector3(0, 1, 0);
+            rb.AddForce((forceDirection.normalized + upwardForce).normalized * forceMagnitude, ForceMode.Impulse);
+        }
+    }
+
+    /// <summary>
+    /// Turn off ragdoll
+    /// </summary>
+    public void DisableRagdoll()
+    {
+        foreach (Collider col in ragdollColliders)
+        {
+            col.isTrigger = true; // Disable colliders to stop ragdoll physics
+        }
+
+        foreach (Rigidbody rb in ragdollRigidbodies)
+        {
+            rb.isKinematic = true; // Disable rigidbodies to stop ragdoll physics
+        }
+
+        animator.enabled = true;
+        TurnOn();
+        _characterController.enabled = true;
     }
 }

@@ -17,7 +17,7 @@ public class PlayerInteract : MonoBehaviour
 
     public Interactable interacting;
     private int playerId;
-    
+
     // Variables to enable interact and return to share an action
     private bool _actionLock;
 
@@ -31,7 +31,7 @@ public class PlayerInteract : MonoBehaviour
         interacting = null;
 
         _actionLock = false;
-        
+
         playerId = input.playerIndex;
     }
 
@@ -39,7 +39,7 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         CheckInteraction();
-        
+
         // Disable interaction or return if the interact/return action has not been released yet.
         // This prevents the shared interact action from immediately leaving the interaction after
         // starting an interaction with something and vice versa
@@ -54,14 +54,14 @@ public class PlayerInteract : MonoBehaviour
                 return;
             }
         }
-        
+
         if (IsInteracting())
         {
             // Check for return or interact action to leave the current interactable
             if (_returnAction.WasPressedThisFrame() || _interactAction.WasPressedThisFrame())
             {
                 _actionLock = true;
-                
+
                 interacting?.Return(gameObject);
                 interacting = null;
             }
@@ -74,7 +74,7 @@ public class PlayerInteract : MonoBehaviour
                 if (currentItem.CanInteract())
                 {
                     _actionLock = true;
-                    
+
                     interacting = currentItem;
                     currentItem.Interact(gameObject);
                     DisableCurrInteractable();
@@ -99,7 +99,12 @@ public class PlayerInteract : MonoBehaviour
 
         RaycastHit hit;
 
-        Ray ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
+        Vector3 origin = fpsCam.transform.position + fpsCam.transform.forward * 0.7f;
+
+        Ray ray = new Ray(origin, fpsCam.transform.forward);
+
+        Debug.DrawRay(ray.origin, ray.direction * reach, Color.red);
+
         if (Physics.Raycast(ray, out hit, reach))
         {
             if (hit.collider.tag == "interactable")

@@ -84,6 +84,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Arm Terminal
       objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Size.y
+      value: 4.3157225
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200000814670586052, guid: 01a1e9d0b9355e64090d303385451c90, type: 3}
+      propertyPath: m_Center.y
+      value: 2.0369847
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
