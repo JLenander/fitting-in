@@ -606,10 +606,12 @@ public class HandMovement : MonoBehaviour
     public void StopInteractingWithObject(InteractableObject interactableObject)
     {
         string handType = left ? "left" : "right";
-        if (interactableObject.canDrop)
+        // Drop the current object 1. if we can drop or 2. as a failsafe if our current object is not active
+        if (interactableObject.canDrop || (currObj != null && !currObj.isActiveAndEnabled))
         {
             Debug.Log(handType + " hand stopping interaction with " + interactableObject);
             interactableObject.StopInteractWithHand(this);
+            handAnimator.SetTrigger("Neutral");
             currObj = null;
         }
         else

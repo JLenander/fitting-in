@@ -44,6 +44,7 @@ public class FoodBite : InteractableObject, IPooledObject
 
     private void OnDestroy()
     {
+        canDrop = true;
         bag?.DisableOutline();
     }
 
