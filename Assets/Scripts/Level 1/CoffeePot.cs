@@ -136,7 +136,7 @@ public class CoffeePot : InteractableObject
             coffeeSfx.Stop();
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -161,7 +161,11 @@ public class CoffeePot : InteractableObject
             grappleCollider.enabled = false;
 
             if (allowBurnArm) StartCoroutine(BurnArm());
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

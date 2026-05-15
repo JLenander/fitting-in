@@ -45,7 +45,7 @@ public class Ball : InteractableObject
         groundSfx.Stop();
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -71,7 +71,10 @@ public class Ball : InteractableObject
             target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
 
             grappleCollider.enabled = false;
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

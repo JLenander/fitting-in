@@ -33,7 +33,7 @@ public class Bag : InteractableObject
         ScoreKeeper.Instance.AddScoring("Discarded food", 5, false, true, 0);
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -54,7 +54,11 @@ public class Bag : InteractableObject
             Debug.Log("pickup success");
 
             target.handAnimator.SetTrigger("Pot"); // sets current hand to pot anim
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

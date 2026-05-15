@@ -37,7 +37,7 @@ public class Food : InteractableObject
         ScoreKeeper.Instance.AddScoring("Spaghetti completion", 2, true, false, totalBites);
     }
 
-    public override void InteractWithHand(Transform wrist, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform wrist, HandMovement target)
     {
         if (foodBiteCount < totalBites && canPickup)
         {
@@ -66,13 +66,13 @@ public class Food : InteractableObject
 
             // Turn off outline when food bite is picked up (until another hover turns it back on)
             DisableOutline();
+            return foodBite;
         }
-        else
-        {
-            Debug.Log("No more food bites!");
-            target.StopInteractingWithObject(this);
-            canPickup = false;
-        }
+
+        Debug.Log("No more food bites!");
+        target.StopInteractingWithObject(this);
+        canPickup = false;
+        return null;
     }
 
     protected override void OnTriggerEnter(Collider other)

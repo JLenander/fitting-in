@@ -28,7 +28,7 @@ public class Phone : InteractableObject
         first = true;
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -70,7 +70,11 @@ public class Phone : InteractableObject
             }
 
             grappleCollider.enabled = false;
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

@@ -596,8 +596,8 @@ public class HandMovement : MonoBehaviour
             return;
         }
         Debug.Log(handType + " hand interacting with " + interactableObject);
-        interactableObject.InteractWithHand(wristBone, this);
-        currObj = interactableObject;
+        var objInteractingWith = interactableObject.InteractWithHand(wristBone, this);
+        currObj = objInteractingWith;
     }
 
     /// <summary>

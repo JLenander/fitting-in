@@ -47,7 +47,7 @@ public class FoodBite : InteractableObject, IPooledObject
         bag?.DisableOutline();
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -65,7 +65,11 @@ public class FoodBite : InteractableObject, IPooledObject
             handMovement = target;
 
             if (bag != null) bag.EnableOutline();
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

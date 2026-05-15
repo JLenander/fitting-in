@@ -14,10 +14,10 @@ public class AttachPoint : InteractableObject
         throw new NotImplementedException();
     }
 
-    public override void InteractWithHand(Transform wrist, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform wrist, HandMovement target)
     {
         base.InteractWithHand(wrist, target);
-        if (!canInteract || isHeld) return;
+        if (!canInteract || isHeld) return null;
 
         isHeld = true;
         currentHand = target;
@@ -32,6 +32,8 @@ public class AttachPoint : InteractableObject
         target.handAnimator.SetTrigger("Pot");
         target.FreezeWristPosition(true);
         tray.OnAttachPointGrabbed();
+
+        return this;
     }
 
     public override void StopInteractWithHand(HandMovement target)

@@ -18,7 +18,7 @@ public class GrabbableObject : InteractableObject
         ogParent = transform.parent;
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -38,7 +38,10 @@ public class GrabbableObject : InteractableObject
             target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
 
             handMovement = target;
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)
