@@ -3,8 +3,8 @@ using UnityEngine;
 public class Level1TaskManager : TaskManager
 {
     /// <summary>
-    /// Use this instance of the Level0TaskManager for tasks that are specific to level 0 (or for base class methods) <br />
-    /// For example: The Phone needs to start the Swipe task so it calls Level0TaskManager.StartTaskGoToPhone() (the Phone is already specific to level 0)
+    /// Use this instance of the Level1TaskManager for tasks that are specific to level 1 (or for base class methods) <br />
+    /// For example: The Phone needs to start the Swipe task so it calls Level1TaskManager.StartTaskGoToPhone()
     /// See <see cref="TaskManager.GenericInstance"/> for a level agnostic TaskManager Instance example.
     /// </summary>
     public static Level1TaskManager Instance;
