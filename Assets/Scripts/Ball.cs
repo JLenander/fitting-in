@@ -67,9 +67,7 @@ public class Ball : InteractableObject
             rg.interpolation = RigidbodyInterpolation.None;
             triggerCollider.enabled = false;
             Debug.Log("pickup success");
-
-            target.SetTargetCurrentObject(this);
-
+            
             target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
 
             grappleCollider.enabled = false;

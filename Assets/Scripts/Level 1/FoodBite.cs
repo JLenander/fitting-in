@@ -62,7 +62,6 @@ public class FoodBite : InteractableObject, IPooledObject
             Debug.Log("pickup success");
 
             target.handAnimator.SetTrigger("Pot"); // sets current hand to hold anim
-            target.SetTargetCurrentObject(this);
             handMovement = target;
 
             if (bag != null) bag.EnableOutline();

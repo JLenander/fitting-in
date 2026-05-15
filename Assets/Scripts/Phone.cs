@@ -44,9 +44,7 @@ public class Phone : InteractableObject
             rg.isKinematic = true;
             triggerCollider.enabled = false;
             Debug.Log("pickup success");
-
-            target.SetTargetCurrentObject(this);
-
+            
             target.oppositeHandAnimator.SetTrigger("Point"); // sets the opposite hand to point
             target.handAnimator.SetTrigger("Hold"); // sets current hand to hold anim
 

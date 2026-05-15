@@ -45,7 +45,6 @@ public class CakeSlice : InteractableObject
             triggerCollider.enabled = false;
 
             target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
-            target.SetTargetCurrentObject(this);
         }
     }
 

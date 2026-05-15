@@ -156,7 +156,6 @@ public class CoffeePot : InteractableObject
             triggerCollider.enabled = false;
             Debug.Log("pickup success");
 
-            target.SetTargetCurrentObject(this);
             target.handAnimator.SetTrigger("Pot"); // sets current hand to pot anim
 
             grappleCollider.enabled = false;
