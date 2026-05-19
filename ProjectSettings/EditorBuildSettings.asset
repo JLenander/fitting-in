@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level0.unity
     guid: 517af41d21b0fb54184a8f13c0b9274d
+  - enabled: 1
+    path: Assets/Scenes/Carnival.unity
+    guid: 09012068f9497ff42a02fde5ac8fc3fb
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 2ceba5d9a4cce245fb02155d49fa29c2, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 5a9f47bf536d8da4d81d60910febc352, type: 3}
