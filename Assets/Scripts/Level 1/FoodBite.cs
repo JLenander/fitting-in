@@ -44,10 +44,11 @@ public class FoodBite : InteractableObject, IPooledObject
 
     private void OnDestroy()
     {
+        canDrop = true;
         bag?.DisableOutline();
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -62,11 +63,14 @@ public class FoodBite : InteractableObject, IPooledObject
             Debug.Log("pickup success");
 
             target.handAnimator.SetTrigger("Pot"); // sets current hand to hold anim
-            target.SetTargetCurrentObject(this);
             handMovement = target;
 
             if (bag != null) bag.EnableOutline();
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

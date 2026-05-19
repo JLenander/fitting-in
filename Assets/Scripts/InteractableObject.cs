@@ -63,9 +63,16 @@ public abstract class InteractableObject : MonoBehaviour
         }
     }
 
-    public virtual void InteractWithHand(Transform wrist, HandMovement target)
+    /// <summary>
+    /// Interact with the robot arm's hand in some way. Returns the object the hand should consider it is interacting with.
+    /// </summary>
+    /// <param name="wrist">The transform of the hand base (wrist)</param>
+    /// <param name="target">The hand this object is interacting with</param>
+    /// <returns>The object the hand is interacting with after triggering an interact on this object.</returns>
+    public virtual InteractableObject InteractWithHand(Transform wrist, HandMovement target)
     {
         inHand = true;
+        return null;
     }
 
     public virtual void StopInteractWithHand(HandMovement target)

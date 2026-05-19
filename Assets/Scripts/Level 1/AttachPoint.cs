@@ -1,3 +1,5 @@
+using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class AttachPoint : InteractableObject
@@ -6,10 +8,16 @@ public class AttachPoint : InteractableObject
     public bool isHeld;
     public HandMovement currentHand;
 
-    public override void InteractWithHand(Transform wrist, HandMovement target)
+    public void Awake()
+    {
+        // Is old script and has been modified without test.
+        throw new NotImplementedException();
+    }
+
+    public override InteractableObject InteractWithHand(Transform wrist, HandMovement target)
     {
         base.InteractWithHand(wrist, target);
-        if (!canInteract || isHeld) return;
+        if (!canInteract || isHeld) return null;
 
         isHeld = true;
         currentHand = target;
@@ -21,10 +29,11 @@ public class AttachPoint : InteractableObject
         canPickup = false;
 
         // Tell tray a hand grabbed this attach point
-        target.SetTargetCurrentObject(this);
         target.handAnimator.SetTrigger("Pot");
         target.FreezeWristPosition(true);
         tray.OnAttachPointGrabbed();
+
+        return this;
     }
 
     public override void StopInteractWithHand(HandMovement target)
@@ -33,7 +42,6 @@ public class AttachPoint : InteractableObject
         Debug.Log("Stop ATTACH and  " + target);
         if (!isHeld || currentHand != target) return;
 
-        target.SetTargetCurrentObject(null);
         target.FreezeWristPosition(false);
         // currentHand.attachedCheckGrapple();
         target.handAnimator.SetTrigger("Neutral");
@@ -56,7 +64,6 @@ public class AttachPoint : InteractableObject
     {
         if (currentHand != null)
         {
-            currentHand.SetTargetCurrentObject(null);
             currentHand.FreezeWristPosition(false);
             currentHand.DisableGrapple(false);
             currentHand.handAnimator.SetTrigger("Neutral");

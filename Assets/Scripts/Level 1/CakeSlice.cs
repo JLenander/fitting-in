@@ -23,7 +23,7 @@ public class CakeSlice : InteractableObject
         first = true;
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -45,8 +45,11 @@ public class CakeSlice : InteractableObject
             triggerCollider.enabled = false;
 
             target.handAnimator.SetTrigger("Grab"); // sets current hand to hold anim
-            target.SetTargetCurrentObject(this);
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

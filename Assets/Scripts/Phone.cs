@@ -28,7 +28,7 @@ public class Phone : InteractableObject
         first = true;
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (canInteract && canPickup)
         {
@@ -44,9 +44,7 @@ public class Phone : InteractableObject
             rg.isKinematic = true;
             triggerCollider.enabled = false;
             Debug.Log("pickup success");
-
-            target.SetTargetCurrentObject(this);
-
+            
             target.oppositeHandAnimator.SetTrigger("Point"); // sets the opposite hand to point
             target.handAnimator.SetTrigger("Hold"); // sets current hand to hold anim
 
@@ -72,7 +70,11 @@ public class Phone : InteractableObject
             }
 
             grappleCollider.enabled = false;
+
+            return this;
         }
+
+        return null;
     }
 
     public override void StopInteractWithHand(HandMovement target)

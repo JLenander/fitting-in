@@ -31,7 +31,7 @@ public class Evidence : InteractableObject, IPooledObject
         grabbed = false;
     }
 
-    public override void InteractWithHand(Transform obj, HandMovement target)
+    public override InteractableObject InteractWithHand(Transform obj, HandMovement target)
     {
         if (!grabbed)
         {
@@ -67,6 +67,7 @@ public class Evidence : InteractableObject, IPooledObject
             StartCoroutine(DisappearRoutine());
         }
 
+        return null;
     }
 
     public void SetEvidenceSpawner(EvidenceSpawner evidenceSpawner)
