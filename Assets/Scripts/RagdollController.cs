@@ -20,6 +20,7 @@ public class RagdollController : Interactable
         currPlayerInteract = currPlayer.GetComponent<PlayerInteract>();
         characterController = currPlayer.GetComponent<CharacterController>();
         ragdollCollider = GetComponent<Collider>();
+        ragdollCollider.gameObject.layer = currPlayer.GetComponent<PlayerSetup>().playerIgnoreLayer;
         playerCamera = currPlayer.GetComponentInChildren<Camera>().transform;
         cameraParent = playerCamera.transform.parent;
         originalCameraLocalPosition = playerCamera.localPosition;

@@ -20,6 +20,7 @@ public class PlayerInteract : MonoBehaviour
 
     // Variables to enable interact and return to share an action
     private bool _actionLock;
+    private LayerMask _interactLayerMask;
 
     void Awake()
     {
@@ -33,6 +34,9 @@ public class PlayerInteract : MonoBehaviour
         _actionLock = false;
 
         playerId = input.playerIndex;
+
+        int selfIgnoreLayer = LayerMask.NameToLayer("Player" + (playerId + 1) + "IgnoreRender");
+        _interactLayerMask = ~(1 << selfIgnoreLayer);
     }
 
     // Update is called once per frame
@@ -99,13 +103,11 @@ public class PlayerInteract : MonoBehaviour
 
         RaycastHit hit;
 
-        Vector3 origin = fpsCam.transform.position + fpsCam.transform.forward * 0.7f;
-
-        Ray ray = new Ray(origin, fpsCam.transform.forward);
+        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         Debug.DrawRay(ray.origin, ray.direction * reach, Color.red);
 
-        if (Physics.Raycast(ray, out hit, reach))
+        if (Physics.Raycast(ray, out hit, reach, _interactLayerMask))
         {
             if (hit.collider.tag == "interactable")
             {

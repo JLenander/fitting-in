@@ -13,6 +13,7 @@ public class PlayerSetup : MonoBehaviour
 
     public float fireCheckRadius = 0.5f;
     public LayerMask fireLayer;
+    public int playerIgnoreLayer;
     private SplitscreenUIHandler splitscreenUIHandler;
 
     void Awake()
@@ -23,7 +24,7 @@ public class PlayerSetup : MonoBehaviour
         playerId = playerInput.playerIndex + 1;
 
         // Layer for things this player's camera does not render (ex. player geometry)
-        int playerIgnoreLayer = LayerMask.NameToLayer("Player" + playerId + "IgnoreRender");
+        playerIgnoreLayer = LayerMask.NameToLayer("Player" + playerId + "IgnoreRender");
         if (playerIgnoreLayer == -1) throw new Exception("Player ignore render layer not found for player " + playerId);
         // Layer for things this player's camera renders (but the specified player's camera does not. Ex. other player only water stream that follows mouth)
         int playerExclusiveLayer = LayerMask.NameToLayer("Player" + playerId + "OnlyRender");
