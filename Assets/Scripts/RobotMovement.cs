@@ -53,21 +53,19 @@ public class RobotMovement : MonoBehaviour
         }
         _robotVelocity.y += gravity;
 
-        float leftInput = _moveAction.ReadValue<Vector2>().y;
-        float rightInput = _lookAction.ReadValue<Vector2>().y;
+        Vector2 leftInput = _moveAction.ReadValue<Vector2>();
+        Vector2 rightInput = _lookAction.ReadValue<Vector2>();
 
-        if (Mathf.Abs(leftInput) < 0.1f) leftInput = 0;
-        if (Mathf.Abs(rightInput) < 0.1f) rightInput = 0;
-
-        // Move based on the camera forward look.
-        float moveInput = (leftInput + rightInput) / 2f;
-        Vector3 moveDir = getCameraForward() * moveInput + _robotVelocity;
+        if (Mathf.Abs(leftInput.y) < 0.1f) leftInput.y = 0;
+        if (Mathf.Abs(rightInput.x) < 0.1f) rightInput.x = 0;
+        
+        // Move based on the camera forward look. (left input move forward/backward no strafing)
+        Vector3 moveDir = (getCameraForward() * leftInput.y) + _robotVelocity;
         _robotCharacterController.Move(moveDir * robotMoveSpeed * Time.deltaTime);
+        
+        transform.Rotate(Vector3.up, rightInput.x * robotLookSensitivity * Time.deltaTime);
 
-        float rotateInput = (leftInput - rightInput);
-        transform.Rotate(Vector3.up, rotateInput * robotLookSensitivity * Time.deltaTime);
-
-        if (Mathf.Abs(moveInput) > 0 || Mathf.Abs(rotateInput) > 0)
+        if (Mathf.Abs(leftInput.y) > 0 || Mathf.Abs(rightInput.x) > 0)
         {
             GlobalPlayerUIManager.Instance.StartWalkingShake();
             _stepTimer -= Time.fixedDeltaTime;

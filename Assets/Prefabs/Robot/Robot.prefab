@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341a755013d2f15498df966efb4cec1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobotMovement
-  robotMoveSpeed: 40
-  robotLookSensitivity: 40
+  robotMoveSpeed: 60
+  robotLookSensitivity: 80
   disable: 0
   stepSfx: {fileID: 6264176496961272089}
   stepInterval: 1
