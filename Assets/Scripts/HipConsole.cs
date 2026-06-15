@@ -12,11 +12,16 @@ public class HipConsole : Interactable
 
     [SerializeField] Transform playerChair;
     private TriggerSeat triggerSeat;
+    private GoKartTriggerSeat goKartTriggerSeat;
     void Start()
     {
         DisableOutline();
         uIHandler = LegUIHandler.Instance;
-        if (playerChair) triggerSeat = playerChair.GetComponent<TriggerSeat>();
+        if (playerChair)
+        {
+            triggerSeat = playerChair.GetComponent<TriggerSeat>();
+            goKartTriggerSeat = playerChair.GetComponent<GoKartTriggerSeat>();
+        }
 
     }
     public override void Interact(GameObject player)
@@ -25,7 +30,7 @@ public class HipConsole : Interactable
         {
             return;
         }
-        
+
         if (TutorialManager.Instance != null)
         {
             TutorialManager.Instance.interactLegTerminal = true;
@@ -49,6 +54,12 @@ public class HipConsole : Interactable
                 collider.enabled = true;
             }
         }
+
+        // Level 2 gokart exit: leg console teleports player back to trigger entry point.
+        if (goKartTriggerSeat != null && goKartTriggerSeat.PlayerInsideSeat())
+        {
+            goKartTriggerSeat.ExitRobotToEntry();
+        }
     }
 
     public override void Return(GameObject player)
@@ -69,7 +80,7 @@ public class HipConsole : Interactable
                 triggerSeat.SeatRobot();
             }
         }
-        
+
         GlobalPlayerUIManager.Instance.StopWalkingShake();
     }
 
