@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class AttachPoint : InteractableObject
@@ -23,7 +22,7 @@ public class AttachPoint : InteractableObject
         currentHand = target;
         currentHand.DisableGrapple(true);
         DisableOutline();
-           
+
         // Disable interactivity while held
         canInteract = false;
         canPickup = false;
@@ -45,7 +44,7 @@ public class AttachPoint : InteractableObject
         target.FreezeWristPosition(false);
         // currentHand.attachedCheckGrapple();
         target.handAnimator.SetTrigger("Neutral");
-        
+
         currentHand.DisableGrapple(false);
         isHeld = false;
         currentHand = null;
@@ -58,7 +57,7 @@ public class AttachPoint : InteractableObject
         // Notify tray
         tray.OnAttachPointReleased();
     }
-    
+
     // need this instead of calling stopinteractwithhand because can call without currenthand reference
     public void LetGoCurrentHand()
     {
@@ -67,7 +66,7 @@ public class AttachPoint : InteractableObject
             currentHand.FreezeWristPosition(false);
             currentHand.DisableGrapple(false);
             currentHand.handAnimator.SetTrigger("Neutral");
-            
+
             isHeld = false;
             currentHand = null;
 
