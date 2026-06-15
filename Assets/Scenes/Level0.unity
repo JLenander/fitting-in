@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: f7b830bd10b50054a9f43b76c41dfe40, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0a43eda337f0df34caf565566dd2f84a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -7489,8 +7489,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2399.382, y: 217.59, z: 2786.7236}
-  m_Center: {x: 207.23509, y: 0, z: -159.14406}
+  m_Size: {x: 1951.1583, y: 217.59, z: 2786.7236}
+  m_Center: {x: 431.3465, y: 0, z: -159.14407}
 --- !u!1001 &1842878192
 PrefabInstance:
   m_ObjectHideFlags: 0
