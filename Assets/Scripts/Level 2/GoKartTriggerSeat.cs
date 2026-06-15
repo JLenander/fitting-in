@@ -378,7 +378,7 @@ public class GoKartTriggerSeat : MonoBehaviour
     {
         if (steeringWheel != null)
         {
-            float steeringZ = steeringInput * steeringWheelMaxZ;
+            float steeringZ = -steeringInput * steeringWheelMaxZ;
             steeringWheel.localRotation = Quaternion.Euler(
                 steeringWheelBaseEuler.x,
                 steeringWheelBaseEuler.y,
