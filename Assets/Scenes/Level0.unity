@@ -4884,6 +4884,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Go kart game
       objectReference: {fileID: 0}
+    - target: {fileID: 4879708728376839255, guid: 17f36b618b6166844a7e6fd54f90f081, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6444938164710465949, guid: 17f36b618b6166844a7e6fd54f90f081, type: 3}
       propertyPath: m_LocalPosition.x
       value: 60.2
